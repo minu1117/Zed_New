@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: JhinImages
+  m_EditorClassIdentifier: 
+  m_GroupName: JhinImages
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 15a318a73c8db884f86663d09fb1e18d
+  m_SerializeEntries:
+  - m_GUID: 22ee7315afdf57e48aa3fa7d64a6feae
+    m_Address: Jhin_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 75a4d2a29dbe23e4a9dd9fcc81cb2d56, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a9f306299f7fc314294c2ebed779570d, type: 2}
+    - {fileID: 11400000, guid: 98cbdb76da0724149b151d1aca540261, type: 2}

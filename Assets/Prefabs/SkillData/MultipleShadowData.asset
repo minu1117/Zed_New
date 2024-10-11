@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: MultipleShadowData
+  m_EditorClassIdentifier: 
+  type: -1
+  skillName: MultipleShadow
+  skillDescription: "\uADF8\uB9BC\uC790 \uC5EC\uB7EC \uAC1C \uC18C\uD658\uD558\uB294
+    \uAC81\uB2C8\uB2E4"
+  skillLevel: 1
+  levelRestriction: 0
+  damage: 0
+  coolDown: 0
+  duration: 6
+  useDelay: 0
+  speed: 0
+  immobilityTime: 0
+  isShadow: 0
+  distance: 0
+  useClips:
+  - {fileID: 8300000, guid: 6904aa6fd2f53e448b0e8de21902da99, type: 3}
+  attackClips: []
+  disappearClips:
+  - {fileID: 8300000, guid: d837bde18be9d79469923767f3c524d3, type: 3}
+  recastClips:
+  - {fileID: 8300000, guid: 85d7068a345fb11428e8c7cb1a35e148, type: 3}

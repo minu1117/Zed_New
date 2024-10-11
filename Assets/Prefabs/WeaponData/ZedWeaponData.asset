@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
+  m_Name: ZedWeaponData
+  m_EditorClassIdentifier: 
+  damage: 0
+  useClips:
+  - {fileID: 8300000, guid: a3fd9e9120c2b95418e559fa35be6457, type: 3}
+  - {fileID: 8300000, guid: e0d21bb6cf429f04884c869602a4a173, type: 3}
+  - {fileID: 8300000, guid: 78ee9f94594384c4ea095136c029af53, type: 3}
+  - {fileID: 8300000, guid: 631e6d457b6a3ea498aeded4ff820be9, type: 3}
+  - {fileID: 8300000, guid: b56d8da3af027c4409922b384a45144b, type: 3}
+  - {fileID: 8300000, guid: 73c1b35bd5b068449b871470c0c08f0c, type: 3}
+  - {fileID: 8300000, guid: 3ab9a5597947f0f4a9d7b8d3eb37fed6, type: 3}
+  - {fileID: 8300000, guid: 620c9f0ee48802a4695f5601ee3e3147, type: 3}
+  - {fileID: 8300000, guid: edcab2a2928156c4fb8da076e2a475ab, type: 3}
+  attackClips:
+  - {fileID: 8300000, guid: 7a0a342e816ee994698e164ee6d0d1ad, type: 3}
+  - {fileID: 8300000, guid: 95d083fa1772b1146bb4d6180c8ffc9f, type: 3}

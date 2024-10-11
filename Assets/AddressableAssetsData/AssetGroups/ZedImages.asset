@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ZedImages
+  m_EditorClassIdentifier: 
+  m_GroupName: ZedImages
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2e402686328095e44b9d5f903c3733c8
+  m_SerializeEntries:
+  - m_GUID: 692af55c7ea14c347b85adc263e1473d
+    m_Address: TempZed_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 508526b2fe63f0c47b884d34e04c9464
+    m_Address: Govos_happy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c5ee23077e38714e89f3cbbba7be1d9
+    m_Address: Govos_surprised
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7da56530b465f94a8eac45fc6cf85d0
+    m_Address: Usan_surprised
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c457b96231bb594fb1013624c86df4e
+    m_Address: Temp_Usan_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce799d82c04f2fe4eae4e25ee6f0f21c
+    m_Address: Usan_happy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32edcc951456f0341b92dbb0d7b1e32d
+    m_Address: Usan_angry
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7c6ebb2421b27e43a74272d570c5a7d
+    m_Address: Zed_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 00ffc1870d7d8284fac26b66f79b9ebc
+    m_Address: Govos_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac146d0dbe0dced49829d7ddc014cc49
+    m_Address: Usan_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 75a4d2a29dbe23e4a9dd9fcc81cb2d56, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 76c31300544e96247914143bbae631d5, type: 2}
+    - {fileID: 11400000, guid: dfbcb8fc81f3e0141822e0092d7b7ca9, type: 2}

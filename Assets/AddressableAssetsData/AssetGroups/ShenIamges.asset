@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ShenIamges
+  m_EditorClassIdentifier: 
+  m_GroupName: ShenIamges
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c085539f87ca50f46829d91a656d52e4
+  m_SerializeEntries:
+  - m_GUID: f9f7c4baf0bca3144a329e1608d5bca5
+    m_Address: TempShen_normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 75a4d2a29dbe23e4a9dd9fcc81cb2d56, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f9dccccc56d20e14f96de8850d1ce79c, type: 2}
+    - {fileID: 11400000, guid: ca70edda2b12c7c40807f6dc661fdbb3, type: 2}

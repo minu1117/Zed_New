@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shen Upper Avatar Mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Root
+    m_Weight: 1
+  - m_Path: Root/Pelvis
+    m_Weight: 1
+  - m_Path: Root/Pelvis/L_Hip
+    m_Weight: 1
+  - m_Path: Root/Pelvis/L_Hip/L_KneeUpper
+    m_Weight: 1
+  - m_Path: Root/Pelvis/L_Hip/L_KneeUpper/L_KneeLower
+    m_Weight: 1
+  - m_Path: Root/Pelvis/L_Hip/L_KneeUpper/L_KneeLower/L_Foot
+    m_Weight: 1
+  - m_Path: Root/Pelvis/L_Hip/L_KneeUpper/L_KneeLower/L_Foot/L_Toe
+    m_Weight: 1
+  - m_Path: Root/Pelvis/L_Hip/L_KneeUpper/L_KneeLower/L_Foot/L_Buffbone_Glb_Foot_Loc
+    m_Weight: 1
+  - m_Path: Root/Pelvis/R_Hip
+    m_Weight: 1
+  - m_Path: Root/Pelvis/R_Hip/R_KneeUpper
+    m_Weight: 1
+  - m_Path: Root/Pelvis/R_Hip/R_KneeUpper/R_KneeLower
+    m_Weight: 1
+  - m_Path: Root/Pelvis/R_Hip/R_KneeUpper/R_KneeLower/R_Foot
+    m_Weight: 1
+  - m_Path: Root/Pelvis/R_Hip/R_KneeUpper/R_KneeLower/R_Foot/R_Toe
+    m_Weight: 1
+  - m_Path: Root/Pelvis/R_Hip/R_KneeUpper/R_KneeLower/R_Foot/R_Buffbone_Glb_Foot_Loc
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/R_Thumb1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/R_Thumb1/R_Thumb2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/R_Index1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/R_Index1/R_Index2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/R_Pinky1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/R_Pinky1/R_Pinky2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/BUFFBONE_GLB_WEAPON_1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Shoulder/R_Elbow/R_Hand/R_Buffbone_Glb_Hand_Loc
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/R_Clavicle/R_Pauldrons
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand/L_Index1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand/L_Index1/L_Index2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand/L_Pinky1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand/L_Pinky1/L_Pinky2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand/L_Thumb1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand/L_Thumb1/L_Thumb2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Shoulder/L_Elbow/L_Hand/L_Buffbone_Glb_Hand_Loc
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/L_Clavicle/L_Pauldrons
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/Neck
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/Neck/Head
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/Spine2/Neck/Head/C_Buffbone_Glb_Head_Loc
+    m_Weight: 1
+  - m_Path: Root/Pelvis/Spine1/C_Buffbone_Glb_Chest_Loc
+    m_Weight: 1
+  - m_Path: Root/Pelvis/B_cloth1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/B_cloth1/B_cloth2
+    m_Weight: 1
+  - m_Path: Root/Pelvis/B_cloth1/B_cloth2/B_cloth3
+    m_Weight: 1
+  - m_Path: Root/Pelvis/F_cloth1
+    m_Weight: 1
+  - m_Path: Root/Pelvis/F_cloth1/F_cloth2
+    m_Weight: 1
+  - m_Path: C_BUFFBONE_GLB_OVERHEAD_LOC
+    m_Weight: 0
+  - m_Path: C_BUFFBONE_GLB_CENTER_LOC
+    m_Weight: 0
+  - m_Path: C_BUFFBONE_GLB_LAYOUT_LOC
+    m_Weight: 0
+  - m_Path: BUFFBONE_GLB_GROUND_LOC
+    m_Weight: 0
+  - m_Path: BUFFBONE_GLB_CHANNEL_LOC
+    m_Weight: 0
+  - m_Path: L_sword
+    m_Weight: 1
+  - m_Path: R_sword
+    m_Weight: 1
+  - m_Path: Model
+    m_Weight: 0

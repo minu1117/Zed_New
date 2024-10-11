@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: EnemyDash
+  m_EditorClassIdentifier: 
+  type: 3
+  skillName: Dash
+  skillDescription: "\uC2A4\uD0AC\uC785\uB2C8\uB2E4\uB871"
+  skillLevel: 1
+  levelRestriction: 0
+  damage: 100
+  coolDown: 1
+  duration: 0.2
+  useDelay: 1
+  speed: 50
+  immobilityTime: 0
+  isShadow: 0
+  distance: 10
+  effect: {fileID: 0}
+  useClips:
+  - {fileID: 8300000, guid: 7cc19cdcfd9aa0645ba35a66246b943f, type: 3}
+  attackClips:
+  - {fileID: 8300000, guid: cd9030b649a0f64428caacbbc28d1cd2, type: 3}
+  disappearClips: []
+  recastClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: 8d580e3c94303d84d8b094d5547f2387, type: 3}
