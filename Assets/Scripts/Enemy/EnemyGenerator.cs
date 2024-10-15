@@ -67,8 +67,8 @@ public class EnemyGenerator : MonoBehaviour
     // 오브젝트 풀의 Get 
     private void GetEnemy(EnemyBase enemy)
     {
+        enemy.ResetEnemy();
         enemy.transform.position = transform.position;  // 몬스터 위치 이동 (생성기 위치로)
-        //enemy.SetIsPatrol(true);                        // 정찰 행동 활성화
         enemy.SetPatrolState();
         var hpController = enemy.GetStatusController(SliderMode.HP);     // HP Controller 가져오기
         hpController.SetMaxValue();                     // 최대 HP, MP로 설정

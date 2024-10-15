@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
-  m_Name: EnemyDash
+  m_Name: Shen_Q
   m_EditorClassIdentifier: 
-  type: 3
-  skillName: Dash
+  type: 1
+  skillName: Shen_Q
   skillDescription: "\uC2A4\uD0AC\uC785\uB2C8\uB2E4\uB871"
   skillLevel: 1
   levelRestriction: 0
@@ -27,14 +27,9 @@ MonoBehaviour:
   distance: 10
   effect: {fileID: 0}
   useClips: []
-  attackClips:
-  - {fileID: 8300000, guid: e5ea4ebbfd79eb0479c6235133143c5c, type: 3}
+  attackClips: []
   disappearClips: []
   recastClips: []
-  complateClips:
-  - {fileID: 8300000, guid: e8f8fa805d6bffb4d996b5b7693a7b73, type: 3}
-  - {fileID: 8300000, guid: c22eaa347fa372c49921972df34625a1, type: 3}
-  - {fileID: 8300000, guid: f5fa0e97f39f60b49932e0afb67eedcb, type: 3}
+  complateClips: []
   voiceClips:
-  - {fileID: 8300000, guid: 360035a9e7e98144980cbca1704d90c0, type: 3}
-  - {fileID: 8300000, guid: 36aac6adf5b8e5949826e9cc98717571, type: 3}
+  - {fileID: 8300000, guid: 38537cfc9b2aa6946a0dbc15f8bbfe1b, type: 3}

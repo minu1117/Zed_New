@@ -106,15 +106,26 @@ public class DashSkill : Skill
         if (animationController != null)                // 시전자의 애니메이션 컨트롤러가 있을 시
             animationController.StartNextMotion();      // 다음 모션으로 변경 -> [완료] 모션
 
+        StartSound(data.complateClips);
+
         movePoint = Vector3.zero;                       // 이동할 위치 초기화
         if (moveController != null)                     // 시전자의 CharacterMoveController가 있을 시
             moveController.isMoved = true;              // 시전자 이동 활성화
 
-        if (agent != null && agent.isActiveAndEnabled)
-            agent.isStopped = false;
+        //if (agent != null && agent.isActiveAndEnabled)
+        //    agent.isStopped = false;
 
-        if (obj.tag == EnumConverter.GetString(CharacterEnum.Enemy))
+        //if (obj.tag == EnumConverter.GetString(CharacterEnum.Enemy))
+        //    agent.Warp(agent.transform.position);
+
+        if (agent != null)
+        {
             agent.Warp(agent.transform.position);
+            if (agent.isActiveAndEnabled)
+            {
+                agent.isStopped = false;
+            }
+        }
 
         Release();  // 오브젝트 풀에 반납
     }

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Pool;
+using System.Collections.Generic;
 
 public class Skill : MonoBehaviour, IDamageable
 {
@@ -27,9 +28,9 @@ public class Skill : MonoBehaviour, IDamageable
     // 스킬 사용
     public virtual void Use(GameObject character)
     {
-        UseEffect(gameObject);  // 이펙트 사용
-        StartUseSound();        // 스킬 시전 사운드 재생
-        StartVoiceSound();      // 보이스 재생
+        UseEffect(gameObject);          // 이펙트 사용
+        StartSound(data.useClips);      // 스킬 시전 사운드 재생
+        StartSound(data.voiceClips);    // 보이스 재생
     }
 
     // 이펙트 Release
@@ -59,24 +60,13 @@ public class Skill : MonoBehaviour, IDamageable
         effect.Use();   // 이펙트 사용
     }
 
-    // 시전 사운드 재생
-    protected void StartUseSound()
+    protected void StartSound(List<AudioClip> clipList)
     {
-        if (data.useClips == null || data.useClips.Count == 0)      // 데이터에 시전 사운드가 없을 경우 return
+        if (clipList == null || clipList.Count == 0)           // 사운드가 없을 경우 return
             return;
 
-        int index = GetRandomIndex(0, data.useClips.Count);         // 랜덤 인덱스 (사운드 클립들 중 하나를 재생하기 위함)
-        SoundManager.Instance.PlayOneShot(data.useClips[index]);    // 사운드 매니저에서 시전 사운드들 중 랜덤 인덱스에 위치한 사운드 재생
-    }
-
-    // 음성 재생
-    protected void StartVoiceSound()
-    {
-        if (data.voiceClips == null || data.voiceClips.Count == 0)  // 데이터에 음성 사운드가 없을 경우 return
-            return;
-
-        int index = GetRandomIndex(0, data.voiceClips.Count);         // 랜덤 인덱스 (사운드 클립들 중 하나를 재생하기 위함)
-        SoundManager.Instance.PlayOneShot(data.voiceClips[index]);    // 사운드 매니저에서 시전 사운드들 중 랜덤 인덱스에 위치한 사운드 재생
+        int index = GetRandomIndex(0, clipList.Count);         // 랜덤 인덱스 (사운드 클립들 중 하나를 재생하기 위함)
+        SoundManager.Instance.PlayOneShot(clipList[index]);    // 사운드 매니저에서 시전 사운드들 중 랜덤 인덱스에 위치한 사운드 재생
     }
 
     public void SetPool(IObjectPool<Skill> pool) { this.pool = pool; }

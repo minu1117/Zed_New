@@ -58,6 +58,9 @@ public class SkillData : ScriptableObject
     [Header("재시전 사운드")]
     public List<AudioClip> recastClips;
 
+    [Header("사용 완료 후 사운드")]
+    public List<AudioClip> complateClips;
+
     [Header("음성")]
     public List<AudioClip> voiceClips;
 }

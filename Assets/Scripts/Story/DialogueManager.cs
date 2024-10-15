@@ -194,7 +194,7 @@ public class DialogueManager : Singleton<DialogueManager>
         }
         else
         {
-            await AddressableManager.Instance.ApplyImage(data.address, image);
+            await AddressableManager.ApplyImage(data.address, image);
         }
     }
 
@@ -253,7 +253,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
         // Dictionary에 로딩된 Sprite들의 Address를 Key로 하고, Sprite를 같이 저장
         // Address로 저장된 Image를 찾아 사용하려는 목적
-        currentTalkImages = await AddressableManager.Instance.LoadSpritesToDictionary(addresses);
+        currentTalkImages = await AddressableManager.LoadSpritesToDictionary(addresses);
     }
 
     // 대화 진행

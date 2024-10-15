@@ -22,6 +22,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7cb2c45413522f4bba4bc8a8611cf73
+    m_Address: Assets/Resources_moved/Sounds/Shen/SFX/Q 1.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51e27f45759844746afd240a21b763e3
+    m_Address: Assets/Resources_moved/Sounds/Shen/SFX/Q 2.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SFX
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5ea4ebbfd79eb0479c6235133143c5c
+    m_Address: "Assets/Resources_moved/Sounds/Shen/SFX/\uB3C4\uBC1C.wav"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 75a4d2a29dbe23e4a9dd9fcc81cb2d56, type: 2}
   m_SchemaSet:

@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-public class AddressableManager : Singleton<AddressableManager>
+public static class AddressableManager
 {
     // 이미지 적용
-    public async Task ApplyImage(string address, Image applyImage)
+    public static async Task ApplyImage(string address, Image applyImage)
     {
         if (applyImage == null || address == null || address == string.Empty)   // 이미지가 없거나, 이미지 주소가 비었을 경우 return
             return;
@@ -24,7 +25,7 @@ public class AddressableManager : Singleton<AddressableManager>
     }
 
     // 이미지 가져오기
-    public async Task<Sprite> GetSprite(string address)
+    public static async Task<Sprite> GetSprite(string address)
     {
         try
         {
@@ -39,7 +40,7 @@ public class AddressableManager : Singleton<AddressableManager>
     }
 
     // 이미지 찾기
-    private async Task<Sprite> GetSpriteAsync(string address)
+    private static async Task<Sprite> GetSpriteAsync(string address)
     {
         try
         {
@@ -67,7 +68,7 @@ public class AddressableManager : Singleton<AddressableManager>
     }
 
     // Dictionary에 이미지를 이름과 같이 저장해 가져오기
-    public async Task<Dictionary<string, Sprite>> LoadSpritesToDictionary(List<string> addresses)
+    public static async Task<Dictionary<string, Sprite>> LoadSpritesToDictionary(List<string> addresses)
     {
         var dict = new Dictionary<string, Sprite>();
 
@@ -85,7 +86,7 @@ public class AddressableManager : Singleton<AddressableManager>
     }
 
     // 로딩된 이미지 적용
-    private void OnImageLoaded(AsyncOperationHandle<Sprite> obj, Image applyImage)
+    private static void OnImageLoaded(AsyncOperationHandle<Sprite> obj, Image applyImage)
     {
         // 로딩 완료 후 이미지 적용
         if (obj.Status == AsyncOperationStatus.Succeeded)
@@ -99,7 +100,7 @@ public class AddressableManager : Singleton<AddressableManager>
     }
 
     // 어드레서블에 저장된 이미지의 경로를 빼고, 이름만 가져오기
-    private string GetAddressName(string address)
+    private static string GetAddressName(string address)
     {
         int lastSlashIndex = address.LastIndexOf('/');                      // 마지막에 있는 '/' 문자의 인덱스 가져오기
         if (lastSlashIndex >= 0 && lastSlashIndex < address.Length - 1)     // 인덱스가 0 이상이고, 글자 총 길이보다 적을 때
@@ -109,4 +110,27 @@ public class AddressableManager : Singleton<AddressableManager>
 
         return address; // 자르지 않아도 되는 문자이기 때문에 그대로 return
     }
+
+    /**************************************** 미완성 ****************************************/
+    public static async Task<IList<AudioClip>> LoadSounds(AssetLabelReference label)
+    {
+        var loadAsync = Addressables.LoadAssetsAsync<AudioClip>(label.labelString, null);
+        await loadAsync.Task;
+
+        return loadAsync.Result;
+    }
+
+    public static async Task<IList<AudioClip>> LoadSoundss(AssetLabelReference label)
+    {
+        var loadAsync = Addressables.LoadAssetsAsync<AudioClip>(label.labelString, null);
+        await loadAsync.Task;
+
+        if (loadAsync.Status == AsyncOperationStatus.Succeeded)
+        {
+            return loadAsync.Result;
+        }
+
+        return null;
+    }
+    /****************************************************************************************/
 }

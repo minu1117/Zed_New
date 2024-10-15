@@ -61,7 +61,6 @@ public class EliteEnemy : EnemyBase
         attackMode = GetRandomAttackMode(AttackMode.Pattern);
         if (comboDict == null || comboDict.Count == 0)
         {
-            //attackMode = GetRandomAttackMode(AttackMode.Combo);
             attackMode = GetRandomAttackMode(AttackMode.Combo, AttackMode.Combo);
         }
 

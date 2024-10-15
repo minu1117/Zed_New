@@ -13,6 +13,7 @@ public class MeleeSkill : Skill
     private IEnumerator CoMelee()
     {
         yield return waitduration;  // 시전 대기 시간만큼 대기
+        StartSound(data.complateClips);
         Release();                  // 오브젝트 풀에 반납
     }
 }

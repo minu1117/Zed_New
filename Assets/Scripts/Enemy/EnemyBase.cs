@@ -86,6 +86,12 @@ public abstract class EnemyBase : ChampBase
         player = Zed.Instance.gameObject;
     }
 
+    public virtual void ResetEnemy() 
+    {
+        agent.speed = data.moveSpeed;
+        runSpeed = data.moveSpeed + addRunSpeed;
+    }
+
     public virtual void Update()
     {
         MoveAnimation();
@@ -105,6 +111,24 @@ public abstract class EnemyBase : ChampBase
 
     public override void OnDead()
     {
+        if (loseTargetCoroutine != null)
+        {
+            StopCoroutine(loseTargetCoroutine);
+            loseTargetCoroutine = null;
+        }
+
+        if (patrolCoroutine != null)
+        {
+            StopCoroutine(patrolCoroutine);
+            patrolCoroutine = null;
+        }
+
+        if (waitNextAttackCoroutine != null)
+        {
+            StopCoroutine(waitNextAttackCoroutine);
+            waitNextAttackCoroutine = null;
+        }
+
         // 오브젝트 풀이 설정된 경우
         if (pool != null)
         {
@@ -139,13 +163,6 @@ public abstract class EnemyBase : ChampBase
         agent.isStopped = true;
         AutoAttack();
     }
-
-    //protected IEnumerator CoUseAutoAttack()
-    //{
-    //    yield return waitAutoAttackTime;
-    //    useAutoAttackCoroutine = null;
-    //    agent.isStopped = false;
-    //}
 
     protected void WaitNextAttack(float duration)
     {
@@ -218,6 +235,11 @@ public abstract class EnemyBase : ChampBase
         }
 
         attackMode = GetRandomAttackMode(AttackMode.Skill);
+        if (attackMode == AttackMode.Combo || attackMode == AttackMode.Pattern)
+        {
+            attackMode = AttackMode.Normal;
+        }
+
         switch (attackMode)
         {
             case AttackMode.Normal:
@@ -386,6 +408,12 @@ public abstract class EnemyBase : ChampBase
         yield return new WaitForSeconds(1f);                            // 도착 후 1초 대기
 
         patrolCoroutine = null;
+    }
+
+    protected void CreateNewSkill(SkillButtonData data)
+    {
+        var parent = slot.GetSlotObj();
+        slot.CreateExcutor(parent, data);
     }
 
     protected void CreateNewSkills(List<SkillButtonData> datas)

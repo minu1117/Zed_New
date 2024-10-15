@@ -51,7 +51,7 @@ public class ZedShadow : ShotSkill
             return;
 
         UseEffect(particleFollowObj);           // 이펙트 실행
-        StartUseSound();                        // 스킬 사용 사운드 재생
+        StartSound(data.useClips);              // 스킬 사용 사운드 재생
         meshRenderer.enabled = false;           // 이동 중 오브젝트가 보이지 않기 위해 비활성화
         SetActiveTrailRenderer(true);           // TrailRenderer 활성화
         SetActiveWeaponTrailRenderers(false);   // 무기 전용 TrailRenderer 활성화

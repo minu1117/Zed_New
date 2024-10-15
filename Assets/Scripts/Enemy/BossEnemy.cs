@@ -13,7 +13,7 @@ public class BossEnemy : EliteEnemy
     protected Coroutine usePatternWaitCoroutine;
     [SerializeField] protected float waitPatternDelay;
     [SerializeField] protected float resetDelay;
-    protected bool isReset;
+    protected bool isResetPattern;
 
     protected override void Awake()
     {
@@ -24,14 +24,20 @@ public class BossEnemy : EliteEnemy
     {
         base.Init();
         recognitionRange = Mathf.Infinity;
+        patternDict = new();
+        sortedPattern = new();
 
         if (patternSkillList == null || patternSkillList.Count == 0)
             return;
 
-        patternDict = new();
         AddPattern(patternSkillList, patternDict);
         SortPattern();
         SetCurrentPattern(sortedPattern[0].Value, sortedPattern[0].Key);
+        nextPatternHP = data.maxHp;
+    }
+
+    public override void ResetEnemy()
+    {
         nextPatternHP = data.maxHp;
     }
 
@@ -69,7 +75,7 @@ public class BossEnemy : EliteEnemy
         if (waitNextAttackCoroutine != null)
             return;
 
-        if (isReset)
+        if (isResetPattern)
         {
             attackMode = AttackMode.Pattern;
         }
@@ -171,7 +177,28 @@ public class BossEnemy : EliteEnemy
         return slot.GetSlotDict()[data.keycode];
     }
 
-    private void AddPattern(List<SkillButtonData> skillList, Dictionary<float, List<SkillButtonData>> dict)
+    protected void AddPattern(SkillButtonData skillData, Dictionary<float, List<SkillButtonData>> dict)
+    {
+        CreateNewSkill(skillData);
+        var bossSkill = skillData as BossSkillButtonData;
+        if (bossSkill == null)
+            return;
+
+        float percent = bossSkill.healthPercentage / 100f;
+        float patternHP = data.maxHp * percent;
+
+        if (dict.ContainsKey(patternHP))
+        {
+            dict[patternHP].Add(bossSkill);
+        }
+        else
+        {
+            var list = new List<SkillButtonData> { bossSkill };
+            dict.Add(patternHP, list);
+        }
+    }
+
+    protected void AddPattern(List<SkillButtonData> skillList, Dictionary<float, List<SkillButtonData>> dict)
     {
         CreateNewSkills(skillList);
         foreach (var skillData in skillList)
@@ -195,9 +222,8 @@ public class BossEnemy : EliteEnemy
         }
     }
 
-    private void SortPattern()
+    protected void SortPattern()
     {
-        sortedPattern = new();
         foreach (var item in patternDict)
         {
             sortedPattern.Add(item);
@@ -246,7 +272,7 @@ public class BossEnemy : EliteEnemy
         if (usePatternWaitCoroutine != null)
             StopCoroutine(usePatternWaitCoroutine);
 
-        isReset = true;
+        isResetPattern = true;
         usePatternWaitCoroutine = null;
         waitNextAttackCoroutine = null;
         WaitNextAttack(resetDelay);
@@ -256,5 +282,17 @@ public class BossEnemy : EliteEnemy
     {
         base.OnDamage(damage);
         DecidePattern();
+    }
+
+    public override void OnDead()
+    {
+        if (usePatternWaitCoroutine != null)
+        {
+            StopCoroutine(usePatternWaitCoroutine);
+            usePatternWaitCoroutine = null;
+        }
+
+        isResetPattern = false;
+        base.OnDead();
     }
 }
