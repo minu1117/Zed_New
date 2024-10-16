@@ -74,7 +74,7 @@ public class SoundManager : Singleton<SoundManager>
     // 사운드 한 번 재생
     public void PlayOneShot(AudioClip clip)
     {
-        if (!Exist(clip.name))                  // 클립이 없을 경우 return
+        if (clip == null || !Exist(clip.name))                  // 클립이 없을 경우 return
             return;
 
         var audio = createdClips[clip.name];    // 사운드 가져오기
@@ -84,7 +84,7 @@ public class SoundManager : Singleton<SoundManager>
     // 사운드 재생
     public void Play(AudioClip clip)
     {
-        if (!Exist(clip.name))          // 클립이 없을 경우 return
+        if (clip == null || !Exist(clip.name))          // 클립이 없을 경우 return
             return;
 
         createdClips[clip.name].Play(); // 사운드 재생
@@ -93,7 +93,7 @@ public class SoundManager : Singleton<SoundManager>
     // 사운드 정지
     public void Stop(AudioClip clip)
     {
-        if (!Exist(clip.name))          // 클립이 없을 경우 return
+        if (clip == null || !Exist(clip.name))          // 클립이 없을 경우 return
             return;
 
         createdClips[clip.name].Stop(); // 사운드 정지
@@ -102,7 +102,7 @@ public class SoundManager : Singleton<SoundManager>
     // 사운드 일시 정지
     public void Pause(AudioClip clip)
     {
-        if (!Exist(clip.name))              // 클립이 없을 경우 return
+        if (clip == null || !Exist(clip.name))              // 클립이 없을 경우 return
             return;
 
         createdClips[clip.name].Pause();    // 일시 정지
@@ -111,7 +111,7 @@ public class SoundManager : Singleton<SoundManager>
     // 사운드 반복 재생 설정
     public void SetLoop(AudioClip clip, bool set)
     {
-        if (!Exist(clip.name))              // 클립이 없을 경우 return
+        if (clip == null || !Exist(clip.name))              // 클립이 없을 경우 return
             return;
 
         createdClips[clip.name].loop = set; // 반복 재생 활성화

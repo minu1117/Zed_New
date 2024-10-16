@@ -26,7 +26,9 @@ public class Shen : BossEnemy
 
         createdDuskswordDummy = Instantiate(duskSwordDummy);
         createdDuskswordDummy.SetShen(this);
+
         createdDuskswordDummy.transform.position = new Vector3(shotStartTransform.position.x, createdDuskswordDummy.transform.position.y, shotStartTransform.position.z);
+        createdDuskswordDummy.SetInitPosY(createdDuskswordDummy.transform.position.y);
         duskSword.SetDamage(duskSwordSkill.skill.data.damage);
         duskSword.SetChamp(this);
 
@@ -57,6 +59,13 @@ public class Shen : BossEnemy
     /********************************************** Animation Event **********************************************/
     public void OnDuskSword()
     {
+        var attackClip = createdDuskswordDummy.GetAudioClip(ShenDuskSwordAudio.Attack);
+        SoundManager.Instance.PlayOneShot(attackClip);
+
+        var randomWeapon = weapons[Random.Range(0, weapons.Count)];
+        var attackVoice = randomWeapon.data.voiceClips[Random.Range(0, randomWeapon.data.voiceClips.Count)];
+        SoundManager.Instance.PlayOneShot(attackVoice);
+
         duskSword.OnReady();
     }
 
@@ -77,6 +86,13 @@ public class Shen : BossEnemy
 
     public void CallDuskSword()
     {
+        transform.LookAt(player.transform.position);
+
+        var useClip = createdDuskswordDummy.GetAudioClip(ShenDuskSwordAudio.Use);
+        var voiceClip = createdDuskswordDummy.GetAudioClip(ShenDuskSwordAudio.Voice);
+        SoundManager.Instance.PlayOneShot(useClip);
+        SoundManager.Instance.PlayOneShot(voiceClip);
+
         var pos = new Vector3(transform.position.x, createdDuskswordDummy.transform.position.y, transform.position.z);
         createdDuskswordDummy.transform.DOMove(pos, duskSwordMoveDuration)
                                        .OnComplete(OnNext);
@@ -84,6 +100,9 @@ public class Shen : BossEnemy
 
     private void OnNext()
     {
+        var audioClip = createdDuskswordDummy.GetAudioClip(ShenDuskSwordAudio.Catch);
+        SoundManager.Instance.PlayOneShot(audioClip);
+
         animationController.StartNextMotion();
     }
 }

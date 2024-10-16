@@ -54,7 +54,7 @@ public abstract class EnemyBase : ChampBase
     //private bool isChase;
 
     private float addRunSpeed = 5f;
-    private float runSpeed;
+    protected float runSpeed;
     private string moveAnimControllParam = "Speed";
 
     [SerializeField] protected float waitSkillDelay;

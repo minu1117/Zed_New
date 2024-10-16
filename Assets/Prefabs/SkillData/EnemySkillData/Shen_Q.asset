@@ -24,12 +24,11 @@ MonoBehaviour:
   speed: 50
   immobilityTime: 0
   isShadow: 0
-  distance: 10
+  distance: 3
   effect: {fileID: 0}
   useClips: []
   attackClips: []
   disappearClips: []
   recastClips: []
   complateClips: []
-  voiceClips:
-  - {fileID: 8300000, guid: 38537cfc9b2aa6946a0dbc15f8bbfe1b, type: 3}
+  voiceClips: []

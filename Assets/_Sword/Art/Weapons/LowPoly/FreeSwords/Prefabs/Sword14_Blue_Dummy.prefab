@@ -245,6 +245,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duskSwordLineRenderer: {fileID: 706342961634505451}
   LineRendererTr: {fileID: 3887307154040057419}
+  useClips:
+  - {fileID: 8300000, guid: 718a2cb2babfb8741aed3db6d6d61ca8, type: 3}
+  catchClips:
+  - {fileID: 8300000, guid: 1815241be9291374388620d47d5e41c3, type: 3}
+  attackClips:
+  - {fileID: 8300000, guid: 75065763bd03cc24eadc7b84212b5a4d, type: 3}
+  - {fileID: 8300000, guid: c562228f4d5ecf44dacc9ce91d10f2d4, type: 3}
+  - {fileID: 8300000, guid: 963307a0c5739a14fbaf43cda6c9344c, type: 3}
+  voiceClips:
+  - {fileID: 8300000, guid: 38537cfc9b2aa6946a0dbc15f8bbfe1b, type: 3}
+  - {fileID: 8300000, guid: 36aac6adf5b8e5949826e9cc98717571, type: 3}
 --- !u!1 &7268729793816945053
 GameObject:
   m_ObjectHideFlags: 0

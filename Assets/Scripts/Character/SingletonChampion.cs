@@ -18,6 +18,7 @@ public class SingletonChampion<T> : ChampBase where T : MonoBehaviour
 
     protected override void Awake()
     {
+        base.Awake();
         if (instance != null)
         {
             if (instance != this)
@@ -30,6 +31,5 @@ public class SingletonChampion<T> : ChampBase where T : MonoBehaviour
 
         instance = GetComponent<T>();
         DontDestroyOnLoad(gameObject);
-        base.Awake();
     }
 }

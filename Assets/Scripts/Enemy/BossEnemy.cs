@@ -14,6 +14,7 @@ public class BossEnemy : EliteEnemy
     [SerializeField] protected float waitPatternDelay;
     [SerializeField] protected float resetDelay;
     protected bool isResetPattern;
+    protected bool isPatternUsing;
 
     protected override void Awake()
     {
@@ -38,7 +39,9 @@ public class BossEnemy : EliteEnemy
 
     public override void ResetEnemy()
     {
+        base.ResetEnemy();
         nextPatternHP = data.maxHp;
+        isPatternUsing = false;
     }
 
     public override void Update()
@@ -49,6 +52,9 @@ public class BossEnemy : EliteEnemy
 
     protected override void StateBehavior()
     {
+        if (isPatternUsing)
+            return;
+
         if (state == State.Patrol)
         {
             state = State.Chase;
@@ -130,9 +136,33 @@ public class BossEnemy : EliteEnemy
 
     protected IEnumerator CoWaitPattern(float waitDelay, SkillExcutor excutor)
     {
-        yield return new WaitForSeconds(waitDelay);
+        isPatternUsing = true;
+        if (waitNextAttackCoroutine != null)
+        {
+            StopCoroutine(waitNextAttackCoroutine);
+            waitNextAttackCoroutine = null;
+        }
+
+        float prevtTime = Time.time;
+        float skillDistance = excutor.GetData().skill.data.distance;
+
+        agent.speed = runSpeed;
+        while (GetDistance(player.transform.position) >= skillDistance)
+        {
+            agent.SetDestination(player.transform.position);
+            yield return null;
+        }
+        agent.speed = data.moveSpeed;
+
+        float chaseTime = Time.time - prevtTime;
+        WaitNextAttack(waitPatternDelay);
+
+        if (waitDelay - chaseTime > 0)
+            yield return new WaitForSeconds(waitDelay - chaseTime);
+
         UsePattern(excutor);
         usePatternWaitCoroutine = null;
+        isPatternUsing = false;
     }
 
     protected void UseRandomPattern()

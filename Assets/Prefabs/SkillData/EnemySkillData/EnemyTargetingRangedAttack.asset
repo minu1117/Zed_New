@@ -24,7 +24,7 @@ MonoBehaviour:
   speed: 20
   immobilityTime: 0
   isShadow: 0
-  distance: 10
+  distance: 15
   effect: {fileID: 0}
   useClips:
   - {fileID: 8300000, guid: 2d8e6805fadf8724ea756799e873ee0b, type: 3}
@@ -32,3 +32,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2250138e2e4ee0b4cbd96d5d6d967532, type: 3}
   disappearClips: []
   recastClips: []
+  complateClips: []
+  voiceClips: []

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
+  m_Name: ShenWeaponData
+  m_EditorClassIdentifier: 
+  damage: 20
+  useClips:
+  - {fileID: 8300000, guid: 898a80c0688241840a1e59a8153871af, type: 3}
+  - {fileID: 8300000, guid: 244a00c56d6295a42ab09bdcb5fb92f0, type: 3}
+  - {fileID: 8300000, guid: 6f69d94a5b5751444b8a514287c2f66b, type: 3}
+  - {fileID: 8300000, guid: 752fccc0eaa548f45a3e67ba87e3a1b2, type: 3}
+  - {fileID: 8300000, guid: 912e53c59aa541842a121ef8e0dcb814, type: 3}
+  attackClips:
+  - {fileID: 8300000, guid: 63695a401752f554ea7e4d64b680b097, type: 3}
+  - {fileID: 8300000, guid: 077d44fff433fe846a75a3bafb69bbd1, type: 3}
+  - {fileID: 8300000, guid: 3da52009b4ed70c488fe5fe2508d74c1, type: 3}
+  - {fileID: 8300000, guid: bc2f3e810d24e4342a676264cd877650, type: 3}
+  voiceClips:
+  - {fileID: 8300000, guid: 8d580e3c94303d84d8b094d5547f2387, type: 3}
+  - {fileID: 8300000, guid: 2b4688af1b885df4099f780064062d3d, type: 3}
+  - {fileID: 8300000, guid: 1d69933d4753baf4ca79401b7bea1aab, type: 3}
