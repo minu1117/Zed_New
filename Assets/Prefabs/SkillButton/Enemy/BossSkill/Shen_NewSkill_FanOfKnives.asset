@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed175eaf0cd4ce4e9ed1ed5a3f0c262, type: 3}
+  m_Name: Shen_NewSkill_FanOfKnives
+  m_EditorClassIdentifier: 
+  keycode: 876248585
+  skill: {fileID: -5582623404567928721, guid: c12c0d37559bc254c957802b01ac94ef, type: 3}
+  maxPoolSize: 2
+  sp: {fileID: 0}
+  type: 3
+  isUpper: 0
+  healthPercentage: 100

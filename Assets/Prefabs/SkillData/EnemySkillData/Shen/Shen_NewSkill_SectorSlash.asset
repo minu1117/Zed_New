@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: Shen_NewSkill_SectorSlash
+  m_EditorClassIdentifier: 
+  type: 1
+  skillName: "\uC6D0\uD615 \uBCA0\uAE30"
+  skillDescription: "\uC6D0\uD615\uC73C\uB85C \uD070 \uBC94\uC704 \uBCA0\uAE30"
+  skillLevel: 0
+  levelRestriction: 0
+  damage: 0
+  coolDown: 0
+  duration: 0
+  useDelay: 0
+  speed: 0
+  immobilityTime: 0
+  isShadow: 0
+  distance: 0
+  effect: {fileID: 0}
+  useClips: []
+  attackClips: []
+  disappearClips: []
+  recastClips: []
+  complateClips: []
+  voiceClips: []

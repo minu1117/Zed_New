@@ -32,6 +32,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a8fed72a154dc4498836cd8ab2ddd82, type: 3}
   disappearClips: []
   recastClips: []
+  complateClips: []
   voiceClips:
   - {fileID: 8300000, guid: 2e9fcf8a23972f9409def8922fb1ec8a, type: 3}
   - {fileID: 8300000, guid: d871235943cb0fb4ba4cdd36f91f084a, type: 3}

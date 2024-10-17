@@ -92,6 +92,7 @@ public class SkillExcutor : MonoBehaviour
     {
         isAvailable = false;                                        // 스킬 사용 불가 상태로 변경 (오동작 방지)
         useSkill.SetActive(false);                                  // 스킬 오브젝트의 active 꺼놓기 (켜져 있을 경우 보이기 때문)
+        character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
         yield return new WaitForSeconds(useSkill.data.useDelay);    // 스킬 데이터의 대기 시간만큼 대기
 
         Vector3 startPosition = character.gameObject.transform.position;    // 시작 위치 설정 (character 오브젝트의 현재 위치)
@@ -100,7 +101,6 @@ public class SkillExcutor : MonoBehaviour
             startPosition = champion.shotStartTransform.position;           // 스킬 시작 위치를 캐릭터에 설정된 발사 시작 위치로 변경
         }
 
-        character.transform.LookAt(lookAtPoint);            // 캐릭터를 lookAtPoint로 바라보게 설정
         useSkill.SetActive(true);                           // 스킬 active 활성화
         useSkill.SetPosition(startPosition);                // 스킬 위치 설정
         useSkill.SetStartPos(startPosition);                // 스킬 시작 위치 설정

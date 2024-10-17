@@ -42,7 +42,7 @@ public class Shen_DuskSword_Dummy : MonoBehaviour
             return;
 
         duskSwordLineRenderer.positionCount = 2;
-        duskSwordLineRenderer.SetPosition(0, shen.shotStartTransform.position);
+        duskSwordLineRenderer.SetPosition(0, shen.lineLendererTransform.position);
         duskSwordLineRenderer.SetPosition(1, LineRendererTr.position);
     }
 

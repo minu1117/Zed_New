@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: Shen_NewSkill_FanOfKnives
+  m_EditorClassIdentifier: 
+  type: 0
+  skillName: "\uCE7C\uB0A0 \uBD80\uCC44"
+  skillDescription: "\uBD80\uCC44\uAF34\uB85C \uB2E8\uAC80 \uD22C\uCC99"
+  skillLevel: 0
+  levelRestriction: 0
+  damage: 100
+  coolDown: 0
+  duration: 0
+  useDelay: 1
+  speed: 0
+  immobilityTime: 0
+  isShadow: 0
+  distance: 30
+  effect: {fileID: 4327858145450995911, guid: 3ed89532ddc706b41b53951558589789, type: 3}
+  useClips:
+  - {fileID: 8300000, guid: 0c9f9e57dd904864f83714e7e10c9275, type: 3}
+  attackClips: []
+  disappearClips: []
+  recastClips: []
+  complateClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: 913e9711b1cb42c40b258ed7383704e2, type: 3}

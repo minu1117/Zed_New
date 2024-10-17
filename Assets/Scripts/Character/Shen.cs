@@ -10,7 +10,7 @@ public class Shen : BossEnemy
     [SerializeField] private float duskSwordMoveDuration;
     private Shen_DuskSword_Dummy createdDuskswordDummy;
 
-    [SerializeField] private LineRenderer duskSwordLineRenderer;
+    public Transform lineLendererTransform;
 
     protected override void Awake()
     {

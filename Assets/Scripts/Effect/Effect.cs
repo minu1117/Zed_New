@@ -36,6 +36,11 @@ public class Effect : MonoBehaviour
         particle.transform.position = startPos;
     }
 
+    public void SetForward(Vector3 forward)
+    {
+        particle.transform.forward = forward;
+    }
+
     // 파티클 활성화 여부 확인 코루틴
     private IEnumerator CheckParticleAlive()
     {

@@ -268,6 +268,15 @@ public class BossEnemy : EliteEnemy
         currentPatternHP = patternHP;
     }
 
+    private void AddCurrentPattern(List<SkillButtonData> pattern, float patternHP)
+    {
+        foreach (var skill in pattern)
+        {
+            currentPattern.Add(skill);
+        }
+        currentPatternHP = patternHP;
+    }
+
     private void DecidePattern()
     {
         float currentHP = data.currentHp;
@@ -280,7 +289,8 @@ public class BossEnemy : EliteEnemy
             if (key >= currentHP && key < currentPatternHP)
             {
                 var value = sortedPattern[i].Value;
-                SetCurrentPattern(value, key);
+                //SetCurrentPattern(value, key);
+                AddCurrentPattern(value, key);
 
                 if (i + 1 < sortedPattern.Count)
                 {
@@ -291,13 +301,13 @@ public class BossEnemy : EliteEnemy
                     nextPatternHP = key;
                 }
 
-                ResetPattern();
+                ResetUsePattern();
                 break;
             }
         }
     }
 
-    protected void ResetPattern()
+    protected void ResetUsePattern()
     {
         if (usePatternWaitCoroutine != null)
             StopCoroutine(usePatternWaitCoroutine);
