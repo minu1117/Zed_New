@@ -58,6 +58,7 @@ public class Skill : MonoBehaviour, IDamageable
             followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
             effect = followEffect;          // 이펙트 할당
         }
+
         effect.Use();   // 이펙트 사용
     }
 

@@ -25,7 +25,7 @@ MonoBehaviour:
   immobilityTime: 0
   isShadow: 0
   distance: 0
-  effect: {fileID: 8850139126722969596, guid: 9aea693e97c439d4c8168e9de64437a9, type: 3}
+  effect: {fileID: 5051723841979018167, guid: d9450ac491c36a54d9a40b8481454ccf, type: 3}
   useClips:
   - {fileID: 8300000, guid: 037d0d0e0d038924eb802c8c7d038fd5, type: 3}
   attackClips:

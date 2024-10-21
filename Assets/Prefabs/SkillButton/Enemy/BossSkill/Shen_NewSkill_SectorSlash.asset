@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed175eaf0cd4ce4e9ed1ed5a3f0c262, type: 3}
   m_Name: Shen_NewSkill_SectorSlash
   m_EditorClassIdentifier: 
-  keycode: 
+  keycode: 564496406
   skill: {fileID: -2460268875714287767, guid: 4def3e46b232a904a98b403c14d93986, type: 3}
-  maxPoolSize: 0
+  maxPoolSize: 2
   sp: {fileID: 0}
-  type: 4
-  isUpper: 0
-  healthPercentage: 0
+  type: 2
+  isUpper: 1
+  healthPercentage: 100
