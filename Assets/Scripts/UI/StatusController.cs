@@ -36,14 +36,12 @@ public class StatusController : MonoBehaviour
     private CharacterData data;
     private Camera cam;
 
+    public Slider shieldSlider;
+    public bool isShield;
+    private float maxShieldValue;
+
     private void Awake()
     {
-        //if (champ == null)              // 캐릭터를 할당하지 않았을 경우
-        //{
-        //    champ = Zed.Instance;       // 플레이어 할당 -> 플레이어는 별도의 UI로 조정할 거기 때문에 씬이 바뀌어도 가져올 수 있게
-        //    champ.SetStatusController(sliderMode, this);
-        //}
-
         switch (usedSlider)
         {
             case UsedSlider.Player:
@@ -123,6 +121,49 @@ public class StatusController : MonoBehaviour
         data.currentMp = data.maxMp;
         SetCurrentMp();
         SetText($"{data.currentMp} / {data.maxMp}");
+    }
+
+    public void SetShield(float shieldValue)
+    {
+        if (shieldSlider == null)
+            return;
+
+        if (shieldValue <= 0)
+            return;
+
+        isShield = true;
+
+        maxShieldValue = shieldValue;
+        shieldSlider.value = shieldValue / maxShieldValue;
+
+        SetText($"{data.currentHp} / {data.maxHp} ({maxShieldValue})");
+        shieldSlider.gameObject.SetActive(true);
+    }
+
+    public float HitShield(float damage)
+    {
+        if (shieldSlider == null)
+            return 0;
+
+        var currentShield = shieldSlider.value * maxShieldValue;
+        shieldSlider.value = (currentShield - damage) / maxShieldValue;
+
+        if (currentShield - damage <= 0)
+        {
+            isShield = false;
+            shieldSlider.value = 0;
+            shieldSlider.gameObject.SetActive(false);
+
+            SetText($"{data.currentHp} / {data.maxHp}");
+            return Mathf.Abs(currentShield - damage);
+            //data.currentHp -= Mathf.Abs(shield - damage);
+            //SetText($"{data.currentHp} / {data.maxHp})");
+        }
+        else
+        {
+            SetText($"{data.currentHp} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
+            return 0;
+        }
     }
 
     private void SetText(string text)

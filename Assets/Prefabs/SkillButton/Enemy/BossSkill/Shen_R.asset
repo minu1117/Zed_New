@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shen_R
   m_EditorClassIdentifier: 
   keycode: 886870953
-  skill: {fileID: -7715565680676668206, guid: f8d9226b6e157aa40b1b7b9679f06b98, type: 3}
+  skill: {fileID: 5529552521355609698, guid: 0f37cb8d058308e4f9e5d2d7d8ce357f, type: 3}
   maxPoolSize: 5
   sp: {fileID: 0}
   type: 2

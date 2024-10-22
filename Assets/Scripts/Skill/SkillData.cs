@@ -19,7 +19,7 @@ public class SkillData : ScriptableObject
     [Header("레벨 제한")]
     public int levelRestriction;
 
-    [Header("데미지")]
+    [Header("데미지 (보호막일 경우 보호막 값)")]
     public float damage;
 
     [Header("쿨타임")]
@@ -63,4 +63,7 @@ public class SkillData : ScriptableObject
 
     [Header("음성")]
     public List<AudioClip> voiceClips;
+
+    [Header("셀프 타게팅일 경우 체크")]
+    public bool isSelf = false;
 }

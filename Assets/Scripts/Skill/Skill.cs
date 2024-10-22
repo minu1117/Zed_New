@@ -55,7 +55,14 @@ public class Skill : MonoBehaviour, IDamageable
 
         if (effect.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
         {
-            followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
+            if (data.isSelf)
+            {
+                followEffect.SetTarget(caster);
+            }
+            else
+            {
+                followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
+            }
             effect = followEffect;          // 이펙트 할당
         }
 

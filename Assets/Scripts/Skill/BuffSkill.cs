@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BuffSkill : Skill
 {
-    public override void Use(GameObject charactor)
+    public override void Use(GameObject character)
     {
-        //var obj = Instantiate(data.gameObject);
+        base.Use(character);
     }
 }

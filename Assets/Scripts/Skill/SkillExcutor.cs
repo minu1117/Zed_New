@@ -66,20 +66,79 @@ public class SkillExcutor : MonoBehaviour
             return dashSkill;
         }
 
-        if (useSkill.isTargeting)                                   // 스킬이 타게팅 스킬일 경우
+        if (useSkill.isTargeting)                   // 스킬이 타게팅 스킬일 경우
         {
-            var hit = Raycast.GetHit(Input.mousePosition, layerMask);  // 현재 마우스 위치의 적 탐지, 타겟 정보 가져오기
-            bool isHit = hit.collider != null;
-            if (!isHit)                                  // 적이 없을 경우
+            if (!useSkill.data.isSelf)
             {
-                skillPool.Release(useSkill);                        // 스킬 사용 X, 생성된 스킬 바로 Release
-                return null;                                        // 스킬이 사용되지 않았으니 null return
+                GameObject target = null;
+                if (character.tag == EnumConverter.GetString(CharacterEnum.Player))
+                {
+                    var hit = Raycast.GetHit(Input.mousePosition, layerMask);  // 현재 마우스 위치의 적 탐지, 타겟 정보 가져오기
+                    if (hit.collider != null)
+                    {
+                        target = hit.collider.gameObject;
+                    }
+
+                }
+                else if (character.tag == EnumConverter.GetString(CharacterEnum.Enemy))
+                {
+                    target = Zed.Instance.gameObject;
+                }
+
+                if (!target)
+                {
+                    skillPool.Release(useSkill);
+                    return null;
+                }
+                else
+                {
+                    var targeting = useSkill.GetComponent<ITargetable>();  // 가져온 스킬에서 타게팅 추출
+                    targeting.SetTarget(target);                           // 타겟 설정
+                }
+
+                //if (character.tag == EnumConverter.GetString(CharacterEnum.Player))
+                //{
+                //    var hit = Raycast.GetHit(Input.mousePosition, layerMask);  // 현재 마우스 위치의 적 탐지, 타겟 정보 가져오기
+                //    bool isHit = hit.collider != null;
+                //    if (!isHit)                                  // 적이 없을 경우
+                //    {
+                //        skillPool.Release(useSkill);                        // 스킬 사용 X, 생성된 스킬 바로 Release
+                //        return null;                                        // 스킬이 사용되지 않았으니 null return
+                //    }
+                //    else // 적이 있을 경우
+                //    {
+                //        var target = useSkill.GetComponent<ITargetable>();              // 가져온 스킬에서 타게팅 추출
+                //        target.SetTarget(hit.collider.gameObject);                      // 타겟 설정
+                //    }
+                //}
+                //else if (character.tag == EnumConverter.GetString(CharacterEnum.Enemy))
+                //{
+                //    var player = Zed.Instance;
+                //    if (!player)                                  // 적이 없을 경우
+                //    {
+                //        skillPool.Release(useSkill);                        // 스킬 사용 X, 생성된 스킬 바로 Release
+                //        return null;                                        // 스킬이 사용되지 않았으니 null return
+                //    }
+                //    else // 적이 있을 경우
+                //    {
+                //        var target = useSkill.GetComponent<ITargetable>();              // 가져온 스킬에서 타게팅 추출
+                //        target.SetTarget(player.gameObject);                            // 타겟 설정
+                //    }
+                //}
+            }  
+            else
+            {
+                if (!character)
+                {
+                    skillPool.Release(useSkill);
+                    return null;
+                }
+                else
+                {
+                    var targeting = useSkill.GetComponent<ITargetable>();   // 가져온 스킬에서 타게팅 추출
+                    targeting.SetTarget(character);                         // 타겟 설정
+                }
             }
-            else // 적이 있을 경우
-            {
-                var targetingSkill = useSkill.GetComponent<TargetingSkill>();   // 가져온 스킬에서 타게팅 스킬 컴포넌트 추출
-                targetingSkill.SetTarget(hit.collider.gameObject);                     // 타겟 설정
-            }    
         }
 
         StartCoroutine(WaitUseSkill(useSkill, character, point));   // 스킬 사용 대기 코루틴 시작

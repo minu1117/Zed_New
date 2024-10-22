@@ -19,7 +19,7 @@ MonoBehaviour:
   levelRestriction: 0
   damage: 100
   coolDown: 0
-  duration: 0
+  duration: 0.5
   useDelay: 1
   speed: 0
   immobilityTime: 0

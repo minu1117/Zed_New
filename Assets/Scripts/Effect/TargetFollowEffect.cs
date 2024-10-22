@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class TargetFollowEffect : Effect
 {
+    public float newYPos;
+    private Vector3 newPos;
     private GameObject target;      // 따라다닐 타겟
 
     // 이펙트 사용
@@ -27,7 +29,11 @@ public class TargetFollowEffect : Effect
         if (target == null || particle == null || particle.isStopped)       // 타겟이 없거나, 파티클이 없거나, 파티클이 멈춰있는 경우 return
             return;
 
-        particle.gameObject.transform.position = target.transform.position; // 따라다니기
+        newPos.x = target.transform.position.x;
+        newPos.y = newYPos;
+        newPos.z = target.transform.position.z;
+
+        particle.gameObject.transform.position = newPos; // 따라다니기
     }
 
     private void Update()

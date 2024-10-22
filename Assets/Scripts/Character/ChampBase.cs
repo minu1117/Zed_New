@@ -116,6 +116,14 @@ public class ChampBase : MonoBehaviour
     // 데미지 받기
     public virtual void OnDamage(float damage)
     {
+        if (hpController.isShield)
+        {
+            damage = hpController.HitShield(damage);
+        }
+
+        if (damage <= 0)
+            return;
+
         if (data.currentHp - damage >= 0)   // 현재 HP - 받는 데미지가 0 이상일 경우
         {
             data.currentHp -= damage;       // HP 차감
@@ -136,6 +144,11 @@ public class ChampBase : MonoBehaviour
     public virtual void OnDead()
     {
         Destroy(gameObject);
+    }
+
+    public void OnShield(float shieldValue)
+    {
+        hpController.SetShield(shieldValue);
     }
 
     /********************************************** Animation Event **********************************************/
