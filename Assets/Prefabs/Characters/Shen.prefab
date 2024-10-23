@@ -504,10 +504,10 @@ MonoBehaviour:
   comboSkillLists: {fileID: 0}
   waitComboDelay: 3
   patternSkillList:
-  - {fileID: 11400000, guid: 26e994bb9744e0c4ab12444ceb49c2df, type: 2}
   - {fileID: 11400000, guid: d84ca2ab6a5ff6d489c095b65f7f2c61, type: 2}
-  - {fileID: 11400000, guid: eaaaedf4be6f205409cbce23f91b2067, type: 2}
-  - {fileID: 11400000, guid: 49a83c59e86c3fc48b46ee420daefc48, type: 2}
+  - {fileID: 11400000, guid: d84ca2ab6a5ff6d489c095b65f7f2c61, type: 2}
+  - {fileID: 11400000, guid: d84ca2ab6a5ff6d489c095b65f7f2c61, type: 2}
+  - {fileID: 11400000, guid: d84ca2ab6a5ff6d489c095b65f7f2c61, type: 2}
   waitPatternDelay: 5
   resetDelay: 1
   duskSword: {fileID: 1158188664177964655}

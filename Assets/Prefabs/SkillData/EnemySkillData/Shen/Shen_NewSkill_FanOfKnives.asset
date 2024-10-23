@@ -25,6 +25,7 @@ MonoBehaviour:
   immobilityTime: 0
   isShadow: 0
   distance: 30
+  indicator: {fileID: 4388867058225924817, guid: 34052f083b50e544ba964574fecf85e2, type: 3}
   effect: {fileID: 4327858145450995911, guid: 3ed89532ddc706b41b53951558589789, type: 3}
   useClips:
   - {fileID: 8300000, guid: 0c9f9e57dd904864f83714e7e10c9275, type: 3}
@@ -34,3 +35,4 @@ MonoBehaviour:
   complateClips: []
   voiceClips:
   - {fileID: 8300000, guid: 913e9711b1cb42c40b258ed7383704e2, type: 3}
+  isSelf: 0

@@ -18,8 +18,20 @@ public class Skill : MonoBehaviour, IDamageable
     protected Effect effect;                        // 이펙트
     protected Tweener tweener;
 
+    protected SkillIndicator indicator;
+    private List<ChildCollider> colliders;
+    public bool isCollide { get; set; } = false;
+
     public virtual void Awake()
     {
+        colliders = new();
+
+        var childColliders = GetComponentsInChildren<ChildCollider>();
+        foreach (var coll in childColliders)
+        {
+            colliders.Add(coll);
+        }
+
         waitUseDelay = new WaitForSeconds(data.useDelay);               // 시전 대기 시간 캐싱
         waitduration = new WaitForSeconds(data.duration);               // 지속 시간 캐싱
         waitimmobilityTime = new WaitForSeconds(data.immobilityTime);   // 스킬 종료 후 경직 시간 캐싱
@@ -84,18 +96,18 @@ public class Skill : MonoBehaviour, IDamageable
 
     // Collision, Trigger 둘 다 사용될 수 있으니 두 가지 메서드를 똑같이 구현
     // 오브젝트 충돌 시 처리될 작업 실행
-    protected virtual void OnCollisionEnter(Collision collision)
-    {
-        Collide(collision.gameObject);
-    }
+    //protected virtual void OnCollisionEnter(Collision collision)
+    //{
+    //    Collide(collision.gameObject);
+    //}
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        Collide(other.gameObject);
-    }
+    //protected virtual void OnTriggerEnter(Collider other)
+    //{
+    //    Collide(other.gameObject);
+    //}
 
     // 오브젝트 충돌 시 처리될 작업
-    protected virtual void Collide(GameObject obj)
+    public virtual void Collide(GameObject obj)
     {
         if (data.isShadow)  // 그림자 스킬일 경우 return (그림자 스킬 스크립트에서 따로 처리)
             return;
@@ -105,6 +117,9 @@ public class Skill : MonoBehaviour, IDamageable
             if (!shadow.isReady)    // 스킬 사용 준비가 되지 않았으면 return
                 return;
         }
+
+        if (isCollide)
+            return;
 
         DealDamage(obj);    // 데미지 처리
     }
@@ -156,6 +171,7 @@ public class Skill : MonoBehaviour, IDamageable
         if (target.TryGetComponent(out ChampBase champion))                 // 타겟에서 ChampBase 컴포넌트 추출 성공 시
         {
             DealDamage(champion, data.damage);                              // 타겟에게 데미지 부여
+            isCollide = true;                                               // 부딪힘 여부 활성화
 
             if (data.attackClips == null || data.attackClips.Count == 0)    // 평타 사운드가 없을 경우 return
                 return;
@@ -173,6 +189,7 @@ public class Skill : MonoBehaviour, IDamageable
             return;
         }
 
+        isCollide = false;
         ReleaseEffect();        // 이펙트 반납
         StartDisappearSound();  // 시전 해제 사운드 재생
         caster = null;          // 시전자 초기화

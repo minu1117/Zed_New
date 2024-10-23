@@ -131,6 +131,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5237178423152883816, guid: 517185e1886e98a44be5e049d35adac6, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237178423152883816, guid: 517185e1886e98a44be5e049d35adac6, type: 3}
       propertyPath: ShapeModule.enabled
       value: 0
       objectReference: {fileID: 0}
@@ -145,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 5237178423152883816, guid: 517185e1886e98a44be5e049d35adac6, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237178423152883816, guid: 517185e1886e98a44be5e049d35adac6, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0.39215687
       objectReference: {fileID: 0}
     - target: {fileID: 5237178423152883816, guid: 517185e1886e98a44be5e049d35adac6, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].time

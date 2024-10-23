@@ -933,6 +933,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 93973039f98db8940a7d8fb02dd4c4b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 404673645307437552}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 93973039f98db8940a7d8fb02dd4c4b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3866498186531033078}
   m_SourcePrefab: {fileID: 100100000, guid: 93973039f98db8940a7d8fb02dd4c4b1, type: 3}
 --- !u!4 &1715475821837350059 stripped
 Transform:
@@ -1006,6 +1009,8 @@ MonoBehaviour:
   nextMotionTriggerParamName: NextMotion
   upperLayerParamName: IsUpper
   maxAutoAttackEnum: 2
+  upperLayerIndex: 1
+  wholeBodyLayerIndex: 2
 --- !u!54 &6639304510100191221
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1076,6 +1081,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!114 &-3866498186531033078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8725561791716995186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c7133b536e1b4e99c47fcbbe5c130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 6859965597726614844}
 --- !u!4 &8822124168629930503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1132794777874286372, guid: 93973039f98db8940a7d8fb02dd4c4b1, type: 3}

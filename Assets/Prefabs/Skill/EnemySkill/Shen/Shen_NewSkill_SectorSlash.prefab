@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3727213188828285866}
   - component: {fileID: 4481171286330736473}
   - component: {fileID: -2460268875714287767}
+  - component: {fileID: 4717883638720171419}
   m_Layer: 0
   m_Name: Shen_NewSkill_SectorSlash
   m_TagString: Untagged
@@ -68,3 +69,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: d97576563eb51194e9d1e5edc3e048c9, type: 2}
   isTargeting: 0
+--- !u!114 &4717883638720171419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2300615302625102005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c7133b536e1b4e99c47fcbbe5c130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: -2460268875714287767}

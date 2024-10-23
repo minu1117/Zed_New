@@ -10,6 +10,7 @@ public class SkillExcutor : MonoBehaviour
     public static int shadowID = 0;         // 플레이어의 그림자 스킬 전용 ID
     private Skill coolDownSkill;            // 쿨다운 중인 스킬
     private bool isAvailable = true;        // 스킬 사용 가능 여부
+    protected SkillIndicator indicator;
 
     // 초기 설정
     public void Init(GameObject parentObj, SkillButtonData data)
@@ -33,10 +34,15 @@ public class SkillExcutor : MonoBehaviour
                         DestroySkill,
                         maxSize : data.maxPoolSize
                     );
+
+        if (data.skill.data.indicator != null)
+        {
+            indicator = Instantiate(data.skill.data.indicator, gameObject.transform);
+        }
     }
 
     // 스킬 실행 
-    // 실행한 스킬을 return (해당 를 실행한 곳에서도 실행한 스킬의 정보를 알 수 있게)
+    // 실행한 스킬을 return (해당 스킬을 실행한 곳에서도 실행한 스킬의 정보를 알 수 있게)
     public Skill StartSkill(GameObject character, string layerMask)
     {
         if (!isAvailable)   // 사용 불가 상태일 경우 null return
@@ -152,6 +158,9 @@ public class SkillExcutor : MonoBehaviour
         isAvailable = false;                                        // 스킬 사용 불가 상태로 변경 (오동작 방지)
         useSkill.SetActive(false);                                  // 스킬 오브젝트의 active 꺼놓기 (켜져 있을 경우 보이기 때문)
         character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
+
+        UseIndicator(character.transform.position, useSkill.data.useDelay); // 스킬 범위 표시기 사용
+
         yield return new WaitForSeconds(useSkill.data.useDelay);    // 스킬 데이터의 대기 시간만큼 대기
 
         Vector3 startPosition = character.gameObject.transform.position;    // 시작 위치 설정 (character 오브젝트의 현재 위치)
@@ -192,6 +201,16 @@ public class SkillExcutor : MonoBehaviour
         yield return new WaitForSeconds(coolDownSkill.data.coolDown);   // 스킬 데이터의 쿨다운 시간만큼 대기
         coolDownSkill = null;   // 쿨다운 코루틴 초기화
         isAvailable = true;     // 스킬 사용 가능 상태로 변경
+    }
+
+    protected void UseIndicator(Vector3 pos, float duration)
+    {
+        if (indicator == null)
+            return;
+
+        indicator.SetPosition(pos);
+        indicator.duration = duration;
+        indicator.Use();
     }
 
     // 오브젝트 풀의 Create 

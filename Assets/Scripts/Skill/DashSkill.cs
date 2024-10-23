@@ -58,10 +58,10 @@ public class DashSkill : Skill
     }
     
     // 충돌 처리
-    protected override void OnTriggerEnter(Collider other)
-    {
-        Collide(other.gameObject);
-    }
+    //protected override void OnTriggerEnter(Collider other)
+    //{
+    //    Collide(other.gameObject);
+    //}
 
     // 대쉬 스킬 사용 코루틴
     // obj = 사용자(시전자)

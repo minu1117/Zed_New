@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8361304708688891808}
   - component: {fileID: 949415898919454932}
   - component: {fileID: 1291742464380487658}
+  - component: {fileID: -8157813079049089700}
   m_Layer: 0
   m_Name: ESkill
   m_TagString: Untagged
@@ -68,3 +69,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 0.1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8157813079049089700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590254422734250529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38c7133b536e1b4e99c47fcbbe5c130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 949415898919454932}

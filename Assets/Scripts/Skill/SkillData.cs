@@ -43,6 +43,9 @@ public class SkillData : ScriptableObject
     [Header("사거리")]
     public float distance;
 
+    [Header("스킬 범위 인디케이터")]
+    public SkillIndicator indicator;
+
     [Header("이펙트")]
     public Effect effect;
 

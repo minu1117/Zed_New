@@ -4,7 +4,7 @@ using UnityEngine;
 public class TargetingShotSkill : TargetingSkill
 {
     public bool isPenetrate;        // 관통 여부
-    private bool isCollide = false;
+    private bool isOtherCollide = false;
 
     public override void Use(GameObject character)
     {
@@ -21,30 +21,38 @@ public class TargetingShotSkill : TargetingSkill
         StartCoroutine(CoShot());
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (other == null)
-            return;
+    //protected override void OnTriggerEnter(Collider other)
+    //{
+    //    if (other == null)
+    //        return;
 
-        Collide(other.gameObject);
-    }
+    //    Collide(other.gameObject);
+    //}
 
     // 충돌 처리
-    protected override void Collide(GameObject obj)
+    public override void Collide(GameObject obj)
     {
+        if (obj == null)
+            return;
+
         if (target == null || obj == null)  // 타겟이 없거나 부딪힌 대상이 없을 경우 return
             return;
 
         // 타겟에 부딪혔을 경우 타겟에 데미지 부여
-        if (!isCollide && ReferenceEquals(target, obj))
+        if (ReferenceEquals(target, obj))
         {
-            isCollide = true;
+            //isCollide = true;
+            if (isOtherCollide)
+                isCollide = false;
+
             base.Collide(target);
         }
 
         // 관통하는 스킬일 경우 다른 대상에게 부딪혀도 데미지 부여
         else if (isPenetrate && !ReferenceEquals(target, obj))
         {
+            isCollide = false;
+            isOtherCollide = true;
             base.Collide(obj);
         }
     }
