@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Pool;
 
 public class SkillExcutor : MonoBehaviour
@@ -43,7 +44,7 @@ public class SkillExcutor : MonoBehaviour
 
     // 스킬 실행 
     // 실행한 스킬을 return (해당 스킬을 실행한 곳에서도 실행한 스킬의 정보를 알 수 있게)
-    public Skill StartSkill(GameObject character, string layerMask)
+    public Skill StartSkill(GameObject character, int enumIndex, string layerMask)
     {
         if (!isAvailable)   // 사용 불가 상태일 경우 null return
             return null;
@@ -63,6 +64,11 @@ public class SkillExcutor : MonoBehaviour
             var dashSkill = useSkill.GetComponent<DashSkill>(); // 가져온 스킬에서 대쉬 스킬 컴포넌트 추출
             if (dashSkill == null)      // 대쉬 스킬이 아닐 때
                 return null;            // null return (잘못 설정된 스킬)
+
+            if (character.TryGetComponent<CharacterAnimationController>(out var animationController))
+            {
+                animationController.UseSkill(enumIndex, data.isUpper);
+            }
 
             isAvailable = false;            // 스킬 사용 불가 상태로 변경 (오동작 방지)
             dashSkill.SetPoint(point);      // 대쉬할 위치 설정
@@ -147,13 +153,13 @@ public class SkillExcutor : MonoBehaviour
             }
         }
 
-        StartCoroutine(WaitUseSkill(useSkill, character, point));   // 스킬 사용 대기 코루틴 시작
+        StartCoroutine(WaitUseSkill(useSkill, character, point, enumIndex));   // 스킬 사용 대기 코루틴 시작
         return useSkill;    // 스킬 return
     }
 
     // 스킬 사용 대기 코루틴
     // 스킬 데이터의 대기 시간만큼 대기, 대기 완료 후 스킬 실행
-    private IEnumerator WaitUseSkill(Skill useSkill, GameObject character, Vector3 lookAtPoint)
+    private IEnumerator WaitUseSkill(Skill useSkill, GameObject character, Vector3 lookAtPoint, int enumIndex)
     {
         isAvailable = false;                                        // 스킬 사용 불가 상태로 변경 (오동작 방지)
         useSkill.SetActive(false);                                  // 스킬 오브젝트의 active 꺼놓기 (켜져 있을 경우 보이기 때문)
@@ -161,7 +167,31 @@ public class SkillExcutor : MonoBehaviour
 
         UseIndicator(character.transform.position, useSkill.data.useDelay); // 스킬 범위 표시기 사용
 
-        yield return new WaitForSeconds(useSkill.data.useDelay);    // 스킬 데이터의 대기 시간만큼 대기
+        var moveController = character.GetComponent<CharacterMoveController>();
+        var agent = character.GetComponent<NavMeshAgent>();
+        if (useSkill.data.isStiffen)              // 사용 전 경직이 활성화 되어 있을 경우
+        {
+            if (moveController != null)
+                moveController.StopMove();
+            if (agent != null)
+                agent.isStopped = true;
+        }
+
+        if (useSkill.data.useDelay > 0)
+            yield return new WaitForSeconds(useSkill.data.useDelay);            // 스킬 데이터의 대기 시간만큼 대기
+
+        if (character.TryGetComponent<CharacterAnimationController>(out var animationController))
+        {
+            animationController.UseSkill(enumIndex, data.isUpper);        // 애니메이션 출력
+        }
+
+        // 애니메이션 전환 후 평타 애니메이션의 애니메이션 이벤트가 발생하지 않게 하기 위함 (트랜지션 대기 1프레임)
+        yield return null;
+        if (character.TryGetComponent<ChampBase>(out var champ))
+        {
+            champ.FinishedAttack();
+        }
+
 
         Vector3 startPosition = character.gameObject.transform.position;    // 시작 위치 설정 (character 오브젝트의 현재 위치)
         if (character.TryGetComponent(out ChampBase champion))              // character 오브젝트에서 ChampBase 컴포넌트 추출 성공 시
@@ -190,9 +220,22 @@ public class SkillExcutor : MonoBehaviour
             zed.AddShadow(shadow);      // 그림자 스킬을 플레이어에 추가
         }
 
+        character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
         useSkill.Use(character);        // 스킬 실행
         coolDownSkill = useSkill;       // 쿨다운 스킬 설정
         StartCoroutine(CoCoolDown());   // 쿨다운 코루틴 실행
+
+        if (moveController != null)
+            moveController.StopMove();
+        if (agent != null)
+            agent.isStopped = true;
+
+        yield return new WaitForSeconds(useSkill.data.afterUseStiffenTime);    // 스킬 데이터의 사용 후 경직 시간만큼 대기
+
+        if (moveController != null)
+            moveController.isMoved = true;
+        if (agent != null)
+            agent.isStopped = false;
     }
 
     // 쿨다운 코루틴

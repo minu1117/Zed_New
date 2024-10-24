@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Pool;
 
 public class Zed : SingletonChampion<Zed>
 {
@@ -45,7 +44,7 @@ public class Zed : SingletonChampion<Zed>
 
     // 스킬 사용 
     // null return == 스킬 사용 X
-    public override Skill UseSkill(string keycode, string layerMask = "")
+    public override Skill UseSkill(string keycode, int enumIndex, string layerMask = "")
     {
         if (skillSlotMgr == null)   // 스킬 슬롯 매니저가 없을 시 null return (스킬이 없다는 뜻)
             return null;
@@ -54,7 +53,7 @@ public class Zed : SingletonChampion<Zed>
         if (!skillDict.ContainsKey(keycode))        // 입력한 키가 없을 경우 null return
             return null;
 
-        Skill skill = skillDict[keycode].GetExcutor().StartSkill(gameObject, layerMask);    // 사용할 스킬 가져오기
+        Skill skill = skillDict[keycode].GetExcutor().StartSkill(gameObject, enumIndex, layerMask);    // 사용할 스킬 가져오기
         return skill;   // 사용한 스킬 return
     }
 
@@ -91,11 +90,11 @@ public class Zed : SingletonChampion<Zed>
             return;
         }
 
-        Skill useSkill = UseSkill(keycode, EnumConverter.GetString(CharacterEnum.Enemy));   // 스킬 사용
+        int typeToint = (int)type;
+
+        Skill useSkill = UseSkill(keycode, typeToint, EnumConverter.GetString(CharacterEnum.Enemy));   // 스킬 사용
         if (useSkill == null)   // 사용한 스킬이 null을 반환할 시 return
             return;
-
-        FinishedAttack();       // 무기 상태 초기화
 
         (GameObject, bool) target = (null, false);  // 타겟 정보
         if (useSkill.isTargeting)                   // 타게팅 스킬일 시
@@ -107,11 +106,11 @@ public class Zed : SingletonChampion<Zed>
                 target = (hit.collider.gameObject, isHit);
         }
 
-        CopySkill(keycode, useSkill, type, skillSlotMgr.GetSlotDict()[keycode].GetExcutor().GetPool(), target.Item1);   // 그림자 스킬에 사용한 스킬 전달
+        CopySkill(keycode, useSkill, type, skillSlotMgr.GetSlotDict()[keycode].GetExcutor(), target.Item1);   // 그림자 스킬에 사용한 스킬 전달
 
-        int typeToint = (int)type;
-        bool isUpperLayer = typeToint != (int)ZedSkillType.ShadowRush ? true : false;   // 상체 레이어 사용 여부
-        animationController.UseSkill(typeToint, isUpperLayer);        // 애니메이션 출력
+        //int typeToint = (int)type;
+        //bool isUpperLayer = typeToint != (int)ZedSkillType.ShadowRush ? true : false;   // 상체 레이어 사용 여부
+        //animationController.UseSkill(typeToint, isUpperLayer);        // 애니메이션 출력
         skillSlotMgr.CoolDown(useSkill.data.coolDown);  // 쿨다운 시작
     }
 
@@ -124,15 +123,16 @@ public class Zed : SingletonChampion<Zed>
         if (hit.collider == null)   // 마우스 위치에 그림자 스킬이 없을 시
         {
             FinishedAttack();       // 무기 상태 초기화
-            Skill useSkill = UseSkill(key, EnumConverter.GetString(CharacterEnum.Enemy));   // 그림자 스킬 사용
+            Skill useSkill = UseSkill(key, (int)type, EnumConverter.GetString(CharacterEnum.Enemy));   // 그림자 스킬 사용
 
-            if (useSkill != null)   // 스킬 사용 성공 시
-            {
-                int typeToint = (int)type;
-                bool isUpperLayer = typeToint != (int)ZedSkillType.ShadowRush ? true : false;   // 상체 레이어 사용 여부
-                animationController.UseSkill(typeToint, isUpperLayer);   // 애니메이션 출력
-                skillSlotMgr.CoolDown(useSkill.data.coolDown);      // 쿨다운 시작
-            }
+            //if (useSkill != null)   // 스킬 사용 성공 시
+            //{
+            //    int typeToint = (int)type;
+            //    bool isUpperLayer = typeToint != (int)ZedSkillType.ShadowRush ? true : false;   // 상체 레이어 사용 여부
+            //    animationController.UseSkill(typeToint, isUpperLayer);   // 애니메이션 출력
+            //    skillSlotMgr.CoolDown(useSkill.data.coolDown);      // 쿨다운 시작
+            //}
+            skillSlotMgr.CoolDown(useSkill.data.coolDown);      // 쿨다운 시작
         }
         else  // 마우스 위치에 그림자 스킬이 있을 시
         {
@@ -162,7 +162,7 @@ public class Zed : SingletonChampion<Zed>
     }    
 
     // 스킬 복제 사용 (그림자 스킬이)
-    private void CopySkill(string skillKeyStr, Skill useSkill, ZedSkillType type, IObjectPool<Skill> skillPool, GameObject target = null)
+    private void CopySkill(string skillKeyStr, Skill useSkill, ZedSkillType type, SkillExcutor excutor, GameObject target = null)
     {
         if (useSkill == null)   // 사용할 스킬이 null일 경우 return (스킬이 사용되지 않았음)
             return;
@@ -172,7 +172,7 @@ public class Zed : SingletonChampion<Zed>
             foreach (var shadow in shadows)         // 그림자 목록 순회
             {
                 shadow.Value.SetCaster(gameObject); // 시전자 설정
-                shadow.Value.AddSkill(skillKeyStr, useSkill, type, skillPool, target); // 사용한 스킬 추가
+                shadow.Value.AddSkill(skillKeyStr, useSkill, type, excutor, target); // 사용한 스킬 추가
             }
         }
     }

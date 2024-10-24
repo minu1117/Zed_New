@@ -4,5 +4,4 @@ using UnityEngine;
 public class EnemySkillButtonData : SkillButtonData
 {
     public EnemySkill type;
-    public bool isUpper;
 }

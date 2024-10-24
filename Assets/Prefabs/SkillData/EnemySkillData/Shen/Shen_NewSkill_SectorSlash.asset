@@ -21,6 +21,7 @@ MonoBehaviour:
   coolDown: 0
   duration: 0.5
   useDelay: 1
+  afterUseStiffenTime: 0
   speed: 0
   immobilityTime: 0
   isShadow: 0
@@ -34,3 +35,4 @@ MonoBehaviour:
   complateClips: []
   voiceClips: []
   isSelf: 0
+  isStiffen: 1

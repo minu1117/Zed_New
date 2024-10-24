@@ -50,8 +50,6 @@ public abstract class EnemyBase : ChampBase
     protected List<string> skillKeys;
     private Coroutine loseTargetCoroutine;
     private Coroutine patrolCoroutine;
-    //private bool isPatrol;
-    //private bool isChase;
 
     private float addRunSpeed = 5f;
     protected float runSpeed;
@@ -198,8 +196,8 @@ public abstract class EnemyBase : ChampBase
             if (!slot.GetIsAvailable())
                 return;
 
-            slot.StartSkill(gameObject, EnumConverter.GetString(CharacterEnum.Player));    // 스킬 실행
-            animationController.UseSkill((int)data.type);
+            slot.StartSkill(gameObject, (int)data.type, EnumConverter.GetString(CharacterEnum.Player));    // 스킬 실행
+            //animationController.UseSkill((int)data.type);
         }
 
         // 랜덤으로 가져온 스킬의 범위에 타겟이 없을 경우
@@ -216,9 +214,10 @@ public abstract class EnemyBase : ChampBase
                     if (!slot.GetIsAvailable())
                         return;
 
-                    slot.StartSkill(gameObject, EnumConverter.GetString(CharacterEnum.Player));
                     var data = slot.GetData() as EnemySkillButtonData;
-                    animationController.UseSkill((int)data.type);
+                    slot.StartSkill(gameObject, (int)data.type, EnumConverter.GetString(CharacterEnum.Player));
+                    //var data = slot.GetData() as EnemySkillButtonData;
+                    //animationController.UseSkill((int)data.type);
                     break;
                 }
             }

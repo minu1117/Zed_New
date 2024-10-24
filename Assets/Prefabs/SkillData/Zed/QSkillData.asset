@@ -21,10 +21,12 @@ MonoBehaviour:
   coolDown: 1
   duration: 1
   useDelay: 0.1
+  afterUseStiffenTime: 0.2
   speed: 20
   immobilityTime: 0
   isShadow: 0
   distance: 0
+  indicator: {fileID: 0}
   effect: {fileID: -367961775740068773, guid: 3399372d4f5d11244bebed235f22fba5, type: 3}
   useClips:
   - {fileID: 8300000, guid: 2d8e6805fadf8724ea756799e873ee0b, type: 3}
@@ -33,7 +35,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2250138e2e4ee0b4cbd96d5d6d967532, type: 3}
   disappearClips: []
   recastClips: []
+  complateClips: []
   voiceClips:
   - {fileID: 8300000, guid: 8b2754e9a3495ec4abb4d9fd8a481c52, type: 3}
   - {fileID: 8300000, guid: 9e60faf9909083a4e9499ba967182f4f, type: 3}
   - {fileID: 8300000, guid: 34a17baadeb573144be948b9c355711a, type: 3}
+  isSelf: 0
+  isStiffen: 0

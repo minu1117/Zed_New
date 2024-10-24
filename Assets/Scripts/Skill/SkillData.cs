@@ -28,8 +28,11 @@ public class SkillData : ScriptableObject
     [Header("지속 시간")]
     public float duration;
 
-    [Header("사용 전 경직 시간")]
+    [Header("사용 전 대기 시간")]
     public float useDelay;
+
+    [Header("사용 후 경직 시간")]
+    public float afterUseStiffenTime;
 
     [Header("물체의 이동 속도")]
     public float speed;
@@ -69,4 +72,7 @@ public class SkillData : ScriptableObject
 
     [Header("셀프 타게팅일 경우 체크")]
     public bool isSelf = false;
+
+    [Header("사용 전 경직 여부")]
+    public bool isStiffen = false;
 }

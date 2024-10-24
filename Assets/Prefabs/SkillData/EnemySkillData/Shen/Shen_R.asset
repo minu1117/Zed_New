@@ -21,10 +21,12 @@ MonoBehaviour:
   coolDown: 0
   duration: 10
   useDelay: 0
+  afterUseStiffenTime: 0
   speed: 0
   immobilityTime: 0
   isShadow: 0
   distance: 9999
+  indicator: {fileID: 0}
   effect: {fileID: -5654840191769220375, guid: 0d95d18abe4a17b448e24c8be97de114, type: 3}
   useClips: []
   attackClips: []
@@ -33,3 +35,4 @@ MonoBehaviour:
   complateClips: []
   voiceClips: []
   isSelf: 1
+  isStiffen: 1

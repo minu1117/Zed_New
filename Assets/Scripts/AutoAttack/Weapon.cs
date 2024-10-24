@@ -39,6 +39,8 @@ public class Weapon : MonoBehaviour, IDamageable
     // 무기 준비 완료
     public void OnReady()
     {
+        Debug.Log("Ready");
+
         isReady = true;         // 준비 상태 변경 (완료)
         coll.enabled = true;    // Collider 활성화 (부딪힐 수 있게)
 
@@ -54,6 +56,7 @@ public class Weapon : MonoBehaviour, IDamageable
     {
         isReady = false;        // 준비 상태 변경 (미완료)
         coll.enabled = false;   // Collider 비활성화 (부딪히지 않게)
+        //Debug.Log("Finishe");
     }
 
     public void SetDamage(float dmg)

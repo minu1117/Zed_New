@@ -107,9 +107,11 @@ public class EliteEnemy : EnemyBase
             slot.SetIsAvailable(true);
             var duration = slot.GetData().skill.data.duration;
 
-            slot.StartSkill(gameObject, playerTag);
             var enemySkillButtonData = data as EnemySkillButtonData;
-            animationController.UseSkill((int)enemySkillButtonData.type);
+            slot.StartSkill(gameObject, (int)enemySkillButtonData.type, playerTag);
+
+            //var enemySkillButtonData = data as EnemySkillButtonData;
+            //animationController.UseSkill((int)enemySkillButtonData.type);
             yield return new WaitForSeconds(duration + addWaitTime);
         }
     }

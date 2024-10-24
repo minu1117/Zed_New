@@ -14,12 +14,16 @@ public class ChampBase : MonoBehaviour
     private StatusController hpController;                              // hp 컨트롤러
     private StatusController mpController;                              // mp 컨트롤러
     protected NavMeshAgent agent;
+    private CharacterMoveController moveController;
+
+    public bool isSkillUsed = false;
 
     protected virtual void Awake()
     {
         hpController = GetComponent<StatusController>();
         animationController = GetComponent<CharacterAnimationController>();
         agent = GetComponent<NavMeshAgent>();
+        moveController = GetComponent<CharacterMoveController>();
 
         weaponDict = new(); // 무기 dictionary 초기화
         if (weapons != null && weapons.Count > 0)   // 무기 List에 무기가 있을 경우
@@ -43,9 +47,6 @@ public class ChampBase : MonoBehaviour
     // 평타 공격 완료 
     public void FinishedAttack()
     {
-        if (agent != null)
-            agent.isStopped = false;
-
         if (weaponDict == null || weaponDict.Count == 0)    // 무기 dictionary가 비었을 경우 return
             return;
 
@@ -54,6 +55,15 @@ public class ChampBase : MonoBehaviour
         {
             weapon.Value.OnFinished();  // 무기 상태 초기화
         }
+    }
+
+    public void ActiveMove()
+    {
+        if (agent != null)
+            agent.isStopped = false;
+
+        if (moveController != null)
+            moveController.isMoved = true;
     }
 
     // 평타 준비 상태 변경 
@@ -89,6 +99,9 @@ public class ChampBase : MonoBehaviour
         if (agent != null)
             agent.isStopped = true;
 
+        if (moveController != null)
+            moveController.StopMove();
+
         autoAttack.Attack(gameObject);  // 평타 실행
     }
 
@@ -100,7 +113,7 @@ public class ChampBase : MonoBehaviour
 
     // 스킬 사용 
     // 실행하는 곳에서도 사용하는 스킬을 알 수 있게 스킬을 return
-    public virtual Skill UseSkill(string keycode, string layerMask = "")
+    public virtual Skill UseSkill(string keycode, int enumIndex, string layerMask = "")
     {
         if (slot == null)   // 스킬 슬롯이 없을 경우 null return
             return null;
@@ -109,7 +122,7 @@ public class ChampBase : MonoBehaviour
         if (!skillDict.ContainsKey(keycode))    // 찾는 스킬이 없을 경우 null return
             return null;
 
-        Skill skill = skillDict[keycode].StartSkill(gameObject, layerMask); // 스킬 사용
+        Skill skill = skillDict[keycode].StartSkill(gameObject, enumIndex, layerMask); // 스킬 사용
         return skill; // 사용한 스킬 return
     }
 

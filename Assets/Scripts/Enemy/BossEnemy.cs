@@ -178,10 +178,12 @@ public class BossEnemy : EliteEnemy
 
         var data = excutor.GetData();
         excutor.SetIsAvailable(true);
-        excutor.StartSkill(gameObject, playerTag);
 
         var enemySkillButtonData = data as EnemySkillButtonData;
-        animationController.UseSkill((int)enemySkillButtonData.type, enemySkillButtonData.isUpper);
+        excutor.StartSkill(gameObject, (int)enemySkillButtonData.type, playerTag);
+
+        //var enemySkillButtonData = data as EnemySkillButtonData;
+        //animationController.UseSkill((int)enemySkillButtonData.type, enemySkillButtonData.isUpper);
     }
 
     protected void UsePattern(SkillExcutor excutor)
@@ -190,10 +192,12 @@ public class BossEnemy : EliteEnemy
 
         var data = excutor.GetData();
         excutor.SetIsAvailable(true);
-        excutor.StartSkill(gameObject, playerTag);
 
         var enemySkillButtonData = data as EnemySkillButtonData;
-        animationController.UseSkill((int)enemySkillButtonData.type, enemySkillButtonData.isUpper);
+        excutor.StartSkill(gameObject, (int)enemySkillButtonData.type, playerTag);
+
+        //var enemySkillButtonData = data as EnemySkillButtonData;
+        //animationController.UseSkill((int)enemySkillButtonData.type, enemySkillButtonData.isUpper);
     }
 
     protected SkillExcutor GetRandomPatternSkillExcutor()

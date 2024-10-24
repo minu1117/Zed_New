@@ -70,7 +70,7 @@ public class DashSkill : Skill
         /********************************************** 사용 대기 **********************************************/
 
         if (moveController != null)
-            moveController.isMoved = false;             // 시전자 이동 제한
+            moveController.StopMove();                  // 시전자 이동 제한
 
         if (agent != null && agent.isActiveAndEnabled)
             agent.isStopped = true;                     // 시전자 agent 멈추기    

@@ -21,6 +21,7 @@ MonoBehaviour:
   coolDown: 0
   duration: 0.5
   useDelay: 1
+  afterUseStiffenTime: 0
   speed: 0
   immobilityTime: 0
   isShadow: 0
@@ -36,3 +37,4 @@ MonoBehaviour:
   voiceClips:
   - {fileID: 8300000, guid: 913e9711b1cb42c40b258ed7383704e2, type: 3}
   isSelf: 0
+  isStiffen: 1

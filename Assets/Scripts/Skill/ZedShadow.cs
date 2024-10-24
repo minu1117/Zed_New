@@ -11,6 +11,7 @@ public struct UseSkillData
     public Skill skill;                     // 사용할 스킬
     public ZedSkillType skillType;          // 애니메이션 타입
     public GameObject target;               // 타겟
+    public bool isUpper;
 }
 
 // 플레이어 전용 스킬
@@ -140,16 +141,16 @@ public class ZedShadow : ShotSkill
         {
             foreach (var skillObject in skillPairList.Value)
             {
-                UseCopySkill(skillObject.skill, skillObject.skillPool, skillObject.target);  // 스킬 사용
-                StartAnimation(skillObject.skillType); // 애니메이션 실행
+                UseCopySkill(skillObject.skill, skillObject.skillPool, (int)skillObject.skillType, skillObject.isUpper, skillObject.target);  // 스킬 사용
+                //StartAnimation(skillObject.skillType); // 애니메이션 실행
             }
         }
 
         useSkills.Clear();  // 사용 완료, 담아둔 모든 스킬 삭제
     }
 
-    // 이동 중 사용된 스킬들을 담아주는 
-    public void AddSkill(string name, Skill skill, ZedSkillType type, IObjectPool<Skill> skillPool, GameObject target = null)
+    // 이동 중 사용된 스킬들 담기
+    public void AddSkill(string name, Skill skill, ZedSkillType type, SkillExcutor excutor, GameObject target = null)
     {
         if (skill == null)  // 스킬이 없을 경우 return
             return;
@@ -157,8 +158,8 @@ public class ZedShadow : ShotSkill
         if (isReady)        // 스킬 사용 준비가 됐을 경우 스킬 바로 사용
         {
             usePoint = GetUsePoint();                   // 현재 마우스 위치 저장
-            UseCopySkill(skill, skillPool, target);     // 스킬 사용
-            StartAnimation(type);                       // 애니메이션 실행
+            UseCopySkill(skill, excutor.GetPool(), (int)type, excutor.GetData().isUpper, target);     // 스킬 사용
+            //StartAnimation(type);                       // 애니메이션 실행
             return;                                     // 사용 후 return
         }
 
@@ -166,9 +167,10 @@ public class ZedShadow : ShotSkill
         var skilldata = new UseSkillData
         {
             skill = skill,
-            skillPool = skillPool,
+            skillPool = excutor.GetPool(),
             skillType = type,
-            target = target
+            target = target,
+            isUpper = excutor.GetData().isUpper
         };
 
         // 대쉬 스킬일 경우
@@ -203,13 +205,13 @@ public class ZedShadow : ShotSkill
     }
 
     // 스킬 사용 
-    private void UseCopySkill(Skill skill, IObjectPool<Skill> skillPool, GameObject target = null)
+    private void UseCopySkill(Skill skill, IObjectPool<Skill> skillPool, int enumIndex, bool isUpper, GameObject target = null)
     {
-        StartCoroutine(CoUseCopySkill(skill, skillPool, target));
+        StartCoroutine(CoUseCopySkill(skill, skillPool, enumIndex, isUpper, target));
     }
 
     // 스킬 사용 코루틴
-    private IEnumerator CoUseCopySkill(Skill skill, IObjectPool<Skill> skillPool, GameObject target = null)
+    private IEnumerator CoUseCopySkill(Skill skill, IObjectPool<Skill> skillPool, int enumIndex, bool isUpper, GameObject target = null)
     {
         if (skill.data.isShadow)    // 그림자 스킬일 경우 중단
             yield break;
@@ -218,7 +220,11 @@ public class ZedShadow : ShotSkill
 
         transform.LookAt(usePoint);             // 시전 위치 바라보기
 
+        if (animationController != null)
+            animationController.UseSkill(enumIndex, isUpper);        // 애니메이션 출력
+
         var skillObject = skillPool.Get();      // 스킬 가져오기
+
         if (skillObject.isTargeting)            // 타게팅 스킬일 경우
         {
             if (target == null)                 // 타겟이 없을 경우

@@ -7,4 +7,5 @@ public class SkillButtonData : ScriptableObject
     public Skill skill;         // 스킬
     public int maxPoolSize;     // 오브젝트 풀 최대 사이즈
     public Sprite sp;           // 이미지
+    public bool isUpper;        // 상체 레이어 사용 여부
 }
