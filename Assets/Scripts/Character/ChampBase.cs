@@ -164,6 +164,16 @@ public class ChampBase : MonoBehaviour
         hpController.SetShield(shieldValue);
     }
 
+    public void HitShield(float damage)
+    {
+        hpController.HitShield(damage);
+    }
+
+    public void DestroyShield()
+    {
+        hpController.DestroyShield();
+    }
+
     /********************************************** Animation Event **********************************************/
     public void OnAllWeaponsAttackReady()
     {

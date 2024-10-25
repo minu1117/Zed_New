@@ -38,7 +38,9 @@ public class StatusController : MonoBehaviour
 
     public Slider shieldSlider;
     public bool isShield;
+    private float currentShieldValue;
     private float maxShieldValue;
+    public float shieldAccumulateDamage { get; set; }
 
     private void Awake()
     {
@@ -123,6 +125,19 @@ public class StatusController : MonoBehaviour
         SetText($"{data.currentMp} / {data.maxMp}");
     }
 
+    public void DestroyShield()
+    {
+        if (shieldSlider == null)
+            return;
+
+        isShield = false;
+        shieldSlider.value = 0.01f;
+
+        maxShieldValue = 0;
+        currentShieldValue = 0;
+        SetText($"{data.currentHp} / {data.maxHp}");
+    }
+
     public void SetShield(float shieldValue)
     {
         if (shieldSlider == null)
@@ -133,11 +148,16 @@ public class StatusController : MonoBehaviour
 
         isShield = true;
 
-        maxShieldValue = shieldValue;
-        shieldSlider.value = shieldValue / maxShieldValue;
+        currentShieldValue += shieldValue;
+        maxShieldValue += shieldValue;
+        shieldSlider.value = currentShieldValue / maxShieldValue;
 
-        SetText($"{data.currentHp} / {data.maxHp} ({maxShieldValue})");
-        shieldSlider.gameObject.SetActive(true);
+        SetText($"{data.currentHp} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
+    }
+
+    public void DeductedMaxShield(float damage)
+    {
+        maxShieldValue -= damage;
     }
 
     public float HitShield(float damage)
@@ -145,23 +165,26 @@ public class StatusController : MonoBehaviour
         if (shieldSlider == null)
             return 0;
 
-        var currentShield = shieldSlider.value * maxShieldValue;
-        shieldSlider.value = (currentShield - damage) / maxShieldValue;
-
-        if (currentShield - damage <= 0)
+        currentShieldValue -= damage;
+        if (currentShieldValue <= 0)
         {
-            isShield = false;
-            shieldSlider.value = 0;
-            shieldSlider.gameObject.SetActive(false);
+            float shieldValue = currentShieldValue;
 
+            isShield = false;
+
+            maxShieldValue = 0f;
+            currentShieldValue = 0f;
+
+            shieldSlider.value = 0f;
             SetText($"{data.currentHp} / {data.maxHp}");
-            return Mathf.Abs(currentShield - damage);
-            //data.currentHp -= Mathf.Abs(shield - damage);
-            //SetText($"{data.currentHp} / {data.maxHp})");
+            return Mathf.Abs(shieldValue - damage);
         }
         else
         {
-            SetText($"{data.currentHp} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
+            shieldAccumulateDamage += damage;
+
+            shieldSlider.value = currentShieldValue / maxShieldValue;
+            SetText($"{data.currentHp} / {data.maxHp} ({currentShieldValue})");
             return 0;
         }
     }
