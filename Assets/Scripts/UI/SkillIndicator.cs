@@ -136,8 +136,9 @@ public class SkillIndicator : MonoBehaviour
 
     public void SetPosition(Vector3 pos)
     {
-        float newPosY = -pos.y;
-        newPosY += 0.01f;
-        transform.localPosition = new Vector3(0, newPosY, 0);
+        //float newPosY = -pos.y;
+        //newPosY += 0.01f;
+        //transform.localPosition = new Vector3(0, newPosY, 0);
+        transform.localPosition = new Vector3(0, pos.y + 0.01f, 0);
     }
 }

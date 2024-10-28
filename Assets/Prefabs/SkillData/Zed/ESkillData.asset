@@ -18,9 +18,12 @@ MonoBehaviour:
   skillLevel: 1
   levelRestriction: 0
   damage: 10
+  hitRate: 1
+  hitInterval: 0
   coolDown: 0
   duration: 0.5
   useDelay: 0
+  afterUseStiffenTime: 0
   speed: 0
   immobilityTime: 0
   isShadow: 0
@@ -41,3 +44,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d6629cb404a7aee4798002abd30a7aa5, type: 3}
   - {fileID: 8300000, guid: c455d4bf64186aa4dae0ea3e4ba29fa7, type: 3}
   isSelf: 0
+  isStiffen: 0

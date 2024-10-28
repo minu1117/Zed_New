@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour, IDamageable
@@ -25,7 +26,7 @@ public class Weapon : MonoBehaviour, IDamageable
 
         if (other.TryGetComponent(out ChampBase champion)) // 부딪힌 오브젝트에서 ChampBase 추출 성공 시
         {
-            DealDamage(champion, data.damage);             // 데미지 부여
+            StartCoroutine(DealDamage(champion, data.damage, 1));             // 데미지 부여
         }
     }
 
@@ -63,12 +64,20 @@ public class Weapon : MonoBehaviour, IDamageable
     }
 
     // 타겟에 데미지 부여
-    public void DealDamage(ChampBase target, float damage)
+    public IEnumerator DealDamage(ChampBase target, float damage, int hitRate)
     {
-        target.OnDamage(damage);
+        int count = 0;
+        while (count < hitRate)
+        {
+            target.OnDamage(damage);    // 타겟에 데미지 부여
+            count++;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+       // target.OnDamage(damage);
 
         if (data.attackClips == null || data.attackClips.Count == 0)        // 때릴 때 나올 사운드가 없을 경우 return
-            return;
+            yield break;
 
         int randomIndex = Random.Range(0, data.attackClips.Count);          // 랜덤 인덱스 (때린 사운드 클립)
         SoundManager.Instance.PlayOneShot(data.attackClips[randomIndex]);   // 사운드 매니저에서 재생

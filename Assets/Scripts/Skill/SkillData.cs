@@ -22,6 +22,12 @@ public class SkillData : ScriptableObject
     [Header("데미지 (보호막일 경우 보호막 값)")]
     public float damage;
 
+    [Header("타격 횟수")]
+    public int hitRate = 1;
+
+    [Header("타격 간격")]
+    public float hitInterval;
+
     [Header("쿨타임")]
     public float coolDown;
 

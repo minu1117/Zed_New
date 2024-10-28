@@ -83,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3702840804395021477
 Transform:
   m_ObjectHideFlags: 0
@@ -128,6 +128,8 @@ MonoBehaviour:
   maxHeight: 15
   addMaxProjectorSizeX: 2
   addMaxProjectorSizeY: 2
+  isPivotAdded: 0
+  addPivot: 0
 --- !u!114 &4001066631705166574
 MonoBehaviour:
   m_ObjectHideFlags: 0

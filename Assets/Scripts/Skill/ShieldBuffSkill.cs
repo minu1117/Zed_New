@@ -19,9 +19,23 @@ public class ShieldBuffSkill : BuffSkill, ITargetable
 
         target.OnShield(data.damage);
 
-        yield return waitduration;  // 지속 시간만큼 대기
-
         var hpController = target.GetStatusController(SliderMode.HP);
+
+        float startTime = Time.time;
+        while (Time.time - startTime < data.duration)
+        {
+            if (!hpController.isShield)
+            {
+                target.DestroyShield();
+                StartSound(data.complateClips);
+                effect.ResetParticle();
+                Release();
+                yield break;
+            }
+
+            yield return null;
+        }
+
         hpController.DeductedMaxShield(data.damage);
 
         var removeShieldValue = data.damage - hpController.shieldAccumulateDamage;

@@ -1,4 +1,6 @@
+using System.Collections;
+
 public interface IDamageable
 {
-    public void DealDamage(ChampBase target, float damage);
+    public IEnumerator DealDamage(ChampBase target, float damage, int hitRate);
 }

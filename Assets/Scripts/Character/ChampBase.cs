@@ -16,8 +16,6 @@ public class ChampBase : MonoBehaviour
     protected NavMeshAgent agent;
     private CharacterMoveController moveController;
 
-    public bool isSkillUsed = false;
-
     protected virtual void Awake()
     {
         hpController = GetComponent<StatusController>();

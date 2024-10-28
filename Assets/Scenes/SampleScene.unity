@@ -5008,6 +5008,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3da52009b4ed70c488fe5fe2508d74c1, type: 3}
   - {fileID: 8300000, guid: bc2f3e810d24e4342a676264cd877650, type: 3}
   - {fileID: 8300000, guid: 0c9f9e57dd904864f83714e7e10c9275, type: 3}
+  - {fileID: 8300000, guid: 341018fb7667dc24ea949fa509c298ee, type: 3}
+  - {fileID: 8300000, guid: 82067024fcaef9e40bbcb84ad6da7c29, type: 3}
   voiceSounds:
   - {fileID: 8300000, guid: 682aed651dad39f4f9d504c28a30f7f5, type: 3}
   - {fileID: 8300000, guid: 4928928556f2d684092c27e63ed49401, type: 3}
@@ -6452,7 +6454,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.25
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 76c0778217bc12141bba2705fc3874eb, type: 2}
   m_BuildHeightMesh: 0
@@ -10262,10 +10264,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 328820110730113603, guid: 43404936f3a346648a5a1ece8b73a143, type: 3}
-      propertyPath: skillTypeParamName
-      value: SkillType
-      objectReference: {fileID: 0}
     - target: {fileID: 8240668764970117832, guid: 43404936f3a346648a5a1ece8b73a143, type: 3}
       propertyPath: m_LocalPosition.x
       value: 510

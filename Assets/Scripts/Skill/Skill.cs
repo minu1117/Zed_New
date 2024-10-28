@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Skill : MonoBehaviour, IDamageable
 {
@@ -13,6 +14,7 @@ public class Skill : MonoBehaviour, IDamageable
     protected WaitForSeconds waitUseDelay;
     protected WaitForSeconds waitduration;
     protected WaitForSeconds waitimmobilityTime;
+    protected WaitForSeconds hitInterval;
 
     protected GameObject caster;                    // 시전자
     protected Effect effect;                        // 이펙트
@@ -35,6 +37,7 @@ public class Skill : MonoBehaviour, IDamageable
         waitUseDelay = new WaitForSeconds(data.useDelay);               // 시전 대기 시간 캐싱
         waitduration = new WaitForSeconds(data.duration);               // 지속 시간 캐싱
         waitimmobilityTime = new WaitForSeconds(data.immobilityTime);   // 스킬 종료 후 경직 시간 캐싱
+        hitInterval = new WaitForSeconds(data.hitInterval);
     }
 
     // 스킬 사용
@@ -145,9 +148,23 @@ public class Skill : MonoBehaviour, IDamageable
     }
 
     // 데미지 처리
-    public void DealDamage(ChampBase target, float damage)
+    public IEnumerator DealDamage(ChampBase target, float damage, int hitRate)
     {
-        target.OnDamage(damage);    // 타겟에 데미지 부여
+        int count = 0;
+        bool isSound = data.attackClips != null && data.attackClips.Count > 0;
+        while (count < hitRate)
+        {
+            target.OnDamage(damage);    // 타겟에 데미지 부여
+
+            if (isSound)
+            {
+                int index = GetRandomIndex(0, data.attackClips.Count);          // 랜덤 인덱스 (타격 사운드 클립)
+                SoundManager.Instance.PlayOneShot(data.attackClips[index]);     // 사운드 매니저에서 타격 재생
+            }
+
+            count++;
+            yield return hitInterval;
+        }
     }
 
     // 타겟에 데미지 부여
@@ -170,14 +187,14 @@ public class Skill : MonoBehaviour, IDamageable
 
         if (target.TryGetComponent(out ChampBase champion))                 // 타겟에서 ChampBase 컴포넌트 추출 성공 시
         {
-            DealDamage(champion, data.damage);                              // 타겟에게 데미지 부여
+            StartCoroutine(DealDamage(champion, data.damage, data.hitRate));                // 타겟에게 데미지 부여
             isCollide = true;                                               // 부딪힘 여부 활성화
 
-            if (data.attackClips == null || data.attackClips.Count == 0)    // 평타 사운드가 없을 경우 return
-                return;
+            //if (data.attackClips == null || data.attackClips.Count == 0)    // 평타 사운드가 없을 경우 return
+            //    return;
 
-            int index = GetRandomIndex(0, data.attackClips.Count);          // 랜덤 인덱스 (평타 사운드 클립)
-            SoundManager.Instance.PlayOneShot(data.attackClips[index]);     // 사운드 매니저에서 평타 사운드 재생
+            //int index = GetRandomIndex(0, data.attackClips.Count);          // 랜덤 인덱스 (타격 사운드 클립)
+            //SoundManager.Instance.PlayOneShot(data.attackClips[index]);     // 사운드 매니저에서 타격 재생
         }
     }
 

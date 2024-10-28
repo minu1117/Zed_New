@@ -40,7 +40,7 @@ public abstract class EnemyBase : ChampBase
     public float loseTargetTime;            // 타겟 해제 시간
     public float patrolRange;               // 정찰 범위
 
-    private Rigidbody rb;
+    protected Rigidbody rb;
     protected GameObject target;
     protected GameObject player;
     private IObjectPool<EnemyBase> pool;

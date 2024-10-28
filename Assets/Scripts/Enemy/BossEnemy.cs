@@ -69,7 +69,7 @@ public class BossEnemy : EliteEnemy
                 Chase();
                 break;
             case State.Attack:
-                AttackByMode();
+                AttackByMode(); 
                 break;
             default:
                 break;
@@ -137,11 +137,6 @@ public class BossEnemy : EliteEnemy
     protected IEnumerator CoWaitPattern(float waitDelay, SkillExcutor excutor)
     {
         isPatternUsing = true;
-        if (waitNextAttackCoroutine != null)
-        {
-            StopCoroutine(waitNextAttackCoroutine);
-            waitNextAttackCoroutine = null;
-        }
 
         float prevtTime = Time.time;
         float skillDistance = excutor.GetData().skill.data.distance;
@@ -153,12 +148,17 @@ public class BossEnemy : EliteEnemy
             yield return null;
         }
         agent.speed = data.moveSpeed;
-
         float chaseTime = Time.time - prevtTime;
-        WaitNextAttack(waitPatternDelay);
 
         if (waitDelay - chaseTime > 0)
             yield return new WaitForSeconds(waitDelay - chaseTime);
+
+        if (waitNextAttackCoroutine != null)
+        {
+            StopCoroutine(waitNextAttackCoroutine);
+            waitNextAttackCoroutine = null;
+        }
+        WaitNextAttack(waitPatternDelay);
 
         UsePattern(excutor);
         usePatternWaitCoroutine = null;
@@ -181,9 +181,6 @@ public class BossEnemy : EliteEnemy
 
         var enemySkillButtonData = data as EnemySkillButtonData;
         excutor.StartSkill(gameObject, (int)enemySkillButtonData.type, playerTag);
-
-        //var enemySkillButtonData = data as EnemySkillButtonData;
-        //animationController.UseSkill((int)enemySkillButtonData.type, enemySkillButtonData.isUpper);
     }
 
     protected void UsePattern(SkillExcutor excutor)
@@ -195,9 +192,6 @@ public class BossEnemy : EliteEnemy
 
         var enemySkillButtonData = data as EnemySkillButtonData;
         excutor.StartSkill(gameObject, (int)enemySkillButtonData.type, playerTag);
-
-        //var enemySkillButtonData = data as EnemySkillButtonData;
-        //animationController.UseSkill((int)enemySkillButtonData.type, enemySkillButtonData.isUpper);
     }
 
     protected SkillExcutor GetRandomPatternSkillExcutor()

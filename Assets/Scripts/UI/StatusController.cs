@@ -131,10 +131,11 @@ public class StatusController : MonoBehaviour
             return;
 
         isShield = false;
-        shieldSlider.value = 0.01f;
+        shieldSlider.value = 0f;
 
         maxShieldValue = 0;
         currentShieldValue = 0;
+        shieldAccumulateDamage = 0f;
         SetText($"{data.currentHp} / {data.maxHp}");
     }
 
@@ -166,23 +167,22 @@ public class StatusController : MonoBehaviour
             return 0;
 
         currentShieldValue -= damage;
+
         if (currentShieldValue <= 0)
         {
             float shieldValue = currentShieldValue;
 
-            isShield = false;
-
-            maxShieldValue = 0f;
-            currentShieldValue = 0f;
-
-            shieldSlider.value = 0f;
-            SetText($"{data.currentHp} / {data.maxHp}");
+            DestroyShield();
+            //isShield = false;
+            //maxShieldValue = 0f;
+            //currentShieldValue = 0f;
+            //shieldSlider.value = 0f;
+            //SetText($"{data.currentHp} / {data.maxHp}");
             return Mathf.Abs(shieldValue - damage);
         }
         else
         {
             shieldAccumulateDamage += damage;
-
             shieldSlider.value = currentShieldValue / maxShieldValue;
             SetText($"{data.currentHp} / {data.maxHp} ({currentShieldValue})");
             return 0;

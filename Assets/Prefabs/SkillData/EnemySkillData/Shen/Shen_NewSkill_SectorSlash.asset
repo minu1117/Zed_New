@@ -17,7 +17,9 @@ MonoBehaviour:
   skillDescription: "\uC6D0\uD615\uC73C\uB85C \uBC94\uC704 \uBCA0\uAE30"
   skillLevel: 0
   levelRestriction: 0
-  damage: 100
+  damage: 20
+  hitRate: 5
+  hitInterval: 0.05
   coolDown: 0
   duration: 0.5
   useDelay: 1
@@ -28,11 +30,13 @@ MonoBehaviour:
   distance: 10
   indicator: {fileID: -2183189155032086514, guid: 43d065805edc94f429bbb45d3db69fc4, type: 3}
   effect: {fileID: 5051723841979018167, guid: d9450ac491c36a54d9a40b8481454ccf, type: 3}
-  useClips: []
+  useClips:
+  - {fileID: 8300000, guid: 82067024fcaef9e40bbcb84ad6da7c29, type: 3}
   attackClips: []
   disappearClips: []
   recastClips: []
   complateClips: []
-  voiceClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: f4e14d53caeb7484e88d205941f37f64, type: 3}
   isSelf: 0
   isStiffen: 1

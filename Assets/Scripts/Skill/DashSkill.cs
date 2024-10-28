@@ -69,13 +69,15 @@ public class DashSkill : Skill
     {
         /********************************************** 사용 대기 **********************************************/
 
+        coll.enabled = false;
+
         if (moveController != null)
             moveController.StopMove();                  // 시전자 이동 제한
 
         if (agent != null && agent.isActiveAndEnabled)
             agent.isStopped = true;                     // 시전자 agent 멈추기    
 
-        rb.velocity = Vector3.zero;                     // 시전자 rigidBody의 속도 초기화
+        rb.velocity = Vector3.zero;                 // 시전자 rigidBody의 속도 초기화
         point.y = obj.transform.position.y;             // 이동할 위치의 y값을 시전자의 y값으로 변경 (위, 아래로 돌진하지 않게)
 
         Vector3 LookAtDirection = (point == Vector3.zero) ? obj.transform.forward : point;  // 바라볼 방향 계산 -> 이동할 위치가 0,0,0일 시 forward 바라보기
@@ -87,6 +89,8 @@ public class DashSkill : Skill
 
         /********************************************** 사용 중 **********************************************/
 
+        coll.enabled = true;
+
         if (animationController != null)                // 시전자의 애니메이션 컨트롤러가 있을 시
             animationController.StartNextMotion();      // 다음 모션 재생 ([준비 -> 대쉬 -> 완료] 순으로 애니메이션을 재생하기 때문에 [준비] 모션에서 [대쉬] 모션으로 바꾸는 과정) 
 
@@ -97,6 +101,8 @@ public class DashSkill : Skill
 
 
         /********************************************** 사용 완료 **********************************************/
+
+        coll.enabled = false;
 
         if (rb != null)                                 // 시전자의 rigidBody가 있을 시 (중간에 죽어서 사라질 수도 있기 때문에 계속 체크)
             rb.velocity = Vector3.zero;                 // rigidBody의 속도 값 초기화
