@@ -70,6 +70,8 @@ public class SkillExcutor : MonoBehaviour
                 animationController.UseSkill(enumIndex, data.isUpper);
             }
 
+            UseIndicator(character.transform.position, useSkill.data.useDelay); // 스킬 범위 표시기 사용
+
             isAvailable = false;            // 스킬 사용 불가 상태로 변경 (오동작 방지)
             dashSkill.SetPoint(point);      // 대쉬할 위치 설정
             dashSkill.Use(character);       // 대쉬 스킬 사용
@@ -107,36 +109,6 @@ public class SkillExcutor : MonoBehaviour
                     var targeting = useSkill.GetComponent<ITargetable>();  // 가져온 스킬에서 타게팅 추출
                     targeting.SetTarget(target);                           // 타겟 설정
                 }
-
-                //if (character.tag == EnumConverter.GetString(CharacterEnum.Player))
-                //{
-                //    var hit = Raycast.GetHit(Input.mousePosition, layerMask);  // 현재 마우스 위치의 적 탐지, 타겟 정보 가져오기
-                //    bool isHit = hit.collider != null;
-                //    if (!isHit)                                  // 적이 없을 경우
-                //    {
-                //        skillPool.Release(useSkill);                        // 스킬 사용 X, 생성된 스킬 바로 Release
-                //        return null;                                        // 스킬이 사용되지 않았으니 null return
-                //    }
-                //    else // 적이 있을 경우
-                //    {
-                //        var target = useSkill.GetComponent<ITargetable>();              // 가져온 스킬에서 타게팅 추출
-                //        target.SetTarget(hit.collider.gameObject);                      // 타겟 설정
-                //    }
-                //}
-                //else if (character.tag == EnumConverter.GetString(CharacterEnum.Enemy))
-                //{
-                //    var player = Zed.Instance;
-                //    if (!player)                                  // 적이 없을 경우
-                //    {
-                //        skillPool.Release(useSkill);                        // 스킬 사용 X, 생성된 스킬 바로 Release
-                //        return null;                                        // 스킬이 사용되지 않았으니 null return
-                //    }
-                //    else // 적이 있을 경우
-                //    {
-                //        var target = useSkill.GetComponent<ITargetable>();              // 가져온 스킬에서 타게팅 추출
-                //        target.SetTarget(player.gameObject);                            // 타겟 설정
-                //    }
-                //}
             }  
             else
             {

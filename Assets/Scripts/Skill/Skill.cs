@@ -97,18 +97,6 @@ public class Skill : MonoBehaviour, IDamageable
     public void SetCaster(GameObject obj) { caster = obj; }
     public int GetRandomIndex(int min, int max) { return Random.Range(min, max); }
 
-    // Collision, Trigger 둘 다 사용될 수 있으니 두 가지 메서드를 똑같이 구현
-    // 오브젝트 충돌 시 처리될 작업 실행
-    //protected virtual void OnCollisionEnter(Collision collision)
-    //{
-    //    Collide(collision.gameObject);
-    //}
-
-    //protected virtual void OnTriggerEnter(Collider other)
-    //{
-    //    Collide(other.gameObject);
-    //}
-
     // 오브젝트 충돌 시 처리될 작업
     public virtual void Collide(GameObject obj)
     {
@@ -189,12 +177,6 @@ public class Skill : MonoBehaviour, IDamageable
         {
             StartCoroutine(DealDamage(champion, data.damage, data.hitRate));                // 타겟에게 데미지 부여
             isCollide = true;                                               // 부딪힘 여부 활성화
-
-            //if (data.attackClips == null || data.attackClips.Count == 0)    // 평타 사운드가 없을 경우 return
-            //    return;
-
-            //int index = GetRandomIndex(0, data.attackClips.Count);          // 랜덤 인덱스 (타격 사운드 클립)
-            //SoundManager.Instance.PlayOneShot(data.attackClips[index]);     // 사운드 매니저에서 타격 재생
         }
     }
 

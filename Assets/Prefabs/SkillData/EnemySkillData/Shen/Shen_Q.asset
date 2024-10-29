@@ -18,6 +18,8 @@ MonoBehaviour:
   skillLevel: 1
   levelRestriction: 0
   damage: 100
+  hitRate: 1
+  hitInterval: 0
   coolDown: 1
   duration: 3
   useDelay: 2
@@ -25,8 +27,9 @@ MonoBehaviour:
   speed: 50
   immobilityTime: 0
   isShadow: 0
+  isDashPass: 0
   distance: 3
-  indicator: {fileID: 0}
+  indicator: {fileID: 4388867058225924817, guid: b44f9e24cee2a8c40a2a05f6e443ec79, type: 3}
   effect: {fileID: 0}
   useClips: []
   attackClips: []
