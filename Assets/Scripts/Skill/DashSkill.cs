@@ -19,11 +19,9 @@ public class DashSkill : Skill
 
         SetColliderSize();                              // Collider 사이즈 설정
 
-        var rb = character.GetComponent<Rigidbody>();                                     // 시전자의 rigidBody
-        var agent = character.GetComponent<NavMeshAgent>();                               // 시전자의 NavMeshAgent
-        var animationController = character.GetComponent<CharacterAnimationController>(); // 시전자의 애니메이션 컨트롤러
         var moveController = character.GetComponent<CharacterMoveController>();           // 시전자의 CharacterMoveController
-        StartCoroutine(CoDash(character, movePoint, animationController, rb, agent, moveController));     // 대쉬 스킬 사용 코루틴 실행
+        var animationController = character.GetComponent<CharacterAnimationController>(); // 시전자의 애니메이션 컨트롤러
+        StartCoroutine(CoDash(character, movePoint, animationController, moveController));     // 대쉬 스킬 사용 코루틴 실행
     }
 
     public void SetPoint(Vector3 point)
@@ -56,38 +54,51 @@ public class DashSkill : Skill
 
         gameObject.transform.position = caster.transform.position;  // 시전자 따라다니기
     }
-    
-    // 충돌 처리
-    //protected override void OnTriggerEnter(Collider other)
-    //{
-    //    Collide(other.gameObject);
-    //}
 
     // 대쉬 스킬 사용 코루틴
     // obj = 사용자(시전자)
-    private IEnumerator CoDash(GameObject obj, Vector3 point, CharacterAnimationController animationController, Rigidbody rb, NavMeshAgent agent, CharacterMoveController moveController)
+    private IEnumerator CoDash(GameObject obj, Vector3 point, CharacterAnimationController animationController, CharacterMoveController moveController)
     {
         /********************************************** 사용 대기 **********************************************/
 
-        coll.enabled = false;
+        Rigidbody rb = null;
+        NavMeshAgent agent = null;
 
         if (moveController != null)
+        {
             moveController.StopMove();                  // 시전자 이동 제한
+            rb = moveController.GetRigidbody();
+            agent = moveController.GetAgent();
+        }
 
-        if (agent != null && agent.isActiveAndEnabled)
-            agent.isStopped = true;                     // 시전자 agent 멈추기    
+        if (rb == null)
+        {
+            rb = obj.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
+        }
+        if (agent == null)
+        {
+            agent = obj.GetComponent<NavMeshAgent>();
+            agent.isStopped = true;
+        }
 
-        rb.velocity = Vector3.zero;                 // 시전자 rigidBody의 속도 초기화
-        point.y = obj.transform.position.y;             // 이동할 위치의 y값을 시전자의 y값으로 변경 (위, 아래로 돌진하지 않게)
+        coll.enabled = false;
+
+        point.y = obj.transform.position.y;                                                 // 이동할 위치의 y값을 시전자의 y값으로 변경 (위, 아래로 돌진하지 않게)
 
         Vector3 LookAtDirection = (point == Vector3.zero) ? obj.transform.forward : point;  // 바라볼 방향 계산 -> 이동할 위치가 0,0,0일 시 forward 바라보기
         Vector3 dashDirection = (point - obj.transform.position).normalized;                // 대쉬 방향 계산 -> (이동할 위치 - 시전자 위치) 정규화
-        obj.transform.LookAt(LookAtDirection);          // 시전자 회전 값 변경 (바라보기)
+        obj.transform.LookAt(LookAtDirection);                                              // 시전자 회전 값 변경 (바라보기)
 
         yield return waitUseDelay;                      // 시전 대기 시간동안 대기
 
 
         /********************************************** 사용 중 **********************************************/
+
+        if (agent != null && data.isDashPass)
+        {
+            agent.enabled = false;
+        }
 
         coll.enabled = true;
 
@@ -118,14 +129,9 @@ public class DashSkill : Skill
         if (moveController != null)                     // 시전자의 CharacterMoveController가 있을 시
             moveController.isMoved = true;              // 시전자 이동 활성화
 
-        //if (agent != null && agent.isActiveAndEnabled)
-        //    agent.isStopped = false;
-
-        //if (obj.tag == EnumConverter.GetString(CharacterEnum.Enemy))
-        //    agent.Warp(agent.transform.position);
-
         if (agent != null)
         {
+            agent.enabled = true;
             agent.Warp(agent.transform.position);
             if (agent.isActiveAndEnabled)
             {

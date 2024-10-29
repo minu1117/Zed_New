@@ -40,6 +40,8 @@ public class Shen : BossEnemy
         createdDuskswordDummy.gameObject.SetActive(true);
         duskSword.OnFinished();
         duskSword.gameObject.SetActive(false);
+        duskSword.ClearTrailRenderer();
+        duskSword.SetActiveTrailRenderer(false);
     }
 
     public override void Update()
@@ -76,11 +78,15 @@ public class Shen : BossEnemy
 
     public void ActivationDuskSword()
     {
+        //duskSword.ClearTrailRenderer();
         duskSword.gameObject.SetActive(true);
+        duskSword.SetActiveTrailRenderer(true);
     }
 
     public void DeactivationDuskSword()
     {
+        //duskSword.ClearTrailRenderer();
+        duskSword.SetActiveTrailRenderer(false);
         duskSword.gameObject.SetActive(false);
     }
 

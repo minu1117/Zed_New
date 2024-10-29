@@ -37,6 +37,11 @@ public class Weapon : MonoBehaviour, IDamageable
         trailRenderer.gameObject.SetActive(active);
     }
 
+    public void ClearTrailRenderer()
+    {
+        trailRenderer.Clear();
+    }
+
     // 무기 준비 완료
     public void OnReady()
     {

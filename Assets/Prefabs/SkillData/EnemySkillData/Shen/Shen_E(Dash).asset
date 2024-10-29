@@ -18,6 +18,8 @@ MonoBehaviour:
   skillLevel: 1
   levelRestriction: 0
   damage: 100
+  hitRate: 1
+  hitInterval: 0
   coolDown: 1
   duration: 0.2
   useDelay: 2
@@ -25,6 +27,7 @@ MonoBehaviour:
   speed: 50
   immobilityTime: 0
   isShadow: 0
+  isDashPass: 1
   distance: 15
   indicator: {fileID: 0}
   effect: {fileID: 0}

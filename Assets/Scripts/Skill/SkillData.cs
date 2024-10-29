@@ -49,6 +49,9 @@ public class SkillData : ScriptableObject
     [Header("그림자 스킬일 경우 체크")]
     public bool isShadow = false;
 
+    [Header("대쉬 대상 통과 여부")]
+    public bool isDashPass;
+
     [Header("사거리")]
     public float distance;
 

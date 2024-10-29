@@ -43,6 +43,7 @@ public class CharacterMoveController : MonoBehaviour
     }
 
     public NavMeshAgent GetAgent() { return agent; }
+    public Rigidbody GetRigidbody() { return rb; }
 
     // 이동
     private void Move()
@@ -94,10 +95,11 @@ public class CharacterMoveController : MonoBehaviour
     // 이동 중지
     public void StopMove()
     {
-        isMoved = false;            // 이동 불가능
-        movement = Vector2.zero;    // 인풋값 초기화
-        runVec = Vector2.zero;      // 달리기 벡터 초기화
-        dir = Vector3.zero;         // 방향 초기화
-        rb.velocity = dir;          // RigidBody 속도 초기화
+        isMoved = false;                // 이동 불가능
+        movement = Vector2.zero;        // 인풋값 초기화
+        runVec = Vector2.zero;          // 달리기 벡터 초기화
+        dir = Vector3.zero;             // 방향 초기화
+        rb.velocity = Vector3.zero;     // RigidBody 속도 초기화
+        agent.isStopped = true;         // agent 멈추기
     }
 }
