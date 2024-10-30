@@ -3,6 +3,15 @@ using UnityEngine.EventSystems;
 
 public class SkillDropZone : MonoBehaviour, IDropHandler
 {
+    private SkillDropZoneManager mgr;
+    private SkillButton skillButton;
+
+    private void Awake()
+    {
+        mgr = GetComponentInParent<SkillDropZoneManager>();
+        skillButton = GetComponent<SkillButton>();
+    }
+
     // 스킬이 해당 위치에 드롭되면 스킬 할당
     public void OnDrop(PointerEventData eventData)
     {
@@ -12,12 +21,39 @@ public class SkillDropZone : MonoBehaviour, IDropHandler
             if (dragInfo == null)                                                   // 드래그 스킬이 없을 시 return
                 return;
 
-            var skillButton = GetComponent<SkillButton>();  // 게임오브젝트에서 스킬 버튼 컴포넌트 추출
-            if (skillButton == null)                        // 스킬 버튼 컴포넌트가 붙어있지 않을 시 return
+            if (skillButton == null)                // 스킬 버튼 컴포넌트가 붙어있지 않을 시 return
                 return;
 
-            skillButton.SetData(dragInfo.skill);    // 스킬 버튼에 스킬 데이터 할당
-            skillButton.Init();
+            string skillName = dragInfo.GetSkillName();
+            var dropZone = mgr.GetDropZoneToSkillName(skillName);
+
+            if (dropZone != null)
+            {
+                dropZone.ResetDropZone();
+            }
+
+            skillButton.SetSkill(dragInfo.skill);
         }
+    }
+
+    public string GetKeyCode()
+    {
+        if (skillButton == null)
+            return string.Empty;
+
+        return skillButton.GetKeyCode();
+    }
+
+    public void ResetDropZone()
+    {
+        skillButton.ResetButton();
+    }
+
+    public string GetSkillName()
+    {
+        if (skillButton.data == null)
+            return "-";
+
+        return skillButton.data.skill.data.skillName;
     }
 }

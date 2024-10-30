@@ -49,6 +49,9 @@ public class SkillExcutor : MonoBehaviour
         if (!isAvailable)   // 사용 불가 상태일 경우 null return
             return null;
 
+        if (data == null)
+            return null;
+
         Vector3 point = Vector3.zero;                                       // 실행된 스킬이 이동할 위치
         if (character.tag == EnumConverter.GetString(CharacterEnum.Enemy))  // 인자로 받은 character 오브젝트의 태그가 Enemy일 경우
             point = Zed.Instance.gameObject.transform.position;             // 플레이어의 위치로 이동
@@ -231,6 +234,9 @@ public class SkillExcutor : MonoBehaviour
     // 오브젝트 풀의 Create 
     private Skill CreateSkill()
     {
+        if (data == null)
+            return null;
+
         var useSkill = Instantiate(data.skill, poolObject.transform);   // 스킬 생성
         useSkill.SetPool(skillPool);    // 스킬에 오브젝트 풀 설정 (release 시 설정한 풀에 반납)
 
@@ -270,4 +276,18 @@ public class SkillExcutor : MonoBehaviour
     public bool GetIsAvailable() { return isAvailable; }
     public void SetIsAvailable(bool set) { isAvailable = set; }
     public IObjectPool<Skill> GetPool() { return skillPool; }
+    public void ResetExcutor()
+    {
+        skillPool.Clear();
+
+        if (poolObject != null)
+            Destroy(poolObject.gameObject);
+
+        if (indicator != null)
+            Destroy(indicator.gameObject);
+
+        data = null;
+        coolDownSkill = null;
+        isAvailable = true;
+    }
 }

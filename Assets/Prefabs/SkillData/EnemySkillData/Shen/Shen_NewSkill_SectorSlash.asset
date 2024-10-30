@@ -27,12 +27,14 @@ MonoBehaviour:
   speed: 0
   immobilityTime: 0
   isShadow: 0
+  isDashPass: 0
   distance: 10
   indicator: {fileID: -2183189155032086514, guid: 43d065805edc94f429bbb45d3db69fc4, type: 3}
   effect: {fileID: 5051723841979018167, guid: d9450ac491c36a54d9a40b8481454ccf, type: 3}
   useClips:
   - {fileID: 8300000, guid: 82067024fcaef9e40bbcb84ad6da7c29, type: 3}
-  attackClips: []
+  attackClips:
+  - {fileID: 8300000, guid: 1b750625916a5814d91fc33b8022d635, type: 3}
   disappearClips: []
   recastClips: []
   complateClips: []

@@ -18,6 +18,8 @@ MonoBehaviour:
   skillLevel: 0
   levelRestriction: 0
   damage: 2100
+  hitRate: 1
+  hitInterval: 0
   coolDown: 0
   duration: 10
   useDelay: 0
@@ -25,14 +27,27 @@ MonoBehaviour:
   speed: 0
   immobilityTime: 0
   isShadow: 0
+  isDashPass: 0
   distance: 9999
   indicator: {fileID: 0}
   effect: {fileID: -5654840191769220375, guid: 0d95d18abe4a17b448e24c8be97de114, type: 3}
-  useClips: []
+  useClips:
+  - {fileID: 8300000, guid: 1e38dfe0ad606d74bad7206bc6bf09ac, type: 3}
   attackClips: []
-  disappearClips: []
+  disappearClips:
+  - {fileID: 8300000, guid: c757912232d2e23489d6c0b0675ed6b1, type: 3}
+  - {fileID: 8300000, guid: e31f4b9a73e641346a3e8388ab94f479, type: 3}
+  - {fileID: 8300000, guid: af5e72b0733d6274f951b4de1c42044c, type: 3}
+  - {fileID: 8300000, guid: 9086e343a5f47294f874aa9695162c02, type: 3}
+  - {fileID: 8300000, guid: 63bbe8c326c67da4590acba7217c61c3, type: 3}
+  - {fileID: 8300000, guid: 89c200af040df074a9d87e9200dfc3cd, type: 3}
+  - {fileID: 8300000, guid: d532eb2d1808dd4469cd6804d929e27a, type: 3}
   recastClips: []
   complateClips: []
-  voiceClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: d3949aad89abb2948913ad2d84012cbb, type: 3}
+  - {fileID: 8300000, guid: 4bd126cfbaf65104f966add7b2e17fbd, type: 3}
+  - {fileID: 8300000, guid: 8f908337d1a264940b712b865345eed3, type: 3}
+  - {fileID: 8300000, guid: bf448545e56e1b449aa47b1bba9ba871, type: 3}
   isSelf: 1
   isStiffen: 1

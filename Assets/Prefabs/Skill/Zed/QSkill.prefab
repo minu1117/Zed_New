@@ -106,6 +106,7 @@ MonoBehaviour:
   rotateObject: {fileID: 4347198912833181179}
   rotateType: 1
   rotateSpeed: 5
+  mirror: 1
 --- !u!65 &2426658713010159134
 BoxCollider:
   m_ObjectHideFlags: 0

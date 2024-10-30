@@ -29,6 +29,7 @@ public class RotationShotSkill : ShotSkill
     private void Rotate(RotateType rotateType)
     {
         Vector3 rotateVec = Vector3.zero;
+
         float rotate = 360 * rotateSpeed;
         switch (rotateType)
         {

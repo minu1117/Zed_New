@@ -9,6 +9,8 @@ public class SkillWindowController : MonoBehaviour
     {
         if (DialogueManager.Instance.isTalking)
         {
+            Debug.Log("Return");
+
             if (skillWindow.activeSelf)
                 skillWindow.SetActive(false);
 

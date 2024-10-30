@@ -83,4 +83,9 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         this.canvas = canvas;
     }
+
+    public string GetSkillName()
+    {
+        return skill.skill.data.skillName;
+    }
 }
