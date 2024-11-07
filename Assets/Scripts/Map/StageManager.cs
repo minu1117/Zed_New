@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
+    [SerializeField] private StartStage startStage;
+    [SerializeField] private SkyboxChanger skyboxChanger;
+
     [SerializeField] private List<Stage> stages;
     private Dictionary<int, Stage> stageDict;
     private Stage currentStage;
@@ -37,6 +40,7 @@ public class StageManager : MonoBehaviour
 
         if (currentStage == null)
         {
+            startStage.SetActiveLight(false);
             currentStage = stageDict[GetLowestStage()];
         }
 
@@ -46,8 +50,11 @@ public class StageManager : MonoBehaviour
             currentStage = stageDict[stageNumber];
         }
 
+
         SetActiveStage(currentStage, true);
         currentStage.NextMap();
+        skyboxChanger.ChangeToDaySkybox(currentStage.skybox);
+        ChangeSunSource(currentStage.currentMap.directionalLight);
     }
 
     private int GetLowestStage()
@@ -80,6 +87,11 @@ public class StageManager : MonoBehaviour
     private void SetStageClear(Stage stage)
     {
         stage.StageClear();
+    }
+
+    public void ChangeSunSource(Light light)
+    {
+        skyboxChanger.ChangeSunSource(light);
     }
 
     public void Update()

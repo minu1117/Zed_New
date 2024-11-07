@@ -10,6 +10,7 @@ public class Stage : MonoBehaviour
     public bool lastStage;
     public bool stageClear { get; set; } = false;
     public Map currentMap { get; set; }
+    public Skybox skybox;
 
     private void Awake()
     {
@@ -33,11 +34,14 @@ public class Stage : MonoBehaviour
         }
         else
         {
+            currentMap.SetActiveLight(false);
+
             int stageNumber = ++currentMap.floor;
             currentMap = mapDict[stageNumber];
         }
 
         SetActiveMap(currentMap, true);
+        currentMap.SetActiveLight(true);
     }
 
     public void StageClear()
