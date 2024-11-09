@@ -27,7 +27,7 @@ public class ZedShadow : ShotSkill
 
     private NavMeshAgent agent;
     private Rigidbody rb;
-    private Vector3 usePoint;                           // 이동 목표 지점
+    //private Vector3 usePoint;                           // 이동 목표 지점
     private Vector3 lookAtPoint;
 
     private Dictionary<string, List<UseSkillData>> useSkills;   // 플레이어가 사용 시 복제하여 사용할 스킬들
@@ -243,6 +243,7 @@ public class ZedShadow : ShotSkill
         skillObject.SetPosition(shotStartTransform.position);   // 스킬 위치 설정
         skillObject.SetStartPos(shotStartTransform.position);   // 시작 위치 설정
         skillObject.SetRotation(transform.rotation);            // 회전 값 설정
+        skillObject.SetPoint(transform.forward);
 
         skillObject.Use(gameObject);                            // 스킬 사용
     }
@@ -276,7 +277,7 @@ public class ZedShadow : ShotSkill
     }
 
     public void SetLookAtPoint(Vector3 lookAtPoint) { this.lookAtPoint = lookAtPoint; }
-    public void SetPoint(Vector3 point) { usePoint = point; }
+    //public void SetPoint(Vector3 point) { usePoint = point; }
     public void SetID(int id) { objectID = id; }
     public int GetID() { return objectID; }
 }

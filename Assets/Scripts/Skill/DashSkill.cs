@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class DashSkill : Skill
 {
     private BoxCollider coll;   // 대쉬 스킬의 Collider
-    private Vector3 movePoint;  // 이동할 위치
+    //private Vector3 movePoint;  // 이동할 위치
 
     public override void Use(GameObject character)
     {
@@ -14,20 +14,20 @@ public class DashSkill : Skill
         if (coll == null)
             coll = GetComponent<BoxCollider>();
 
-        if (movePoint == Vector3.zero)                  // 이동할 위치가 0,0,0일 경우
-            movePoint = Raycast.GetMousePointVec();     // 현재 마우스 위치로 설정
+        if (usePoint == Vector3.zero)                  // 이동할 위치가 0,0,0일 경우
+            usePoint = Raycast.GetMousePointVec();     // 현재 마우스 위치로 설정
 
         SetColliderSize();                              // Collider 사이즈 설정
 
         var moveController = character.GetComponent<CharacterMoveController>();           // 시전자의 CharacterMoveController
         var animationController = character.GetComponent<CharacterAnimationController>(); // 시전자의 애니메이션 컨트롤러
-        StartCoroutine(CoDash(character, movePoint, animationController, moveController));     // 대쉬 스킬 사용 코루틴 실행
+        StartCoroutine(CoDash(character, usePoint, animationController, moveController));     // 대쉬 스킬 사용 코루틴 실행
     }
 
-    public void SetPoint(Vector3 point)
-    {
-        movePoint = point;
-    }
+    //public void SetMovePoint(Vector3 point)
+    //{
+    //    movePoint = point;
+    //}
 
     private void Update()
     {
@@ -125,7 +125,7 @@ public class DashSkill : Skill
 
         StartSound(data.complateClips);
 
-        movePoint = Vector3.zero;                       // 이동할 위치 초기화
+        usePoint = Vector3.zero;                        // 이동할 위치 초기화
         if (moveController != null)                     // 시전자의 CharacterMoveController가 있을 시
             moveController.isMoved = true;              // 시전자 이동 활성화
 

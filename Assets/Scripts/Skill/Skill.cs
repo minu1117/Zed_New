@@ -23,6 +23,7 @@ public class Skill : MonoBehaviour, IDamageable
     protected SkillIndicator indicator;
     private List<ChildCollider> colliders;
     public bool isCollide { get; set; } = false;
+    protected Vector3 usePoint;
 
     public virtual void Awake()
     {
@@ -216,4 +217,6 @@ public class Skill : MonoBehaviour, IDamageable
     {
         tweener.Kill();
     }
+
+    public void SetPoint(Vector3 point) { usePoint = point; }
 }

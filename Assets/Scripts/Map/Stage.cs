@@ -42,6 +42,10 @@ public class Stage : MonoBehaviour
 
         SetActiveMap(currentMap, true);
         currentMap.SetActiveLight(true);
+
+        var agent = Zed.Instance.GetMoveController().GetAgent();
+        agent.Warp(currentMap.startingPos.position);
+        Zed.Instance.transform.position = currentMap.startingPos.position;
     }
 
     public void StageClear()

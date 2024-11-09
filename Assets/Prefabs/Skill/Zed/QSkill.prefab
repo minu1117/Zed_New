@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8728144157497640716}
   - component: {fileID: 1519696985186876971}
   - component: {fileID: -3972660736254989899}
+  - component: {fileID: 3740155931234028814}
   - component: {fileID: 2426658713010159134}
   - component: {fileID: -1048976809579503263}
   - component: {fileID: 4337493241298757588}
@@ -100,13 +101,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278c307a65dc5f145ad89e6484e6a9e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateObject: {fileID: 4347198912833181179}
+  rotateType: 1
+  rotateSpeed: 2000
+--- !u!114 &3740155931234028814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4347198912833181179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5300ecf225c4de54597a5675bb3d99e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 03e138cec824937469a1d22a35c34ab6, type: 2}
   isTargeting: 0
   trailRenderer: {fileID: 1943976797970463694}
-  rotateObject: {fileID: 4347198912833181179}
-  rotateType: 1
-  rotateSpeed: 5
-  mirror: 1
 --- !u!65 &2426658713010159134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -236,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38c7133b536e1b4e99c47fcbbe5c130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: -3972660736254989899}
+  parent: {fileID: 3740155931234028814}
 --- !u!1001 &5618111464821426076
 PrefabInstance:
   m_ObjectHideFlags: 0

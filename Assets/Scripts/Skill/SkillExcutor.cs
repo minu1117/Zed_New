@@ -179,12 +179,15 @@ public class SkillExcutor : MonoBehaviour
         useSkill.SetStartPos(startPosition);                // 스킬 시작 위치 설정
         useSkill.SetRotation(character.transform.rotation); // 스킬 회전 값 설정
 
+        character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
+
         // 그림자 스킬이고,
         // character 오브젝트에서 플레이어 컴포넌트 추출을 성공했고,
         // 스킬에서 그림자 스킬 컴포넌트 추출을 성공했을 경우
         if (data.skill.data.isShadow && character.TryGetComponent(out Zed zed) && useSkill.TryGetComponent(out ZedShadow shadow))
         {
             useSkill.SetPosition(character.transform.position); // 스킬 위치 설정 (캐릭터의 위치로)
+            useSkill.SetPoint(Raycast.GetMousePointVec());
 
             if (shadow.GetID() <= 0)    // 그림자 ID가 0 이하일 경우
             {
@@ -194,8 +197,12 @@ public class SkillExcutor : MonoBehaviour
 
             zed.AddShadow(shadow);      // 그림자 스킬을 플레이어에 추가
         }
+        else
+        {
+            useSkill.SetPoint(character.transform.forward);
+        }
 
-        character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
+        //character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
         useSkill.Use(character);        // 스킬 실행
         coolDownSkill = useSkill;       // 쿨다운 스킬 설정
         StartCoroutine(CoCoolDown());   // 쿨다운 코루틴 실행

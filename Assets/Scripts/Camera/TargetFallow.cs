@@ -3,12 +3,29 @@ using UnityEngine;
 public class FallowTarget : MonoBehaviour
 {
     public GameObject target;       // 따라다닐 타겟
+    private Collider targetCollider;
+    private Vector3 targetPos;
+    private float upPos;
+
+    private void Awake()
+    {
+        if (target == null)
+            return;
+
+        if (target.TryGetComponent<Collider>(out var coll))
+        {
+            targetCollider = coll;
+            upPos = (target.transform.position + Vector3.up * targetCollider.bounds.size.y).y;
+        }
+    }
 
     private void FixedUpdate()
     {
-        if (target == null) // 따라다닐 타겟이 없을 경우 return
-            return; 
+        if (target == null || targetCollider == null) // 따라다닐 타겟이 없을 경우 return
+            return;
 
-        gameObject.transform.position = target.transform.position;  // 타겟 따라다니기
+        targetPos = target.transform.position;
+        targetPos.y = upPos;
+        gameObject.transform.position = targetPos;  // 타겟 따라다니기
     }
 }

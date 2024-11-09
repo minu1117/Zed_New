@@ -6,6 +6,7 @@ public class Map : MonoBehaviour
     public bool lastFloor;
     public bool isClear;
     public Light directionalLight;
+    public Transform startingPos;
 
     public void SetActiveLight(bool set)
     {

@@ -172,6 +172,8 @@ public class ChampBase : MonoBehaviour
         hpController.DestroyShield();
     }
 
+    public CharacterMoveController GetMoveController() { return moveController; }
+
     /********************************************** Animation Event **********************************************/
     public void OnAllWeaponsAttackReady()
     {

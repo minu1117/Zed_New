@@ -102,4 +102,10 @@ public class CharacterMoveController : MonoBehaviour
         rb.velocity = Vector3.zero;     // RigidBody 속도 초기화
         agent.isStopped = true;         // agent 멈추기
     }
+
+    public void StartMove()
+    {
+        isMoved = true;
+        agent.isStopped = false;
+    }
 }
