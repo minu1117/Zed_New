@@ -10,14 +10,7 @@ public class ShotSkill : Skill
     {
         base.Use(character);
         SetActiveTrailRenderer(true);   // TrailRenderer 활성화
-        //StartCoroutine(CoShot(character.transform.forward));    // 날리기 코루틴 실행
         StartCoroutine(CoShot(usePoint));    // 날리기 코루틴 실행
-
-        //if (usePoint == Vector3.zero)
-        //{
-        //    usePoint = character.transform.forward;
-        //}
-        //StartCoroutine(CoShot(usePoint));    // 날리기 코루틴 실행
     }
 
     protected void SetActiveTrailRenderer(bool active)

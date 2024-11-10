@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: dc0c1f370a5a8c34f85971e38a208dbf, type: 2}
   isTargeting: 0
-  count: 5
+  count: 3
   skillPrefab: {fileID: 3740155931234028814, guid: d11bd22d3bebcba4583a10fd343fa589, type: 3}
   individualWaitDelay: 0
-  angle: 45
+  angle: 180
+  isGround: 0
