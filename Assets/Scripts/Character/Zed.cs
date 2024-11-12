@@ -106,11 +106,8 @@ public class Zed : SingletonChampion<Zed>
                 target = (hit.collider.gameObject, isHit);
         }
 
-        CopySkill(keycode, useSkill, type, skillSlotMgr.GetSlotDict()[keycode].GetExcutor(), target.Item1);   // 그림자 스킬에 사용한 스킬 전달
-
-        //int typeToint = (int)type;
-        //bool isUpperLayer = typeToint != (int)ZedSkillType.ShadowRush ? true : false;   // 상체 레이어 사용 여부
-        //animationController.UseSkill(typeToint, isUpperLayer);        // 애니메이션 출력
+        Vector3 point = Raycast.GetMousePointVec();
+        CopySkill(keycode, useSkill, type, skillSlotMgr.GetSlotDict()[keycode].GetExcutor(), point, target.Item1);   // 그림자 스킬에 사용한 스킬 전달
         skillSlotMgr.CoolDown(useSkill.data.coolDown);  // 쿨다운 시작
     }
 
@@ -124,14 +121,6 @@ public class Zed : SingletonChampion<Zed>
         {
             FinishedAttack();       // 무기 상태 초기화
             Skill useSkill = UseSkill(key, (int)type, EnumConverter.GetString(CharacterEnum.Enemy));   // 그림자 스킬 사용
-
-            //if (useSkill != null)   // 스킬 사용 성공 시
-            //{
-            //    int typeToint = (int)type;
-            //    bool isUpperLayer = typeToint != (int)ZedSkillType.ShadowRush ? true : false;   // 상체 레이어 사용 여부
-            //    animationController.UseSkill(typeToint, isUpperLayer);   // 애니메이션 출력
-            //    skillSlotMgr.CoolDown(useSkill.data.coolDown);      // 쿨다운 시작
-            //}
             skillSlotMgr.CoolDown(useSkill.data.coolDown);      // 쿨다운 시작
         }
         else  // 마우스 위치에 그림자 스킬이 있을 시
@@ -162,7 +151,7 @@ public class Zed : SingletonChampion<Zed>
     }    
 
     // 스킬 복제 사용 (그림자 스킬이)
-    private void CopySkill(string skillKeyStr, Skill useSkill, ZedSkillType type, SkillExcutor excutor, GameObject target = null)
+    private void CopySkill(string skillKeyStr, Skill useSkill, ZedSkillType type, SkillExcutor excutor, Vector3 point, GameObject target = null)
     {
         if (useSkill == null)   // 사용할 스킬이 null일 경우 return (스킬이 사용되지 않았음)
             return;
@@ -172,7 +161,7 @@ public class Zed : SingletonChampion<Zed>
             foreach (var shadow in shadows)         // 그림자 목록 순회
             {
                 shadow.Value.SetCaster(gameObject); // 시전자 설정
-                shadow.Value.AddSkill(skillKeyStr, useSkill, type, excutor, target); // 사용한 스킬 추가
+                shadow.Value.AddSkill(skillKeyStr, useSkill, type, excutor, point, target); // 사용한 스킬 추가
             }
         }
     }

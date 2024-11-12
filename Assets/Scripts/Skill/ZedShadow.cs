@@ -12,6 +12,7 @@ public struct UseSkillData
     public ZedSkillType skillType;          // 애니메이션 타입
     public GameObject target;               // 타겟
     public bool isUpper;
+    public Vector3 usePoint;
 }
 
 // 플레이어 전용 스킬
@@ -27,7 +28,6 @@ public class ZedShadow : ShotSkill
 
     private NavMeshAgent agent;
     private Rigidbody rb;
-    //private Vector3 usePoint;                           // 이동 목표 지점
     private Vector3 lookAtPoint;
 
     private Dictionary<string, List<UseSkillData>> useSkills;   // 플레이어가 사용 시 복제하여 사용할 스킬들
@@ -84,12 +84,9 @@ public class ZedShadow : ShotSkill
 
         yield return new WaitForSeconds(data.useDelay);     // 시전 딜레이 만큼 대기
 
-        //if (tweener != null)
-        //    tweener.Kill();
-
         if (tweener == null)
         {
-            tweener = transform.DOMove(usePoint, moveTime)         // 목표 지점까지 moveTime 안에 도착
+            tweener = transform.DOMove(usePoint, moveTime)     // 목표 지점까지 moveTime 안에 도착
                     .SetEase(Ease.OutQuad)                     // 속도가 빠르게 시작, 점차 감소
                     .SetAutoKill(false)
                     .OnComplete(() => UseAllSkills());         // 이동 완료 후, 이동 중 플레이어가 사용한 모든 스킬 사용
@@ -108,7 +105,6 @@ public class ZedShadow : ShotSkill
         if (pool != null)                           // 그림자 스킬 오브젝트 풀이 있을 경우
         {
             isReady = false;                        // 준비 상태 초기화
-            agent.enabled = true;                   // NavMeshAgent 활성화
             SetActiveWeaponTrailRenderers(false);   // 무기 TrailRenderer 비활성화
             Release();                              // 오브젝트 풀에 Release
         }
@@ -130,8 +126,8 @@ public class ZedShadow : ShotSkill
         SetActiveWeaponTrailRenderers(true);    // 무기 TrailRenderer 활성화
 
         meshRenderer.enabled = true;            // 이동이 완료되어 오브젝트가 보여야 하니 활성화
+        agent.enabled = true;                   // NavMeshAgent 활성화
         isReady = true;                         // 스킬 사용 준비 완료
-        usePoint = GetUsePoint();               // 현재 마우스 위치 저장
 
         if (useSkills.Count == 0)
             return;
@@ -141,8 +137,7 @@ public class ZedShadow : ShotSkill
         {
             foreach (var skillObject in skillPairList.Value)
             {
-                UseCopySkill(skillObject.skill, skillObject.skillPool, (int)skillObject.skillType, skillObject.isUpper, skillObject.target);  // 스킬 사용
-                //StartAnimation(skillObject.skillType); // 애니메이션 실행
+                UseCopySkill(skillObject.skill, skillObject.skillPool, (int)skillObject.skillType, skillObject.isUpper, skillObject.usePoint, skillObject.target);  // 스킬 사용
             }
         }
 
@@ -150,16 +145,14 @@ public class ZedShadow : ShotSkill
     }
 
     // 이동 중 사용된 스킬들 담기
-    public void AddSkill(string name, Skill skill, ZedSkillType type, SkillExcutor excutor, GameObject target = null)
+    public void AddSkill(string name, Skill skill, ZedSkillType type, SkillExcutor excutor, Vector3 point, GameObject target = null)
     {
         if (skill == null)  // 스킬이 없을 경우 return
             return;
 
         if (isReady)        // 스킬 사용 준비가 됐을 경우 스킬 바로 사용
         {
-            usePoint = GetUsePoint();                   // 현재 마우스 위치 저장
-            UseCopySkill(skill, excutor.GetPool(), (int)type, excutor.GetData().isUpper, target);     // 스킬 사용
-            //StartAnimation(type);                       // 애니메이션 실행
+            UseCopySkill(skill, excutor.GetPool(), (int)type, excutor.GetData().isUpper, point, target);     // 스킬 사용
             return;                                     // 사용 후 return
         }
 
@@ -170,17 +163,9 @@ public class ZedShadow : ShotSkill
             skillPool = excutor.GetPool(),
             skillType = type,
             target = target,
-            isUpper = excutor.GetData().isUpper
+            isUpper = excutor.GetData().isUpper,
+            usePoint = point
         };
-
-        // 대쉬 스킬일 경우
-        if (skill.data.type == SkillType.Dash)
-        {
-            Vector3 point = Raycast.GetMousePointVec(); // 현재 마우스 위치 저장 (바닥 기준)
-            var dash = skill.GetComponent<DashSkill>(); // 스킬에서 대쉬 스킬 컴포넌트 추출
-            dash.SetCaster(gameObject);                 // 시전자 설정
-            dash.SetPoint(point);                       // 시전 지점 설정
-        }
 
         // 스킬들을 담아둔 곳에 같은 스킬이 없을 경우
         if (!useSkills.ContainsKey(name))
@@ -205,20 +190,21 @@ public class ZedShadow : ShotSkill
     }
 
     // 스킬 사용 
-    private void UseCopySkill(Skill skill, IObjectPool<Skill> skillPool, int enumIndex, bool isUpper, GameObject target = null)
+    private void UseCopySkill(Skill skill, IObjectPool<Skill> skillPool, int enumIndex, bool isUpper, Vector3 point, GameObject target = null)
     {
-        StartCoroutine(CoUseCopySkill(skill, skillPool, enumIndex, isUpper, target));
+        StartCoroutine(CoUseCopySkill(skill, skillPool, enumIndex, isUpper, point, target));
     }
 
     // 스킬 사용 코루틴
-    private IEnumerator CoUseCopySkill(Skill skill, IObjectPool<Skill> skillPool, int enumIndex, bool isUpper, GameObject target = null)
+    private IEnumerator CoUseCopySkill(Skill skill, IObjectPool<Skill> skillPool, int enumIndex, bool isUpper, Vector3 point, GameObject target = null)
     {
         if (skill.data.isShadow)    // 그림자 스킬일 경우 중단
             yield break;
 
-        yield return new WaitForSeconds(skill.data.useDelay);   // 스킬의 선 딜레이 만큼 대기
+        if (skill.data.type != SkillType.Dash)                      // 대쉬 스킬의 경우 스킬에서 따로 대기하기 때문에 대기 X
+            yield return new WaitForSeconds(skill.data.useDelay);   // 스킬의 선 딜레이 만큼 대기
 
-        transform.LookAt(usePoint);             // 시전 위치 바라보기
+        transform.LookAt(point);             // 시전 위치 바라보기
 
         if (animationController != null)
             animationController.UseSkill(enumIndex, isUpper);        // 애니메이션 출력
@@ -240,10 +226,25 @@ public class ZedShadow : ShotSkill
 
         skillObject.SetCaster(gameObject);                      // 시전자 설정
         skillObject.SetPool(skillPool);                         // 오브젝트 풀 설정 (Release 하기 위함)
-        skillObject.SetPosition(shotStartTransform.position);   // 스킬 위치 설정
-        skillObject.SetStartPos(shotStartTransform.position);   // 시작 위치 설정
+
+        Vector3 pos = shotStartTransform.position;
+        if (skill.data.type == SkillType.Dash)
+        {
+            pos = gameObject.transform.position;
+        }
+
+        skillObject.SetPosition(pos);   // 스킬 위치 설정
+        skillObject.SetStartPos(pos);   // 시작 위치 설정
         skillObject.SetRotation(transform.rotation);            // 회전 값 설정
-        skillObject.SetPoint(transform.forward);
+
+        if (skill.data.type != SkillType.Dash)
+        {
+            skillObject.SetPoint(transform.forward);
+        }
+        else
+        {
+            skillObject.SetPoint(point);
+        }
 
         skillObject.Use(gameObject);                            // 스킬 사용
     }
@@ -269,12 +270,12 @@ public class ZedShadow : ShotSkill
         SoundManager.Instance.PlayOneShot(recastClips[UnityEngine.Random.Range(0, recastClips.Count)]); // 재시전 사운드 실행
     }
 
-    private Vector3 GetUsePoint()
-    {
-        Vector3 point = Raycast.GetMousePointVec();
-        point.y = transform.position.y;
-        return point;
-    }
+    //private Vector3 GetUsePoint()
+    //{
+    //    Vector3 point = Raycast.GetMousePointVec();
+    //    point.y = transform.position.y;
+    //    return point;
+    //}
 
     public void SetLookAtPoint(Vector3 lookAtPoint) { this.lookAtPoint = lookAtPoint; }
     //public void SetPoint(Vector3 point) { usePoint = point; }

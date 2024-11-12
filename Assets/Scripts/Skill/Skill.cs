@@ -49,6 +49,8 @@ public class Skill : MonoBehaviour, IDamageable
         StartSound(data.voiceClips);    // 보이스 재생
     }
 
+    public Vector3 GetUsePoint() { return usePoint; }
+
     // 이펙트 Release
     protected void ReleaseEffect()
     {
@@ -167,6 +169,10 @@ public class Skill : MonoBehaviour, IDamageable
 
         // 타겟의 태그가 Shadow(그림자)일 경우 return (그림자 스킬은 맞지 않음)
         if (target.tag == EnumConverter.GetString(CharacterEnum.Shadow))
+            return;
+
+        // 그림자가 시전한 스킬이고, 타겟이 플레이어면 return (플레이어 그림자가 플레이어를 타격하는 현상 방지)
+        if (caster.tag == EnumConverter.GetString(CharacterEnum.Shadow) && target.tag == EnumConverter.GetString(CharacterEnum.Player))
             return;
 
         // 시전자가 몬스터이고, 타겟도 몬스터일 시 return (몬스터 팀킬 방지)
