@@ -8,8 +8,8 @@ public class StartStage : MonoBehaviour
 
     public void Awake()
     {
-        Zed.Instance.GetMoveController().GetAgent().Warp(startPos.transform.position);
-        Zed.Instance.gameObject.transform.position = startPos.transform.position;
+        //Zed.Instance.GetMoveController().GetAgent().Warp(startPos.transform.position);
+        //Zed.Instance.gameObject.transform.position = startPos.transform.position;
     }
 
     public void SetActiveLight(bool set)

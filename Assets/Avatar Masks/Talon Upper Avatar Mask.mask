@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Talon Upper Avatar Mask
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: BUFFBONE_GLB_CHANNEL_LOC
+    m_Weight: 0
+  - m_Path: BUFFBONE_GLB_GROUND_LOC
+    m_Weight: 0
+  - m_Path: C_Buffbone_Cstm_Healthbar_Loc
+    m_Weight: 0
+  - m_Path: C_BUFFBONE_GLB_CENTER_LOC
+    m_Weight: 0
+  - m_Path: C_BUFFBONE_GLB_LAYOUT_LOC
+    m_Weight: 0
+  - m_Path: C_BUFFBONE_GLB_OVERHEAD_LOC
+    m_Weight: 0
+  - m_Path: knife_01
+    m_Weight: 1
+  - m_Path: knife_02
+    m_Weight: 1
+  - m_Path: knife_03
+    m_Weight: 1
+  - m_Path: knife_04
+    m_Weight: 1
+  - m_Path: knife_05
+    m_Weight: 1
+  - m_Path: knife_06
+    m_Weight: 1
+  - m_Path: knife_07
+    m_Weight: 1
+  - m_Path: knife_08
+    m_Weight: 1
+  - m_Path: knife_09
+    m_Weight: 1
+  - m_Path: Model
+    m_Weight: 0
+  - m_Path: root
+    m_Weight: 1
+  - m_Path: root/hip
+    m_Weight: 0
+  - m_Path: root/hip/f_cloth
+    m_Weight: 1
+  - m_Path: root/hip/l_cloth
+    m_Weight: 1
+  - m_Path: root/hip/l_thigh
+    m_Weight: 0
+  - m_Path: root/hip/l_thigh/l_knee
+    m_Weight: 0
+  - m_Path: root/hip/l_thigh/l_knee/L_BUFFBONE_GLB_FOOT_LOC
+    m_Weight: 0
+  - m_Path: root/hip/l_thigh/l_knee/l_foot
+    m_Weight: 0
+  - m_Path: root/hip/l_thigh/l_knee/l_foot/l_toe
+    m_Weight: 0
+  - m_Path: root/hip/r_cloth
+    m_Weight: 0
+  - m_Path: root/hip/r_thigh
+    m_Weight: 0
+  - m_Path: root/hip/r_thigh/r_knee
+    m_Weight: 0
+  - m_Path: root/hip/r_thigh/r_knee/R_BUFFBONE_GLB_FOOT_LOC
+    m_Weight: 0
+  - m_Path: root/hip/r_thigh/r_knee/r_foot
+    m_Weight: 0
+  - m_Path: root/hip/r_thigh/r_knee/r_foot/r_toe
+    m_Weight: 0
+  - m_Path: root/spine
+    m_Weight: 1
+  - m_Path: root/spine/chest
+    m_Weight: 1
+  - m_Path: root/spine/chest/C_BUFFBONE_GLB_CHEST_LOC
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_cloak01
+    m_Weight: 1
+  - m_Path: root/spine/chest/l_cloak01/l_cloak02
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_cloak01/l_cloak02/l_cloak03
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_cloak07
+    m_Weight: 1
+  - m_Path: root/spine/chest/l_cloak07/l_cloak05
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_cloak07/l_cloak05/l_cloak06
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder
+    m_Weight: 1
+  - m_Path: root/spine/chest/l_shoulder/l_uparm
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/L_BUFFBONE_GLB_HAND_LOC
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_index
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_index/l_index_b
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_middle
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_middle/l_middle_b
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/L_PARENTING_HAND_LOC
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_pinky
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_pinky/l_pinky_b
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_ring
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_ring/l_ring_b
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_thumb
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_forearm/l_hand/l_thumb/l_thumb_b
+    m_Weight: 0
+  - m_Path: root/spine/chest/l_shoulder/l_uparm/l_pad
+    m_Weight: 0
+  - m_Path: root/spine/chest/m_cloak04
+    m_Weight: 1
+  - m_Path: root/spine/chest/m_cloak04/m_cloak02
+    m_Weight: 0
+  - m_Path: root/spine/chest/m_cloak04/m_cloak02/m_cloak03
+    m_Weight: 0
+  - m_Path: root/spine/chest/neck
+    m_Weight: 1
+  - m_Path: root/spine/chest/neck/head
+    m_Weight: 0
+  - m_Path: root/spine/chest/neck/head/C_BUFFBONE_GLB_HEAD_LOC
+    m_Weight: 0
+  - m_Path: root/spine/chest/neck/head/mouth
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_cloak01
+    m_Weight: 1
+  - m_Path: root/spine/chest/r_cloak01/r_cloak02
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_cloak01/r_cloak02/r_cloak03
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_cloak08
+    m_Weight: 1
+  - m_Path: root/spine/chest/r_cloak08/r_cloak05
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_cloak08/r_cloak05/r_cloak06
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder
+    m_Weight: 1
+  - m_Path: root/spine/chest/r_shoulder/r_uparm
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/R_BUFFBONE_GLB_HAND_LOC
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/r_hand
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/r_hand/r_middle
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/r_hand/r_middle/r_middle_b
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/r_hand/R_PARENTING_HAND_LOC
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/r_hand/r_thumb
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/r_hand/r_thumb/r_thumb_b
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/weapon
+    m_Weight: 0
+  - m_Path: root/spine/chest/r_shoulder/r_uparm/r_forearm/weapon/BUFFBONE_GLB_WEAPON_1
+    m_Weight: 0
