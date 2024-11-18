@@ -1,5 +1,5 @@
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 // 회전할 방향 enum
 public enum RotateType
@@ -19,11 +19,43 @@ public class RotateObject : MonoBehaviour
     public RotateType rotateType;   // 회전시킬 방향
     public float rotateSpeed;       // 회전 속도
     private Vector3 rotateVec;
+    private Quaternion defaultRotation;
 
     private void Awake()
     {
-        switch (rotateType)
+        defaultRotation = rotateObject.transform.rotation;
+        SetRotateVector(rotateType);
+    }
+
+    private void Update()
+    {
+        Rotate();
+    }
+
+    // 회전 시키기
+    private void Rotate()
+    {
+        if (rotateVec == Vector3.zero)
+            return;
+
+        float x = rotateVec.x * rotateSpeed * Time.deltaTime;
+        float y = rotateVec.y * rotateSpeed * Time.deltaTime;
+        float z = rotateVec.z * rotateSpeed * Time.deltaTime;
+        rotateObject.transform.Rotate(x, y, z);
+    }
+
+    public void SetDefalutRotation()
+    {
+        rotateObject.transform.rotation = defaultRotation;
+    }
+
+    public void SetRotateVector(RotateType rotType)
+    {
+        switch (rotType)
         {
+            case RotateType.None:
+                rotateVec = Vector3.zero;
+                break;
             case RotateType.X:
                 rotateVec = new Vector3(1, 0, 0);
                 break;
@@ -38,40 +70,5 @@ public class RotateObject : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    private void Update()
-    {
-        Rotate();
-    }
-
-    // 회전 시키기
-    private void Rotate()
-    {
-        //Vector3 rotateVec = Vector3.zero;
-
-        //float rotate = 360 * rotateSpeed;
-        //switch (rotateType)
-        //{
-        //    case RotateType.X:
-        //        rotateVec.x = rotate;
-        //        break;
-        //    case RotateType.Y:
-        //        rotateVec.y = rotate;
-        //        break;
-        //    case RotateType.Z:
-        //        rotateVec.z = rotate;
-        //        break;
-        //    default:
-        //        break;
-        //}
-
-        //rotateObject.transform.DOLocalRotate(rotateVec, data.duration, RotateMode.FastBeyond360)    // 무한 회전
-        //                      .SetEase(Ease.Linear);
-
-        float x = rotateVec.x * rotateSpeed * Time.deltaTime;
-        float y = rotateVec.y * rotateSpeed * Time.deltaTime;
-        float z = rotateVec.z * rotateSpeed * Time.deltaTime;
-        rotateObject.transform.Rotate(x, y, z);
     }
 }

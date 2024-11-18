@@ -2072,7 +2072,7 @@ GameObject:
   - component: {fileID: 1323282284278907591}
   - component: {fileID: 6524500091165209879}
   - component: {fileID: -7456120267896246925}
-  - component: {fileID: -3356364203757627923}
+  - component: {fileID: 3512047768442259995}
   m_Layer: 0
   m_Name: Talon
   m_TagString: Untagged
@@ -2128,7 +2128,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2175,7 +2175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 6527010773160093431}
   canvas: {fileID: 2906267649973119047}
-  champ: {fileID: -3356364203757627923}
+  champ: {fileID: 3512047768442259995}
   tmp: {fileID: 5577841614012232488}
   canvasMode: 1
   sliderMode: 0
@@ -2277,7 +2277,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-3356364203757627923
+--- !u!114 &3512047768442259995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2286,20 +2286,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 7799065305620408486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6a25553db6b2204287494e7983501b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 51879a44820e1ae48bb358cb51b75746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 1b5bb8e099457c7498c6c99c710804d1, type: 2}
+  data: {fileID: 11400000, guid: bae741c727b67f44c9cb84cc3f802ce9, type: 2}
   autoAttack: {fileID: 1323282284278907591}
   shotStartTransform: {fileID: 2619149960476736966}
-  weapons: []
+  weapons:
+  - {fileID: 8866015382528976874}
   recognitionRange: 9999
-  attackRange: 3
+  attackRange: 2.5
   skillRange: 30
   loseTargetTime: 0
-  patrolRange: 5
-  waitSkillDelay: 0
+  patrolRange: 0
+  waitSkillDelay: 2
   waitAttackDelay: 1
+  comboSkillLists: {fileID: 0}
+  waitComboDelay: 0
+  patternSkillList: []
+  waitPatternDelay: 5
+  resetDelay: 1
 --- !u!1 &7831642995740647218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,6 +2536,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 776514693987033723}
+  - component: {fileID: 8866015382528976874}
+  - component: {fileID: 3200227715122936791}
   m_Layer: 0
   m_Name: BUFFBONE_GLB_WEAPON_1
   m_TagString: Untagged
@@ -2552,6 +2560,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6160460649220818390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8866015382528976874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8272934455493910305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f536e8921dd8d8d4ab79787da5e34e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: fb499d7e20fc0f84c87be50400660db2, type: 2}
+  trailRenderer: {fileID: 0}
+--- !u!65 &3200227715122936791
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8272934455493910305}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.78779554, y: 1.8592767, z: 0.5221612}
+  m_Center: {x: 0.00054051797, y: 0.27701777, z: -0.015727328}
 --- !u!1 &8302803029886248454
 GameObject:
   m_ObjectHideFlags: 0

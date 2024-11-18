@@ -33,7 +33,10 @@ public class BossEnemy : EliteEnemy
 
         AddPattern(patternSkillList, patternDict);
         SortPattern();
-        SetCurrentPattern(sortedPattern[0].Value, sortedPattern[0].Key);
+
+        if (sortedPattern != null &&  sortedPattern.Count > 0)
+            SetCurrentPattern(sortedPattern[0].Value, sortedPattern[0].Key);
+
         nextPatternHP = data.maxHp;
     }
 
@@ -228,6 +231,9 @@ public class BossEnemy : EliteEnemy
 
     protected void AddPattern(List<SkillButtonData> skillList, Dictionary<float, List<SkillButtonData>> dict)
     {
+        if (skillList == null || skillList.Count == 0)
+            return;
+
         CreateNewSkills(skillList);
         foreach (var skillData in skillList)
         {
@@ -252,6 +258,9 @@ public class BossEnemy : EliteEnemy
 
     protected void SortPattern()
     {
+        if (patternDict == null || patternDict.Count == 0)
+            return;
+
         foreach (var item in patternDict)
         {
             sortedPattern.Add(item);
