@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Talon_W
   m_EditorClassIdentifier: 
   keycode: 
-  skill: {fileID: 0}
-  maxPoolSize: 0
+  skill: {fileID: 1659435368814680895, guid: e565d57c54198c24eb08a2735291b84f, type: 3}
+  maxPoolSize: 3
   sp: {fileID: 0}
   isUpper: 0
   type: 1

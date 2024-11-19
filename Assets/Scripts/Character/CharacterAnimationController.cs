@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -40,6 +41,10 @@ public class CharacterAnimationController : MonoBehaviour
     public int wholeBodyLayerIndex = 2;         // 전신 레이어 인덱스
 
     public float shortJumpThreshold;            // 짧은 점프 거리 기준
+
+    public List<AudioClip> jumpSoundClips;
+    public List<AudioClip> landingSoundClips;
+
     private NavMeshAgent agent;
     private bool isJumping = false;
 
@@ -89,6 +94,7 @@ public class CharacterAnimationController : MonoBehaviour
             type = (int)JumpTypeEnum.Long;
         }
 
+        SoundManager.Instance.StartSound(jumpSoundClips);
         SetTrigger(JumpTriggerName);
         SetInteger(JumpTypeParamName ,type);
 
@@ -101,6 +107,7 @@ public class CharacterAnimationController : MonoBehaviour
             agent.CompleteOffMeshLink();
         }
         isJumping = false;
+        SoundManager.Instance.StartSound(landingSoundClips);
     }
 
     // 이동 애니메이션
@@ -177,6 +184,16 @@ public class CharacterAnimationController : MonoBehaviour
     {
         AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(currentLayerIndex);
         return currentState.length;
+    }
+
+    public bool HasParameter(string parameterName)
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == parameterName)
+                return true;
+        }
+        return false;
     }
 
     public Animator GetAnimator() { return animator; }

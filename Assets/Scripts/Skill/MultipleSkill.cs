@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,6 @@ public class MultipleSkill : Skill
     public override void Awake()
     {
         base.Awake();
-        data.duration = skillPrefab.data.duration + 1f;         // 지속 시간 설정 (스킬보다 1초 많게 -> 스킬이 모두 사라지기 전에 오브젝트가 꺼지면 오동작 할 수 있기 때문)
-
         if (individualWaitDelay > 0f)
         {
             waitDelay = new WaitForSeconds(individualWaitDelay);    // 시전 간격 (시간 간격) 캐싱
@@ -70,6 +69,7 @@ public class MultipleSkill : Skill
 
         Vector3 startDirection = character.gameObject.transform.forward;    // 시작 방향
 
+        Vector3 lookAtPoint = Vector3.zero;
         for (int i = 0; i < skills.Count; i++)                              // 스킬 목록 순회
         {
             float angleAxis = (i - (count - 1) / 2f) * (angle / count);     // 각도 계산 (중심 기준)
@@ -77,7 +77,7 @@ public class MultipleSkill : Skill
             Vector3 point = rotation * startDirection;
 
             skills[i].SetPosition(startPosition);           // 스킬 시작 위치 지정
-            skills[i].SetPoint(point);                      // 스킬 이동 위치 지정
+            skills[i].SetPoint(point);                      // 스킬 이동 위치 지정)
         }
 
         foreach (var skill in skills)   // 스킬 목록 순회
@@ -92,7 +92,15 @@ public class MultipleSkill : Skill
             }
         }
 
-        yield return new WaitForSeconds(data.duration); // 지속 시간만큼 대기
+        yield return new WaitUntil(() =>
+        {
+            for (int i = 0; i < skills.Count; i++)
+            {
+                if (skills[i].gameObject.activeSelf)
+                    return false;
+            }
+            return true;
+        });
 
         Release();  // 오브젝트 풀에 반납
     }

@@ -128,4 +128,15 @@ public class SoundManager : Singleton<SoundManager>
 
         return true;    // 위에서 없을 때의 과정을 모두 통과하였으니 true return
     }
+
+    public void StartSound(List<AudioClip> clipList)
+    {
+        if (clipList == null || clipList.Count == 0)           // 사운드가 없을 경우 return
+            return;
+
+        int index = GetRandomIndex(0, clipList.Count);         // 랜덤 인덱스 (사운드 클립들 중 하나를 재생하기 위함)
+        PlayOneShot(clipList[index]);                          // 시전 사운드들 중 랜덤 인덱스에 위치한 사운드 재생
+    }
+
+    private int GetRandomIndex(int min, int max) { return Random.Range(min, max); }
 }

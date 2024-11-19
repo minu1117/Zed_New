@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: Talon_R_Multiple
+  m_EditorClassIdentifier: 
+  type: 0
+  skillName: QSkill
+  skillDescription: 1
+  skillLevel: 1
+  levelRestriction: 0
+  damage: 0
+  hitRate: 1
+  hitInterval: 0
+  coolDown: 0
+  duration: 0
+  useDelay: 1
+  afterUseStiffenTime: 0.2
+  speed: 0
+  immobilityTime: 0
+  isShadow: 0
+  isDashPass: 0
+  distance: 10
+  indicator: {fileID: 0}
+  effect: {fileID: 0}
+  useClips:
+  - {fileID: 8300000, guid: 1f17898679cabff4681877eeb1dc85b6, type: 3}
+  attackClips: []
+  disappearClips: []
+  recastClips: []
+  complateClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: d9424af43c268a34485146757ba448ec, type: 3}
+  - {fileID: 8300000, guid: 463ca528d52a70b43baf396b4f544e62, type: 3}
+  - {fileID: 8300000, guid: 75f982a9b01b6ef4cbecb8da01281746, type: 3}
+  - {fileID: 8300000, guid: 73ae962eaf981f6428a48b688cbf7a86, type: 3}
+  - {fileID: 8300000, guid: 968f95d16ebce4b4cb3db0ffe3ea8174, type: 3}
+  complateVoiceClips:
+  - {fileID: 8300000, guid: bee62becf826226438ca66906f2422a8, type: 3}
+  - {fileID: 8300000, guid: 726ae5c482497f24dbc2bcf1c296ab8c, type: 3}
+  - {fileID: 8300000, guid: 6ee7968928141a14ea26d2a070ad4503, type: 3}
+  - {fileID: 8300000, guid: 41b9518afaaf4574389ca4d79c16326f, type: 3}
+  isSelf: 0
+  isStiffen: 0

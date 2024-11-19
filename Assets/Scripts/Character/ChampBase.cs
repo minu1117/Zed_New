@@ -173,6 +173,7 @@ public class ChampBase : MonoBehaviour
     }
 
     public CharacterMoveController GetMoveController() { return moveController; }
+    public SkillSlot GetSlot() { return slot; }
 
     /********************************************** Animation Event **********************************************/
     public void OnAllWeaponsAttackReady()

@@ -6,13 +6,13 @@ public class Weapon : MonoBehaviour, IDamageable
     public WeaponData data;                 // 무기 데이터
     public TrailRenderer trailRenderer;     // 무기를 따라다닐 TrailRenderer
     private bool isReady = false;           // 무기 준비 상태 (공격 가능, 불가능)
-    private Collider coll;                  // 무기 Collider
+    private BoxCollider coll;                  // 무기 Collider
 
     private ChampBase champ;                // 무기 소지자
 
     public void Awake()
     {
-        coll = GetComponent<Collider>();
+        coll = GetComponent<BoxCollider>();
         coll.enabled = false;
     }
 
@@ -79,12 +79,12 @@ public class Weapon : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(0.1f);
         }
 
-       // target.OnDamage(damage);
-
         if (data.attackClips == null || data.attackClips.Count == 0)        // 때릴 때 나올 사운드가 없을 경우 return
             yield break;
 
         int randomIndex = Random.Range(0, data.attackClips.Count);          // 랜덤 인덱스 (때린 사운드 클립)
         SoundManager.Instance.PlayOneShot(data.attackClips[randomIndex]);   // 사운드 매니저에서 재생
     }
+
+    public BoxCollider GetWeaponCollider() { return coll; }
 }

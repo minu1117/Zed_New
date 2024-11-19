@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: Talon_W_Data
+  m_EditorClassIdentifier: 
+  type: 0
+  skillName: Talon_W
+  skillDescription: 1
+  skillLevel: 1
+  levelRestriction: 0
+  damage: 10
+  hitRate: 1
+  hitInterval: 0
+  coolDown: 1
+  duration: 0.3
+  useDelay: 0.1
+  afterUseStiffenTime: 0.2
+  speed: 15
+  immobilityTime: 0
+  isShadow: 0
+  isDashPass: 0
+  distance: 15
+  indicator: {fileID: 0}
+  effect: {fileID: -367961775740068773, guid: ba2441f8bfad8154f903c5730bca712e, type: 3}
+  useClips: []
+  attackClips: []
+  disappearClips: []
+  recastClips: []
+  complateClips: []
+  voiceClips: []
+  isSelf: 0
+  isStiffen: 0

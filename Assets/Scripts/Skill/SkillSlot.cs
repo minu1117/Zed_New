@@ -11,9 +11,6 @@ public class SkillSlot : MonoBehaviour
     // 초기 설정
     public void Init()
     {
-        //if (buttonDatas == null || buttonDatas.Count == 0)      // 버튼 데이터가 없을 경우 return (입력할 키와 스킬이 없어 스킬 사용 불가능)
-        //    return;
-
         if (excutorPrefab == null)                              // 실행기 프리팹이 없을 경우 return (실행기를 생성할 수 없어 스킬 사용 불가능)
             return;
 
@@ -22,6 +19,11 @@ public class SkillSlot : MonoBehaviour
         slotObj.transform.SetParent(transform, false);          // 부모 설정
 
         CreateSkillExcutors();                                  // 스킬 생성기 생성
+    }
+
+    public void SetSlotParent(GameObject parent)
+    {
+        slotObj.transform.SetParent(parent.transform);
     }
     public Dictionary<string, SkillExcutor> GetSlotDict() { return slotDict; }
     public GameObject GetSlotObj() { return slotObj; }

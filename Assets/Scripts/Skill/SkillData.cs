@@ -76,8 +76,11 @@ public class SkillData : ScriptableObject
     [Header("사용 완료 후 사운드")]
     public List<AudioClip> complateClips;
 
-    [Header("음성")]
+    [Header("시전 음성")]
     public List<AudioClip> voiceClips;
+
+    [Header("사용 완료 음성")]
+    public List<AudioClip> complateVoiceClips;
 
     [Header("셀프 타게팅일 경우 체크")]
     public bool isSelf = false;

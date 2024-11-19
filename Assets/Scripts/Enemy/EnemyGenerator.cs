@@ -10,15 +10,20 @@ public class EnemyGenerator : MonoBehaviour
     private List<IObjectPool<EnemyBase>> enemyPools;    // 몬스터 종류 별 오브젝트 풀 List
     private int createIndex = 0;                        // 생성 시 설정될 풀의 Index
 
+    private Dictionary<string, GameObject> enemySkillDict;
+
     public void Awake()
     {
         enemyPools = new();
         poolObjects = new();
+        enemySkillDict = new();
 
         // 생성될 몬스터 List 순회
         for (int i = 0; i < enemies.Count; i++)
         {
-            var poolObj = new GameObject($"{enemies[i].data.charactorName} Pool");    // 몬스터 오브젝트를 담아둘 부모 오브젝트 생성
+            var name = enemies[i].data.charactorName;
+
+            var poolObj = new GameObject($"{name}_Pool");    // 몬스터 오브젝트를 담아둘 부모 오브젝트 생성
             poolObj.transform.position = transform.position;                          // 부모 오브젝트를 생성기의 위치로 이동 (몬스터가 이상한 위치에서 생성되지 않기 위함)
             poolObjects.Add(poolObj);
 
@@ -33,6 +38,10 @@ public class EnemyGenerator : MonoBehaviour
             );
 
             enemyPools.Add(pool);   // 몬스터 풀 List에 오브젝트 풀 추가
+
+            var skillParentObj = new GameObject($"{name}_Skill");
+            skillParentObj.transform.SetParent(poolObj.transform);
+            enemySkillDict.Add(name, skillParentObj);
         }
     }
 
@@ -58,6 +67,14 @@ public class EnemyGenerator : MonoBehaviour
         var hpController = enemy.GetStatusController(SliderMode.HP);         // 몬스터의 HP Controller 가져오기
 
         enemy.Init();                           // 몬스터 초기 설정 실행
+        enemy.GetSlot().SetSlotParent(enemySkillDict[enemies[createIndex].data.charactorName]);
+
+        var slotDict = enemy.GetSlot().GetSlotDict();
+        foreach ( var excutor in slotDict.Values )
+        {
+            excutor.SetParentInExcutor();
+        }
+
         hpController.SetMaxValue();             // 몬스터 최대 HP, MP로 설정
         enemy.SetPool(enemyPools[createIndex]); // 몬스터에 오브젝트 풀 설정 (Release용)
 

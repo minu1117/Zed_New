@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: Talon_W_Multiple
+  m_EditorClassIdentifier: 
+  type: 0
+  skillName: Talon_W_Multiple
+  skillDescription: 1
+  skillLevel: 1
+  levelRestriction: 0
+  damage: 0
+  hitRate: 1
+  hitInterval: 0
+  coolDown: 0
+  duration: 0
+  useDelay: 1
+  afterUseStiffenTime: 0.2
+  speed: 0
+  immobilityTime: 0
+  isShadow: 0
+  isDashPass: 0
+  distance: 15
+  indicator: {fileID: 0}
+  effect: {fileID: 0}
+  useClips:
+  - {fileID: 8300000, guid: bd0d50b0dc8b20c42969057cb7c55817, type: 3}
+  attackClips: []
+  disappearClips: []
+  recastClips: []
+  complateClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: d98e775b367576247abcca4e53bc0d4c, type: 3}
+  - {fileID: 8300000, guid: d76326fa3c0edd941b655767ec6a8b6b, type: 3}
+  - {fileID: 8300000, guid: 016f79f9d9d8c29419452d53960ff92f, type: 3}
+  complateVoiceClips: []
+  isSelf: 0
+  isStiffen: 0

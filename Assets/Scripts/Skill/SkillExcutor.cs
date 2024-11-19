@@ -21,7 +21,7 @@ public class SkillExcutor : MonoBehaviour
 
         this.data = data;   // 스킬 데이터 설정
         poolObject = new GameObject($"{data.skill.data.skillName}_Pool");   // 생성된 스킬들을 담아둘 부모 오브젝트 생성
-        poolObject.transform.parent = parentObj.transform;  // 스킬들의 부모 오브젝트를 parentObj의 하위로 이동
+        poolObject.transform.parent = parentObj.transform;                  // 스킬들의 부모 오브젝트를 parentObj의 하위로 이동
 
         if (data.maxPoolSize <= 0)  // 스킬 데이터의 최대 pool size가 0 이하일 경우 return (오브젝트 풀 생성 X)
             return;
@@ -40,6 +40,11 @@ public class SkillExcutor : MonoBehaviour
         {
             indicator = Instantiate(data.skill.data.indicator, gameObject.transform);
         }
+    }
+
+    public void SetParentInExcutor()
+    {
+        poolObject.transform.SetParent(gameObject.transform);
     }
 
     // 스킬 실행 
@@ -157,6 +162,22 @@ public class SkillExcutor : MonoBehaviour
 
         if (character.TryGetComponent<CharacterAnimationController>(out var animationController))
         {
+            if (useSkill.TryGetComponent<Talon_Q>(out var talon_Q))
+            {
+                if (animationController.HasParameter("IsLeap"))
+                {
+                    var distance = Vector3.Distance(character.transform.position, Zed.Instance.transform.position);
+                    if (distance > talon_Q.meleeAttackRange)
+                    {
+                        animationController.SetBool("IsLeap", true);
+                    }
+                    else
+                    {
+                        animationController.SetBool("IsLeap", false);
+                    }
+                }
+            }
+
             animationController.UseSkill(enumIndex, data.isUpper);        // 애니메이션 출력
         }
 

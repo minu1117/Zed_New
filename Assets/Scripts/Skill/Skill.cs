@@ -21,7 +21,7 @@ public class Skill : MonoBehaviour, IDamageable
     protected Tweener tweener;
 
     protected SkillIndicator indicator;
-    private List<ChildCollider> colliders;
+    protected List<ChildCollider> colliders;
     public bool isCollide { get; set; } = false;
     protected Vector3 usePoint;
 
@@ -46,7 +46,7 @@ public class Skill : MonoBehaviour, IDamageable
     {
         UseEffect(gameObject);          // 이펙트 사용
         StartSound(data.useClips);      // 스킬 시전 사운드 재생
-        StartSound(data.voiceClips);    // 보이스 재생
+        StartSound(data.voiceClips);    // 시전 보이스 재생
     }
 
     public Vector3 GetUsePoint() { return usePoint; }
@@ -89,16 +89,11 @@ public class Skill : MonoBehaviour, IDamageable
 
     protected void StartSound(List<AudioClip> clipList)
     {
-        if (clipList == null || clipList.Count == 0)           // 사운드가 없을 경우 return
-            return;
-
-        int index = GetRandomIndex(0, clipList.Count);         // 랜덤 인덱스 (사운드 클립들 중 하나를 재생하기 위함)
-        SoundManager.Instance.PlayOneShot(clipList[index]);    // 사운드 매니저에서 시전 사운드들 중 랜덤 인덱스에 위치한 사운드 재생
+        SoundManager.Instance.StartSound(clipList);
     }
 
     public void SetPool(IObjectPool<Skill> pool) { this.pool = pool; }
     public void SetCaster(GameObject obj) { caster = obj; }
-    public int GetRandomIndex(int min, int max) { return Random.Range(min, max); }
 
     // 오브젝트 충돌 시 처리될 작업
     public virtual void Collide(GameObject obj)
@@ -139,7 +134,7 @@ public class Skill : MonoBehaviour, IDamageable
     }
 
     // 데미지 처리
-    public IEnumerator DealDamage(ChampBase target, float damage, int hitRate)
+    public virtual IEnumerator DealDamage(ChampBase target, float damage, int hitRate)
     {
         int count = 0;
         bool isSound = data.attackClips != null && data.attackClips.Count > 0;
@@ -149,8 +144,7 @@ public class Skill : MonoBehaviour, IDamageable
 
             if (isSound)
             {
-                int index = GetRandomIndex(0, data.attackClips.Count);          // 랜덤 인덱스 (타격 사운드 클립)
-                SoundManager.Instance.PlayOneShot(data.attackClips[index]);     // 사운드 매니저에서 타격 재생
+                SoundManager.Instance.StartSound(data.attackClips);  // 사운드 매니저에서 타격 재생
             }
 
             count++;
@@ -198,6 +192,8 @@ public class Skill : MonoBehaviour, IDamageable
         isCollide = false;
         ReleaseEffect();        // 이펙트 반납
         StartDisappearSound();  // 시전 해제 사운드 재생
+        StartSound(data.complateClips);
+        StartSound(data.complateVoiceClips);
         caster = null;          // 시전자 초기화
         pool.Release(this);     // 스킬 반납
     }
@@ -205,11 +201,12 @@ public class Skill : MonoBehaviour, IDamageable
     // 시전 해제 사운드 재생
     protected void StartDisappearSound()
     {
-        if (data.disappearClips == null || data.disappearClips.Count <= 0)  // 시전 해제 사운드가 없을 경우 return
-            return;
+        SoundManager.Instance.StartSound(data.disappearClips);
+        //if (data.disappearClips == null || data.disappearClips.Count <= 0)  // 시전 해제 사운드가 없을 경우 return
+        //    return;
 
-        int index = GetRandomIndex(0, data.disappearClips.Count);           // 랜덤 인덱스 (시전 해제 사운드 클립)
-        SoundManager.Instance.PlayOneShot(data.disappearClips[index]);      // 사운드 매니저에서 시전 해제 사운드 재생
+        //int index = GetRandomIndex(0, data.disappearClips.Count);           // 랜덤 인덱스 (시전 해제 사운드 클립)
+        //SoundManager.Instance.PlayOneShot(data.disappearClips[index]);      // 사운드 매니저에서 시전 해제 사운드 재생
     }
 
     protected void RestartTween(Vector3 startPos, Vector3 endPos)
