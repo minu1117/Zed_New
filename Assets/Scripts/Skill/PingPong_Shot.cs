@@ -126,12 +126,6 @@ public class PingPong_Shot : Skill
 
         Release();
     }
-
-    // 오브젝트 풀에 Release 하는 용도
-    protected override void Release()
-    {
-        base.Release();
-    }
     
     private void ChangeRotate(RotateType rotType)
     {

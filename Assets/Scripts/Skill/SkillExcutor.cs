@@ -162,6 +162,7 @@ public class SkillExcutor : MonoBehaviour
 
         if (character.TryGetComponent<CharacterAnimationController>(out var animationController))
         {
+            // 탈론
             if (useSkill.TryGetComponent<Talon_Q>(out var talon_Q))
             {
                 if (animationController.HasParameter("IsLeap"))
@@ -177,6 +178,11 @@ public class SkillExcutor : MonoBehaviour
                     }
                 }
             }
+            else if(character.TryGetComponent<Gangplank>(out var gangplank))
+            {
+                var animQuarter = Random.Range(0, gangplank.spell_1_Animation_Quarter);
+                animationController.SetInteger(animationController.spell_Anim_Quarter_ParamName, animQuarter);
+            }
 
             animationController.UseSkill(enumIndex, data.isUpper);        // 애니메이션 출력
         }
@@ -187,7 +193,6 @@ public class SkillExcutor : MonoBehaviour
         {
             champ.FinishedAttack();
         }
-
 
         Vector3 startPosition = character.gameObject.transform.position;    // 시작 위치 설정 (character 오브젝트의 현재 위치)
         if (character.TryGetComponent(out ChampBase champion))              // character 오브젝트에서 ChampBase 컴포넌트 추출 성공 시

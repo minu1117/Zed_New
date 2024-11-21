@@ -34,6 +34,7 @@ public class CharacterAnimationController : MonoBehaviour
     public string upperLayerParamName;          // 상체 레이어 사용 시 쓰는 파라미터
     public string JumpTriggerName;              // 점프 실행 트리거
     public string JumpTypeParamName;            // 점프 타입별 분기 파라미터
+    public string spell_Anim_Quarter_ParamName; // 스킬 사용 시 나올 애니메이션 분기 트리거 이름
     public AutoAttackEnum maxAutoAttackEnum;    // 평타 종류 애니메이션 개수 (최대 개수)
     private Animator animator;
     private int currentLayerIndex;              // 현재 레이어 인덱스
@@ -174,6 +175,9 @@ public class CharacterAnimationController : MonoBehaviour
     public void SetInteger(string name, int value)
     {
         if (name == string.Empty)
+            return;
+
+        if (!HasParameter(name))
             return;
 
         animator.SetInteger(name, value);
