@@ -29,7 +29,7 @@ MonoBehaviour:
   isShadow: 0
   isDashPass: 0
   distance: 10
-  indicator: {fileID: 0}
+  indicator: {fileID: 7504781448254963714, guid: bae8e7464461ca14c8c86a73cac76d53, type: 3}
   effect: {fileID: 0}
   useClips:
   - {fileID: 8300000, guid: 1f17898679cabff4681877eeb1dc85b6, type: 3}

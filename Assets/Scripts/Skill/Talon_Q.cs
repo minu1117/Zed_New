@@ -8,11 +8,10 @@ public class Talon_Q : Skill
     public AudioClip meleeUseClip;
     public AudioClip leapUseClip;
     public AudioClip leapAttackClip;
-    private BoxCollider weaponCollider;
     private ChampBase target;
     private bool isLeap;
 
-    private Weapon casterWeapon;
+    private ChampBase talon;
 
     public override void Awake()
     {
@@ -22,16 +21,7 @@ public class Talon_Q : Skill
 
     public override void Use(GameObject character)
     {
-        var champBase = character.GetComponent<ChampBase>();
-        casterWeapon = champBase.weapons[0];
-        weaponCollider = casterWeapon.GetWeaponCollider();
-        foreach (var collider in colliders)
-        {
-            collider.GetCollider().size = weaponCollider.size;
-            collider.GetCollider().center = weaponCollider.center;
-            collider.gameObject.transform.position = weaponCollider.gameObject.transform.position;
-        }
-
+        talon = character.GetComponent<ChampBase>();
         UseEffect(gameObject);          // 이펙트 사용
         StartSound(data.voiceClips);    // 시전 보이스 재생
 
@@ -112,6 +102,8 @@ public class Talon_Q : Skill
                 {
                     agent.isStopped = false;
                 }
+
+                agent.SetDestination(target.transform.position);
             }
         }
 
@@ -139,7 +131,7 @@ public class Talon_Q : Skill
 
     private void Update()
     {
-        gameObject.transform.position = weaponCollider.gameObject.transform.position;
-        gameObject.transform.rotation = casterWeapon.transform.rotation;
+        transform.forward = talon.transform.forward;
+        transform.position = talon.transform.position;
     }
 }

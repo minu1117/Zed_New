@@ -78,7 +78,7 @@ public class SkillExcutor : MonoBehaviour
                 animationController.UseSkill(enumIndex, data.isUpper);
             }
 
-            UseIndicator(character.transform.position, useSkill.data.useDelay); // 스킬 범위 표시기 사용
+            UseIndicator(character, useSkill.data.useDelay); // 스킬 범위 표시기 사용
 
             isAvailable = false;            // 스킬 사용 불가 상태로 변경 (오동작 방지)
             dashSkill.SetPoint(point);      // 대쉬할 위치 설정
@@ -145,7 +145,7 @@ public class SkillExcutor : MonoBehaviour
         useSkill.SetActive(false);                                  // 스킬 오브젝트의 active 꺼놓기 (켜져 있을 경우 보이기 때문)
         character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
 
-        UseIndicator(character.transform.position, useSkill.data.useDelay); // 스킬 범위 표시기 사용
+        UseIndicator(character, useSkill.data.useDelay); // 스킬 범위 표시기 사용
 
         var moveController = character.GetComponent<CharacterMoveController>();
         var agent = character.GetComponent<NavMeshAgent>();
@@ -249,12 +249,24 @@ public class SkillExcutor : MonoBehaviour
         isAvailable = true;     // 스킬 사용 가능 상태로 변경
     }
 
-    protected void UseIndicator(Vector3 pos, float duration)
+    protected void UseIndicator(GameObject character, float duration)
     {
         if (indicator == null)
             return;
 
+        // 캐릭터의 forward로 Y와 Z 회전값 계산
+        Quaternion targetRotation = Quaternion.LookRotation(character.transform.forward, Vector3.up);
+        Vector3 targetEulerAngles = targetRotation.eulerAngles;
+
+        // X 회전값 유지, Y와 Z는 캐릭터의 회전값 가져오기
+        var eulerAngles = new Vector3(indicator.transform.eulerAngles.x, targetEulerAngles.y, targetEulerAngles.z);
+
+        // 위치 가져오기
+        var pos = character.transform.localPosition;
+
         indicator.SetPosition(pos);
+        indicator.SetTarget(character);
+        indicator.transform.eulerAngles = eulerAngles;
         indicator.duration = duration;
         indicator.Use();
     }

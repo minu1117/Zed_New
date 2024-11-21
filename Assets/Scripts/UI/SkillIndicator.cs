@@ -35,6 +35,8 @@ public class SkillIndicator : MonoBehaviour
     private Vector3 defaultPivot;
     private Vector3 currentPivot;
 
+    private GameObject followTarget;
+
     private void Awake()
     {
         if (sizeUpProjector != null)
@@ -73,6 +75,11 @@ public class SkillIndicator : MonoBehaviour
     private void Update()
     {
         SizeUp();
+        
+        if (followTarget != null)
+        {
+            transform.localPosition = followTarget.transform.localPosition;
+        }
     }
 
     private void SizeUp()
@@ -134,11 +141,13 @@ public class SkillIndicator : MonoBehaviour
         sizeUpProjector.size = new Vector2(minWidth, minHeight);
     }
 
+    public void SetTarget(GameObject followTarget)
+    {
+        this.followTarget = followTarget;
+    }
+
     public void SetPosition(Vector3 pos)
     {
-        //float newPosY = -pos.y;
-        //newPosY += 0.01f;
-        //transform.localPosition = new Vector3(0, newPosY, 0);
-        transform.localPosition = new Vector3(0, pos.y + 0.01f, 0);
+        transform.localPosition = pos;
     }
 }
