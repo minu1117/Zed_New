@@ -6,8 +6,9 @@ public class Trap : Skill
     [SerializeField] private float burstDuration;
     [SerializeField] private Effect burstParticle;
     [SerializeField] private Color burstColor;
+    [SerializeField] private Renderer meshRenderer;
+    [SerializeField] private AudioClip explosionSound;
 
-    private Renderer meshRenderer;
     private Color defaultColor;
     private float timer = 0f;
     private bool isColorAdded = false;
@@ -15,7 +16,6 @@ public class Trap : Skill
     public override void Awake()
     {
         base.Awake();
-        meshRenderer = GetComponent<Renderer>();
         if (meshRenderer != null)
         {
             defaultColor = meshRenderer.material.color;
@@ -24,25 +24,43 @@ public class Trap : Skill
 
     public override void Use(GameObject character)
     {
-        base.Use(character);
+        StartSound(data.useClips);      // 스킬 시전 사운드 재생
+        StartSound(data.voiceClips);    // 시전 보이스 재생
         StartCoroutine(CoUse());
     }
 
     private IEnumerator CoUse()
     {
+        foreach (var coll in colliders)
+        {
+            coll.GetCollider().enabled = false;
+        }
+
         Vector3 movePoint = transform.position + (usePoint * data.distance);
         transform.position = movePoint;
+
+        if (caster.TryGetComponent<BoxCollider>(out var boxCollider))
+        {
+            var yPos = boxCollider.bounds.min.y;
+            transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
+        }
+
+        UseEffect(gameObject);
 
         isCollide = true;
         isColorAdded = true;
 
         yield return waitduration;
 
-        isColorAdded = false;
-
         // Burst
         isCollide = false;
+        foreach (var coll in colliders)
+        {
+            coll.GetCollider().enabled = true;
+        }
 
+        isColorAdded = false;
+        SoundManager.Instance.PlayOneShot(explosionSound);
         if (burstParticle != null)
         {
             var effect = EffectManager.Instance.GetEffect(burstParticle.name);
@@ -51,10 +69,14 @@ public class Trap : Skill
             effect.Use();
         }
 
-        yield return new WaitForSeconds(burstDuration);
+        if (burstDuration > 0f)
+            yield return new WaitForSeconds(burstDuration);
 
         timer = 0f;
-        meshRenderer.material.color = defaultColor;
+
+        if (meshRenderer != null)
+            meshRenderer.material.color = defaultColor;
+
         Release();
     }
 

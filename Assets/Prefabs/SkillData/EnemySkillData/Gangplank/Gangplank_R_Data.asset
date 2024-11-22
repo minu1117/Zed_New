@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: Gangplank_R_Data
+  m_EditorClassIdentifier: 
+  type: 0
+  skillName: Gangplank_R
+  skillDescription: 1
+  skillLevel: 1
+  levelRestriction: 0
+  damage: 100
+  hitRate: 1
+  hitInterval: 0
+  coolDown: 1
+  duration: 10
+  useDelay: 1
+  afterUseStiffenTime: 0.2
+  speed: 0
+  immobilityTime: 0
+  isShadow: 0
+  isDashPass: 0
+  distance: 10
+  indicator: {fileID: 0}
+  effect: {fileID: 8785494125656500745, guid: ae964186176937f4e89597493b2e6a71, type: 3}
+  useClips:
+  - {fileID: 8300000, guid: 948ee7b371fb8f6439c5a9c75f7e3f7f, type: 3}
+  attackClips: []
+  disappearClips: []
+  recastClips: []
+  complateClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: dec2d94f2646f1541898c2c0f2992ad9, type: 3}
+  complateVoiceClips: []
+  isSelf: 0
+  isStiffen: 0

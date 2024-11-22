@@ -169,9 +169,12 @@ MonoBehaviour:
   slider: {fileID: 3329749583410015638}
   canvas: {fileID: 6816088135989669013}
   champ: {fileID: 6110907747098522788}
-  tmp: {fileID: 0}
+  tmp: {fileID: 6614193905837493316}
   canvasMode: 0
   sliderMode: 0
+  usedSlider: 1
+  shieldSlider: {fileID: 0}
+  isShield: 0
 --- !u!1001 &8633548543098154522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -317,6 +320,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5281473855976597995, guid: 67a35189f3cdcb547b304954f3d60155, type: 3}
   m_PrefabInstance: {fileID: 8633548543098154522}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6614193905837493316 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3178082251012022878, guid: 67a35189f3cdcb547b304954f3d60155, type: 3}
+  m_PrefabInstance: {fileID: 8633548543098154522}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!223 &6816088135989669013 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 2974375369120924303, guid: 67a35189f3cdcb547b304954f3d60155, type: 3}

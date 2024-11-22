@@ -259,7 +259,7 @@ AnimatorTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: SkillType
-    m_EventTreshold: 2
+    m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6819412865966242931}
   m_Solo: 0
@@ -310,16 +310,16 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -2824851914138850963}
-    second:
-    - {fileID: 8727872552424177570}
-    - {fileID: 7931347619141335586}
-    - {fileID: -1704734415817156958}
   - first: {fileID: -5729036188280030133}
     second:
     - {fileID: -8765905749569661379}
     - {fileID: -4533169796187842470}
     - {fileID: -238243495524833711}
+  - first: {fileID: -2824851914138850963}
+    second:
+    - {fileID: 8727872552424177570}
+    - {fileID: 7931347619141335586}
+    - {fileID: -1704734415817156958}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -1060,6 +1060,18 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: Spell_Anim_Quarter
     m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: AttackSpeed
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: NextMotion
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

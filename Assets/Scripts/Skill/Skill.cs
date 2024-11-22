@@ -202,11 +202,6 @@ public class Skill : MonoBehaviour, IDamageable
     protected void StartDisappearSound()
     {
         SoundManager.Instance.StartSound(data.disappearClips);
-        //if (data.disappearClips == null || data.disappearClips.Count <= 0)  // 시전 해제 사운드가 없을 경우 return
-        //    return;
-
-        //int index = GetRandomIndex(0, data.disappearClips.Count);           // 랜덤 인덱스 (시전 해제 사운드 클립)
-        //SoundManager.Instance.PlayOneShot(data.disappearClips[index]);      // 사운드 매니저에서 시전 해제 사운드 재생
     }
 
     protected void RestartTween(Vector3 startPos, Vector3 endPos)

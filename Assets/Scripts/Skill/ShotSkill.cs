@@ -25,6 +25,8 @@ public class ShotSkill : Skill
     // 날리기
     private IEnumerator CoShot(Vector3 startVec)
     {
+        yield return waitUseDelay;
+
         Vector3 totalMovement = transform.position + (startVec.normalized * data.duration * data.speed); // 날아갈 거리 계산
 
         if (tweener == null)

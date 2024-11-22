@@ -91,6 +91,12 @@ public class StatusController : MonoBehaviour
         }
     }
 
+    public void Heal(float value)
+    {
+        data.currentHp = Math.Clamp(data.currentHp + value, 0, data.maxHp);
+        SetCurrentHp();
+    }
+
     // 현재 체력 변경
     public void SetCurrentHp()
     {
@@ -173,11 +179,6 @@ public class StatusController : MonoBehaviour
             float shieldValue = currentShieldValue;
 
             DestroyShield();
-            //isShield = false;
-            //maxShieldValue = 0f;
-            //currentShieldValue = 0f;
-            //shieldSlider.value = 0f;
-            //SetText($"{data.currentHp} / {data.maxHp}");
             return Mathf.Abs(shieldValue - damage);
         }
         else

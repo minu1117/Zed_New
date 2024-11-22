@@ -872,6 +872,7 @@ MonoBehaviour:
   upperLayerParamName: IsUpper
   JumpTriggerName: 
   JumpTypeParamName: 
+  spell_Anim_Quarter_ParamName: 
   maxAutoAttackEnum: 0
   upperLayerIndex: 1
   wholeBodyLayerIndex: 2
