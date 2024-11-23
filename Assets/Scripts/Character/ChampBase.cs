@@ -7,6 +7,7 @@ public class ChampBase : MonoBehaviour
     public CharacterData data;                                      // 캐릭터 데이터
     public AutoAttack autoAttack;                                   // 평타 컴포넌트 (오브젝트에 붙어있음)
     public Transform shotStartTransform;                            // 스킬 발사 시작 위치
+    public Transform groundTransform;                               // 바닥 위치
     public List<Weapon> weapons;                                    // 무기 List (인스펙터에서 담아둠)
     protected SkillSlot slot;                                       // 스킬 슬롯
     private Dictionary<string, Weapon> weaponDict;                  // 무기들을 이름과 같이 담아두는 Dictionary
