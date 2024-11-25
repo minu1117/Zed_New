@@ -3,15 +3,16 @@ using UnityEngine;
 
 public class Trap : Skill
 {
-    [SerializeField] private float burstDuration;
-    [SerializeField] private Effect burstParticle;
-    [SerializeField] private Color burstColor;
-    [SerializeField] private Renderer meshRenderer;
-    [SerializeField] private AudioClip explosionSound;
+    [SerializeField] protected float burstDuration;
+    [SerializeField] protected Effect burstParticle;
+    [SerializeField] protected Color burstColor;
+    [SerializeField] protected Renderer meshRenderer;
+    [SerializeField] protected AudioClip explosionSound;
+    [SerializeField] protected AudioClip countdownSound;
 
-    private Color defaultColor;
-    private float timer = 0f;
-    private bool isColorAdded = false;
+    protected Color defaultColor;
+    protected float timer = 0f;
+    protected bool isColorAdded = false;
 
     public override void Awake()
     {
@@ -31,6 +32,8 @@ public class Trap : Skill
 
     private IEnumerator CoUse()
     {
+        SoundManager.Instance.PlayOneShot(countdownSound);
+
         foreach (var coll in colliders)
         {
             coll.GetCollider().enabled = false;
@@ -52,22 +55,7 @@ public class Trap : Skill
 
         yield return waitduration;
 
-        // Burst
-        isCollide = false;
-        foreach (var coll in colliders)
-        {
-            coll.GetCollider().enabled = true;
-        }
-
-        isColorAdded = false;
-        SoundManager.Instance.PlayOneShot(explosionSound);
-        if (burstParticle != null)
-        {
-            var effect = EffectManager.Instance.GetEffect(burstParticle.name);
-            effect.SetStartPos(transform.position);
-            effect.SetForward(transform.forward);
-            effect.Use();
-        }
+        Burst();
 
         if (burstDuration > 0f)
             yield return new WaitForSeconds(burstDuration);
@@ -80,7 +68,7 @@ public class Trap : Skill
         Release();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (meshRenderer == null || !isColorAdded)
             return;
@@ -88,5 +76,39 @@ public class Trap : Skill
         timer += Time.deltaTime;
         float t = Mathf.Clamp01(timer / data.duration);
         meshRenderer.material.color = Color.Lerp(defaultColor, burstColor, t);
+    }
+
+    protected void Burst()
+    {
+        isCollide = false;
+        foreach (var coll in colliders)
+        {
+            coll.GetCollider().enabled = true;
+        }
+
+        isColorAdded = false;
+        SoundManager.Instance.PlayOneShot(explosionSound);
+        UseTrapEffect(burstParticle, transform);
+
+        //if (burstParticle != null)
+        //{
+        //    var effect = EffectManager.Instance.GetEffect(burstParticle.name);
+        //    effect.SetStartPos(transform.position);
+        //    effect.SetForward(transform.forward);
+        //    effect.Use();
+        //}
+    }
+
+    protected Effect UseTrapEffect(Effect effectPrefab, Transform transform)
+    {
+        if (effectPrefab == null)
+            return null;
+
+        var effect = EffectManager.Instance.GetEffect(effectPrefab.name);
+        effect.SetStartPos(transform.position);
+        effect.SetForward(transform.forward);
+        effect.Use();
+
+        return effect;
     }
 }

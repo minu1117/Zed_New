@@ -153,10 +153,10 @@ public class Skill : MonoBehaviour, IDamageable
     }
 
     // 타겟에 데미지 부여
-    private void DealDamage(GameObject target)
+    protected void DealDamage(GameObject target)
     {
-        if (caster != null && ReferenceEquals(caster, target))  // 타겟과 시전자가 같으면 return (본인은 맞지 않게)
-            return;
+        //if (caster != null && ReferenceEquals(caster, target))  // 타겟과 시전자가 같으면 return (본인은 맞지 않게)
+        //    return;
 
         if (target == null || caster == null)                   // 타겟 또는 시전자가 없으면 return
             return;

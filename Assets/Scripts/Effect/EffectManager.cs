@@ -24,6 +24,9 @@ public class EffectManager : Singleton<EffectManager>
         if (effectPoolDict == null || effectPoolDict.Count == 0)    // 이펙트를 저장한 Dictionary가 비었을 경우 return (이펙트 없음)
             return null;
 
+        if (!effectPoolDict.ContainsKey(effectName))
+            return null;
+
         var eft = effectPoolDict[effectName].Get(); // Dictionary에서 가져오기
         eft.ResetParticle();    // 이펙트 초기화
         return eft;

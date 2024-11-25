@@ -5,18 +5,22 @@ public class Weapon : MonoBehaviour, IDamageable
 {
     public WeaponData data;                 // 무기 데이터
     public TrailRenderer trailRenderer;     // 무기를 따라다닐 TrailRenderer
-    private bool isReady = false;           // 무기 준비 상태 (공격 가능, 불가능)
-    private BoxCollider coll;                  // 무기 Collider
+    protected bool isReady = false;           // 무기 준비 상태 (공격 가능, 불가능)
+    protected BoxCollider coll;                  // 무기 Collider
 
-    private ChampBase champ;                // 무기 소지자
+    protected ChampBase champ;                // 무기 소지자
 
-    public void Awake()
+    protected virtual void Awake()
     {
         coll = GetComponent<BoxCollider>();
-        coll.enabled = false;
+
+        if (coll != null)
+        {
+            coll.enabled = false;
+        }
     }
 
-    public void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (!isReady)   // 준비가 되지 않았을 경우 return
             return;
@@ -30,6 +34,7 @@ public class Weapon : MonoBehaviour, IDamageable
         }
     }
 
+    public ChampBase GetChamp() { return champ; }
     public void SetChamp(ChampBase champion) { champ = champion; }
 
     public void SetActiveTrailRenderer(bool active)
@@ -43,7 +48,7 @@ public class Weapon : MonoBehaviour, IDamageable
     }
 
     // 무기 준비 완료
-    public void OnReady()
+    public virtual void OnReady()
     {
         isReady = true;         // 준비 상태 변경 (완료)
         coll.enabled = true;    // Collider 활성화 (부딪힐 수 있게)
@@ -60,7 +65,6 @@ public class Weapon : MonoBehaviour, IDamageable
     {
         isReady = false;        // 준비 상태 변경 (미완료)
         coll.enabled = false;   // Collider 비활성화 (부딪히지 않게)
-        //Debug.Log("Finishe");
     }
 
     public void SetDamage(float dmg)

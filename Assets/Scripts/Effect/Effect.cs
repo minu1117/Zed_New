@@ -5,6 +5,7 @@ public class Effect : MonoBehaviour
 {
     [SerializeField] protected ParticleSystem particle; // 사용할 파티클
     private Vector3 startPos;                           // 파티클 시작 위치
+    private Coroutine coroutine;
 
     protected virtual void Awake()
     {
@@ -16,7 +17,7 @@ public class Effect : MonoBehaviour
     {
         ResetParticle();                        // 파티클 초기화
         particle.Play();                        // 파티클 시작
-        StartCoroutine(CheckParticleAlive());   // 파티클 활성화 여부 확인 코루틴 시작
+        coroutine = StartCoroutine(CheckParticleAlive());   // 파티클 활성화 여부 확인 코루틴 시작
     }
 
     public virtual void Stop()
@@ -45,6 +46,7 @@ public class Effect : MonoBehaviour
     private IEnumerator CheckParticleAlive()
     {
         yield return new WaitUntil(() => particle.IsAlive(true) == false);  // 파티클이 비활성화 될 때 까지 대기
+        coroutine = null;
         gameObject.SetActive(false);    // 게임오브젝트 비활성화
     }
 }
