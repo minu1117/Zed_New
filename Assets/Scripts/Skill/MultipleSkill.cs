@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +38,6 @@ public class MultipleSkill : Skill
         StartCoroutine(CoUseMultipleSkill(character));
     }
 
-    // 다중 그림자 생성 코루틴
     private IEnumerator CoUseMultipleSkill(GameObject character)
     {
         var champBase = character.GetComponent<ChampBase>();
@@ -77,7 +75,7 @@ public class MultipleSkill : Skill
             Vector3 point = rotation * startDirection;
 
             skills[i].SetPosition(startPosition);           // 스킬 시작 위치 지정
-            skills[i].SetPoint(point);                      // 스킬 이동 위치 지정)
+            skills[i].SetPoint(point);                      // 스킬 이동 위치 지정
         }
 
         foreach (var skill in skills)   // 스킬 목록 순회

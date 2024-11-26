@@ -89,14 +89,6 @@ public class Trap : Skill
         isColorAdded = false;
         SoundManager.Instance.PlayOneShot(explosionSound);
         UseTrapEffect(burstParticle, transform);
-
-        //if (burstParticle != null)
-        //{
-        //    var effect = EffectManager.Instance.GetEffect(burstParticle.name);
-        //    effect.SetStartPos(transform.position);
-        //    effect.SetForward(transform.forward);
-        //    effect.Use();
-        //}
     }
 
     protected Effect UseTrapEffect(Effect effectPrefab, Transform transform)

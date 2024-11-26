@@ -61,6 +61,7 @@ public abstract class EnemyBase : ChampBase
 
     protected Coroutine waitNextAttackCoroutine;
     protected AttackMode attackMode;
+    protected EnemyGenerator enemyGenerator;
 
     // 초기 설정
     public virtual void Init()
@@ -423,6 +424,9 @@ public abstract class EnemyBase : ChampBase
             slot.CreateExcutor(parent, skillData);
         }
     }
+
+    public EnemyGenerator GetEnemyGenerator() { return enemyGenerator; }
+    public void SetEnemyGenerator(EnemyGenerator eg) { enemyGenerator = eg; }
 
     // 에디터 전용 코드
     // 인식 범위 기즈모로 그리기 (테스트용)

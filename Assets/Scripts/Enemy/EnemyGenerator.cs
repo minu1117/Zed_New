@@ -12,6 +12,8 @@ public class EnemyGenerator : MonoBehaviour
 
     private Dictionary<string, GameObject> enemySkillDict;
 
+    private Map map;
+
     public void Awake()
     {
         enemyPools = new();
@@ -68,6 +70,7 @@ public class EnemyGenerator : MonoBehaviour
 
         enemy.Init();                           // 몬스터 초기 설정 실행
         enemy.GetSlot().SetSlotParent(enemySkillDict[enemies[createIndex].data.charactorName]);
+        enemy.SetEnemyGenerator(this);
 
         var slotDict = enemy.GetSlot().GetSlotDict();
         foreach ( var excutor in slotDict.Values )
@@ -103,4 +106,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         Destroy(enemy.gameObject);
     }
+
+    public void SetMap(Map map) { this.map = map; }
+    public Map GetMap() { return map; }
 }

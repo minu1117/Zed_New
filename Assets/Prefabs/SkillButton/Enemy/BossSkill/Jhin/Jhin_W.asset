@@ -17,5 +17,5 @@ MonoBehaviour:
   maxPoolSize: 5
   sp: {fileID: 0}
   isUpper: 0
-  type: 0
+  type: 1
   healthPercentage: 100

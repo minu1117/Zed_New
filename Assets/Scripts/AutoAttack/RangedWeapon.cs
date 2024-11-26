@@ -11,6 +11,9 @@ public class RangedWeapon : Weapon, IDamageable
 
     protected override void Awake()
     {
+        if (projectileObject == null)
+            return;
+
         projectileParent = new GameObject($"{name}_Projectiles");
         projectilePool = new ObjectPool<Projectile>
                         (

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q_SkillButtonData_Zed
   m_EditorClassIdentifier: 
   keycode: 
-  skill: {fileID: 5090769215946012778, guid: 07ec398bbac493c42bfe2a98826433c1, type: 3}
-  maxPoolSize: 20
+  skill: {fileID: 1659435368814680895, guid: a683baa826c2f4242b3fa21bc19521ee, type: 3}
+  maxPoolSize: 5
   sp: {fileID: 21300000, guid: e02718203bff44c4e89ee58417f00bc6, type: 3}
   isUpper: 1
   type: 0

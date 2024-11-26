@@ -64,7 +64,9 @@ public class Weapon : MonoBehaviour, IDamageable
     public void OnFinished()
     {
         isReady = false;        // 준비 상태 변경 (미완료)
-        coll.enabled = false;   // Collider 비활성화 (부딪히지 않게)
+
+        if (coll != null)
+            coll.enabled = false;   // Collider 비활성화 (부딪히지 않게)
     }
 
     public void SetDamage(float dmg)
