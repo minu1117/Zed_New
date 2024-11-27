@@ -34,7 +34,7 @@ public class Effect : MonoBehaviour
     public void SetStartPos(Vector3 pos)
     {
         startPos = pos;
-        particle.transform.position = startPos;
+        particle.transform.localPosition = startPos;
     }
 
     public void SetForward(Vector3 forward)
@@ -49,4 +49,6 @@ public class Effect : MonoBehaviour
         coroutine = null;
         gameObject.SetActive(false);    // 게임오브젝트 비활성화
     }
+
+    public float GetDuration() { return particle.main.duration; }
 }

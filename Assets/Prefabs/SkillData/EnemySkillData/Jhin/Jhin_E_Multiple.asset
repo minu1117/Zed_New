@@ -22,13 +22,13 @@ MonoBehaviour:
   hitInterval: 0
   coolDown: 0
   duration: 0
-  useDelay: 0
-  afterUseStiffenTime: 0.2
+  useDelay: 1
+  afterUseStiffenTime: 1
   speed: 0
   immobilityTime: 0
   isShadow: 0
   isDashPass: 0
-  distance: 5
+  distance: 100
   indicator: {fileID: 0}
   effect: {fileID: 0}
   useClips: []

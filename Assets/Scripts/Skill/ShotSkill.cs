@@ -8,7 +8,8 @@ public class ShotSkill : Skill
 
     public override void Use(GameObject character)
     {
-        base.Use(character);
+        StartSound(data.voiceClips);    // 시전 보이스 재생
+        StartSound(data.useClips);      // 스킬 시전 사운드 재생
         SetActiveTrailRenderer(true);   // TrailRenderer 활성화
         StartCoroutine(CoShot(usePoint));    // 날리기 코루틴 실행
     }
@@ -25,8 +26,13 @@ public class ShotSkill : Skill
     // 날리기
     private IEnumerator CoShot(Vector3 startVec)
     {
+        isCollide = true;
+
         yield return waitUseDelay;
+
+        isCollide = false;
         Vector3 totalMovement = transform.position + (startVec.normalized * data.duration * data.speed); // 날아갈 거리 계산
+        UseEffect(gameObject);          // 이펙트 사용
 
         if (tweener == null)
         {

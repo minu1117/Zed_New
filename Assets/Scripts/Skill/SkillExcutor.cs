@@ -228,7 +228,6 @@ public class SkillExcutor : MonoBehaviour
             useSkill.SetPoint(character.transform.forward);
         }
 
-        //character.transform.LookAt(lookAtPoint);                    // 캐릭터를 lookAtPoint로 바라보게 설정
         useSkill.Use(character);        // 스킬 실행
         coolDownSkill = useSkill;       // 쿨다운 스킬 설정
         StartCoroutine(CoCoolDown());   // 쿨다운 코루틴 실행

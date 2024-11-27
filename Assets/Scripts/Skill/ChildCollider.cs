@@ -12,6 +12,10 @@ public class ChildCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        var caster = parent.GetCaster();
+        if (caster != null && other.tag == caster.tag)
+            return;
+
         parent.Collide(other.gameObject);
     }
 

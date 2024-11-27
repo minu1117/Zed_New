@@ -50,6 +50,7 @@ public class Skill : MonoBehaviour, IDamageable
     }
 
     public Vector3 GetUsePoint() { return usePoint; }
+    public GameObject GetCaster() { return caster; }
 
     // 이펙트 Release
     protected void ReleaseEffect()
@@ -57,6 +58,7 @@ public class Skill : MonoBehaviour, IDamageable
         if (effect == null) // 이펙트가 없을 시 return
             return;
 
+        effect.Stop();
         EffectManager.Instance.ReleaseEffect(effect);   // 이펙트 매니저의 오브젝트 풀에 반납
         effect = null;
     }
@@ -68,7 +70,7 @@ public class Skill : MonoBehaviour, IDamageable
             return;
 
         effect = EffectManager.Instance.GetEffect(data.effect.name);    // 이펙트 매니저에서 이펙트 가져오기
-        effect.SetStartPos(obj.transform.position);                     // 이펙트 시작 위치 지정
+        effect.SetStartPos(obj.transform.localPosition);                     // 이펙트 시작 위치 지정
         effect.SetForward(obj.transform.forward);
 
         if (effect.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
@@ -155,8 +157,8 @@ public class Skill : MonoBehaviour, IDamageable
     // 타겟에 데미지 부여
     protected void DealDamage(GameObject target)
     {
-        //if (caster != null && ReferenceEquals(caster, target))  // 타겟과 시전자가 같으면 return (본인은 맞지 않게)
-        //    return;
+        if (caster != null && ReferenceEquals(caster, target))  // 타겟과 시전자가 같으면 return (본인은 맞지 않게)
+            return;
 
         if (target == null || caster == null)                   // 타겟 또는 시전자가 없으면 return
             return;

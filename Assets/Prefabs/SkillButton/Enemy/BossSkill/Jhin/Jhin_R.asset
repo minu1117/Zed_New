@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed175eaf0cd4ce4e9ed1ed5a3f0c262, type: 3}
   m_Name: Jhin_R
   m_EditorClassIdentifier: 
-  keycode: 
+  keycode: 780535914
   skill: {fileID: 1796031610544641483, guid: d5d66ef87733551449d02837bbfa7836, type: 3}
   maxPoolSize: 5
   sp: {fileID: 0}

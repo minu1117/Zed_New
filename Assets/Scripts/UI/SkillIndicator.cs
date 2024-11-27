@@ -78,7 +78,7 @@ public class SkillIndicator : MonoBehaviour
         
         if (followTarget != null)
         {
-            transform.localPosition = followTarget.transform.localPosition;
+            transform.position = followTarget.transform.position;
         }
     }
 
@@ -148,6 +148,6 @@ public class SkillIndicator : MonoBehaviour
 
     public void SetPosition(Vector3 pos)
     {
-        transform.localPosition = pos;
+        transform.position = pos;
     }
 }

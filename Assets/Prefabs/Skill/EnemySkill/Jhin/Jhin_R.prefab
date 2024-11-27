@@ -52,3 +52,4 @@ MonoBehaviour:
   startAnimationDelay: 2
   shootingTriggerName: R_Shooting
   shootingCountParamName: R_Shooting_Count
+  teleportEffect: {fileID: 6631009030399220266, guid: fbfb6e02f0525cb43ab805fe99a1bc8f, type: 3}

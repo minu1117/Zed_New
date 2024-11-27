@@ -4,6 +4,14 @@ using UnityEngine;
 public class Jhin_R_Shot : ShotSkill
 {
     [SerializeField] private GameObject bulletObj;
+    [SerializeField] private Effect shootEffect;
+    private WaitForSeconds waitDeltaTime;
+
+    public override void Awake()
+    {
+        base.Awake();
+        waitDeltaTime = new WaitForSeconds(Time.deltaTime);
+    }
 
     public override void Use(GameObject character)
     {
@@ -24,6 +32,10 @@ public class Jhin_R_Shot : ShotSkill
         StartSound(data.voiceClips);    // 시전 보이스 재생
         SetActiveTrailRenderer(true);   // TrailRenderer 활성화
 
+        UseEffect(gameObject);
+        var shoot = EffectManager.Instance.UseOtherEffect(shootEffect, transform);
+        isCollide = false;
+
         float startTime = Time.time;
         float distanceToTarget = Vector3.Distance(transform.position, movePoint);
         while (distanceToTarget > 0.1f)
@@ -35,6 +47,12 @@ public class Jhin_R_Shot : ShotSkill
 
             transform.position = Vector3.Lerp(transform.position, movePoint, fractionOfJourney);
             yield return null;
+        }
+
+        if (shoot != null)
+        {
+            shoot.Stop();
+            EffectManager.Instance.ReleaseEffect(shoot);
         }
 
         Release();

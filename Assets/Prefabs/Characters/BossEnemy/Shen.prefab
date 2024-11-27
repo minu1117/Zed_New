@@ -709,6 +709,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 1b5bb8e099457c7498c6c99c710804d1, type: 2}
   autoAttack: {fileID: 8525749513012456094}
   shotStartTransform: {fileID: 8009586257241174522}
+  groundTransform: {fileID: 0}
   weapons:
   - {fileID: 9055809481897258136}
   recognitionRange: 9999

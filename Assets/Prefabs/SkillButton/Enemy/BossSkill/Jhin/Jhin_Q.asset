@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed175eaf0cd4ce4e9ed1ed5a3f0c262, type: 3}
+  m_Name: Jhin_Q
+  m_EditorClassIdentifier: 
+  keycode: 1176659838
+  skill: {fileID: 9127232450604684658, guid: 48acb0b796ee5384a960a9af115984f2, type: 3}
+  maxPoolSize: 5
+  sp: {fileID: 0}
+  isUpper: 0
+  type: 0
+  healthPercentage: 100

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +12,7 @@ public class Jhin_R : Skill
 
     [SerializeField] private string shootingTriggerName;
     [SerializeField] private string shootingCountParamName;
+    [SerializeField] private Effect teleportEffect;
 
     private List<Skill> createdDefalutShots;
     private Skill createdFourShot;
@@ -50,6 +50,7 @@ public class Jhin_R : Skill
 
     private IEnumerator CoCurtainCall(GameObject character)
     {
+        var tpEffect_1 = EffectManager.Instance.UseOtherEffect(teleportEffect, transform);
         Vector3 startPos = caster.transform.position;
 
         Jhin jhin = caster.GetComponent<Jhin>();
@@ -143,6 +144,21 @@ public class Jhin_R : Skill
         if (agent != null)
         {
             agent.Warp(startPos);
+        }
+
+        var tpEffect_2 = EffectManager.Instance.UseOtherEffect(teleportEffect, transform);
+        yield return new WaitForSeconds(tpEffect_2.GetDuration());
+
+        if (tpEffect_1 != null)
+        {
+            tpEffect_1.Stop();
+            EffectManager.Instance.ReleaseEffect(tpEffect_1);
+        }
+
+        if (tpEffect_2 != null)
+        {
+            tpEffect_1.Stop();
+            EffectManager.Instance.ReleaseEffect(tpEffect_2);
         }
 
         Release();

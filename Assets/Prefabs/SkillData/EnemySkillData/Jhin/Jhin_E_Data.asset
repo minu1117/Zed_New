@@ -22,8 +22,8 @@ MonoBehaviour:
   hitInterval: 0
   coolDown: 0
   duration: 0
-  useDelay: 0.1
-  afterUseStiffenTime: 0.2
+  useDelay: 0.2
+  afterUseStiffenTime: 1
   speed: 2
   immobilityTime: 0
   isShadow: 0
@@ -31,7 +31,8 @@ MonoBehaviour:
   distance: 10
   indicator: {fileID: 0}
   effect: {fileID: 0}
-  useClips: []
+  useClips:
+  - {fileID: 8300000, guid: 4ae4f419d136bfb4aa4f0a3da4aa85de, type: 3}
   attackClips: []
   disappearClips: []
   recastClips: []

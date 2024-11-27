@@ -13,6 +13,7 @@ public class AnimationTrap : Trap
     [SerializeField] private List<TrapSensorCollider> sensors;
     [SerializeField] private float waitSensorAnimationDelay;
     [SerializeField] private float burstDelay;
+    [SerializeField] private AudioClip sensingAudio;
 
     private bool isSensing = false;
     
@@ -54,8 +55,6 @@ public class AnimationTrap : Trap
             float fractionOfJourney = distanceCovered / distanceToTarget;
 
             transform.position = Vector3.Lerp(transform.position, movePoint, fractionOfJourney);
-            transform.LookAt(movePoint);
-
             yield return null;
         }
 
@@ -68,6 +67,10 @@ public class AnimationTrap : Trap
 
         // 센서 감지 대기
         yield return new WaitUntil(() => isSensing);
+        if (sensingAudio != null)
+        {
+            SoundManager.Instance.PlayOneShot(sensingAudio);
+        }
 
         if (idleEffect != null)
         {

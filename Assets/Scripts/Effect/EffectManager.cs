@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EffectManager : Singleton<EffectManager>
 {
@@ -43,5 +44,18 @@ public class EffectManager : Singleton<EffectManager>
 
         var pool = effectPoolDict[effectName].GetPool();    // 이펙트 풀 가져오기
         pool.Release(eft);                                  // 이펙트 Release
+    }
+
+    public Effect UseOtherEffect(Effect effectPrefab, Transform transform)
+    {
+        if (effectPrefab == null)
+            return null;
+
+        var effect = GetEffect(effectPrefab.name);
+        effect.SetStartPos(transform.position);
+        effect.SetForward(transform.forward);
+        effect.Use();
+
+        return effect;
     }
 }
