@@ -170,7 +170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3087863797759241508}
-  - component: {fileID: 2854380692877456834}
+  - component: {fileID: 363585104383062060}
   m_Layer: 8
   m_Name: C_Pistol
   m_TagString: Untagged
@@ -193,9 +193,10 @@ Transform:
   m_Children:
   - {fileID: 1368163506835822925}
   - {fileID: 2546237128803432571}
+  - {fileID: 5400819261766848343}
   m_Father: {fileID: 9025092318798906348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2854380692877456834
+--- !u!114 &363585104383062060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,14 +205,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 442941574094257071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4130c0b3eeacb6f4683b863afb3aee62, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ae4273e90721454dae9316101187ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5c3bd012f4ae828429d94fffc29a5269, type: 2}
+  data: {fileID: 11400000, guid: b9ec9bcb995b7e342a0bb2be3149849e, type: 2}
   trailRenderer: {fileID: 0}
-  projectileObject: {fileID: 0}
-  shotTransform: {fileID: 1368163506835822925}
-  maxPoolSize: 5
+  projectileObject: {fileID: 1920838911239182030, guid: af4b2301f0baa8c46b6abdd90a74a62b, type: 3}
+  shotTransform: {fileID: 5400819261766848343}
+  maxPoolSize: 20
+  finalShotObject: {fileID: 9071667855571010165, guid: 575a764c0ed4acf46a3d07c7ae4bddaa, type: 3}
+  twoVoiceClips:
+  - {fileID: 8300000, guid: 20d41b96b1c7cdd4a888a030c0640826, type: 3}
+  - {fileID: 8300000, guid: 23279a36a1f1daa48b1524c4a9a80482, type: 3}
+  threeVoiceClips:
+  - {fileID: 8300000, guid: b0490c18f9f2c0c4fb2b6364d33d4784, type: 3}
+  fourVoiceClips:
+  - {fileID: 8300000, guid: 056d1793e9a951041a2b18b4fce0e3e7, type: 3}
+  - {fileID: 8300000, guid: 2a35db6e890facb459c8d101951faee0, type: 3}
+  - {fileID: 8300000, guid: 18227c101bf02b4488647489cc46e730, type: 3}
+  fourSFXClips:
+  - {fileID: 8300000, guid: 3cdfa323473c30f4bb42b0b98d1c964c, type: 3}
 --- !u!1 &662949608415272208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,6 +1526,37 @@ Transform:
   m_Children:
   - {fileID: 1104147678595849505}
   m_Father: {fileID: 4773570611739460575}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3178559643220548188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5400819261766848343}
+  m_Layer: 8
+  m_Name: Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5400819261766848343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178559643220548188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.048, y: -0, z: 0.426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3087863797759241508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3253554200897892827
 GameObject:
@@ -2888,22 +2932,26 @@ MonoBehaviour:
   shotStartTransform: {fileID: 442796447370096486}
   groundTransform: {fileID: 7519543303288832159}
   weapons:
-  - {fileID: 2854380692877456834}
+  - {fileID: 363585104383062060}
   recognitionRange: 9999
   attackRange: 30
   skillRange: 9999
   loseTargetTime: 0
   patrolRange: 0
   waitSkillDelay: 0
-  waitAttackDelay: 2
+  waitAttackDelay: 5
   comboSkillLists: {fileID: 0}
   waitComboDelay: 0
   patternSkillList:
+  - {fileID: 11400000, guid: 773cfd6088ea4a447bd20ad1c0210c23, type: 2}
+  - {fileID: 11400000, guid: 593f75679517c7c4dabc612b9751f6f4, type: 2}
   - {fileID: 11400000, guid: 42f1dda5dd598f3438dcb71be4b6a87c, type: 2}
+  - {fileID: 11400000, guid: ba1aa70947b5da949859abc6271f03cf, type: 2}
   waitPatternDelay: 15
   resetDelay: 3
   R_Shot_Tr: {fileID: 4898567031250830769}
   spine: {fileID: 5756474297505595080}
+  isLastAAParamName: IsLastAA
 --- !u!1 &6125427209597238536
 GameObject:
   m_ObjectHideFlags: 0

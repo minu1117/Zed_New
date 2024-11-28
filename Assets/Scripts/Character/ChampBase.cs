@@ -90,7 +90,7 @@ public class ChampBase : MonoBehaviour
     }
 
     // 평타 실행
-    public void Attack()
+    public virtual void Attack()
     {
         if (animationController != null)                                // 애니메이션 컨트롤러가 있을 경우
             animationController.Attack(autoAttack.data.attackSpeed);    // 평타 애니메이션 실행

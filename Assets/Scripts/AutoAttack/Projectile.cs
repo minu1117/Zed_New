@@ -1,5 +1,4 @@
-using System.Collections;
-using Unity.VisualScripting;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -11,6 +10,10 @@ public class Projectile : MonoBehaviour
     private RangedWeapon rangedWeapon;
     private BoxCollider coll;
     private IObjectPool<Projectile> releasePool;
+
+    private bool isMoved = false;
+    private float currentTime = 0f;
+    private float damage = 0f;
 
     private void Awake()
     {
@@ -24,28 +27,31 @@ public class Projectile : MonoBehaviour
 
         if (other.TryGetComponent(out ChampBase champion))
         {
-            rangedWeapon.DealDamage(champion);
+            rangedWeapon.DealDamage(champion, damage);
             Release();
         }
     }
 
     public void Use(Transform tr)
     {
-        StartCoroutine(CoUse(tr));
+        currentTime = 0f;
+        isMoved = true;
     }
 
-    private IEnumerator CoUse(Transform tr)
+    public void Update()
     {
-        var forward = tr.forward;
-        float startTime = Time.time; // 시작 시간 기록
-
-        while (Time.time - startTime < duration)
+        if (isMoved)
         {
-            transform.position += forward * speed * (Time.time - startTime);
-            yield return null;
+            transform.position += transform.forward * speed * Time.deltaTime;
+            currentTime += Time.deltaTime;
         }
 
-        Release();
+        if (isMoved && currentTime >= duration)
+        {
+            currentTime = 0f;
+            isMoved = false;
+            Release();
+        }
     }
 
     private void Release()
@@ -57,6 +63,19 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    public void Look(Transform tr)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(tr.forward);
+        transform.rotation = targetRotation;
+    }
+
+    public void LookAt(Transform tr)
+    {
+        transform.LookAt(tr);
+    }
+
+    public void SetDamage(float dmg) { damage = dmg; }
+    public void SetPosition(Vector3 pos) { transform.position = pos; }
     public void SetWeapon(RangedWeapon weapon) { rangedWeapon = weapon; }
     public void SetPool(IObjectPool<Projectile> pool) { releasePool = pool; }
 }

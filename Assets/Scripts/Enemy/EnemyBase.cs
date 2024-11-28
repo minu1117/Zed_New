@@ -174,7 +174,6 @@ public abstract class EnemyBase : ChampBase
     protected IEnumerator CoWaitNextAttack(float duration)
     {
         yield return new WaitForSeconds(duration);
-        waitNextAttackCoroutine = null;
     }
 
     // 랜덤 스킬 실행

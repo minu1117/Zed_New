@@ -3,11 +3,12 @@ using UnityEngine.Pool;
 
 public class RangedWeapon : Weapon, IDamageable
 {
-    [SerializeField] private Projectile projectileObject;
-    [SerializeField] private Transform shotTransform;
-    [SerializeField] private int maxPoolSize;
-    private IObjectPool<Projectile> projectilePool;
-    private GameObject projectileParent;
+    [SerializeField] protected Projectile projectileObject;
+    [SerializeField] protected Transform shotTransform;
+    [SerializeField] protected int maxPoolSize;
+    protected IObjectPool<Projectile> projectilePool;
+    protected GameObject projectileParent;
+    protected ChampBase target;
 
     protected override void Awake()
     {
@@ -17,7 +18,7 @@ public class RangedWeapon : Weapon, IDamageable
         projectileParent = new GameObject($"{name}_Projectiles");
         projectilePool = new ObjectPool<Projectile>
                         (
-                            CreateProjectile,
+                            () => CreateProjectile(projectileObject, projectilePool, data.damage),
                             GetProjectile,
                             ReleaseProjectile,
                             DestroyProjectile,
@@ -28,9 +29,9 @@ public class RangedWeapon : Weapon, IDamageable
 
     protected override void OnTriggerEnter(Collider other) { }
 
-    public void DealDamage(ChampBase target)
+    public virtual void DealDamage(ChampBase target, float damage)
     {
-        DealDamage(target, data.damage, 1);
+        StartCoroutine(DealDamage(target, damage, 1));
     }
 
     // 무기 준비 완료
@@ -43,37 +44,56 @@ public class RangedWeapon : Weapon, IDamageable
 
         int randomIndex = Random.Range(0, data.useClips.Count);         // 랜덤 인덱스 (평타 준비 완료 사운드)
         SoundManager.Instance.PlayOneShot(data.useClips[randomIndex]);  // 사운드 매니저에서 재생
+        Shot();
     }
 
-    public void Shot()
+    public virtual void Shot()
     {
         var projectile = projectilePool.Get();
+        projectile.SetPosition(shotTransform.position);
+
+        ChangeProjectileRotation(projectile);
         projectile.Use(shotTransform);
     }
 
-    private Projectile CreateProjectile()
+    protected Projectile CreateProjectile(Projectile projectileObj, IObjectPool<Projectile> pool, float damage)
     {
         if (data == null)
             return null;
 
-        var projectile = Instantiate(projectileObject, projectileParent.transform);
-        projectile.SetPool(projectilePool);
+        var projectile = Instantiate(projectileObj, projectileParent.transform);
+        projectile.SetWeapon(this);
+        projectile.SetDamage(damage);
+        projectile.SetPool(pool);
 
         return projectile;
     }
 
-    private void GetProjectile(Projectile projectile)
+    protected void GetProjectile(Projectile projectile)
     {
         projectile.gameObject.SetActive(true);
     }
 
-    private void ReleaseProjectile(Projectile projectile)
+    protected void ReleaseProjectile(Projectile projectile)
     {
         projectile.gameObject.SetActive(false);
     }
 
-    private void DestroyProjectile(Projectile projectile)
+    protected void DestroyProjectile(Projectile projectile)
     {
         Destroy(projectile.gameObject);
+    }
+
+    public void SetTarget(ChampBase champ) { target = champ; }
+    protected void ChangeProjectileRotation(Projectile projectile)
+    {
+        if (target == null)
+        {
+            projectile.Look(shotTransform);
+        }
+        else
+        {
+            projectile.LookAt(target.shotStartTransform);
+        }
     }
 }
