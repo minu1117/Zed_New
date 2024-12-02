@@ -51,7 +51,7 @@ public abstract class EnemyBase : ChampBase
     private Coroutine loseTargetCoroutine;
     private Coroutine patrolCoroutine;
 
-    private float addRunSpeed = 5f;
+    [SerializeField] private float addRunSpeed = 5f;
     protected float runSpeed;
     private string moveAnimControllParam = "Speed";
 
@@ -70,13 +70,16 @@ public abstract class EnemyBase : ChampBase
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
 
-        var skillSlot = slot.GetSlotDict();
-        if (skillSlot != null && skillSlot.Count > 0)
+        if (slot != null)
         {
-            skillKeys = new();  // 스킬 키 List 초기화
-            foreach (var skillButton in skillSlot) // 스킬 슬롯 순회, 스킬 키 List에 key 추가
+            var skillSlot = slot.GetSlotDict();
+            if (skillSlot != null && skillSlot.Count > 0)
             {
-                skillKeys.Add(skillButton.Key);
+                skillKeys = new();  // 스킬 키 List 초기화
+                foreach (var skillButton in skillSlot) // 스킬 슬롯 순회, 스킬 키 List에 key 추가
+                {
+                    skillKeys.Add(skillButton.Key);
+                }
             }
         }
 
@@ -131,13 +134,16 @@ public abstract class EnemyBase : ChampBase
         // 오브젝트 풀이 설정된 경우
         if (pool != null)
         {
-            var skillSlot = slot.GetSlotDict();
-            if (skillSlot != null && skillSlot.Count > 0)
+            if (slot != null)
             {
-                // 모든 스킬을 사용 가능한 상태로 변경
-                foreach (var slot in skillSlot)
+                var skillSlot = slot.GetSlotDict();
+                if (skillSlot != null && skillSlot.Count > 0)
                 {
-                    slot.Value.SetIsAvailable(true);
+                    // 모든 스킬을 사용 가능한 상태로 변경
+                    foreach (var slot in skillSlot)
+                    {
+                        slot.Value.SetIsAvailable(true);
+                    }
                 }
             }
 
@@ -159,8 +165,14 @@ public abstract class EnemyBase : ChampBase
     protected void UseAutoAttack()
     {
         transform.LookAt(player.transform);
-        agent.isStopped = true;
         AutoAttack();
+    }
+
+    protected void StopMove()
+    {
+        agent.isStopped = true;
+        rb.velocity = Vector3.zero;
+        agent.velocity = Vector3.zero;
     }
 
     protected void WaitNextAttack(float duration)
@@ -174,6 +186,7 @@ public abstract class EnemyBase : ChampBase
     protected IEnumerator CoWaitNextAttack(float duration)
     {
         yield return new WaitForSeconds(duration);
+        waitNextAttackCoroutine = null;
     }
 
     // 랜덤 스킬 실행
@@ -197,7 +210,6 @@ public abstract class EnemyBase : ChampBase
                 return;
 
             slot.StartSkill(gameObject, (int)data.type, EnumConverter.GetString(CharacterEnum.Player));    // 스킬 실행
-            //animationController.UseSkill((int)data.type);
         }
 
         // 랜덤으로 가져온 스킬의 범위에 타겟이 없을 경우
@@ -216,8 +228,6 @@ public abstract class EnemyBase : ChampBase
 
                     var data = slot.GetData() as EnemySkillButtonData;
                     slot.StartSkill(gameObject, (int)data.type, EnumConverter.GetString(CharacterEnum.Player));
-                    //var data = slot.GetData() as EnemySkillButtonData;
-                    //animationController.UseSkill((int)data.type);
                     break;
                 }
             }
@@ -227,6 +237,9 @@ public abstract class EnemyBase : ChampBase
     // 공격
     protected void EnemyAttack()
     {
+        if (waitNextAttackCoroutine != null)
+            return;
+
         if (target == null)
         {
             state = State.Patrol;
@@ -234,7 +247,7 @@ public abstract class EnemyBase : ChampBase
         }
 
         attackMode = GetRandomAttackMode(AttackMode.Skill);
-        if (attackMode == AttackMode.Combo || attackMode == AttackMode.Pattern)
+        if (attackMode == AttackMode.Combo || attackMode == AttackMode.Pattern || slot == null)
         {
             attackMode = AttackMode.Normal;
         }
@@ -244,8 +257,10 @@ public abstract class EnemyBase : ChampBase
             case AttackMode.Normal:
                 if (GetDistance(target.transform.position) <= attackRange)
                 {
+                    StopMove();
                     UseAutoAttack();
                     state = State.Chase;
+                    WaitNextAttack(waitAttackDelay);
                 }
                 break;
             case AttackMode.Skill:
@@ -258,6 +273,7 @@ public abstract class EnemyBase : ChampBase
                     }
 
                     StartRandomSkill(); // 가지고 있는 스킬 중 랜덤으로 골라 스킬 실행
+                    WaitNextAttack(waitSkillDelay);
                 }
                 break;
             case AttackMode.Combo:
@@ -357,6 +373,9 @@ public abstract class EnemyBase : ChampBase
 
         if (patrolCoroutine == null)                                    // 코루틴이 실행되지 않았을 경우
             patrolCoroutine = StartCoroutine(CoPatrol());               // 코루틴 시작
+
+        if (player == null)
+            return;
 
         if (GetDistance(player.transform.position) <= recognitionRange) // 플레이어가 인식 범위 안에 들어왔을 경우
         {

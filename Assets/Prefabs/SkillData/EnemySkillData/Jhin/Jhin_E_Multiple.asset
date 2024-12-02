@@ -39,4 +39,4 @@ MonoBehaviour:
   voiceClips: []
   complateVoiceClips: []
   isSelf: 0
-  isStiffen: 0
+  isStiffen: 1

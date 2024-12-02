@@ -43,4 +43,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d352eb424d728f94cb5e3a1460a1ba8f, type: 3}
   complateVoiceClips: []
   isSelf: 0
-  isStiffen: 0
+  isStiffen: 1

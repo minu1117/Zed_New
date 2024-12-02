@@ -69,15 +69,19 @@ public class EnemyGenerator : MonoBehaviour
         var hpController = enemy.GetStatusController(SliderMode.HP);         // 몬스터의 HP Controller 가져오기
 
         enemy.Init();                           // 몬스터 초기 설정 실행
-        enemy.GetSlot().SetSlotParent(enemySkillDict[enemies[createIndex].data.charactorName]);
-        enemy.SetEnemyGenerator(this);
 
-        var slotDict = enemy.GetSlot().GetSlotDict();
-        foreach ( var excutor in slotDict.Values )
+        var slot = enemy.GetSlot();
+        if (slot != null)
         {
-            excutor.SetParentInExcutor();
+            slot.SetSlotParent(enemySkillDict[enemies[createIndex].data.charactorName]);
+            var slotDict = enemy.GetSlot().GetSlotDict();
+            foreach (var excutor in slotDict.Values)
+            {
+                excutor.SetParentInExcutor();
+            }
         }
 
+        enemy.SetEnemyGenerator(this);
         hpController.SetMaxValue();             // 몬스터 최대 HP, MP로 설정
         enemy.SetPool(enemyPools[createIndex]); // 몬스터에 오브젝트 풀 설정 (Release용)
 

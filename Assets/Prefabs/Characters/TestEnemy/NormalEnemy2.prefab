@@ -401,6 +401,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 5d5de18e6f5a9fb438b35a6556ae5831, type: 2}
   autoAttack: {fileID: 734329960825758658}
   shotStartTransform: {fileID: 604562414257494539}
+  groundTransform: {fileID: 0}
   weapons:
   - {fileID: 2761460311794652155}
   recognitionRange: 20
@@ -408,6 +409,8 @@ MonoBehaviour:
   skillRange: 20
   loseTargetTime: 1
   patrolRange: 20
+  waitSkillDelay: 0
+  waitAttackDelay: 0
 --- !u!65 &3751894108437020055
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -423,7 +426,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -474,6 +477,9 @@ MonoBehaviour:
   tmp: {fileID: 7345524927751730240}
   canvasMode: 0
   sliderMode: 0
+  usedSlider: 1
+  shieldSlider: {fileID: 0}
+  isShield: 0
 --- !u!195 &2515695878156388728
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -486,7 +492,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 1.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 49
   m_AngularSpeed: 220
   m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
@@ -542,9 +548,15 @@ MonoBehaviour:
   attackTypeParamName: AttackType
   nextMotionTriggerParamName: 
   upperLayerParamName: 
+  JumpTriggerName: 
+  JumpTypeParamName: 
+  spell_Anim_Quarter_ParamName: 
   maxAutoAttackEnum: 1
   upperLayerIndex: 0
   wholeBodyLayerIndex: 1
+  shortJumpThreshold: 0
+  jumpSoundClips: []
+  landingSoundClips: []
 --- !u!4 &6488720779256406716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 7740d2587d43d194cacca64e5958e3f7, type: 3}

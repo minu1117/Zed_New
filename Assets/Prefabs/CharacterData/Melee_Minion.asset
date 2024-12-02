@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffee8199543ff747a5450e708a5fabf, type: 3}
+  m_Name: Melee_Minion
+  m_EditorClassIdentifier: 
+  maxHp: 1000
+  currentHp: 1000
+  maxMp: 50
+  currentMp: 50
+  level: 1
+  charactorName: Minion
+  moveSpeed: 1
+  jumpSpeed: 0
+  gravity: 0
