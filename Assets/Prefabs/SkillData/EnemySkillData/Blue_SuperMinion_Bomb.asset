@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54410c2816a9124ea60a85d7ac408f6, type: 3}
+  m_Name: Blue_SuperMinion_Bomb
+  m_EditorClassIdentifier: 
+  type: 1
+  skillName: SuperMinion_Bomb
+  skillDescription: 
+  skillLevel: 1
+  levelRestriction: 0
+  damage: 100
+  hitRate: 3
+  hitInterval: 0.1
+  coolDown: 0
+  duration: 0.5
+  useDelay: 0.5
+  afterUseStiffenTime: 1
+  speed: 0
+  immobilityTime: 0
+  isShadow: 0
+  isDashPass: 0
+  distance: 15
+  indicator: {fileID: 8562218396783994717, guid: 123ec3ae650f00f458ee356936afb815, type: 3}
+  effect: {fileID: 8323091854918026781, guid: 1ace87ff786de8c419e7155df87a91ba, type: 3}
+  useClips:
+  - {fileID: 8300000, guid: 7ab82af3a5e858b45a23ac290fe426ea, type: 3}
+  attackClips: []
+  disappearClips: []
+  recastClips: []
+  complateClips: []
+  voiceClips: []
+  complateVoiceClips: []
+  isSelf: 0
+  isStiffen: 1

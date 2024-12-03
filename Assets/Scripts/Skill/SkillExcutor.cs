@@ -152,9 +152,14 @@ public class SkillExcutor : MonoBehaviour
         if (useSkill.data.isStiffen)              // 사용 전 경직이 활성화 되어 있을 경우
         {
             if (moveController != null)
+            {
                 moveController.StopMove();
-            if (agent != null)
+            }
+            else if (agent != null)
+            {
                 agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+            }
         }
 
         if (useSkill.data.useDelay > 0)
@@ -233,9 +238,14 @@ public class SkillExcutor : MonoBehaviour
         StartCoroutine(CoCoolDown());   // 쿨다운 코루틴 실행
 
         if (moveController != null)
+        {
             moveController.StopMove();
+        }
         if (agent != null)
+        {
             agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
 
         yield return new WaitForSeconds(useSkill.data.afterUseStiffenTime);    // 스킬 데이터의 사용 후 경직 시간만큼 대기
 
