@@ -318,6 +318,10 @@ PrefabInstance:
       value: TrailRenderer
       objectReference: {fileID: 0}
     - target: {fileID: 8580345299772077961, guid: be808c85abd3e6c46ba932c39fdd5d80, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580345299772077961, guid: be808c85abd3e6c46ba932c39fdd5d80, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

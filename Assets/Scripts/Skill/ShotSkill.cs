@@ -27,8 +27,17 @@ public class ShotSkill : Skill
     private IEnumerator CoShot(Vector3 startVec)
     {
         isCollide = true;
+        foreach (var coll in colliders)
+        {
+            coll.GetCollider().enabled = false;
+        }
 
         yield return waitUseDelay;
+
+        foreach (var coll in colliders)
+        {
+            coll.GetCollider().enabled = true;
+        }
 
         isCollide = false;
         Vector3 totalMovement = transform.position + (startVec.normalized * data.duration * data.speed); // 날아갈 거리 계산

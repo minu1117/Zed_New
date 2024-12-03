@@ -21,7 +21,6 @@ public class Jhin_Weapon : RangedWeapon
         if (finalShotObject == null)
             return;
 
-        target = Zed.Instance;
         finalShotPool = new ObjectPool<Projectile>
                         (
                             () => CreateProjectile(finalShotObject, finalShotPool, data.damage * 2),
@@ -51,7 +50,7 @@ public class Jhin_Weapon : RangedWeapon
         {
             projectile.SetPosition(shotTransform.position);
             ChangeProjectileRotation(projectile);
-            projectile.Use(shotTransform);
+            projectile.Use();
         }
     }
 

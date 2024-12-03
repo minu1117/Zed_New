@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -32,8 +31,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Use(Transform tr)
+    public void Use()
     {
+        coll.enabled = true;
         currentTime = 0f;
         isMoved = true;
     }
@@ -72,6 +72,10 @@ public class Projectile : MonoBehaviour
     public void LookAt(Transform tr)
     {
         transform.LookAt(tr);
+    }
+    public void LookAt(Vector3 pos)
+    {
+        transform.LookAt(pos);
     }
 
     public void SetDamage(float dmg) { damage = dmg; }

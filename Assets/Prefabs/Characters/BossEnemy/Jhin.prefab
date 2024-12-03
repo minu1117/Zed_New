@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 363585104383062060}
   m_Layer: 8
   m_Name: C_Pistol
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2938,6 +2938,7 @@ MonoBehaviour:
   skillRange: 9999
   loseTargetTime: 0
   patrolRange: 0
+  addRunSpeed: 5
   waitSkillDelay: 0
   waitAttackDelay: 5
   comboSkillLists: {fileID: 0}

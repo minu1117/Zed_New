@@ -9,11 +9,17 @@ public class RangedWeapon : Weapon, IDamageable
     protected IObjectPool<Projectile> projectilePool;
     protected GameObject projectileParent;
     protected ChampBase target;
+    protected Vector3 targetPos;
 
     protected override void Awake()
     {
         if (projectileObject == null)
             return;
+
+        if (gameObject.tag == EnumConverter.GetString(CharacterEnum.Enemy))
+        {
+            target = Zed.Instance;
+        }
 
         projectileParent = new GameObject($"{name}_Projectiles");
         projectilePool = new ObjectPool<Projectile>
@@ -53,7 +59,7 @@ public class RangedWeapon : Weapon, IDamageable
         projectile.SetPosition(shotTransform.position);
 
         ChangeProjectileRotation(projectile);
-        projectile.Use(shotTransform);
+        projectile.Use();
     }
 
     protected Projectile CreateProjectile(Projectile projectileObj, IObjectPool<Projectile> pool, float damage)
@@ -85,6 +91,14 @@ public class RangedWeapon : Weapon, IDamageable
     }
 
     public void SetTarget(ChampBase champ) { target = champ; }
+    public void SaveCurrentTargetPos()
+    {
+        if (target == null)
+            return;
+
+        targetPos = target.shotStartTransform.position;
+    }
+
     protected void ChangeProjectileRotation(Projectile projectile)
     {
         if (target == null)
@@ -93,7 +107,8 @@ public class RangedWeapon : Weapon, IDamageable
         }
         else
         {
-            projectile.LookAt(target.shotStartTransform);
+            //projectile.LookAt(target.shotStartTransform);
+            projectile.LookAt(targetPos);
         }
     }
 }

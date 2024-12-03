@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ffee8199543ff747a5450e708a5fabf, type: 3}
-  m_Name: Melee_Minion
+  m_Name: Ranged_Minion_Blue
   m_EditorClassIdentifier: 
   maxHp: 1000
   currentHp: 1000
   maxMp: 50
   currentMp: 50
   level: 1
-  charactorName: Minion
+  charactorName: Ranged_Minion_Blue
   moveSpeed: 1
   jumpSpeed: 0
   gravity: 0

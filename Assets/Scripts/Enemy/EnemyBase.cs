@@ -446,6 +446,19 @@ public abstract class EnemyBase : ChampBase
     public EnemyGenerator GetEnemyGenerator() { return enemyGenerator; }
     public void SetEnemyGenerator(EnemyGenerator eg) { enemyGenerator = eg; }
 
+    // 애니메이션 이벤트
+    public void SaveCurrentTargetPos()
+    {
+        foreach (var weapon in weapons)
+        {
+            var rangedWeapon = weapon as RangedWeapon;
+            if (rangedWeapon != null)
+            {
+                rangedWeapon.SaveCurrentTargetPos();
+            }
+        }
+    }
+
     // 에디터 전용 코드
     // 인식 범위 기즈모로 그리기 (테스트용)
 #if UNITY_EDITOR
