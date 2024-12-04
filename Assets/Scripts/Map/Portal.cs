@@ -1,9 +1,22 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
     [SerializeField] private StageManager stageManager;
+    [SerializeField] private GameObject leftDoor;
+    [SerializeField] private GameObject rightDoor;
+    [SerializeField] private float doorMoveDuration;
+    private float moveXPos = 0.5f;
+    private float defalutXPos = 0.5f;
+    private BoxCollider coll;
+
+    private void Awake()
+    {
+        coll = GetComponent<BoxCollider>();
+        coll.enabled = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,8 +34,46 @@ public class Portal : MonoBehaviour
 
         yield return new WaitUntil(() => !stageManager.isFade);
 
+        ResetDoor();
         stageManager.NextStage();
         stageManager.FadeOut();
         moveController.StartMove();
+    }
+
+    public void Open()
+    {
+        Move(true);
+        coll.enabled = true;
+    }
+
+    public void Close()
+    {
+        Move(false);
+        coll.enabled = false;
+    }
+
+    private void Move(bool open)
+    {
+        if (leftDoor == null || rightDoor == null)
+            return;
+
+        var leftMove = leftDoor.transform.localPosition;
+        var rightMove = rightDoor.transform.localPosition;
+        leftMove.x = open ? -defalutXPos - moveXPos : -defalutXPos;
+        rightMove.x = open ? defalutXPos + moveXPos : defalutXPos;
+
+        leftDoor.transform.DOLocalMove(leftMove, doorMoveDuration);
+        rightDoor.transform.DOLocalMove(rightMove, doorMoveDuration);
+    }
+
+    public void ResetDoor()
+    {
+        if (leftDoor == null || rightDoor == null)
+            return;
+
+        var leftDoorPos = leftDoor.gameObject.transform.localPosition;
+        var rightDoorPos = rightDoor.gameObject.transform.localPosition;
+        leftDoor.gameObject.transform.localPosition = new Vector3(-defalutXPos, 0, leftDoorPos.z);
+        rightDoor.gameObject.transform.localPosition = new Vector3(defalutXPos, 0, rightDoorPos.z);
     }
 }

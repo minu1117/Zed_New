@@ -42,6 +42,10 @@ public class Stage : MonoBehaviour
 
         SetActiveMap(currentMap, true);
         currentMap.SetActiveLight(true);
+        currentMap.SetEnemyGeneratorIsCreated(false);
+        currentMap.SetEnemyGeneratorColliderEnable(true);
+        currentMap.ResetPortal();
+        currentMap.StartCheakMapClear();
 
         var agent = Zed.Instance.GetMoveController().GetAgent();
         agent.Warp(currentMap.startingPos.position);

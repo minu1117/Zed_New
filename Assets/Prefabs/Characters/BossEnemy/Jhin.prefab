@@ -2933,6 +2933,7 @@ MonoBehaviour:
   groundTransform: {fileID: 7519543303288832159}
   weapons:
   - {fileID: 363585104383062060}
+  slot: {fileID: 8096975348612580112}
   recognitionRange: 9999
   attackRange: 30
   skillRange: 9999

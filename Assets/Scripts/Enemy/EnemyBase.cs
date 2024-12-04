@@ -63,11 +63,9 @@ public abstract class EnemyBase : ChampBase
     protected AttackMode attackMode;
     protected EnemyGenerator enemyGenerator;
 
-    // 초기 설정
-    public virtual void Init()
+    protected override void Awake()
     {
-        slot = GetComponent<SkillSlot>();
-        agent = GetComponent<NavMeshAgent>();
+        base.Awake();
         rb = GetComponent<Rigidbody>();
 
         if (slot != null)
@@ -82,7 +80,12 @@ public abstract class EnemyBase : ChampBase
                 }
             }
         }
+    }
 
+    // 초기 설정
+    public virtual void Init()
+    {
+        agent.isStopped = false;
         agent.speed = data.moveSpeed;
         runSpeed = data.moveSpeed + addRunSpeed;
         player = Zed.Instance.gameObject;
@@ -90,6 +93,7 @@ public abstract class EnemyBase : ChampBase
 
     public virtual void ResetEnemy() 
     {
+        agent.isStopped = false;
         agent.speed = data.moveSpeed;
         runSpeed = data.moveSpeed + addRunSpeed;
     }
@@ -147,6 +151,10 @@ public abstract class EnemyBase : ChampBase
                 }
             }
 
+            if (enemyGenerator != null)
+            {
+                enemyGenerator.SubEnemyCount();
+            }
             target = null;          // 타겟 해제
             pool.Release(this);     // 오브젝트 풀에 본인 반납
         }

@@ -2252,6 +2252,7 @@ MonoBehaviour:
   upperLayerParamName: IsUpper
   JumpTriggerName: Jump
   JumpTypeParamName: JumpType
+  spell_Anim_Quarter_ParamName: 
   maxAutoAttackEnum: 2
   upperLayerIndex: 1
   wholeBodyLayerIndex: 2
@@ -2296,13 +2297,16 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: bae741c727b67f44c9cb84cc3f802ce9, type: 2}
   autoAttack: {fileID: 1323282284278907591}
   shotStartTransform: {fileID: 2619149960476736966}
+  groundTransform: {fileID: 0}
   weapons:
   - {fileID: 8866015382528976874}
+  slot: {fileID: 3783680755063730397}
   recognitionRange: 9999
   attackRange: 2.5
   skillRange: 20
   loseTargetTime: 0
   patrolRange: 0
+  addRunSpeed: 5
   waitSkillDelay: 0
   waitAttackDelay: 1
   comboSkillLists: {fileID: 0}

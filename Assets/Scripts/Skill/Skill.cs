@@ -70,7 +70,7 @@ public class Skill : MonoBehaviour, IDamageable
             return;
 
         effect = EffectManager.Instance.GetEffect(data.effect.name);    // 이펙트 매니저에서 이펙트 가져오기
-        effect.SetStartPos(obj.transform.localPosition);                     // 이펙트 시작 위치 지정
+        effect.SetStartPos(obj.transform.position);                     // 이펙트 시작 위치 지정
         effect.SetForward(obj.transform.forward);
 
         if (effect.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시

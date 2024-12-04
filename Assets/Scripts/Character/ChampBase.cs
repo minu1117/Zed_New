@@ -9,7 +9,7 @@ public class ChampBase : MonoBehaviour
     public Transform shotStartTransform;                            // 스킬 발사 시작 위치
     public Transform groundTransform;                               // 바닥 위치
     public List<Weapon> weapons;                                    // 무기 List (인스펙터에서 담아둠)
-    protected SkillSlot slot;                                       // 스킬 슬롯
+    public SkillSlot slot;                                          // 스킬 슬롯
     private Dictionary<string, Weapon> weaponDict;                  // 무기들을 이름과 같이 담아두는 Dictionary
     protected CharacterAnimationController animationController;     // 애니메이션 컨트롤러
     private StatusController hpController;                              // hp 컨트롤러
@@ -36,10 +36,17 @@ public class ChampBase : MonoBehaviour
             }
         }
 
-        if (gameObject.TryGetComponent(out SkillSlot skillSlot))    // 오브젝트에서 스킬 슬롯 컴포넌트 추출 성공 시
+        if (slot == null)
         {
-            slot = skillSlot;   // 스킬 슬롯 설정
-            slot.Init();        // 스킬 슬롯 초기 설정
+            if (gameObject.TryGetComponent(out SkillSlot skillSlot))    // 오브젝트에서 스킬 슬롯 컴포넌트 추출 성공 시
+            {
+                slot = skillSlot;   // 스킬 슬롯 설정
+                slot.Init();        // 스킬 슬롯 초기 설정
+            }
+        }
+        else
+        {
+            slot.Init();
         }
     }
 

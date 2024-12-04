@@ -712,11 +712,13 @@ MonoBehaviour:
   groundTransform: {fileID: 0}
   weapons:
   - {fileID: 9055809481897258136}
+  slot: {fileID: 61506639188789943}
   recognitionRange: 9999
   attackRange: 3
   skillRange: 30
   loseTargetTime: 0
   patrolRange: 0
+  addRunSpeed: 5
   waitSkillDelay: 2
   waitAttackDelay: 1
   comboSkillLists: {fileID: 0}

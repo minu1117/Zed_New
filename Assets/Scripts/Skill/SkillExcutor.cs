@@ -241,7 +241,8 @@ public class SkillExcutor : MonoBehaviour
         {
             moveController.StopMove();
         }
-        if (agent != null)
+
+        if (agent != null && agent.enabled && agent.isOnNavMesh)
         {
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
@@ -249,10 +250,13 @@ public class SkillExcutor : MonoBehaviour
 
         yield return new WaitForSeconds(useSkill.data.afterUseStiffenTime);    // 스킬 데이터의 사용 후 경직 시간만큼 대기
 
-        if (moveController != null)
-            moveController.isMoved = true;
-        if (agent != null)
-            agent.isStopped = false;
+        if (character.gameObject.activeSelf)
+        {
+            if (moveController != null)
+                moveController.isMoved = true;
+            if (agent != null && agent.enabled && agent.isOnNavMesh)
+                agent.isStopped = false;
+        }
     }
 
     // 쿨다운 코루틴

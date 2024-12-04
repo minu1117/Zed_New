@@ -82,6 +82,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 445838048122342702}
   - {fileID: 7951217070071192074}
+  slot: {fileID: 9010593846745763600}
   recognitionRange: 20
   attackRange: 3.5
   skillRange: 5
