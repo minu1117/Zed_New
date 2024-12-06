@@ -8,8 +8,8 @@ public class Portal : MonoBehaviour
     [SerializeField] private GameObject leftDoor;
     [SerializeField] private GameObject rightDoor;
     [SerializeField] private float doorMoveDuration;
-    private float moveXPos = 0.5f;
-    private float defalutXPos = 0.5f;
+    private float movePos = 0.5f;
+    private float defalutPos = 0.5f;
     private BoxCollider coll;
 
     private void Awake()
@@ -59,8 +59,9 @@ public class Portal : MonoBehaviour
 
         var leftMove = leftDoor.transform.localPosition;
         var rightMove = rightDoor.transform.localPosition;
-        leftMove.x = open ? -defalutXPos - moveXPos : -defalutXPos;
-        rightMove.x = open ? defalutXPos + moveXPos : defalutXPos;
+
+        leftMove.x = open ? -defalutPos - movePos : -defalutPos;
+        rightMove.x = open ? defalutPos + movePos : defalutPos;
 
         leftDoor.transform.DOLocalMove(leftMove, doorMoveDuration);
         rightDoor.transform.DOLocalMove(rightMove, doorMoveDuration);
@@ -73,7 +74,8 @@ public class Portal : MonoBehaviour
 
         var leftDoorPos = leftDoor.gameObject.transform.localPosition;
         var rightDoorPos = rightDoor.gameObject.transform.localPosition;
-        leftDoor.gameObject.transform.localPosition = new Vector3(-defalutXPos, 0, leftDoorPos.z);
-        rightDoor.gameObject.transform.localPosition = new Vector3(defalutXPos, 0, rightDoorPos.z);
+
+        leftDoor.gameObject.transform.localPosition = new Vector3(-defalutPos, leftDoorPos.y, leftDoorPos.z);
+        rightDoor.gameObject.transform.localPosition = new Vector3(defalutPos, rightDoorPos.y, rightDoorPos.z);
     }
 }

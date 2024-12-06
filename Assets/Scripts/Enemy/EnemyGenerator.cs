@@ -84,6 +84,7 @@ public class EnemyGenerator : MonoBehaviour
         var enemy = enemyobj.GetComponent<EnemyBase>();                      // 생성한 몬스터에서 EnemyBase 컴포넌트 가져오기
         var hpController = enemy.GetStatusController(SliderMode.HP);         // 몬스터의 HP Controller 가져오기
 
+        enemy.SetEnemyGenerator(this);
         enemy.Init();                           // 몬스터 초기 설정 실행
 
         var slot = enemy.GetSlot();
@@ -97,7 +98,6 @@ public class EnemyGenerator : MonoBehaviour
             }
         }
 
-        enemy.SetEnemyGenerator(this);
         hpController.SetMaxValue();             // 몬스터 최대 HP, MP로 설정
         enemy.SetPool(enemyPools[createIndex]); // 몬스터에 오브젝트 풀 설정 (Release용)
 

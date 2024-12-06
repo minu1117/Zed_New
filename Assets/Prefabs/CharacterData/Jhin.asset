@@ -18,6 +18,6 @@ MonoBehaviour:
   currentMp: 1000
   level: 1
   charactorName: Jhin
-  moveSpeed: 2
+  moveSpeed: 3
   jumpSpeed: 1
   gravity: 0

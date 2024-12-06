@@ -14,6 +14,7 @@ public class Map : MonoBehaviour
     public CinemachineVirtualCamera virtualCamera;
     public EnemyGeneratorController enemyGeneratorController;
     public Portal portal;
+    public CurtainMoveController curtainMoveController;
 
     private void Awake()
     {
@@ -92,4 +93,5 @@ public class Map : MonoBehaviour
     }
 
     public void SetActiveVirtualCam(bool set) { virtualCamera.gameObject.SetActive(set); }
+    public CurtainMoveController GetCurtainMoveController() { return curtainMoveController; }
 }

@@ -2954,6 +2954,7 @@ MonoBehaviour:
   R_Shot_Tr: {fileID: 4898567031250830769}
   spine: {fileID: 5756474297505595080}
   isLastAAParamName: IsLastAA
+  waitStartDelay: 2
 --- !u!1 &6125427209597238536
 GameObject:
   m_ObjectHideFlags: 0

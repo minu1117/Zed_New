@@ -236,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duskSwordLineRenderer: {fileID: 706342961634505451}
   LineRendererTr: {fileID: 3887307154040057419}
+  upPos: 4
   useClips:
   - {fileID: 8300000, guid: 718a2cb2babfb8741aed3db6d6d61ca8, type: 3}
   catchClips:

@@ -78,11 +78,10 @@ public class SkillExcutor : MonoBehaviour
                 animationController.UseSkill(enumIndex, data.isUpper);
             }
 
-            UseIndicator(character, useSkill.data.useDelay); // 스킬 범위 표시기 사용
-
             isAvailable = false;            // 스킬 사용 불가 상태로 변경 (오동작 방지)
             dashSkill.SetPoint(point);      // 대쉬할 위치 설정
             dashSkill.Use(character);       // 대쉬 스킬 사용
+            UseIndicator(character, useSkill.data.useDelay); // 스킬 범위 표시기 사용
             coolDownSkill = dashSkill;      // 쿨다운 스킬 설정
             StartCoroutine(CoCoolDown());   // 쿨다운 코루틴 시작
             return dashSkill;

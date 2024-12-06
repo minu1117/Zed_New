@@ -36,7 +36,7 @@ public class Stage : MonoBehaviour
         {
             currentMap.SetActiveLight(false);
 
-            int stageNumber = ++currentMap.floor;
+            int stageNumber = currentMap.floor + 1;
             currentMap = mapDict[stageNumber];
         }
 

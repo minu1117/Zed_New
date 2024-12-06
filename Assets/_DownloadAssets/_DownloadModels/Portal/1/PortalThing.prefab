@@ -100,7 +100,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageManager: {fileID: 0}
+  leftDoor: {fileID: 0}
+  rightDoor: {fileID: 0}
+  doorMoveDuration: 0
 --- !u!1001 &6715213412762727155
 PrefabInstance:
   m_ObjectHideFlags: 0

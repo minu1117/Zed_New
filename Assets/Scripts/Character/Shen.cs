@@ -27,8 +27,8 @@ public class Shen : BossEnemy
         createdDuskswordDummy = Instantiate(duskSwordDummy);
         createdDuskswordDummy.SetShen(this);
 
-        createdDuskswordDummy.transform.position = new Vector3(shotStartTransform.position.x, createdDuskswordDummy.transform.position.y, shotStartTransform.position.z);
-        createdDuskswordDummy.SetInitPosY(createdDuskswordDummy.transform.position.y);
+        var duskSowrdYPos = shotStartTransform.position.y + createdDuskswordDummy.upPos;
+        createdDuskswordDummy.transform.position = new Vector3(shotStartTransform.position.x, duskSowrdYPos, shotStartTransform.position.z);
         duskSword.SetDamage(duskSwordSkill.skill.data.damage);
         duskSword.SetChamp(this);
 
@@ -99,7 +99,7 @@ public class Shen : BossEnemy
         SoundManager.Instance.PlayOneShot(useClip);
         SoundManager.Instance.PlayOneShot(voiceClip);
 
-        var pos = new Vector3(transform.position.x, createdDuskswordDummy.transform.position.y, transform.position.z);
+        var pos = new Vector3(transform.position.x, shotStartTransform.transform.position.y + 1f, transform.position.z);
         createdDuskswordDummy.transform.DOMove(pos, duskSwordMoveDuration)
                                        .OnComplete(OnNext);
     }

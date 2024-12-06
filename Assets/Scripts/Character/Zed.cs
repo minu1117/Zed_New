@@ -10,6 +10,7 @@ public class Zed : SingletonChampion<Zed>
     public Dictionary<int, ZedShadow> shadows = new();  // 그림자 스킬 목록
     private SkillSlotManager skillSlotMgr;              // 스킬 슬롯 매니저
     private List<KeyCode> keycodes;                     // 인풋 키 목록
+    private bool attackUsing = true;
 
     protected override void Awake()
     {
@@ -60,6 +61,9 @@ public class Zed : SingletonChampion<Zed>
     // 평타 입력 체크, 평타 사용
     private void CheckAutoAttack(MouseButton mouseButton)
     {
+        if (!attackUsing)
+            return;
+
         if (!Input.GetMouseButtonDown((int)mouseButton))    // 키 입력이 없을 경우 return
             return;
 
@@ -74,6 +78,9 @@ public class Zed : SingletonChampion<Zed>
     private void CheckUseSkill(KeyCode keyCode)
     {
         if (!Input.GetKeyDown(keyCode)) // 키 입력이 없을 경우 return
+            return;
+
+        if (!attackUsing)
             return;
 
         string keycodeStr = EnumConverter.GetString(keyCode);   // KeyCode를 string으로 변환
@@ -175,6 +182,8 @@ public class Zed : SingletonChampion<Zed>
 
         shadow.Teleport(gameObject);    // 위치 이동
     }
+
+    public void SetAttackUse(bool set) { attackUsing = set; }
 
     /********************************************** Animation Event **********************************************/
     // 우측 무기 준비 완료
