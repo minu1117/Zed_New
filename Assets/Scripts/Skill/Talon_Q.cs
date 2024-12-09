@@ -124,6 +124,7 @@ public class Talon_Q : Skill
                 SoundManager.Instance.PlayOneShot(leapAttackClip);  // 사운드 매니저에서 타격 재생
             }
 
+            UseHitEffect(target);
             count++;
             yield return hitInterval;
         }

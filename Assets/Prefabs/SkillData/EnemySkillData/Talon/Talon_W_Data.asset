@@ -31,11 +31,13 @@ MonoBehaviour:
   distance: 15
   indicator: {fileID: 0}
   effect: {fileID: -367961775740068773, guid: ba2441f8bfad8154f903c5730bca712e, type: 3}
+  hitEffect: {fileID: 7074227076283317439, guid: 7c284af374510c041ac95b39bc846239, type: 3}
   useClips: []
   attackClips: []
   disappearClips: []
   recastClips: []
   complateClips: []
   voiceClips: []
+  complateVoiceClips: []
   isSelf: 0
   isStiffen: 0

@@ -23,14 +23,15 @@ MonoBehaviour:
   coolDown: 1
   duration: 10
   useDelay: 1
-  afterUseStiffenTime: 0.2
+  afterUseStiffenTime: 1
   speed: 0
-  immobilityTime: 0
+  immobilityTime: 1
   isShadow: 0
   isDashPass: 0
   distance: 10
   indicator: {fileID: 0}
   effect: {fileID: 8785494125656500745, guid: ae964186176937f4e89597493b2e6a71, type: 3}
+  hitEffect: {fileID: 7074227076283317439, guid: 111516e8f2eaf364984953c50fdfafea, type: 3}
   useClips:
   - {fileID: 8300000, guid: 948ee7b371fb8f6439c5a9c75f7e3f7f, type: 3}
   attackClips: []

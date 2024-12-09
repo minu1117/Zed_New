@@ -31,6 +31,7 @@ MonoBehaviour:
   distance: 20
   indicator: {fileID: 0}
   effect: {fileID: -367961775740068773, guid: 3399372d4f5d11244bebed235f22fba5, type: 3}
+  hitEffect: {fileID: 7074227076283317439, guid: cf404cb3eeccd6d4a903ce64c42b6d80, type: 3}
   useClips:
   - {fileID: 8300000, guid: 2d8e6805fadf8724ea756799e873ee0b, type: 3}
   - {fileID: 8300000, guid: dd125a22945626f41a86cf707c59b0ce, type: 3}

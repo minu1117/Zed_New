@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8becc5727ce09a44787f1aeb0338cb41, type: 3}
   attackClips: []
   voiceClips: []
+  hitEffect: {fileID: 7074227076283317439, guid: 2493d4d65da92b14b82502fcab60a9e7, type: 3}

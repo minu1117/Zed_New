@@ -14,4 +14,7 @@ public class WeaponData : ScriptableObject
 
     [Header("보이스")]
     public List<AudioClip> voiceClips;
+
+    [Header("타격 이펙트")]
+    public Effect hitEffect;
 }

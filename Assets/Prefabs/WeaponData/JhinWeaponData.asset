@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d1495d82d04f95a458c54a97fc2b96f5, type: 3}
   attackClips: []
   voiceClips: []
+  hitEffect: {fileID: 7074227076283317439, guid: 14862e9e4cdeaa940b2c3121e366973e, type: 3}

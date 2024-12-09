@@ -8,6 +8,7 @@ public class Skill : MonoBehaviour, IDamageable
 {
     public SkillData data;                          // 스킬 데이터
     public bool isTargeting;                        // 타게팅 여부
+    public bool isPiercing;
     protected IObjectPool<Skill> pool;
     protected Vector3 startPos;                     // 스킬 시작 위치
 
@@ -37,8 +38,8 @@ public class Skill : MonoBehaviour, IDamageable
 
         waitUseDelay = new WaitForSeconds(data.useDelay);               // 시전 대기 시간 캐싱
         waitduration = new WaitForSeconds(data.duration);               // 지속 시간 캐싱
+        hitInterval = new WaitForSeconds(data.hitInterval);             // 타격 간격 캐싱
         waitimmobilityTime = new WaitForSeconds(data.immobilityTime);   // 스킬 종료 후 경직 시간 캐싱
-        hitInterval = new WaitForSeconds(data.hitInterval);
     }
 
     // 스킬 사용
@@ -69,11 +70,46 @@ public class Skill : MonoBehaviour, IDamageable
         if (data.effect == null)    // 데이터에 이펙트가 없을 시 return
             return;
 
-        effect = EffectManager.Instance.GetEffect(data.effect.name);    // 이펙트 매니저에서 이펙트 가져오기
-        effect.SetStartPos(obj.transform.position);                     // 이펙트 시작 위치 지정
-        effect.SetForward(obj.transform.forward);
+        effect = UseEffect(obj, obj.transform, data.effect);
+        //effect = EffectManager.Instance.GetEffect(data.effect.name);    // 이펙트 매니저에서 이펙트 가져오기
+        //effect.SetStartPos(obj.transform.position);                     // 이펙트 시작 위치 지정
+        //effect.SetForward(obj.transform.forward);
 
-        if (effect.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
+        //if (effect.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
+        //{
+        //    if (data.isSelf)
+        //    {
+        //        followEffect.SetTarget(caster);
+        //    }
+        //    else
+        //    {
+        //        followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
+        //    }
+        //    effect = followEffect;          // 이펙트 할당
+        //}
+
+        //effect.Use();   // 이펙트 사용
+    }
+
+    protected void UseHitEffect(ChampBase target)
+    {
+        if (data.hitEffect == null)
+            return;
+
+        UseEffect(target.gameObject, target.shotStartTransform, data.hitEffect, true);
+    }
+
+    protected Effect UseEffect(GameObject obj, Transform tr, Effect eft, bool autoRelease = false)
+    {
+        if (eft == null)    // 데이터에 이펙트가 없을 시 return
+            return null;
+
+        eft = EffectManager.Instance.GetEffect(eft.name);    // 이펙트 매니저에서 이펙트 가져오기
+        eft.SetStartPos(tr.position);                        // 이펙트 시작 위치 지정
+        eft.SetForward(tr.forward);
+        eft.SetAutoRelease(autoRelease);
+
+        if (eft.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
         {
             if (data.isSelf)
             {
@@ -83,10 +119,12 @@ public class Skill : MonoBehaviour, IDamageable
             {
                 followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
             }
-            effect = followEffect;          // 이펙트 할당
+
+            eft = followEffect;          // 이펙트 할당
         }
 
-        effect.Use();   // 이펙트 사용
+        eft.Use();   // 이펙트 사용
+        return eft;
     }
 
     protected void StartSound(List<AudioClip> clipList)
@@ -149,6 +187,7 @@ public class Skill : MonoBehaviour, IDamageable
                 SoundManager.Instance.StartSound(data.attackClips);  // 사운드 매니저에서 타격 재생
             }
 
+            UseHitEffect(target);
             count++;
             yield return hitInterval;
         }
@@ -179,7 +218,11 @@ public class Skill : MonoBehaviour, IDamageable
         if (target.TryGetComponent(out ChampBase champion))                 // 타겟에서 ChampBase 컴포넌트 추출 성공 시
         {
             StartCoroutine(DealDamage(champion, data.damage, data.hitRate));                // 타겟에게 데미지 부여
-            isCollide = true;                                               // 부딪힘 여부 활성화
+
+            if (!isPiercing)
+            {
+                isCollide = true;                                               // 부딪힘 여부 활성화
+            }
         }
     }
 

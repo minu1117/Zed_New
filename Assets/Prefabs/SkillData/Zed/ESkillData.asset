@@ -27,9 +27,11 @@ MonoBehaviour:
   speed: 0
   immobilityTime: 0
   isShadow: 0
+  isDashPass: 0
   distance: 0
   indicator: {fileID: 0}
   effect: {fileID: 8850139126722969596, guid: 9aea693e97c439d4c8168e9de64437a9, type: 3}
+  hitEffect: {fileID: 7074227076283317439, guid: cf404cb3eeccd6d4a903ce64c42b6d80, type: 3}
   useClips:
   - {fileID: 8300000, guid: 037d0d0e0d038924eb802c8c7d038fd5, type: 3}
   attackClips:
@@ -43,5 +45,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 31b2a9589b9ec42468395c3e83552451, type: 3}
   - {fileID: 8300000, guid: d6629cb404a7aee4798002abd30a7aa5, type: 3}
   - {fileID: 8300000, guid: c455d4bf64186aa4dae0ea3e4ba29fa7, type: 3}
+  complateVoiceClips: []
   isSelf: 0
   isStiffen: 0

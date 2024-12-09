@@ -61,6 +61,9 @@ public class SkillData : ScriptableObject
     [Header("이펙트")]
     public Effect effect;
 
+    [Header("타격 이펙트")]
+    public Effect hitEffect;
+
     [Header("시전 사운드")]
     public List<AudioClip> useClips;
 

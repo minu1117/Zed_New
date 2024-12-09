@@ -28,3 +28,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8d580e3c94303d84d8b094d5547f2387, type: 3}
   - {fileID: 8300000, guid: 2b4688af1b885df4099f780064062d3d, type: 3}
   - {fileID: 8300000, guid: 1d69933d4753baf4ca79401b7bea1aab, type: 3}
+  hitEffect: {fileID: 7074227076283317439, guid: 7c284af374510c041ac95b39bc846239, type: 3}

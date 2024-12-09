@@ -22,3 +22,4 @@ MonoBehaviour:
   voiceClips:
   - {fileID: 8300000, guid: 2dadbb64ee0ffaa4eb28822654b1fb9a, type: 3}
   - {fileID: 8300000, guid: e57b0d2ed573d0e45a3f762686a62df7, type: 3}
+  hitEffect: {fileID: 7074227076283317439, guid: 7c284af374510c041ac95b39bc846239, type: 3}

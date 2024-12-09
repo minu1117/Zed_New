@@ -118,8 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 03e138cec824937469a1d22a35c34ab6, type: 2}
   isTargeting: 0
-  trailRenderer: {fileID: 1943976797970463694}
   isPiercing: 1
+  trailRenderer: {fileID: 1943976797970463694}
 --- !u!65 &2426658713010159134
 BoxCollider:
   m_ObjectHideFlags: 0

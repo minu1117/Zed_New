@@ -20,3 +20,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a824be2864fc0ce47a4712f98f95407f, type: 3}
   - {fileID: 8300000, guid: 74e968f941028df4ba32afbc22baeaef, type: 3}
   voiceClips: []
+  hitEffect: {fileID: 7074227076283317439, guid: 111516e8f2eaf364984953c50fdfafea, type: 3}

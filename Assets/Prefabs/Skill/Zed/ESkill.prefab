@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b463845310085f84bb751da9afe9d4e6, type: 2}
   isTargeting: 0
+  isPiercing: 1
 --- !u!65 &1291742464380487658
 BoxCollider:
   m_ObjectHideFlags: 0

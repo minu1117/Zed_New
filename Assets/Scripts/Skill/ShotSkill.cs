@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShotSkill : Skill
 {
     public TrailRenderer trailRenderer; // 따라다닐 TrailRenderer
-    public bool isPiercing;
 
     public override void Use(GameObject character)
     {
@@ -59,26 +58,26 @@ public class ShotSkill : Skill
         yield return waitimmobilityTime;    // 사용 후 경직 시간동안 대기
     }
 
-    // 오브젝트 충돌 시 처리될 작업
-    public override void Collide(GameObject obj)
-    {
-        if (data.isShadow)  // 그림자 스킬일 경우 return (그림자 스킬 스크립트에서 따로 처리)
-            return;
+    //// 오브젝트 충돌 시 처리될 작업
+    //public override void Collide(GameObject obj)
+    //{
+    //    if (data.isShadow)  // 그림자 스킬일 경우 return (그림자 스킬 스크립트에서 따로 처리)
+    //        return;
 
-        if (gameObject.TryGetComponent(out ZedShadow shadow))   // 해당 스킬이 그림자 스킬일 경우
-        {
-            if (!shadow.isReady)    // 스킬 사용 준비가 되지 않았으면 return
-                return;
-        }
+    //    if (gameObject.TryGetComponent(out ZedShadow shadow))   // 해당 스킬이 그림자 스킬일 경우
+    //    {
+    //        if (!shadow.isReady)    // 스킬 사용 준비가 되지 않았으면 return
+    //            return;
+    //    }
 
-        if (!isPiercing)
-        {
-            if (isCollide)
-                return;
-        }
+    //    if (!isPiercing)
+    //    {
+    //        if (isCollide)
+    //            return;
+    //    }
 
-        DealDamage(obj);    // 데미지 처리
-    }
+    //    DealDamage(obj);    // 데미지 처리
+    //}
 
     // 오브젝트 풀에 Release 하는 용도
     protected override void Release()
