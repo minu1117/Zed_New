@@ -107,10 +107,11 @@ public class Jhin : BossEnemy
         isStart = true;
     }
 
-    public override void OnDead()
+    public override IEnumerator OnDead()
     {
         OpenCurtain();
-        base.OnDead();
+        yield return null;
+        StartCoroutine(base.OnDead());
     }
 
     private void OpenCurtain()

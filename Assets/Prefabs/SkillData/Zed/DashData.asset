@@ -18,22 +18,32 @@ MonoBehaviour:
   skillLevel: 1
   levelRestriction: 0
   damage: 10
-  coolDown: 0
+  hitRate: 1
+  hitInterval: 0
+  coolDown: 1
   duration: 0.2
   useDelay: 0.3
+  afterUseStiffenTime: 0
   speed: 50
   immobilityTime: 0
   isShadow: 0
+  isDashPass: 0
   distance: 0
+  indicator: {fileID: 0}
   effect: {fileID: 0}
+  hitEffect: {fileID: 7074227076283317439, guid: cf404cb3eeccd6d4a903ce64c42b6d80, type: 3}
   useClips:
   - {fileID: 8300000, guid: 7cc19cdcfd9aa0645ba35a66246b943f, type: 3}
   attackClips:
   - {fileID: 8300000, guid: cd9030b649a0f64428caacbbc28d1cd2, type: 3}
   disappearClips: []
   recastClips: []
+  complateClips: []
   voiceClips:
   - {fileID: 8300000, guid: 1900b1a04cd15c542b76dd79e1b3b721, type: 3}
   - {fileID: 8300000, guid: eaa98d0fc6c4f5948bd3b89954e68635, type: 3}
   - {fileID: 8300000, guid: 2aa1aa3eb6c39754793220fbf861f05e, type: 3}
   - {fileID: 8300000, guid: c84dfcc67782a7b42b7705e84dee6ee0, type: 3}
+  complateVoiceClips: []
+  isSelf: 0
+  isStiffen: 0

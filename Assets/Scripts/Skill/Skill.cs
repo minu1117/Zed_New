@@ -71,24 +71,6 @@ public class Skill : MonoBehaviour, IDamageable
             return;
 
         effect = UseEffect(obj, obj.transform, data.effect);
-        //effect = EffectManager.Instance.GetEffect(data.effect.name);    // 이펙트 매니저에서 이펙트 가져오기
-        //effect.SetStartPos(obj.transform.position);                     // 이펙트 시작 위치 지정
-        //effect.SetForward(obj.transform.forward);
-
-        //if (effect.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
-        //{
-        //    if (data.isSelf)
-        //    {
-        //        followEffect.SetTarget(caster);
-        //    }
-        //    else
-        //    {
-        //        followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
-        //    }
-        //    effect = followEffect;          // 이펙트 할당
-        //}
-
-        //effect.Use();   // 이펙트 사용
     }
 
     protected void UseHitEffect(ChampBase target)
@@ -101,30 +83,7 @@ public class Skill : MonoBehaviour, IDamageable
 
     protected Effect UseEffect(GameObject obj, Transform tr, Effect eft, bool autoRelease = false)
     {
-        if (eft == null)    // 데이터에 이펙트가 없을 시 return
-            return null;
-
-        eft = EffectManager.Instance.GetEffect(eft.name);    // 이펙트 매니저에서 이펙트 가져오기
-        eft.SetStartPos(tr.position);                        // 이펙트 시작 위치 지정
-        eft.SetForward(tr.forward);
-        eft.SetAutoRelease(autoRelease);
-
-        if (eft.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
-        {
-            if (data.isSelf)
-            {
-                followEffect.SetTarget(caster);
-            }
-            else
-            {
-                followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
-            }
-
-            eft = followEffect;          // 이펙트 할당
-        }
-
-        eft.Use();   // 이펙트 사용
-        return eft;
+        return EffectManager.Instance.UseEffect(eft, tr, data.isSelf, autoRelease, obj);
     }
 
     protected void StartSound(List<AudioClip> clipList)

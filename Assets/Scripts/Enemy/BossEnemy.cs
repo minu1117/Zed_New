@@ -331,7 +331,7 @@ public class BossEnemy : EliteEnemy
         DecidePattern();
     }
 
-    public override void OnDead()
+    public override IEnumerator OnDead()
     {
         if (usePatternWaitCoroutine != null)
         {
@@ -340,6 +340,7 @@ public class BossEnemy : EliteEnemy
         }
 
         isResetPattern = false;
-        base.OnDead();
+        yield return null;
+        StartCoroutine(base.OnDead());
     }
 }

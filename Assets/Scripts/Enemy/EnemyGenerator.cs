@@ -76,10 +76,7 @@ public class EnemyGenerator : MonoBehaviour
     private EnemyBase CreateEnemy()
     {
         var enemyobj = Instantiate(enemies[createIndex].gameObject, poolObjects[createIndex].transform);    // 몬스터 생성
-
-        var spawnPos = transform.position + Random.insideUnitSphere * spawnRange;
-        spawnPos.y = transform.position.y;
-        enemyobj.transform.position = transform.position + Random.insideUnitSphere * spawnRange; // 스폰 범위 내 랜덤 생성
+        enemyobj.transform.position = GetRandomPos(transform.position); // 스폰 범위 내 랜덤 생성
 
         var enemy = enemyobj.GetComponent<EnemyBase>();                      // 생성한 몬스터에서 EnemyBase 컴포넌트 가져오기
         var hpController = enemy.GetStatusController(SliderMode.HP);         // 몬스터의 HP Controller 가져오기
@@ -104,15 +101,24 @@ public class EnemyGenerator : MonoBehaviour
         return enemy;
     }
 
+    protected Vector3 GetRandomPos(Vector3 point)
+    {
+        var randomPoint = point + Random.insideUnitSphere * spawnRange;
+        randomPoint.y = point.y;
+
+        return randomPoint;
+    }
+
     // 오브젝트 풀의 Get 
     private void GetEnemy(EnemyBase enemy)
     {
         enemy.ResetEnemy();
-        enemy.transform.position = transform.position;  // 몬스터 위치 이동 (생성기 위치로)
+        enemy.transform.position = GetRandomPos(transform.position);
         enemy.SetPatrolState();
         var hpController = enemy.GetStatusController(SliderMode.HP);     // HP Controller 가져오기
         hpController.SetMaxValue();                     // 최대 HP, MP로 설정
         enemy.gameObject.SetActive(true);               // 몬스터 오브젝트 활성화
+        enemy.UseSpawnEffect();
     }
 
     // 오브젝트 풀의 Release 

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,12 +11,15 @@ public class ChampBase : MonoBehaviour
     public Transform groundTransform;                               // 바닥 위치
     public List<Weapon> weapons;                                    // 무기 List (인스펙터에서 담아둠)
     public SkillSlot slot;                                          // 스킬 슬롯
+    public Effect deadEffect;                                       // 죽었을 때 나오는 이펙트
     private Dictionary<string, Weapon> weaponDict;                  // 무기들을 이름과 같이 담아두는 Dictionary
     protected CharacterAnimationController animationController;     // 애니메이션 컨트롤러
-    private StatusController hpController;                              // hp 컨트롤러
-    private StatusController mpController;                              // mp 컨트롤러
+    private StatusController hpController;                          // hp 컨트롤러
+    private StatusController mpController;                          // mp 컨트롤러
     protected NavMeshAgent agent;
     private CharacterMoveController moveController;
+    public float deadAnimDuration;                                  // 죽는 애니메이션 출력 시간
+    protected BoxCollider coll;
 
     protected virtual void Awake()
     {
@@ -23,6 +27,7 @@ public class ChampBase : MonoBehaviour
         animationController = GetComponent<CharacterAnimationController>();
         agent = GetComponent<NavMeshAgent>();
         moveController = GetComponent<CharacterMoveController>();
+        coll = GetComponent<BoxCollider>();
 
         weaponDict = new(); // 무기 dictionary 초기화
         if (weapons != null && weapons.Count > 0)   // 무기 List에 무기가 있을 경우
@@ -143,25 +148,59 @@ public class ChampBase : MonoBehaviour
         if (damage <= 0)
             return;
 
-        if (data.currentHp - damage >= 0)   // 현재 HP - 받는 데미지가 0 이상일 경우
+        float currentValue = hpController.GetCurrentValue();
+        if (currentValue - damage >= 0)   // 현재 HP - 받는 데미지가 0 이상일 경우
         {
-            data.currentHp -= damage;       // HP 차감
+            hpController.SetCurrentValue(currentValue - damage);
         }
         else                                // 피해를 받았을 때 HP가 0 미만으로 내려가는 경우
         {
-            data.currentHp = 0;             // HP를 0으로 설정
+            hpController.SetCurrentValue(0);
         }
+
+        //if (data.currentHp - damage >= 0)   // 현재 HP - 받는 데미지가 0 이상일 경우
+        //{
+        //    data.currentHp -= damage;       // HP 차감
+        //}
+        //else                                // 피해를 받았을 때 HP가 0 미만으로 내려가는 경우
+        //{
+        //    data.currentHp = 0;             // HP를 0으로 설정
+        //}
 
         if (hpController == null)           // HP 컨트롤러가 없을 경우 return
             return;
 
         hpController.SetCurrentValue();     // HP 컨트롤러에서 현재 HP 설정
-        if (data.currentHp <= 0)            // 체력이 0 이하일 경우
-            OnDead();                       // 사망
+        //if (data.currentHp <= 0)            // 체력이 0 이하일 경우
+        if (hpController.GetCurrentValue() <= 0)            // 체력이 0 이하일 경우
+        {
+            StartCoroutine(OnDead());                       // 사망
+        }
     }
 
-    public virtual void OnDead()
+    public virtual IEnumerator OnDead()
     {
+        if (coll != null)
+        {
+            coll.enabled = false;
+        }
+
+        if (moveController != null)
+        {
+            moveController.StopMove();
+        }
+
+        if (animationController != null)
+        {
+            animationController.Dead();
+            yield return new WaitForSeconds(deadAnimDuration);
+        }
+
+        if (deadEffect != null)
+        {
+            EffectManager.Instance.UseEffect(deadEffect, gameObject.transform, true, true);
+        }
+
         Destroy(gameObject);
     }
 
@@ -180,6 +219,7 @@ public class ChampBase : MonoBehaviour
         hpController.DestroyShield();
     }
 
+    public CharacterAnimationController GetAnimationController() { return animationController; }
     public CharacterMoveController GetMoveController() { return moveController; }
     public SkillSlot GetSlot() { return slot; }
 

@@ -50,7 +50,7 @@ public class Jhin_R : Skill
 
     private IEnumerator CoCurtainCall(GameObject character)
     {
-        var tpEffect_1 = EffectManager.Instance.UseOtherEffect(teleportEffect, transform);
+        var tpEffect_1 = EffectManager.Instance.UseEffect(teleportEffect, transform);
         Vector3 startPos = caster.transform.position;
 
         Jhin jhin = caster.GetComponent<Jhin>();
@@ -146,7 +146,7 @@ public class Jhin_R : Skill
             agent.Warp(startPos);
         }
 
-        var tpEffect_2 = EffectManager.Instance.UseOtherEffect(teleportEffect, transform);
+        var tpEffect_2 = EffectManager.Instance.UseEffect(teleportEffect, transform);
         yield return new WaitForSeconds(tpEffect_2.GetDuration());
 
         if (tpEffect_1 != null)

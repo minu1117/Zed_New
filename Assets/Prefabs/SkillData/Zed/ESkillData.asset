@@ -20,7 +20,7 @@ MonoBehaviour:
   damage: 10
   hitRate: 1
   hitInterval: 0
-  coolDown: 0
+  coolDown: 1
   duration: 0.5
   useDelay: 0
   afterUseStiffenTime: 0

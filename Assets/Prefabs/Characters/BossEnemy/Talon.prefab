@@ -2301,6 +2301,8 @@ MonoBehaviour:
   weapons:
   - {fileID: 8866015382528976874}
   slot: {fileID: 3783680755063730397}
+  deadEffect: {fileID: 0}
+  deadAnimDuration: 3
   recognitionRange: 9999
   attackRange: 2.5
   skillRange: 20
@@ -2309,6 +2311,7 @@ MonoBehaviour:
   addRunSpeed: 5
   waitSkillDelay: 0
   waitAttackDelay: 1
+  spawnEffect: {fileID: 0}
   comboSkillLists: {fileID: 0}
   waitComboDelay: 0
   patternSkillList:

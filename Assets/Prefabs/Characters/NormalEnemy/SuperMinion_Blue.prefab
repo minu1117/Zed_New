@@ -83,6 +83,8 @@ MonoBehaviour:
   - {fileID: 445838048122342702}
   - {fileID: 7951217070071192074}
   slot: {fileID: 9010593846745763600}
+  deadEffect: {fileID: 0}
+  deadAnimDuration: 2
   recognitionRange: 20
   attackRange: 3.5
   skillRange: 5
@@ -91,6 +93,7 @@ MonoBehaviour:
   addRunSpeed: 3
   waitSkillDelay: 2
   waitAttackDelay: 2
+  spawnEffect: {fileID: 7577269658054579021, guid: 1e318c8540b352a4e90b0b5e74de9b2a, type: 3}
 --- !u!65 &4359249927440687398
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class Shen : BossEnemy
@@ -50,12 +51,14 @@ public class Shen : BossEnemy
         StateBehavior();
     }
 
-    public override void OnDead()
+    public override IEnumerator OnDead()
     {
         duskSword.OnFinished();
         duskSword.gameObject.SetActive(false);
         createdDuskswordDummy.gameObject.SetActive(false);
-        base.OnDead();
+
+        yield return null;
+        StartCoroutine(base.OnDead());
     }
 
     /********************************************** Animation Event **********************************************/

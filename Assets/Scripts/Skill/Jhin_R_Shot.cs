@@ -33,7 +33,7 @@ public class Jhin_R_Shot : ShotSkill
         SetActiveTrailRenderer(true);   // TrailRenderer 활성화
 
         UseEffect(gameObject);
-        var shoot = EffectManager.Instance.UseOtherEffect(shootEffect, transform);
+        var shoot = EffectManager.Instance.UseEffect(shootEffect, transform);
         isCollide = false;
 
         float startTime = Time.time;

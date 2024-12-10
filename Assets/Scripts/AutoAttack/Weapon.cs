@@ -97,20 +97,6 @@ public class Weapon : MonoBehaviour, IDamageable
 
     protected void UseEffect(GameObject obj, Transform tr, Effect effect)
     {
-        if (effect == null)
-            return;
-
-        effect = EffectManager.Instance.GetEffect(effect.name);     // 이펙트 매니저에서 이펙트 가져오기
-        effect.SetStartPos(tr.position);                            // 이펙트 시작 위치 지정
-        effect.SetForward(tr.forward);
-        effect.SetAutoRelease(true);
-
-        if (effect.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
-        {
-            followEffect.SetTarget(obj);    // 이펙트가 따라다닐 타겟 지정
-            effect = followEffect;          // 이펙트 할당
-        }
-
-        effect.Use();   // 이펙트 사용
+        EffectManager.Instance.UseEffect(effect, tr, false, true, obj);
     }
 }

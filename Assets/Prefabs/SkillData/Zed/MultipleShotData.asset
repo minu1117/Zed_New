@@ -20,7 +20,7 @@ MonoBehaviour:
   damage: 0
   hitRate: 1
   hitInterval: 0
-  coolDown: 0
+  coolDown: 3
   duration: 2
   useDelay: 0.1
   afterUseStiffenTime: 0.2
@@ -31,11 +31,13 @@ MonoBehaviour:
   distance: 0
   indicator: {fileID: 0}
   effect: {fileID: 0}
+  hitEffect: {fileID: 0}
   useClips: []
   attackClips: []
   disappearClips: []
   recastClips: []
   complateClips: []
   voiceClips: []
+  complateVoiceClips: []
   isSelf: 0
   isStiffen: 0

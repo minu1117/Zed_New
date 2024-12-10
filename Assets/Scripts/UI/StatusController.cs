@@ -38,6 +38,7 @@ public class StatusController : MonoBehaviour
 
     public Slider shieldSlider;
     public bool isShield;
+    private float currentValue;
     private float currentShieldValue;
     private float maxShieldValue;
     public float shieldAccumulateDamage { get; set; }
@@ -51,7 +52,6 @@ public class StatusController : MonoBehaviour
                 champ.SetStatusController(sliderMode, this);
                 break;
             case UsedSlider.Boss:
-                
                 break;
             default:
                 break;
@@ -100,35 +100,46 @@ public class StatusController : MonoBehaviour
     // 현재 체력 변경
     public void SetCurrentHp()
     {
-        data.currentHp = Math.Clamp(data.currentHp, 0, data.maxHp);
-        champ.data.currentHp = data.currentHp;
-        slider.value = data.currentHp / data.maxHp;
-        SetText($"{data.currentHp} / {data.maxHp}");
+        //data.currentHp = Math.Clamp(data.currentHp, 0, data.maxHp);
+        //champ.data.currentHp = data.currentHp;
+        //slider.value = data.currentHp / data.maxHp;
+        //SetText($"{data.currentHp} / {data.maxHp}");
+
+        currentValue = Math.Clamp(currentValue, 0, data.maxHp);
+        slider.value = currentValue / data.maxHp;
+        SetText($"{currentValue} / {data.maxHp}");
     }
 
     // 최대 체력으로 설정
     public void SetMaxHp()
     {
         data.currentHp = data.maxHp;
+        currentValue = data.currentHp;
         SetCurrentHp();
-        SetText($"{data.currentHp} / {data.maxHp}");
+        SetText($"{currentValue} / {data.maxHp}");
     }
 
     // 현재 마나 변경
     public void SetCurrentMp()
     {
-        data.currentMp = Math.Clamp(data.currentMp, 0, data.maxMp);
-        champ.data.currentMp = data.currentMp;
-        slider.value = data.currentMp / data.maxMp;
-        SetText($"{data.currentMp} / {data.maxMp}");
+        //data.currentMp = Math.Clamp(data.currentMp, 0, data.maxMp);
+        //champ.data.currentMp = data.currentMp;
+        //slider.value = data.currentMp / data.maxMp;
+        //SetText($"{data.currentMp} / {data.maxMp}");
+        currentValue = Math.Clamp(currentValue, 0, data.maxMp);
+        slider.value = currentValue / data.maxMp;
+        SetText($"{currentValue} / {data.maxMp}");
     }
 
     // 최대 마나로 설정
     public void SetMaxMp()
     {
-        data.currentMp = data.maxMp;
+        //data.currentMp = data.maxMp;
+        //SetCurrentMp();
+        //SetText($"{data.currentMp} / {data.maxMp}");
+        currentValue = data.maxMp;
         SetCurrentMp();
-        SetText($"{data.currentMp} / {data.maxMp}");
+        SetText($"{currentValue} / {data.maxMp}");
     }
 
     public void DestroyShield()
@@ -142,7 +153,8 @@ public class StatusController : MonoBehaviour
         maxShieldValue = 0;
         currentShieldValue = 0;
         shieldAccumulateDamage = 0f;
-        SetText($"{data.currentHp} / {data.maxHp}");
+        //SetText($"{data.currentHp} / {data.maxHp}");
+        SetText($"{currentValue} / {data.maxHp}");
     }
 
     public void SetShield(float shieldValue)
@@ -159,7 +171,8 @@ public class StatusController : MonoBehaviour
         maxShieldValue += shieldValue;
         shieldSlider.value = currentShieldValue / maxShieldValue;
 
-        SetText($"{data.currentHp} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
+        //SetText($"{data.currentHp} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
+        SetText($"{currentValue} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
     }
 
     public void DeductedMaxShield(float damage)
@@ -185,7 +198,8 @@ public class StatusController : MonoBehaviour
         {
             shieldAccumulateDamage += damage;
             shieldSlider.value = currentShieldValue / maxShieldValue;
-            SetText($"{data.currentHp} / {data.maxHp} ({currentShieldValue})");
+            //SetText($"{data.currentHp} / {data.maxHp} ({currentShieldValue})");
+            SetText($"{currentValue} / {data.maxHp} ({currentShieldValue})");
             return 0;
         }
     }
@@ -193,6 +207,16 @@ public class StatusController : MonoBehaviour
     private void SetText(string text)
     {
         tmp.text = text;
+    }
+
+    public float GetCurrentValue()
+    {
+        return currentValue;
+    }
+
+    public void SetCurrentValue(float value)
+    {
+        currentValue = value;
     }
 
     public void Update()

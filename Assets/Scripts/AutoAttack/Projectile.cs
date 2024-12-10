@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
 
         if (other.TryGetComponent(out ChampBase champion))
         {
-            if (rangedWeapon.gameObject.activeSelf)
+            if (rangedWeapon != null && rangedWeapon.gameObject.activeSelf)
             {
                 rangedWeapon.DealDamage(champion, damage);
             }

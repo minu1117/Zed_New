@@ -1835,6 +1835,9 @@ MonoBehaviour:
   groundTransform: {fileID: 0}
   weapons:
   - {fileID: 4924006550438776568}
+  slot: {fileID: 0}
+  deadEffect: {fileID: 0}
+  deadAnimDuration: 2
   recognitionRange: 20
   attackRange: 10
   skillRange: 0
@@ -1843,6 +1846,7 @@ MonoBehaviour:
   addRunSpeed: 2
   waitSkillDelay: 0
   waitAttackDelay: 2
+  spawnEffect: {fileID: 7577269658054579021, guid: 2c653b768ab982a41812bb5101276cf9, type: 3}
 --- !u!65 &1027449350132483761
 BoxCollider:
   m_ObjectHideFlags: 0

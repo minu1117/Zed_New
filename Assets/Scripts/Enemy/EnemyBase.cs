@@ -1,4 +1,3 @@
-using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections.Generic;
@@ -57,6 +56,7 @@ public abstract class EnemyBase : ChampBase
 
     [SerializeField] protected float waitSkillDelay;
     [SerializeField] protected float waitAttackDelay;
+    [SerializeField] protected Effect spawnEffect;
     protected bool isAttack;
 
     protected Coroutine waitNextAttackCoroutine;
@@ -93,6 +93,12 @@ public abstract class EnemyBase : ChampBase
 
     public virtual void ResetEnemy() 
     {
+        if (coll != null)
+        {
+            coll.enabled = true;
+        }
+
+        animationController.Restart();
         agent.isStopped = false;
         agent.speed = data.moveSpeed;
         runSpeed = data.moveSpeed + addRunSpeed;
@@ -115,8 +121,13 @@ public abstract class EnemyBase : ChampBase
         target = targetObj;
     }
 
-    public override void OnDead()
+    public override IEnumerator OnDead()
     {
+        if (coll != null)
+        {
+            coll.enabled = false;
+        }
+
         if (loseTargetCoroutine != null)
         {
             StopCoroutine(loseTargetCoroutine);
@@ -133,6 +144,28 @@ public abstract class EnemyBase : ChampBase
         {
             StopCoroutine(waitNextAttackCoroutine);
             waitNextAttackCoroutine = null;
+        }
+
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
+
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+        }
+
+        if (animationController != null)
+        {
+            animationController.Dead();
+            yield return new WaitForSeconds(deadAnimDuration);
+        }
+
+        if (deadEffect != null)
+        {
+            EffectManager.Instance.UseEffect(deadEffect, gameObject.transform, true, true);
         }
 
         // 오브젝트 풀이 설정된 경우
@@ -465,6 +498,11 @@ public abstract class EnemyBase : ChampBase
                 rangedWeapon.SaveCurrentTargetPos();
             }
         }
+    }
+
+    public void UseSpawnEffect()
+    {
+        EffectManager.Instance.UseEffect(spawnEffect, gameObject.transform, true, true);
     }
 
     // 에디터 전용 코드

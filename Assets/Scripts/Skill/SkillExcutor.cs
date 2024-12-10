@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 
 public class SkillExcutor : MonoBehaviour
 {
+    [SerializeField] private SkillCoolDown cooldownImage;
     private IObjectPool<Skill> skillPool;
     private GameObject poolObject;          // 생성된 스킬들을 담아둘 부모 오브젝트
     private SkillButtonData data;           // 스킬 데이터
@@ -261,6 +262,11 @@ public class SkillExcutor : MonoBehaviour
     // 쿨다운 코루틴
     private IEnumerator CoCoolDown()
     {
+        if (cooldownImage != null)
+        {
+            cooldownImage.StartCoolDown(coolDownSkill.data.coolDown);
+        }
+
         yield return new WaitForSeconds(coolDownSkill.data.coolDown);   // 스킬 데이터의 쿨다운 시간만큼 대기
         coolDownSkill = null;   // 쿨다운 코루틴 초기화
         isAvailable = true;     // 스킬 사용 가능 상태로 변경

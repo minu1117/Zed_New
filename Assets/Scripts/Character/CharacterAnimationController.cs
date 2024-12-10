@@ -48,6 +48,8 @@ public class CharacterAnimationController : MonoBehaviour
 
     private NavMeshAgent agent;
     private bool isJumping = false;
+    private string restartTrigger = "Restart";
+    private string deadTrigger = "Dead";
 
     private void Awake()
     {
@@ -146,6 +148,26 @@ public class CharacterAnimationController : MonoBehaviour
 
         SetInteger(skillTypeParamName, enumIndex);                  // 스킬 타입 파라미터 값 설정
         SetTrigger(useSkillParamName);                              // 스킬 사용 트리거 활성화
+    }
+
+    public void Dead()
+    {
+        if (deadTrigger == string.Empty)
+            return;
+
+        animator.ResetTrigger(deadTrigger);
+        animator.ResetTrigger(restartTrigger);
+        SetTrigger(deadTrigger);
+    }
+
+    public void Restart()
+    {
+        if (restartTrigger == string.Empty)
+            return;
+
+        animator.ResetTrigger(deadTrigger);
+        animator.ResetTrigger(restartTrigger);
+        SetTrigger(restartTrigger);
     }
 
     public void SetTrigger(string triggerName)

@@ -46,7 +46,7 @@ public class EffectManager : Singleton<EffectManager>
         pool.Release(eft);                                  // 이펙트 Release
     }
 
-    public Effect UseOtherEffect(Effect effectPrefab, Transform transform)
+    public Effect UseEffect(Effect effectPrefab, Transform transform)
     {
         if (effectPrefab == null)
             return null;
@@ -57,5 +57,33 @@ public class EffectManager : Singleton<EffectManager>
         effect.Use();
 
         return effect;
+    }
+
+    public Effect UseEffect(Effect eft, Transform tr, bool self, bool autoRelease, GameObject target = null)
+    {
+        if (eft == null)    // 데이터에 이펙트가 없을 시 return
+            return null;
+
+        eft = GetEffect(eft.name);
+        eft.SetStartPos(tr.position);
+        eft.SetForward(tr.forward);
+        eft.SetAutoRelease(autoRelease);
+
+        if (eft.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
+        {
+            if (self)
+            {
+                followEffect.SetTarget(target);
+            }
+            else
+            {
+                followEffect.SetTarget(target);    // 이펙트가 따라다닐 타겟 지정
+            }
+
+            eft = followEffect;          // 이펙트 할당
+        }
+
+        eft.Use();   // 이펙트 사용
+        return eft;
     }
 }
