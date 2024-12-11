@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ESkillData
   m_EditorClassIdentifier: 
   type: 1
-  skillName: ESkill
+  skillName: "\uADF8\uB9BC\uC790 \uBCA0\uAE30"
   skillDescription: 1
   skillLevel: 1
   levelRestriction: 0

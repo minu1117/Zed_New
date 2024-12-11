@@ -8,6 +8,9 @@ public class NormalEnemy : EnemyBase
 
     protected override void StateBehavior()
     {
+        if (isDead)
+            return;
+
         switch (state)
         {
             case State.Patrol:

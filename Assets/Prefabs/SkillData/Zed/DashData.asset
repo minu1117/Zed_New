@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DashData
   m_EditorClassIdentifier: 
   type: 3
-  skillName: Dash
+  skillName: "\uAE30\uC2B5"
   skillDescription: 1
   skillLevel: 1
   levelRestriction: 0

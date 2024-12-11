@@ -19,9 +19,9 @@ public class SkillButton : MonoBehaviour
             excutor = GetComponent<SkillExcutor>();
 
         tmp.text = EnumConverter.GetString(keycode).ToUpper();
-        SetSkill(data);
-        //SetSprite(data.sp);
-        //excutor.Init(SkillSlotManager.Instance.gameObject, data);   // 스킬 생성기 초기 설정 실행
+
+        if (data != null)
+            SetSkill(data);
     }
 
     public void SetSkill(SkillButtonData data)

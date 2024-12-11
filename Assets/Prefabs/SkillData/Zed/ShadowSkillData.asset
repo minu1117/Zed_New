@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShadowSkillData
   m_EditorClassIdentifier: 
   type: 0
-  skillName: Shadow
+  skillName: "\uC0B4\uC544\uC788\uB294 \uADF8\uB9BC\uC790"
   skillDescription: 1
   skillLevel: 1
   levelRestriction: 0

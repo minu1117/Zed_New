@@ -98,6 +98,7 @@ public abstract class EnemyBase : ChampBase
             coll.enabled = true;
         }
 
+        isDead = false;
         animationController.Restart();
         agent.isStopped = false;
         agent.speed = data.moveSpeed;
@@ -123,6 +124,7 @@ public abstract class EnemyBase : ChampBase
 
     public override IEnumerator OnDead()
     {
+        isDead = true;
         if (coll != null)
         {
             coll.enabled = false;

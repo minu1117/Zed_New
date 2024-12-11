@@ -128,6 +128,10 @@ public class Zed : SingletonChampion<Zed>
         {
             FinishedAttack();       // 무기 상태 초기화
             Skill useSkill = UseSkill(key, (int)type, EnumConverter.GetString(CharacterEnum.Enemy));   // 그림자 스킬 사용
+
+            if (useSkill == null)
+                return;
+
             skillSlotMgr.CoolDown(useSkill.data.coolDown);      // 쿨다운 시작
         }
         else  // 마우스 위치에 그림자 스킬이 있을 시

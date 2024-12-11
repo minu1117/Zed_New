@@ -11,7 +11,8 @@ public class SkillDropZoneManager : MonoBehaviour
         dropZondDict = new();
         foreach (var dropZone in dropZones)
         {
-            dropZondDict.Add(dropZone.GetSkillName(), dropZone);
+            //dropZondDict.Add(dropZone.GetSkillName(), dropZone);
+            dropZondDict.Add(dropZone.GetKeyCode(), dropZone);
         }
     }
 
@@ -32,6 +33,9 @@ public class SkillDropZoneManager : MonoBehaviour
     {
         foreach (var pair in dropZondDict)
         {
+            if (pair.Value.GetSkillData() == null)
+                continue;
+
             if (pair.Value.GetSkillName() == skillName)
             {
                 return pair.Value;

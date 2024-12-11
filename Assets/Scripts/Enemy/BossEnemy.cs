@@ -55,6 +55,9 @@ public class BossEnemy : EliteEnemy
 
     protected override void StateBehavior()
     {
+        if (isDead)
+            return;
+
         if (isPatternUsing)
             return;
 

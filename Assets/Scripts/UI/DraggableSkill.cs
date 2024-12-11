@@ -24,7 +24,9 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         canvasGroup = GetComponent<CanvasGroup>();
         sortingGroup = GetComponent<SortingGroup>();
         img = GetComponent<Image>();
-        img.sprite = skill.sp;
+
+        if (skill != null)
+            img.sprite = skill.sp;
 
         canvasGroup.alpha = 0f;
         gameObject.SetActive(false);
@@ -33,6 +35,9 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     // 드래그 시작 시 처음 한 번 실행되는 이벤트
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (skill == null)
+            return;
+
         isDrag = true;                          // 드래그 상태 활성화
         canvasGroup.alpha = 0.6f;               // 알파 값 조정 (흐리게)
         canvasGroup.blocksRaycasts = false;     // 입력 비활성화 (오동작 방지)
@@ -42,18 +47,27 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     // 드래그 중 실행되는 이벤트
     public void OnDrag(PointerEventData eventData)
     {
+        if (skill == null)
+            return;
+
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     // 드래그를 끝낸 후 한 번 실행되는 이벤트
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (skill == null)
+            return;
+
         OnReset(); // 리셋
     }
 
     // 마우스 포인트가 이미지를 벗어났을 때 실행되는 이벤트
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (skill == null)
+            return;
+
         if (isDrag) // 드래그 중일 경우 return
             return;
 
@@ -87,5 +101,10 @@ public class DraggableSkill : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public string GetSkillName()
     {
         return skill.skill.data.skillName;
+    }
+
+    public Sprite GetSkillSprite()
+    {
+        return skill.sp;
     }
 }

@@ -2935,7 +2935,7 @@ MonoBehaviour:
   - {fileID: 363585104383062060}
   slot: {fileID: 8096975348612580112}
   deadEffect: {fileID: 0}
-  deadAnimDuration: 5
+  deadAnimDuration: 7
   recognitionRange: 9999
   attackRange: 30
   skillRange: 9999

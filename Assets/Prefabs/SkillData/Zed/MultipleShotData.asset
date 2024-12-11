@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MultipleShotData
   m_EditorClassIdentifier: 
   type: 0
-  skillName: MultipleShot
+  skillName: "\uB2E4\uC911 \uC608\uB9AC\uD55C \uD45C\uCC3D"
   skillDescription: "\uC5EC\uB7EC \uAC1C \uC3D8\uB294 \uAC81\uB2C8\uB2E4"
   skillLevel: 1
   levelRestriction: 0

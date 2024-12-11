@@ -56,4 +56,6 @@ public class SkillDropZone : MonoBehaviour, IDropHandler
 
         return skillButton.data.skill.data.skillName;
     }
+
+    public SkillButtonData GetSkillData() { return skillButton.data; }
 }

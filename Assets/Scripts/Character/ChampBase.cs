@@ -20,6 +20,7 @@ public class ChampBase : MonoBehaviour
     private CharacterMoveController moveController;
     public float deadAnimDuration;                                  // 죽는 애니메이션 출력 시간
     protected BoxCollider coll;
+    protected bool isDead = false;
 
     protected virtual void Awake()
     {
@@ -158,15 +159,6 @@ public class ChampBase : MonoBehaviour
             hpController.SetCurrentValue(0);
         }
 
-        //if (data.currentHp - damage >= 0)   // 현재 HP - 받는 데미지가 0 이상일 경우
-        //{
-        //    data.currentHp -= damage;       // HP 차감
-        //}
-        //else                                // 피해를 받았을 때 HP가 0 미만으로 내려가는 경우
-        //{
-        //    data.currentHp = 0;             // HP를 0으로 설정
-        //}
-
         if (hpController == null)           // HP 컨트롤러가 없을 경우 return
             return;
 
@@ -180,6 +172,7 @@ public class ChampBase : MonoBehaviour
 
     public virtual IEnumerator OnDead()
     {
+        isDead = true;
         if (coll != null)
         {
             coll.enabled = false;

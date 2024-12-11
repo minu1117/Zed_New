@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: QSkillData
   m_EditorClassIdentifier: 
   type: 0
-  skillName: QSkill
+  skillName: "\uC608\uB9AC\uD55C \uD45C\uCC3D"
   skillDescription: 1
   skillLevel: 1
   levelRestriction: 0
