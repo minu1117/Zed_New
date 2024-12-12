@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,7 +11,7 @@ public static class AddressableManager
     // 이미지 적용
     public static async Task ApplyImage(string address, Image applyImage)
     {
-        if (applyImage == null || address == null || address == string.Empty)   // 이미지가 없거나, 이미지 주소가 비었을 경우 return
+        if (applyImage == null || address == null || address == string.Empty || address == "-")   // 이미지가 없거나, 이미지 주소가 비었을 경우 return
             return;
 
         if (applyImage.sprite.name == GetAddressName(address))                  // 같은 이미지일 경우 return
@@ -42,6 +41,9 @@ public static class AddressableManager
     // 이미지 찾기
     private static async Task<Sprite> GetSpriteAsync(string address)
     {
+        if (address == string.Empty)
+            return null;
+
         try
         {
             var loadAsync = Addressables.LoadAssetAsync<Sprite>(address);  // 어드레서블에 저장된 이미지 로딩

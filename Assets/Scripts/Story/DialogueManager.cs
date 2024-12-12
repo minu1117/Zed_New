@@ -249,20 +249,29 @@ public class DialogueManager : Singleton<DialogueManager>
         string otherName = firstOtherData.name;
 
         // 첫 시작 이미지는 일반 표정의 이미지로 변경
-        if (IsValidName(zedName))
-        {
-            firstZedData.address = $"{SetDefalutAddress(firstZedData.address)}{addressWhiteSpaceStr}{addressNormalImageStr}";
-        }
-        if (IsValidName(otherName))
-        {
-            firstOtherData.address = $"{SetDefalutAddress(firstOtherData.address)}{addressWhiteSpaceStr}{addressNormalImageStr}";
-        }
+        //if (IsValidName(zedName))
+        //{
+        //    firstZedData.address = $"{SetDefalutAddress(firstZedData.address)}{addressWhiteSpaceStr}{addressNormalImageStr}";
+        //}
+        //if (IsValidName(otherName))
+        //{
+        //    firstOtherData.address = $"{SetDefalutAddress(firstOtherData.address)}{addressWhiteSpaceStr}{addressNormalImageStr}";
+        //}
 
         // TalkData가 할당 되지 않았을 경우 캐릭터가 없는 것으로 판단, 이미지 오브젝트 비활성화
         leftCharacterImage.SetActive(false);
         rightCharacterImage.SetActive(false);
         await ApplyImage(firstZedData, leftCharacterImage.image);
         await ApplyImage(firstOtherData, rightCharacterImage.image);
+
+        //if (firstZedData.address == emptySellStr || firstZedData.address == string.Empty)
+        //{
+        //    leftCharacterImage.SetActive(false);
+        //}
+        //if (firstOtherData.address == emptySellStr || firstOtherData.address == string.Empty)
+        //{
+        //    rightCharacterImage.SetActive(false);
+        //}
 
         // 이름이 유효하지 않을 경우 return
         if (!IsValidName(zedName) && !IsValidName(otherName))
@@ -313,6 +322,7 @@ public class DialogueManager : Singleton<DialogueManager>
             dialogueTMP.text = string.Empty;
             dialoguePanel.SetActive(false);
             character.isMoved = true;
+            currentTalkImages.Clear();
             return;
         }
 
@@ -357,6 +367,11 @@ public class DialogueManager : Singleton<DialogueManager>
             {
                 ContorollCharacterImage(rightCharacterImage, leftCharacterImage, currentDialogue);
             }
+        }
+        else
+        {
+            leftCharacterImage.SetActive(false);
+            rightCharacterImage.SetActive(false);
         }
 
         // 대사 시작 코루틴 실행

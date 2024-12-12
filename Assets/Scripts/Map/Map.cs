@@ -15,6 +15,7 @@ public class Map : MonoBehaviour
     public EnemyGeneratorController enemyGeneratorController;
     public Portal portal;
     public CurtainMoveController curtainMoveController;
+    public DialogueStarter dialogueStarter;
 
     private void Awake()
     {
@@ -42,6 +43,9 @@ public class Map : MonoBehaviour
     private IEnumerator CoCheakClear()
     {
         yield return new WaitUntil(() => GetIsClear());
+
+        if (dialogueStarter != null)
+            dialogueStarter.StartDialogue(Zed.Instance.gameObject);
 
         enemyGeneratorController.ResetEnemyCount();
         isClear = true;
