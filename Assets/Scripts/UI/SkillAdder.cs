@@ -2,26 +2,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillAdder : MonoBehaviour
+public class SkillAdder : InteractiveObject
 {
     [SerializeField] private DraggableSkillCreatorManager skillCreatorManager;
     [SerializeField] private DraggableSkill skill;
-    [SerializeField] private KeyCode interactionKey;
-    [SerializeField] private float interactionRange;
-
     [SerializeField] private TextMeshProUGUI tmp;
     [SerializeField] private Image image;
     [SerializeField] private AudioClip sound;
     [SerializeField] private Effect effect;
 
     [SerializeField] private TextMeshProUGUI keyTmp;
-
-    private Zed player;
+    [SerializeField] private DialogueStarter dialogueStarter;
     private bool isAdded = false;
 
-    private void Awake()
+    protected override void Awake()
     {
-        player = Zed.Instance;
+        base.Awake();
         keyTmp.text = EnumConverter.GetString(interactionKey);
 
         if (skill != null)
@@ -39,27 +35,24 @@ public class SkillAdder : MonoBehaviour
         Interaction();
     }
 
-    private bool CheackDistance()
+    protected override bool CheackDistance()
     {
-        if (player == null)
-            return false;
-
+        var check = base.CheackDistance();
         if (isAdded)
-            return false;
-
-        float distance = Vector3.Distance(transform.position, player.gameObject.transform.position);
-        if (distance <= interactionRange)
         {
-            return true;
+            check = false;
         }
 
-        return false;
+        return check;
     }
 
-    private void Interaction()
+    protected override void Interaction()
     {
         if (Input.GetKeyDown(interactionKey))
         {
+            if (dialogueStarter != null)
+                dialogueStarter.StartDialogue(player.gameObject);
+
             SoundManager.Instance.PlayOneShot(sound);
             EffectManager.Instance.UseEffect(effect, transform, true, true);
             skillCreatorManager.AddDraggableSkill(skill);

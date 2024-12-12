@@ -32,7 +32,9 @@ public struct TalkData
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    public Dictionary<string, List<TalkData>> allTalkData;  // CSV에서 가져온 모든 대화 정보를 저장할 곳
+    //public Dictionary<string, List<TalkData>> allTalkData;  // CSV에서 가져온 모든 대화 정보를 저장할 곳
+    public Dictionary<string, Dictionary<string, List<TalkData>>> allTalkData;  // CSV에서 가져온 모든 대화 정보를 저장할 곳
+    public List<string> csvFileNames;
     private Coroutine messageCoroutine;
     private List<TalkData> currentTalkData;                 // 현재 진행중인 대화 전체의 데이터
     private string currentText;                             // 출력할 대사
@@ -41,7 +43,7 @@ public class DialogueManager : Singleton<DialogueManager>
     public float typingSpeed;                               // 텍스트가 나오는 속도
     public float textRevealTime;                            // 모든 텍스트가 나와야 할 시간
 
-    public string csvFileName;                              // 대화를 가져올 CSV 파일의 이름
+    //public string csvFileName;                              // 대화를 가져올 CSV 파일의 이름
 
     public TextMeshProUGUI dialogueTMP;                     // 대사 칸
     public TextMeshProUGUI nameTMP;                         // 캐릭터 이름이 나올 칸
@@ -100,60 +102,82 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private void ReadAllText()
     {
-        List<Dictionary<string, object>> csv = CSVReader.Read(csvFileName);     // CSV 파일 읽어오기
-        allTalkData = new Dictionary<string, List<TalkData>>();
+        allTalkData = new Dictionary<string, Dictionary<string, List<TalkData>>>();
 
         string currentEventName = string.Empty;
-
-        // 읽어온 CSV 파일을 저장한 컨테이너 순회
-        foreach (var textData in csv)
+        List<List<Dictionary<string, object>>> csvList = new();
+        foreach (var fileName in csvFileNames)
         {
-            string eventName = textData[eventNameColumnStr].ToString(); // 이벤트 이름
+            csvList.Add(CSVReader.Read(fileName));
+        }
 
-            // 이벤트 이름이 endStr이거나, null 또는 empty일 경우 다음 열로 이동
-            if (eventName == endStr || string.IsNullOrEmpty(eventName))
-                continue;
+        int currentFileIndex = 0;
+        foreach (var csv in csvList)
+        {
+            string currentFileName = csvFileNames[currentFileIndex];
+            currentFileIndex++;
 
-            // 겹치는 EventName 키가 없고, 이벤트 이름이 emptySellStr이 아닐 경우
-            // 이벤트 별로 구분하여 대화를 Dictionary에 저장
-            if (!allTalkData.ContainsKey(eventName) && eventName != emptySellStr)
+            for (int i = 0; i < csv.Count; i++)
             {
-                currentEventName = eventName;
-                allTalkData.Add(currentEventName, new List<TalkData>());
-            }
+                string eventName = csv[i][eventNameColumnStr].ToString(); // 이벤트 이름
 
-            // 대화 데이터 생성
-            var data = new TalkData
-            {
-                name = textData[characterNameColumnStr].ToString(), // 캐릭터 이름
-                talk = textData[textColumnStr].ToString(),          // 대사
-                address = textData[addressColumnStr].ToString(),    // 캐릭터 이미지
-                isEnabled = textData[enabledColumnStr].ToString() != string.Empty ? Convert.ToBoolean(textData[enabledColumnStr]) : true,   // 이미지 활성화 여부. 비어있지 않으면 가져오고, 비어있으면 true
-                shake = textData[shakeColumnStr].ToString() != string.Empty ? Convert.ToBoolean(textData[shakeColumnStr]) : false,          // 흔들림 여부. 비어있지 않으면 가져오고, 비어있으면 false
-                bounce = textData[bounceColumnStr].ToString() != string.Empty ? Convert.ToBoolean(textData[bounceColumnStr]) : false        // 점프 여부. 비어있지 않으면 가져오고, 비어있으면 false
-            };
+                // 이벤트 이름이 endStr이거나, null 또는 empty일 경우 다음 열로 이동
+                if (eventName == endStr || string.IsNullOrEmpty(eventName))
+                    continue;
 
-            // 저장한 대화에서 개행 처리를 해야 할 경우
-            if (data.talk.Contains(lineSplitStr))
-            {
-                // Line Split 문자가 있는 구간마다 문자 분리
-                // 분리된 문자를 개행 처리 한 후 데이터에 추가
-                string[] lineSplit = data.talk.Split(lineSplitStr);
-                data.talk = string.Empty;
-                for (int i = 0; i < lineSplit.Length; i++) 
+                // 겹치는 EventName 키가 없고, 이벤트 이름이 emptySellStr이 아닐 경우
+                // 이벤트 별로 구분하여 대화를 Dictionary에 저장
+                if (!allTalkData.ContainsKey(eventName) && eventName != emptySellStr)
                 {
-                    // 마지막 줄이 아닐 경우에만 개행
-                    string splitStr = lineSplit[i];
-                    if (i < lineSplit.Length - 1)
+                    currentEventName = eventName;
+                    var newTalkData = new List<TalkData>();
+                    if (allTalkData.ContainsKey(currentFileName))
                     {
-                        splitStr = $"{splitStr}{Environment.NewLine}";
+                        allTalkData[currentFileName].Add(currentEventName, newTalkData);
                     }
-
-                    data.talk += splitStr;
+                    else
+                    {
+                        var newData = new Dictionary<string, List<TalkData>>
+                        {
+                            { currentEventName, newTalkData }
+                        };
+                        allTalkData.Add(currentFileName, newData);
+                    }
                 }
-            }
 
-            allTalkData[currentEventName].Add(data);
+                // 대화 데이터 생성
+                var data = new TalkData
+                {
+                    name = csv[i][characterNameColumnStr].ToString(), // 캐릭터 이름
+                    talk = csv[i][textColumnStr].ToString(),          // 대사
+                    address = csv[i][addressColumnStr].ToString(),    // 캐릭터 이미지
+                    isEnabled = csv[i][enabledColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][enabledColumnStr]) : true,   // 이미지 활성화 여부. 비어있지 않으면 가져오고, 비어있으면 true
+                    shake = csv[i][shakeColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][shakeColumnStr]) : false,          // 흔들림 여부. 비어있지 않으면 가져오고, 비어있으면 false
+                    bounce = csv[i][bounceColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][bounceColumnStr]) : false        // 점프 여부. 비어있지 않으면 가져오고, 비어있으면 false
+                };
+
+                // 저장한 대화에서 개행 처리를 해야 할 경우
+                if (data.talk.Contains(lineSplitStr))
+                {
+                    // Line Split 문자가 있는 구간마다 문자 분리
+                    // 분리된 문자를 개행 처리 한 후 데이터에 추가
+                    string[] lineSplit = data.talk.Split(lineSplitStr);
+                    data.talk = string.Empty;
+                    for (int j = 0; j < lineSplit.Length; j++)
+                    {
+                        // 마지막 줄이 아닐 경우에만 개행
+                        string splitStr = lineSplit[j];
+                        if (j < lineSplit.Length - 1)
+                        {
+                            splitStr = $"{splitStr}{Environment.NewLine}";
+                        }
+
+                        data.talk += splitStr;
+                    }
+                }
+
+                allTalkData[currentFileName][currentEventName].Add(data);
+            }
         }
     }
 
@@ -205,16 +229,19 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     // 현재 대화에 사용할 데이터들 미리 담아두기
-    public async void SetCurrentTalk(string eventName)
+    public async void SetCurrentTalk(string csvFileName, string eventName)
     {
-        if (!allTalkData.ContainsKey(eventName) || allTalkData[eventName].Count == 0)
+        if (!allTalkData.ContainsKey(csvFileName) || allTalkData[csvFileName].Count == 0)
+            return;
+
+        if (!allTalkData[csvFileName].ContainsKey(eventName) || allTalkData[csvFileName][eventName].Count == 0)
             return;
 
         leftCharacterImage.gameObject.SetActive(true);
         rightCharacterImage.gameObject.SetActive(true);
 
         currentTalkIndex = 0;
-        currentTalkData = allTalkData[eventName];
+        currentTalkData = allTalkData[csvFileName][eventName];
 
         TalkData firstZedData = FindFirstMatchingElement(currentTalkData, zedNameStrList);      // 대화 중, 주인공의 첫 번째 대사 데이터 가져오기
         TalkData firstOtherData = FindFirstNotMatchingElement(currentTalkData, zedNameStrList); // 대화 중, 다른 캐릭터의 첫 번째 대사 데이터 가져오기
@@ -408,6 +435,25 @@ public class DialogueManager : Singleton<DialogueManager>
             return null;
 
         return currentTalkImages[address];
+    }
+
+    public string GetRandomEvent(string csvFileName)
+    {
+        if (csvFileName == string.Empty)
+            return string.Empty;
+
+        if (!allTalkData.ContainsKey(csvFileName) || allTalkData[csvFileName].Count == 0)
+            return string.Empty;
+
+        var data = allTalkData[csvFileName];
+        List<string> keys = new();
+        foreach (var talk in data)
+        {
+            keys.Add(talk.Key);
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, keys.Count);
+        return keys[randomIndex];
     }
 
     public void SetCharacter(CharacterMoveController character)

@@ -1,38 +1,38 @@
-﻿EventName,CharacterName,Text,Address
-첫 만남,제드,안녕하십니까 저는 제드입니다.,TempZed_normal
--,쉔,알고 있다. 난 쉔이다.,TempShen_normal
--,제드,ㅗㅗ 쉔 개못생김 고릴라녀석,TempZed_normal
--,쉔,이녀석이….! 응징하겠다!,TempShen_normal
--,제드,ㅗㅗ ㅋㅋ 도망가야지~,TempZed_normal
-End,,,
-누구노,제드,넌 누구냐? 여자.,TempZed_normal
--,아칼리,내 이름은 아칼리. 닌자입니다.,TempShen_normal
--,제드,눼 이륨운 애컐뤼~ 뉜좌입뉘돠~,TempZed_normal
--,아칼리,ㅂㄷㅂㄷ...,TempShen_normal
--,제드,ㅋㅋ 긁?,TempZed_normal
-End,,,
-쉔이노,쉔,균형만이 살 길…,TempShen_normal
--,쉔,균형 없는 삶은 가치 없는 삶..,TempShen_normal
--,쉔,균형. 나.,TempShen_normal
--,제드,(쟤 뭐냐..),TempZed_normal
--,제드,야 너 뭐하냐 혼자서\n왜 청승맞게 그러고 있어?,TempZed_normal
--,쉔,균….형..........,TempShen_normal
--,제드,(저 자식은 균형 변태군),TempZed_normal
-End,,,
-난 케인이당,케인,안녕?\n난 나르시스트 케인이라고 해.\n넌 누구니?,TempKayn_normal
--,제드,(슈슉 슈슈슈슉),TempZed_normal
--,케인,으억!!!!!!!!!!,TempKayn_normal
--,제드,휴.. 오늘도 한 건 했구만,TempZed_normal
-제드만 있음,제드,테스트입니다 1,TempZed_normal
--,고보스,테스트입니다 2,Govos_happy
--,우산,테스트입니다 3,Usan_surprised
--,제드,테스트입니다 4,TempZed_normal
--,고보스,테스트입니다 5,Govos_surprised
--,우산,테스트입니다 6,Usan_normal
--,제드,테스트입니다 7,TempZed_normal
-End,,,
-빈 공간 테스트,-,테스트입니다 1,-
--,-,테스트입니다 2,-
--,-,테스트입니다 3,-
--,-,테스트입니다 4,-
-End,,,
+﻿EventName,CharacterName,Text,Address,IsEnabled,Shake,Bounce
+첫 만남,제드,안녕하십니까 저는 제드입니다.,TempZed_normal,,,
+-,쉔,알고 있다. 난 쉔이다.,TempShen_normal,,,
+-,제드,ㅗㅗ 쉔 개못생김 고릴라녀석,TempZed_normal,,,
+-,쉔,이녀석이….! 응징하겠다!,TempShen_normal,,,
+-,제드,ㅗㅗ ㅋㅋ 도망가야지~,TempZed_normal,,,
+End,,,,,,
+누구노,제드,넌 누구냐? 여자.,TempZed_normal,,,
+-,아칼리,내 이름은 아칼리. 닌자입니다.,TempShen_normal,,,
+-,제드,눼 이륨운 애컐뤼~ 뉜좌입뉘돠~,TempZed_normal,,,
+-,아칼리,ㅂㄷㅂㄷ...,TempShen_normal,,,
+-,제드,ㅋㅋ 긁?,TempZed_normal,,,
+End,,,,,,
+쉔이노,쉔,균형만이 살 길…,TempShen_normal,,,
+-,쉔,균형 없는 삶은 가치 없는 삶..,TempShen_normal,,,
+-,쉔,균형. 나.,TempShen_normal,,,
+-,제드,(쟤 뭐냐..),TempZed_normal,,,
+-,제드,야 너 뭐하냐 혼자서\n왜 청승맞게 그러고 있어?,TempZed_normal,,,
+-,쉔,균….형..........,TempShen_normal,,,
+-,제드,(저 자식은 균형 변태군),TempZed_normal,,,
+End,,,,,,
+난 케인이당,케인,안녕?\n난 나르시스트 케인이라고 해.\n넌 누구니?,TempKayn_normal,,,
+-,제드,(슈슉 슈슈슈슉),TempZed_normal,,,
+-,케인,으억!!!!!!!!!!,TempKayn_normal,,,
+-,제드,휴.. 오늘도 한 건 했구만,TempZed_normal,,,
+제드만 있음,제드,테스트입니다 1,TempZed_normal,,,
+-,고보스,테스트입니다 2,Govos_happy,,,
+-,우산,테스트입니다 3,Usan_surprised,,,
+-,제드,테스트입니다 4,TempZed_normal,,,
+-,고보스,테스트입니다 5,Govos_surprised,,,
+-,우산,테스트입니다 6,Usan_normal,,,
+-,제드,테스트입니다 7,TempZed_normal,,,
+End,,,,,,
+빈 공간 테스트,-,테스트입니다 1,-,,,
+-,-,테스트입니다 2,-,,,
+-,-,테스트입니다 3,-,,,
+-,-,테스트입니다 4,-,,,
+End,,,,,,
