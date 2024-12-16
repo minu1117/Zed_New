@@ -20,6 +20,7 @@ public class StartStage : MonoBehaviour
         if (storyPortal == null)
             return;
 
+        map.StartCheakMapClear();
         storyPortal.Open();
     }
 

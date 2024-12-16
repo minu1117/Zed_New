@@ -16,6 +16,8 @@ public class Map : MonoBehaviour
     public Portal portal;
     public CurtainMoveController curtainMoveController;
     public DialogueStarter dialogueStarter;
+    public SkillAdder skillAdder;
+    public SkillWindowController skillWindowController;
 
     private void Awake()
     {
@@ -24,6 +26,12 @@ public class Map : MonoBehaviour
 
         if (enemyGeneratorController != null)
             enemyGeneratorController.SetMap(this);
+
+        if (skillAdder != null)
+            skillAdder.SetIsInteract(false);
+
+        if (skillWindowController != null)
+            skillWindowController.SetIsInteract(false);
     }
 
     public void SetActiveLight(bool set)
@@ -46,6 +54,12 @@ public class Map : MonoBehaviour
 
         if (dialogueStarter != null)
             dialogueStarter.StartDialogue(Zed.Instance.gameObject);
+
+        if (skillAdder != null)
+            skillAdder.SetIsInteract(true);
+
+        if (skillWindowController != null)
+            skillWindowController.SetIsInteract(true);
 
         enemyGeneratorController.ResetEnemyCount();
         isClear = true;
@@ -83,8 +97,17 @@ public class Map : MonoBehaviour
     {
         if (enemyGeneratorController == null)
         {
+            if (skillAdder != null)
+                skillAdder.SetIsInteract(true);
+
+            if (skillWindowController != null)
+                skillWindowController.SetIsInteract(true);
+
             isClear = true;
-            portal.Open();
+
+            if (portal != null)
+                portal.Open();
+
             return;
         }
 

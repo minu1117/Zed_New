@@ -300,7 +300,8 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             opacityPanel.SetActive(false);
             isTalking = false;
-            character.isMoved = true;
+            character.StartMove();
+            Zed.Instance.SetAttackUse(true);
             return;
         }
 
@@ -321,7 +322,8 @@ public class DialogueManager : Singleton<DialogueManager>
             isTalking = false;
             dialogueTMP.text = string.Empty;
             dialoguePanel.SetActive(false);
-            character.isMoved = true;
+            character.StartMove();
+            Zed.Instance.SetAttackUse(true);
             currentTalkImages.Clear();
             return;
         }

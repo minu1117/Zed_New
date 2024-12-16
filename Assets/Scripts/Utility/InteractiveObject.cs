@@ -4,7 +4,10 @@ public abstract class InteractiveObject : MonoBehaviour
 {
     [SerializeField] protected KeyCode interactionKey;
     [SerializeField] protected float interactionRange;
+    [SerializeField] protected AudioClip interactionSound;
+    [SerializeField] protected AudioClip escapeSound;
     protected Zed player;
+    protected bool isInteractable;
 
     protected virtual void Awake()
     {
@@ -26,4 +29,12 @@ public abstract class InteractiveObject : MonoBehaviour
     }
 
     protected abstract void Interaction();
+    protected void StartSound(AudioClip clip)
+    {
+        if (clip == null)
+            return;
+
+        SoundManager.Instance.PlayOneShot(clip);
+    }
+    public void SetIsInteract(bool set) { isInteractable = set; }
 }

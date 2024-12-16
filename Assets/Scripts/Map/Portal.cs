@@ -28,15 +28,16 @@ public class Portal : MonoBehaviour
 
     private IEnumerator Teleport()
     {
-        stageManager.FadeIn();
+        var sceneManager = CustomSceneManager.Instance;
+        sceneManager.FadeIn();
         var moveController = Zed.Instance.GetMoveController();
         moveController.StopMove();
 
-        yield return new WaitUntil(() => !stageManager.isFade);
+        yield return new WaitUntil(() => !sceneManager.isFade);
 
         ResetDoor();
         stageManager.NextStage();
-        stageManager.FadeOut();
+        sceneManager.FadeOut();
         moveController.StartMove();
     }
 

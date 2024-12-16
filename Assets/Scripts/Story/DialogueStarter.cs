@@ -37,6 +37,8 @@ public class DialogueStarter : MonoBehaviour
         if (other.TryGetComponent(out CharacterMoveController character))
         {
             character.StopMove();               // 캐릭터 멈추기
+            Zed.Instance.SetAttackUse(false);
+
             manager.isTalking = true;           // 대화 상태 활성화
             manager.SetCharacter(character);    // 대화 중인 캐릭터 매니저에 넘겨주기
             manager.SetTypingType(typingType);

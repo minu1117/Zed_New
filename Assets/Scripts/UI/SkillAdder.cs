@@ -8,7 +8,6 @@ public class SkillAdder : InteractiveObject
     [SerializeField] private DraggableSkill skill;
     [SerializeField] private TextMeshProUGUI tmp;
     [SerializeField] private Image image;
-    [SerializeField] private AudioClip sound;
     [SerializeField] private Effect effect;
 
     [SerializeField] private TextMeshProUGUI keyTmp;
@@ -29,9 +28,6 @@ public class SkillAdder : InteractiveObject
 
     public void Update()
     {
-        if (!CheackDistance())
-            return;
-
         Interaction();
     }
 
@@ -48,12 +44,18 @@ public class SkillAdder : InteractiveObject
 
     protected override void Interaction()
     {
+        if (!isInteractable)
+            return;
+
+        if (!CheackDistance())
+            return;
+
         if (Input.GetKeyDown(interactionKey))
         {
             if (dialogueStarter != null)
                 dialogueStarter.StartDialogue(player.gameObject);
 
-            SoundManager.Instance.PlayOneShot(sound);
+            StartSound(interactionSound);
             EffectManager.Instance.UseEffect(effect, transform, true, true);
             skillCreatorManager.AddDraggableSkill(skill);
             isAdded = true;
