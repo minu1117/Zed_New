@@ -10,7 +10,9 @@ public class FallowTarget : MonoBehaviour
     private void Awake()
     {
         if (target == null)
-            return;
+        {
+            target = Zed.Instance.gameObject;
+        }
 
         if (target.TryGetComponent<Collider>(out var coll))
         {

@@ -9,23 +9,12 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
 {
     [SerializeField] private Slider progressSlider;
     [SerializeField] private TextMeshProUGUI progressText;
-    [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private Image fadeImage;
     [SerializeField] private float fadeDuration;
     [SerializeField] private string gameSceneName;
     [SerializeField] private string titleSceneName;
+    public bool isLoaded { get; set; }
     public bool isFade { get; set; } = false;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (videoPlayer != null)
-        {
-            var mainCam = Camera.main;
-            videoPlayer.targetCamera = mainCam;
-            videoPlayer.Play();
-        }
-    }
 
     public void LoadGameScene()
     {
@@ -39,17 +28,13 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
 
     public void LoadScene(string sceneName)
     {
+        isLoaded = true;
         StartCoroutine(CoLoadSceneAsync(sceneName));
     }
     public IEnumerator CoLoadSceneAsync(string sceneName)
     {
         FadeIn();
         yield return new WaitUntil(() => !isFade);
-
-        if (sceneName != titleSceneName && videoPlayer != null)
-        {
-            videoPlayer.Stop();
-        }
 
         progressSlider.value = 0f;
         progressText.text = "0%";
@@ -67,14 +52,8 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
         progressSlider.gameObject.SetActive(false);
         progressText.gameObject.SetActive(false);
 
-        if (sceneName == titleSceneName && videoPlayer != null)
-        {
-            var mainCam = Camera.main;
-            videoPlayer.targetCamera = mainCam;
-            videoPlayer.Play();
-        }
-
         FadeOut();
+        isLoaded = false;
     }
 
     // 투명 -> 불투명
@@ -120,10 +99,6 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
         if (Input.GetKeyDown(KeyCode.I))
         {
             LoadTitleScene();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            videoPlayer.Play();
         }
     }
 }

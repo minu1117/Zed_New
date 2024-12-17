@@ -21,7 +21,12 @@ public class SkillButton : MonoBehaviour
         tmp.text = EnumConverter.GetString(keycode).ToUpper();
 
         if (data != null)
-            SetSkill(data);
+            SetSkill();
+    }
+
+    public void SetSkill()
+    {
+        SetSkill(data);
     }
 
     public void SetSkill(SkillButtonData data)

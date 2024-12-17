@@ -8,14 +8,13 @@ public class Zed : SingletonChampion<Zed>
     public GameObject L_Hand_Blade;                     // 좌측 무기
     public GameObject R_Hand_Blade;                     // 우측 무기
     public Dictionary<int, ZedShadow> shadows = new();  // 그림자 스킬 목록
-    private SkillSlotManager skillSlotMgr;              // 스킬 슬롯 매니저
+    public SkillSlotManager skillSlotMgr;              // 스킬 슬롯 매니저
     private List<KeyCode> keycodes;                     // 인풋 키 목록
     private bool attackUsing = true;
 
     protected override void Awake()
     {
         base.Awake();
-        skillSlotMgr = SkillSlotManager.Instance;
     }
 
     private void Start()

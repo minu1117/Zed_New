@@ -2,34 +2,29 @@ using UnityEngine;
 
 public class SingletonChampion<T> : ChampBase where T : MonoBehaviour
 {
-    private static T instance;
-    public static T Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindAnyObjectByType<T>();
-                DontDestroyOnLoad(instance.gameObject);
-            }
-            return instance;
-        }
-    }
+    public static T Instance;
 
     protected override void Awake()
     {
         base.Awake();
-        if (instance != null)
-        {
-            if (instance != this)
-            {
-                Destroy(gameObject);
-            }
 
+        if (Instance == null)
+        {
+            Instance = GetComponent<T>();
+        }
+        else
+        {
+            Destroy(gameObject);
             return;
         }
+    }
 
-        instance = GetComponent<T>();
-        DontDestroyOnLoad(gameObject);
+    protected void OnDestroy()
+    {
+        // 씬이 바뀌면 파괴
+        if (Instance != null)
+        {
+            Instance = null;
+        }
     }
 }
