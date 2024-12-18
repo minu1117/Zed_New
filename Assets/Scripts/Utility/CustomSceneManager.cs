@@ -3,10 +3,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
 public class CustomSceneManager : Singleton<CustomSceneManager>
 {
+    [SerializeField] private Option option;
     [SerializeField] private Slider progressSlider;
     [SerializeField] private TextMeshProUGUI progressText;
     [SerializeField] private Image fadeImage;
@@ -88,6 +88,11 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
         {
             isFade = false;
         }
+    }
+
+    public void SetOptionButton(Button button)
+    {
+        option.SetOptionButton(button);
     }
 
     public void Update()

@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -11,22 +13,41 @@ public enum AudioType
     Voice,
 }
 
+[Serializable]
+public struct SoundSettingData
+{
+    public float masterVolumeValue;
+    public float bgmVolumeValue;
+    public float sfxVolumeValue;
+    public float voiceVolumeValue;
+}
+
 public class AudioMixerController : Singleton<AudioMixerController>
 {
-    [SerializeField] private AudioMixer mixer;      // 오디오 믹서
-    [SerializeField] private Slider MasterSlider;   // 마스터 볼륨 슬라이더
-    [SerializeField] private Slider BGMSlider;      // BGM 볼륨 슬라이더
-    [SerializeField] private Slider SFXSlider;      // SFX 볼륨 슬라이더
-    [SerializeField] private Slider VoiceSlider;    // Voice 볼륨 슬라이더
+    [SerializeField] private AudioMixer mixer;              // 오디오 믹서
+    [SerializeField] private Slider MasterSlider;           // 마스터 볼륨 슬라이더
+    [SerializeField] private TextMeshProUGUI masterTmp;     // 마스터 볼륨 텍스트
 
-    public string MasterGroupName;                  // 마스터 볼륨 그룹 이름
-    public string BGMGroupName;                     // BGM 볼륨 그룹 이름
-    public string SFXGroupName;                     // SFX 볼륨 그룹 이름
-    public string VoiceGroupName;                   // Voice 볼륨 그룹 이름
+    [SerializeField] private Slider BGMSlider;              // BGM 볼륨 슬라이더
+    [SerializeField] private TextMeshProUGUI bgmTmp;        // BGM 볼륨 텍스트
+
+    [SerializeField] private Slider SFXSlider;              // SFX 볼륨 슬라이더
+    [SerializeField] private TextMeshProUGUI sfxTmp;        // SFX 볼륨 텍스트
+
+    [SerializeField] private Slider VoiceSlider;            // Voice 볼륨 슬라이더
+    [SerializeField] private TextMeshProUGUI voiceTmp;      // Voice 볼륨 텍스트
+
+    public string MasterGroupName;                          // 마스터 볼륨 그룹 이름
+    public string BGMGroupName;                             // BGM 볼륨 그룹 이름
+    public string SFXGroupName;                             // SFX 볼륨 그룹 이름
+    public string VoiceGroupName;                           // Voice 볼륨 그룹 이름
+
+    private SoundSettingData data;
 
     protected override void Awake()
     {
         base.Awake();
+        data = new();
     }
 
     // 오디오 믹서 그룹 가져오기
@@ -39,7 +60,6 @@ public class AudioMixerController : Singleton<AudioMixerController>
         }
         else
         {
-            Debug.LogError("SFX 그룹을 찾을 수 없습니다.");
             return null;
         }
     }
@@ -48,23 +68,54 @@ public class AudioMixerController : Singleton<AudioMixerController>
     public void SetMasterVolume(float volume)
     {
         mixer.SetFloat(MasterGroupName, Mathf.Log10(volume) * 20);
+        data.masterVolumeValue = volume * 100f;
     }
 
     // BGM 볼륨 조절
     public void SetMusicVolume(float volume)
     {
         mixer.SetFloat(BGMGroupName, Mathf.Log10(volume) * 20);
+        data.bgmVolumeValue = volume * 100f;
     }
 
     // SFX 볼륨 조절
     public void SetSFXVolume(float volume)
     {
         mixer.SetFloat(SFXGroupName, Mathf.Log10(volume) * 20);
+        data.sfxVolumeValue = volume * 100f;
     }
 
     // Voice 볼륨 조절
     public void SetVoiceVolume(float volume)
     {
         mixer.SetFloat(VoiceGroupName, Mathf.Log10(volume) * 20);
+        data.voiceVolumeValue = volume * 100f;
+    }
+
+    public void Save()
+    {
+        SaveLoadManager.Save(data, SaveLoadMode.SoundSetting);
+    }
+
+    public SoundSettingData Load()
+    {
+        var loadData = SaveLoadManager.Load<SoundSettingData>(SaveLoadMode.SoundSetting);
+        SetMasterVolume(loadData.masterVolumeValue);
+        SetMusicVolume(loadData.bgmVolumeValue);
+        SetSFXVolume(loadData.sfxVolumeValue);
+        SetVoiceVolume(loadData.voiceVolumeValue);
+
+        data = loadData;
+        return data;
+    }
+
+    public void OnDestroy()
+    {
+        Save();
+    }
+
+    public void OnApplicationQuit()
+    {
+        Save();
     }
 }

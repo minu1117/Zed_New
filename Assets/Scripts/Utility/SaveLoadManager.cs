@@ -20,6 +20,7 @@ public enum SaveLoadMode
     Skill,
     PlayerData,
     Stage,
+    SoundSetting,
 }
 
 public static class SaveLoadManager
@@ -27,6 +28,7 @@ public static class SaveLoadManager
     private static string skillSavePath = Application.persistentDataPath + "/CurrentSkill.json";
     private static string playerDataSavePath = Application.persistentDataPath + "/PlayerData.json";
     private static string stageDataSavePath = Application.persistentDataPath + "/StageData.json";
+    private static string soundSettingSavePath = Application.persistentDataPath + "/SoundSetting.json";
 
     public static void Save<T>(Dictionary<T, T> saveDict, SaveLoadMode mode)
     {
@@ -109,6 +111,9 @@ public static class SaveLoadManager
                 break;
             case SaveLoadMode.Stage:
                 path = stageDataSavePath;
+                break;
+            case SaveLoadMode.SoundSetting:
+                path = soundSettingSavePath;
                 break;
         }
 

@@ -6,11 +6,13 @@ public class TitleSceneManager : MonoBehaviour
 {
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private Button startButton;
+    [SerializeField] private Button optionButton;
 
     private void Awake()
     {
         StartVideo();
         OnClickStartButton();
+        CustomSceneManager.Instance.SetOptionButton(optionButton);
     }
 
     public void OnClickStartButton()
@@ -19,6 +21,11 @@ public class TitleSceneManager : MonoBehaviour
             return;
 
         startButton.onClick.AddListener(CustomSceneManager.Instance.LoadGameScene);
+    }
+
+    public Button GetOptionButton()
+    {
+        return optionButton;
     }
 
     private void StartVideo()
