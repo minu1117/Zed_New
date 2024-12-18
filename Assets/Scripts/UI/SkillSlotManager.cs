@@ -114,7 +114,7 @@ public class SkillSlotManager : MonoBehaviour
 
     public void Load()
     {
-        var loadData = SaveLoadManager.Load<string>(SaveLoadMode.Skill);
+        var loadData = SaveLoadManager.LoadDictionary<string>(SaveLoadMode.Skill);
         if (loadData == null)
             return;
 

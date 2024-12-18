@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
+    public string stageName;
     public int stageNumber;
     [SerializeField] private List<Map> maps;
     [SerializeField] private Dictionary<int, Map> mapDict;
@@ -40,16 +41,35 @@ public class Stage : MonoBehaviour
             currentMap = mapDict[stageNumber];
         }
 
+        ResetCurrentMap();
+        TeleportPlayer();
+    }
+
+    public void MoveCurrentMap()
+    {
+        if (currentMap == null)
+            return;
+
+        SetActiveAllMaps(false);
+        ResetCurrentMap();
+        TeleportPlayer();
+    }
+
+    private void TeleportPlayer()
+    {
+        var agent = Zed.Instance.GetMoveController().GetAgent();
+        agent.Warp(currentMap.startingPos.position);
+        Zed.Instance.transform.position = currentMap.startingPos.position;
+    }
+
+    private void ResetCurrentMap()
+    {
         SetActiveMap(currentMap, true);
         currentMap.SetActiveLight(true);
         currentMap.SetEnemyGeneratorIsCreated(false);
         currentMap.SetEnemyGeneratorColliderEnable(true);
         currentMap.ResetPortal();
         currentMap.StartCheakMapClear();
-
-        var agent = Zed.Instance.GetMoveController().GetAgent();
-        agent.Warp(currentMap.startingPos.position);
-        Zed.Instance.transform.position = currentMap.startingPos.position;
     }
 
     public void StageClear()
@@ -77,4 +97,8 @@ public class Stage : MonoBehaviour
     {
         map.gameObject.SetActive(active);
     }
+
+    public void SetCurrentMap(Map map) { currentMap = map; }
+    public Dictionary<int, Map> GetMapDict() { return mapDict; }
+    public List<Map> GetAllMaps() { return maps; }
 }

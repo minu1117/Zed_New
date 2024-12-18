@@ -4,29 +4,34 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private StageManager stageManager;
-    [SerializeField] private GameObject leftDoor;
-    [SerializeField] private GameObject rightDoor;
-    [SerializeField] private float doorMoveDuration;
-    private float movePos = 0.5f;
-    private float defalutPos = 0.5f;
-    private BoxCollider coll;
+    [SerializeField] protected StageManager stageManager;
+    [SerializeField] protected GameObject leftDoor;
+    [SerializeField] protected GameObject rightDoor;
+    [SerializeField] protected float doorMoveDuration;
+    protected float movePos = 0.5f;
+    protected float defalutPos = 0.5f;
+    protected BoxCollider coll;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         coll = GetComponent<BoxCollider>();
         coll.enabled = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag != EnumConverter.GetString(CharacterEnum.Player))
             return;
 
-        StartCoroutine(Teleport());
+        Teleport();
     }
 
-    private IEnumerator Teleport()
+    protected void Teleport()
+    {
+        StartCoroutine(CoTeleport());
+    }
+
+    protected IEnumerator CoTeleport()
     {
         var sceneManager = CustomSceneManager.Instance;
         sceneManager.FadeIn();
@@ -37,6 +42,26 @@ public class Portal : MonoBehaviour
 
         ResetDoor();
         stageManager.NextStage();
+        sceneManager.FadeOut();
+        moveController.StartMove();
+    }
+
+    protected void TeleportSelectMap()
+    {
+        StartCoroutine (CoTeleportSelectMap());
+    }
+
+    protected IEnumerator CoTeleportSelectMap()
+    {
+        var sceneManager = CustomSceneManager.Instance;
+        sceneManager.FadeIn();
+        var moveController = Zed.Instance.GetMoveController();
+        moveController.StopMove();
+
+        yield return new WaitUntil(() => !sceneManager.isFade);
+
+        ResetDoor();
+        stageManager.MoveCurrentStage();
         sceneManager.FadeOut();
         moveController.StartMove();
     }
@@ -53,7 +78,7 @@ public class Portal : MonoBehaviour
         coll.enabled = false;
     }
 
-    private void Move(bool open)
+    protected void Move(bool open)
     {
         if (leftDoor == null || rightDoor == null)
             return;

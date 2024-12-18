@@ -1631,7 +1631,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressSlider: {fileID: 1814132667}
   progressText: {fileID: 838130663}
-  videoPlayer: {fileID: 435291434}
   fadeImage: {fileID: 10445666}
   fadeDuration: 1
   gameSceneName: GameScene

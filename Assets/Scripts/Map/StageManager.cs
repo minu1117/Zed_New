@@ -1,8 +1,14 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+
+[Serializable]
+public struct StageData
+{
+    public int currentStageNumber;
+    public int currentMapNumber;
+}
 
 public class StageManager : MonoBehaviour
 {
@@ -22,7 +28,11 @@ public class StageManager : MonoBehaviour
         {
             stageDict.Add(stage.stageNumber, stage);
         }
+    }
 
+    private void Start()
+    {
+        // 맵의 Awake가 실행되지 않을 수 있어 Start에서 맵 비활성화
         SetActiveAllStages(false);
     }
 
@@ -45,6 +55,7 @@ public class StageManager : MonoBehaviour
         if (currentStage == null)
         {
             startStage.SetActiveLight(false);
+            startStage.gameObject.SetActive(false);
             currentStage = stageDict[GetLowestStage()];
         }
 
@@ -54,9 +65,23 @@ public class StageManager : MonoBehaviour
             currentStage = stageDict[stageNumber];
         }
 
-
         SetActiveStage(currentStage, true);
         currentStage.NextMap();
+        skyboxChanger.ChangeToDaySkybox(currentStage.skybox);
+        ChangeSunSource(currentStage.currentMap.directionalLight);
+    }
+
+    public void MoveCurrentStage()
+    {
+        if (currentStage == null)
+            return;
+
+        SetActiveAllStages(false);
+        startStage.SetActiveLight(false);
+        startStage.gameObject.SetActive(false);
+
+        SetActiveStage(currentStage, true);
+        currentStage.MoveCurrentMap();
         skyboxChanger.ChangeToDaySkybox(currentStage.skybox);
         ChangeSunSource(currentStage.currentMap.directionalLight);
     }
@@ -98,11 +123,89 @@ public class StageManager : MonoBehaviour
         skyboxChanger.ChangeSunSource(light);
     }
 
-    public void Update()
+    public void SetCurrentStage(Stage stage) { currentStage = stage; }
+    public void SetCurrentMap(Map map)
     {
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (currentStage == null)
+            return;
+
+        currentStage.SetCurrentMap(map);
+    }
+    public Dictionary<int, Stage> GetStageDict() { return stageDict; }
+    public List<Stage> GetAllStages() { return stages; }
+    public Stage GetCurrentStage() { return currentStage; }
+    public Map GetCurrentMap() { return currentStage.currentMap; }
+
+    /********************************* Save & Load *********************************/
+
+    public void Save()
+    {
+        if (currentStage == null)
+            return;
+
+        StageData data = new StageData();
+        data.currentStageNumber = currentStage.stageNumber;
+        data.currentMapNumber = currentStage.currentMap.floor;
+
+        SaveLoadManager.Save(data, SaveLoadMode.Stage);
+    }
+
+    public StageData Load()
+    {
+        if (stageDict == null)
+            return default;
+
+        var loadData = SaveLoadManager.Load<StageData>(SaveLoadMode.Stage);
+        return loadData;
+    }
+
+    public void MoveSelectStage(StageData data)
+    {
+        if (!stageDict.ContainsKey(data.currentStageNumber))
+            return;
+
+        currentStage = stageDict[data.currentStageNumber];
+        var mapDict = currentStage.GetMapDict();
+
+        if (mapDict == null)
+            return;
+
+        if (!mapDict.ContainsKey(data.currentMapNumber))
+            return;
+
+        currentStage.currentMap = mapDict[data.currentMapNumber];
+
+    }
+
+    private void SaveSequnce()
+    {
+        if (currentStage == null)
+            return;
+
+        if (currentStage.currentMap == null)
+            return;
+
+        var loadData = Load();
+
+        // 이전보다 높거나 같은 스테이지일 경우
+        if (loadData.currentStageNumber <= currentStage.stageNumber)
         {
-            NextStage();
+            // 이전보다 높거나 같은 단계일 경우에만 저장
+            // 같은 경우를 넣은 이유 : 넣지 않을 시 첫 저장이 저장 되지 않음 (Json 파일이 없을 때 파일 생성 X)
+            if (loadData.currentMapNumber <= currentStage.currentMap.floor)
+            {
+                Save();
+            }
         }
+    }
+
+    public void OnApplicationQuit()
+    {
+        SaveSequnce();
+    }
+
+    public void OnDestroy()
+    {
+        SaveSequnce();
     }
 }

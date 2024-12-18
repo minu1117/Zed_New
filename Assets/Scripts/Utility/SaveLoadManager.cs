@@ -19,12 +19,14 @@ public enum SaveLoadMode
 {
     Skill,
     PlayerData,
+    Stage,
 }
 
 public static class SaveLoadManager
 {
     private static string skillSavePath = Application.persistentDataPath + "/CurrentSkill.json";
-    private static string playerDataSavePath = Application.persistentDataPath + "/Player.json";
+    private static string playerDataSavePath = Application.persistentDataPath + "/PlayerData.json";
+    private static string stageDataSavePath = Application.persistentDataPath + "/StageData.json";
 
     public static void Save<T>(Dictionary<T, T> saveDict, SaveLoadMode mode)
     {
@@ -34,7 +36,14 @@ public static class SaveLoadManager
         File.WriteAllText(path, json);
     }
 
-    public static Dictionary<T, T> Load<T>(SaveLoadMode mode)
+    public static void Save<T>(T data, SaveLoadMode mode)
+    {
+        var path = GetModePath(mode);
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(path, json);
+    }
+
+    public static Dictionary<T, T> LoadDictionary<T>(SaveLoadMode mode)
     {
         string path = GetModePath(mode);
 
@@ -54,6 +63,21 @@ public static class SaveLoadManager
         else
         {
             return null;
+        }
+    }
+
+    public static T Load<T>(SaveLoadMode mode)
+    {
+        string path = GetModePath(mode);
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            var jsonParse = JsonUtility.FromJson<T>(json);
+            return jsonParse;
+        }
+        else
+        {
+            return default;
         }
     }
 
@@ -82,6 +106,9 @@ public static class SaveLoadManager
                 break;
             case SaveLoadMode.PlayerData:
                 path = playerDataSavePath;
+                break;
+            case SaveLoadMode.Stage:
+                path = stageDataSavePath;
                 break;
         }
 
