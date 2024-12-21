@@ -10,7 +10,6 @@ public class CameraShakeController : MonoBehaviour
     public float frequencyGain;
 
     private CinemachineBasicMultiChannelPerlin perlin;
-    private WaitForSeconds waitForSecnonds;
     private Coroutine shakeCoroutine;
 
     private void Awake()
@@ -18,8 +17,16 @@ public class CameraShakeController : MonoBehaviour
         perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         perlin.m_AmplitudeGain = 0;
         perlin.m_FrequencyGain = 0;
+    }
 
-        waitForSecnonds = new WaitForSeconds(shakeDuration);
+    public void PowerfulShake()
+    {
+        if (shakeCoroutine != null)
+        {
+            StopCoroutine(shakeCoroutine);
+        }
+
+        shakeCoroutine = StartCoroutine(CoShake(shakeDuration*2, amplitudeGain*2, frequencyGain*2));
     }
 
     public void ShakeCamera()
@@ -29,15 +36,15 @@ public class CameraShakeController : MonoBehaviour
             StopCoroutine(shakeCoroutine);
         }
 
-        shakeCoroutine = StartCoroutine(CoShake());
+        shakeCoroutine = StartCoroutine(CoShake(shakeDuration, amplitudeGain, frequencyGain));
     }
 
-    private IEnumerator CoShake()
+    private IEnumerator CoShake(float duration, float amplitude, float frequency)
     {
-        perlin.m_AmplitudeGain = amplitudeGain;
-        perlin.m_FrequencyGain = frequencyGain;
+        perlin.m_AmplitudeGain = amplitude;
+        perlin.m_FrequencyGain = frequency;
 
-        yield return waitForSecnonds;
+        yield return new WaitForSeconds(duration);
 
         perlin.m_AmplitudeGain = 0;
         perlin.m_FrequencyGain = 0;

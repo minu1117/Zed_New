@@ -90,4 +90,7 @@ public class SkillData : ScriptableObject
 
     [Header("사용 전 경직 여부")]
     public bool isStiffen = false;
+
+    [Header("카메라 흔들림 여부")]
+    public bool isCameraShake = false;
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CustomSceneManager : Singleton<CustomSceneManager>
 {
     [SerializeField] private Option option;
+    [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private Slider progressSlider;
     [SerializeField] private TextMeshProUGUI progressText;
     [SerializeField] private Image fadeImage;
@@ -54,6 +55,17 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
 
         FadeOut();
         isLoaded = false;
+
+        if (sceneName == gameSceneName)
+        {
+            //var gameSceneMgr = FindFirstObjectByType<GameSceneManager>();
+            var gameSceneMgr = GameSceneManager.Instance;
+            if (gameSceneMgr != null)
+            {
+                var camController = gameSceneMgr.GetCameraChakeController();
+                dialogueManager.SetCamShakeController(camController);
+            }
+        }
     }
 
     // 투명 -> 불투명

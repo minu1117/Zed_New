@@ -28,11 +28,11 @@ public struct TalkData
     public bool isEnabled;
     public bool shake;
     public bool bounce;
+    public bool isCameraShake;
 }
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    //public Dictionary<string, List<TalkData>> allTalkData;  // CSV에서 가져온 모든 대화 정보를 저장할 곳
     public Dictionary<string, Dictionary<string, List<TalkData>>> allTalkData;  // CSV에서 가져온 모든 대화 정보를 저장할 곳
     public List<string> csvFileNames;
     private Coroutine messageCoroutine;
@@ -42,8 +42,6 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public float typingSpeed;                               // 텍스트가 나오는 속도
     public float textRevealTime;                            // 모든 텍스트가 나와야 할 시간
-
-    //public string csvFileName;                              // 대화를 가져올 CSV 파일의 이름
 
     public TextMeshProUGUI dialogueTMP;                     // 대사 칸
     public TextMeshProUGUI nameTMP;                         // 캐릭터 이름이 나올 칸
@@ -59,12 +57,13 @@ public class DialogueManager : Singleton<DialogueManager>
     private string enabledColumnStr;                        // CSV의 이미지를 출력 여부 열
     private string shakeColumnStr;                          // CSV의 이미지 흔들림 여부 열
     private string bounceColumnStr;                         // CSV의 이미지 점프 여부 열
+    private string cameraShakeColumnStr;                    // CSV의 카메라 흔들림 여부 열
 
     private string endStr;                                  // CSV에서 쓴 대화가 끝난 후 다음 열에 작성할 텍스트 (대화 끝)
     private string lineSplitStr;                            // CSV에서 쓴 들여쓰기 텍스트 (텍스트 불러올 때 들여쓰기 확인)
     private string emptySellStr;                            // CSV에서 쓴 빈 공간에 적을 텍스트 (텍스트 불러올 때 스킵용)
     private string addressWhiteSpaceStr;                    // CSV에서 쓴 캐릭터 이미지 주소의 띄어쓰기 대신 사용한 문자 (띄어쓰기 시 오동작 할 위험이 있어 해당 문자로 사용)
-    private string addressNormalImageStr;                   // CSV에서 쓴 캐릭터 이미지 주소의 평상시 버전 이미지를 가져오기 위한 것
+    //private string addressNormalImageStr;                   // CSV에서 쓴 캐릭터 이미지 주소의 평상시 버전 이미지를 가져오기 위한 것
     private Dictionary<string, Sprite> currentTalkImages;   // 현재 대화에서 사용될 이미지들
 
     public bool isTalking = false;                          // 대화 여부 확인용
@@ -75,6 +74,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private List<string> zedNameStrList;                    // 주인공 이름 저장용
     private CharacterMoveController character;              // 대화를 진행중인 캐릭터 저장용
+    private CameraShakeController shakeController;          // 카메라 흔들림 컨트롤러
 
     protected override void Awake()
     {
@@ -88,10 +88,11 @@ public class DialogueManager : Singleton<DialogueManager>
         lineSplitStr = "\\n";                               // CSV에서 쓴 들여쓰기 텍스트
         emptySellStr = "-";                                 // CSV에서 쓴 빈 공간에 적을 텍스트
         addressWhiteSpaceStr = "_";                         // CSV에서 쓴 캐릭터 이미지 주소의 띄어쓰기 대신 사용한 문자
-        addressNormalImageStr = "normal";                   // CSV에서 쓴 캐릭터 이미지 주소의 평상시 버전 이미지를 가져오기 위한 것
+        //addressNormalImageStr = "normal";                   // CSV에서 쓴 캐릭터 이미지 주소의 평상시 버전 이미지를 가져오기 위한 것
         enabledColumnStr = "IsEnabled";                     // CSV의 이미지를 출력 여부 열 텍스트
         shakeColumnStr = "Shake";                           // CSV의 이미지 흔들림 여부 열 텍스트
         bounceColumnStr = "Bounce";                         // CSV의 이미지 점프 여부 열 텍스트
+        cameraShakeColumnStr = "CameraShake";               // CSV의 카메라 흔들림 여부 열 텍스트
 
         currentTalkImages = new Dictionary<string, Sprite>();
         blinkWait = new WaitForSeconds(blinkTime);
@@ -153,7 +154,8 @@ public class DialogueManager : Singleton<DialogueManager>
                     address = csv[i][addressColumnStr].ToString(),    // 캐릭터 이미지
                     isEnabled = csv[i][enabledColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][enabledColumnStr]) : true,   // 이미지 활성화 여부. 비어있지 않으면 가져오고, 비어있으면 true
                     shake = csv[i][shakeColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][shakeColumnStr]) : false,          // 흔들림 여부. 비어있지 않으면 가져오고, 비어있으면 false
-                    bounce = csv[i][bounceColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][bounceColumnStr]) : false        // 점프 여부. 비어있지 않으면 가져오고, 비어있으면 false
+                    bounce = csv[i][bounceColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][bounceColumnStr]) : false,       // 점프 여부. 비어있지 않으면 가져오고, 비어있으면 false
+                    isCameraShake = csv[i][cameraShakeColumnStr].ToString() != string.Empty ? Convert.ToBoolean(csv[i][cameraShakeColumnStr]) : false
                 };
 
                 // 저장한 대화에서 개행 처리를 해야 할 경우
@@ -198,16 +200,6 @@ public class DialogueManager : Singleton<DialogueManager>
         return dataList.FirstOrDefault(element => !strList.Contains(element.name));
     }
 
-    // 캐릭터 이미지 주소 string 안의 캐릭터 이름 string 가져오기
-    private string SetDefalutAddress(string address)
-    {
-        if (address == null || address == emptySellStr || address == string.Empty)
-            return string.Empty;
-
-        string[] parts = address.Split(addressWhiteSpaceStr);
-        return parts[0];
-    }
-
     // 이미지 적용
     private async Task ApplyImage(TalkData data, Image image)
     {
@@ -248,30 +240,11 @@ public class DialogueManager : Singleton<DialogueManager>
         string zedName = firstZedData.name;
         string otherName = firstOtherData.name;
 
-        // 첫 시작 이미지는 일반 표정의 이미지로 변경
-        //if (IsValidName(zedName))
-        //{
-        //    firstZedData.address = $"{SetDefalutAddress(firstZedData.address)}{addressWhiteSpaceStr}{addressNormalImageStr}";
-        //}
-        //if (IsValidName(otherName))
-        //{
-        //    firstOtherData.address = $"{SetDefalutAddress(firstOtherData.address)}{addressWhiteSpaceStr}{addressNormalImageStr}";
-        //}
-
         // TalkData가 할당 되지 않았을 경우 캐릭터가 없는 것으로 판단, 이미지 오브젝트 비활성화
         leftCharacterImage.SetActive(false);
         rightCharacterImage.SetActive(false);
         await ApplyImage(firstZedData, leftCharacterImage.image);
         await ApplyImage(firstOtherData, rightCharacterImage.image);
-
-        //if (firstZedData.address == emptySellStr || firstZedData.address == string.Empty)
-        //{
-        //    leftCharacterImage.SetActive(false);
-        //}
-        //if (firstOtherData.address == emptySellStr || firstOtherData.address == string.Empty)
-        //{
-        //    rightCharacterImage.SetActive(false);
-        //}
 
         // 이름이 유효하지 않을 경우 return
         if (!IsValidName(zedName) && !IsValidName(otherName))
@@ -317,14 +290,7 @@ public class DialogueManager : Singleton<DialogueManager>
         // 대화가 끝났을 경우 모두 초기화 한 후 return
         if (currentTalkData.Count == currentTalkIndex)
         {
-            opacityPanel.SetActive(false);
-            currentTalkIndex = 0;
-            isTalking = false;
-            dialogueTMP.text = string.Empty;
-            dialoguePanel.SetActive(false);
-            character.StartMove();
-            Zed.Instance.SetAttackUse(true);
-            currentTalkImages.Clear();
+            ResetDialogue();
             return;
         }
 
@@ -374,6 +340,11 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             leftCharacterImage.SetActive(false);
             rightCharacterImage.SetActive(false);
+        }
+
+        if (currentDialogue.isCameraShake && shakeController != null)
+        {
+            shakeController.PowerfulShake();
         }
 
         // 대사 시작 코루틴 실행
@@ -440,6 +411,18 @@ public class DialogueManager : Singleton<DialogueManager>
         ChangeActiveDialoguePanel();    // 활성화
     }
 
+    public void ResetDialogue()
+    {
+        opacityPanel.SetActive(false);
+        currentTalkIndex = 0;
+        isTalking = false;
+        dialogueTMP.text = string.Empty;
+        dialoguePanel.SetActive(false);
+        character.StartMove();
+        Zed.Instance.SetAttackUse(true);
+        currentTalkImages.Clear();
+    }
+
     public void SetTypingType(TypingType type)
     {
         currentTypingType = type;
@@ -477,6 +460,8 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         this.character = character;
     }
+
+    public void SetCamShakeController(CameraShakeController controller) { shakeController = controller; }
 
     public void Update()
     {

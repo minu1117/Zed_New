@@ -18,6 +18,7 @@ public class Option : MonoBehaviour
 
         quitButton.onClick.AddListener(() => Application.Quit());
         titleExitButton.onClick.AddListener(() => SetActiveOptionPanel(false));
+        titleExitButton.onClick.AddListener(() => DialogueManager.Instance.ResetDialogue());
         titleExitButton.onClick.AddListener(() => CustomSceneManager.Instance.LoadTitleScene());
     }
 

@@ -34,6 +34,11 @@ public class ShotSkill : Skill
 
         yield return waitUseDelay;
 
+        if (data.isCameraShake)
+        {
+            GameSceneManager.Instance.GetCameraChakeController().ShakeCamera();
+        }
+
         foreach (var coll in colliders)
         {
             coll.GetCollider().enabled = true;

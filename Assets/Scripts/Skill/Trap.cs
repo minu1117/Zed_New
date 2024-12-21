@@ -86,6 +86,11 @@ public class Trap : Skill
             coll.GetCollider().enabled = true;
         }
 
+        if (data.isCameraShake)
+        {
+            GameSceneManager.Instance.GetCameraChakeController().ShakeCamera();
+        }
+
         isColorAdded = false;
         SoundManager.Instance.PlayOneShot(explosionSound);
         UseTrapEffect(burstParticle, transform);
