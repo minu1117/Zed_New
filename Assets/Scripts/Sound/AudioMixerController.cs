@@ -1,8 +1,6 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
 // 오디오 그룹 타입
 public enum AudioType
@@ -25,22 +23,10 @@ public struct SoundSettingData
 public class AudioMixerController : Singleton<AudioMixerController>
 {
     [SerializeField] private AudioMixer mixer;              // 오디오 믹서
-    [SerializeField] private Slider MasterSlider;           // 마스터 볼륨 슬라이더
-    [SerializeField] private TextMeshProUGUI masterTmp;     // 마스터 볼륨 텍스트
-
-    [SerializeField] private Slider BGMSlider;              // BGM 볼륨 슬라이더
-    [SerializeField] private TextMeshProUGUI bgmTmp;        // BGM 볼륨 텍스트
-
-    [SerializeField] private Slider SFXSlider;              // SFX 볼륨 슬라이더
-    [SerializeField] private TextMeshProUGUI sfxTmp;        // SFX 볼륨 텍스트
-
-    [SerializeField] private Slider VoiceSlider;            // Voice 볼륨 슬라이더
-    [SerializeField] private TextMeshProUGUI voiceTmp;      // Voice 볼륨 텍스트
-
-    public string MasterGroupName;                          // 마스터 볼륨 그룹 이름
-    public string BGMGroupName;                             // BGM 볼륨 그룹 이름
-    public string SFXGroupName;                             // SFX 볼륨 그룹 이름
-    public string VoiceGroupName;                           // Voice 볼륨 그룹 이름
+    private string MasterGroupName;                          // 마스터 볼륨 그룹 이름
+    private string BGMParamName;                             // BGM 볼륨 파라미터 이름
+    private string SFXParamName;                             // SFX 볼륨 파라미터 이름
+    private string VoiceParamName;                           // Voice 볼륨 파라미터 이름
 
     private SoundSettingData data;
 
@@ -48,6 +34,10 @@ public class AudioMixerController : Singleton<AudioMixerController>
     {
         base.Awake();
         data = new();
+        MasterGroupName = EnumConverter.GetString(AudioType.Master);
+        BGMParamName = EnumConverter.GetString(AudioType.BGM);
+        SFXParamName = EnumConverter.GetString(AudioType.SFX);
+        VoiceParamName = EnumConverter.GetString(AudioType.Voice);
     }
 
     // 오디오 믹서 그룹 가져오기
@@ -67,28 +57,60 @@ public class AudioMixerController : Singleton<AudioMixerController>
     // 마스터 볼륨 조절
     public void SetMasterVolume(float volume)
     {
-        mixer.SetFloat(MasterGroupName, Mathf.Log10(volume) * 20);
+        if (volume <= 0.0001f)
+        {
+            mixer.SetFloat(MasterGroupName, -80f); // 음소거
+        }
+        else
+        {
+            mixer.SetFloat(MasterGroupName, Mathf.Log10(volume) * 20);
+        }
+
         data.masterVolumeValue = volume * 100f;
     }
 
     // BGM 볼륨 조절
     public void SetMusicVolume(float volume)
     {
-        mixer.SetFloat(BGMGroupName, Mathf.Log10(volume) * 20);
+        if (volume <= 0.0001f)
+        {
+            mixer.SetFloat(BGMParamName, -80f); // 음소거
+        }
+        else
+        {
+            mixer.SetFloat(BGMParamName, Mathf.Log10(volume) * 20);
+        }
+
         data.bgmVolumeValue = volume * 100f;
     }
 
     // SFX 볼륨 조절
     public void SetSFXVolume(float volume)
     {
-        mixer.SetFloat(SFXGroupName, Mathf.Log10(volume) * 20);
+        if (volume <= 0.0001f)
+        {
+            mixer.SetFloat(SFXParamName, -80f); // 음소거
+        }
+        else
+        {
+            mixer.SetFloat(SFXParamName, Mathf.Log10(volume) * 20);
+        }
+
         data.sfxVolumeValue = volume * 100f;
     }
 
     // Voice 볼륨 조절
     public void SetVoiceVolume(float volume)
     {
-        mixer.SetFloat(VoiceGroupName, Mathf.Log10(volume) * 20);
+        if (volume <= 0.0001f)
+        {
+            mixer.SetFloat(VoiceParamName, -80f); // 음소거
+        }
+        else
+        {
+            mixer.SetFloat(VoiceParamName, Mathf.Log10(volume) * 20);
+        }
+
         data.voiceVolumeValue = volume * 100f;
     }
 

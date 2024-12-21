@@ -8,5 +8,6 @@ public class GameSceneManager : MonoBehaviour
     private void Awake()
     {
         CustomSceneManager.Instance.SetOptionButton(optionButton);
+        CustomSceneManager.Instance.GetOption().SetActiveTitleOptionButtons(true);
     }
 }

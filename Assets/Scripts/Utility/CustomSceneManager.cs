@@ -95,6 +95,11 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
         option.SetOptionButton(button);
     }
 
+    public Option GetOption()
+    {
+        return option;
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.U))

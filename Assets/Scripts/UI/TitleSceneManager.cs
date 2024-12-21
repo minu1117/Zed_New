@@ -7,12 +7,15 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private Button startButton;
     [SerializeField] private Button optionButton;
+    [SerializeField] private Button exitButton;
 
     private void Awake()
     {
         StartVideo();
         OnClickStartButton();
         CustomSceneManager.Instance.SetOptionButton(optionButton);
+        CustomSceneManager.Instance.GetOption().SetActiveTitleOptionButtons(false);
+        exitButton.onClick.AddListener(() => Application.Quit());
     }
 
     public void OnClickStartButton()

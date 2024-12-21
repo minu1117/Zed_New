@@ -6,6 +6,8 @@ public class Option : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private GameObject optionPanel;
     [SerializeField] private SoundSetting soundSetting;
+    [SerializeField] private Button titleExitButton;
+    [SerializeField] private Button quitButton;
     private Button optionButton;
 
     private void Start()
@@ -13,6 +15,10 @@ public class Option : MonoBehaviour
         soundSetting.Init();
         SetActiveOptionPanel(false);
         exitButton.onClick.AddListener(() => SetActiveOptionPanel(false));
+
+        quitButton.onClick.AddListener(() => Application.Quit());
+        titleExitButton.onClick.AddListener(() => SetActiveOptionPanel(false));
+        titleExitButton.onClick.AddListener(() => CustomSceneManager.Instance.LoadTitleScene());
     }
 
     public void SetOptionButton(Button button)
@@ -24,5 +30,11 @@ public class Option : MonoBehaviour
     public void SetActiveOptionPanel(bool set)
     {
         optionPanel.SetActive(set);
+    }
+
+    public void SetActiveTitleOptionButtons(bool set)
+    {
+        titleExitButton.gameObject.SetActive(set);
+        quitButton.gameObject.SetActive(set);
     }
 }
