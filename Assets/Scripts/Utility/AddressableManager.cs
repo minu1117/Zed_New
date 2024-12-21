@@ -14,7 +14,7 @@ public static class AddressableManager
         if (applyImage == null || address == null || address == string.Empty || address == "-")   // 이미지가 없거나, 이미지 주소가 비었을 경우 return
             return;
 
-        if (applyImage.sprite.name == GetAddressName(address))                  // 같은 이미지일 경우 return
+        if (applyImage.sprite != null && applyImage.sprite.name == GetAddressName(address))                  // 같은 이미지일 경우 return
             return;
 
         var loadAsync = Addressables.LoadAssetAsync<Sprite>(address);           // 어드레서블에 저장된 이미지 로딩

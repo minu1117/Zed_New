@@ -98,6 +98,11 @@ public class SkillSlotManager : MonoBehaviour
         return buttonDict;
     }
 
+    public List<SkillButtonData> GetAllPlayerSkillButtonData()
+    {
+        return playerSkillDatas;
+    }
+
     public void Save()
     {
         saveSkills = new();

@@ -15,9 +15,17 @@ public class SerializableKeyValuePairList<T>
     public List<SerializableKeyValuePair<T>> pairList;
 }
 
+[Serializable]
+public class ListWrapper<T>
+{
+    public List<T> list;
+}
+
+
 public enum SaveLoadMode
 {
     Skill,
+    SkillTree,
     PlayerData,
     Stage,
     SoundSetting,
@@ -26,6 +34,7 @@ public enum SaveLoadMode
 public static class SaveLoadManager
 {
     private static string skillSavePath = Application.persistentDataPath + "/CurrentSkill.json";
+    private static string skillTreeSavePath = Application.persistentDataPath + "/SkillTree.json";
     private static string playerDataSavePath = Application.persistentDataPath + "/PlayerData.json";
     private static string stageDataSavePath = Application.persistentDataPath + "/StageData.json";
     private static string soundSettingSavePath = Application.persistentDataPath + "/SoundSetting.json";
@@ -105,6 +114,9 @@ public static class SaveLoadManager
         {
             case SaveLoadMode.Skill:
                 path = skillSavePath;
+                break;
+            case SaveLoadMode.SkillTree:
+                path = skillTreeSavePath;
                 break;
             case SaveLoadMode.PlayerData:
                 path = playerDataSavePath;
