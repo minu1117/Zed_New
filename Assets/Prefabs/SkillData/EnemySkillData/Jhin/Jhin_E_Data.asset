@@ -31,6 +31,7 @@ MonoBehaviour:
   distance: 10
   indicator: {fileID: 0}
   effect: {fileID: 0}
+  hitEffect: {fileID: 0}
   useClips:
   - {fileID: 8300000, guid: 4ae4f419d136bfb4aa4f0a3da4aa85de, type: 3}
   attackClips: []
@@ -41,3 +42,4 @@ MonoBehaviour:
   complateVoiceClips: []
   isSelf: 0
   isStiffen: 0
+  isCameraShake: 1

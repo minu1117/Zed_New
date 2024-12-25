@@ -30,7 +30,7 @@ MonoBehaviour:
   isDashPass: 0
   distance: 80
   indicator: {fileID: 0}
-  effect: {fileID: 975265344397167380, guid: 8460a897a50912a40bdba1f8bf7166ee, type: 3}
+  effect: {fileID: 9149036405415236575, guid: e73816eabba4a0741b096b6bd1801e12, type: 3}
   hitEffect: {fileID: 7074227076283317439, guid: 14862e9e4cdeaa940b2c3121e366973e, type: 3}
   useClips:
   - {fileID: 8300000, guid: 7555335ab891b9c41b46a1ac61455768, type: 3}
@@ -42,3 +42,4 @@ MonoBehaviour:
   complateVoiceClips: []
   isSelf: 0
   isStiffen: 0
+  isCameraShake: 0
