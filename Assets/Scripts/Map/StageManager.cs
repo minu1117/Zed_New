@@ -16,6 +16,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private SkyboxChanger skyboxChanger;
 
     [SerializeField] private List<Stage> stages;
+    [SerializeField] private EndingCredit endingCredit;
     private Dictionary<int, Stage> stageDict;
     private Stage currentStage;
 
@@ -48,6 +49,12 @@ public class StageManager : MonoBehaviour
 
         if (currentStage != null && currentStage.lastStage && currentStage.stageClear)
         {
+            startStage.gameObject.SetActive(true);
+            skyboxChanger.ChangeToDaySkybox(Skybox.Defalut);
+            ChangeSunSource(startStage.GetDirectionalLight());
+
+            startStage.Warp();
+            endingCredit.Ending();
             // ending
             return;
         }

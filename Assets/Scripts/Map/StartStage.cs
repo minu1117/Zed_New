@@ -12,8 +12,7 @@ public class StartStage : MonoBehaviour
 
     public void Awake()
     {
-        Zed.Instance.GetMoveController().GetAgent().Warp(startPos.transform.position);
-        Zed.Instance.gameObject.transform.position = startPos.transform.position;
+        Warp();
     }
 
     private void Start()
@@ -24,6 +23,12 @@ public class StartStage : MonoBehaviour
         StartBgm();
         map.StartCheakMapClear();
         storyPortal.Open();
+    }
+
+    public void Warp()
+    {
+        Zed.Instance.GetMoveController().GetAgent().Warp(startPos.transform.position);
+        Zed.Instance.gameObject.transform.position = startPos.transform.position;
     }
 
     public void StartBgm()
@@ -41,4 +46,6 @@ public class StartStage : MonoBehaviour
     {
         map.SetActiveLight(set);
     }
+
+    public Light GetDirectionalLight() { return directionalLight; }
 }
