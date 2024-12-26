@@ -8,6 +8,7 @@ public class StartStage : MonoBehaviour
     [SerializeField] private Portal storyPortal;
     [SerializeField] private Portal bossRaidPortal;
     [SerializeField] private Portal challengePortal;
+    [SerializeField] private AudioClip bgmClip;
 
     public void Awake()
     {
@@ -20,8 +21,20 @@ public class StartStage : MonoBehaviour
         if (storyPortal == null)
             return;
 
+        StartBgm();
         map.StartCheakMapClear();
         storyPortal.Open();
+    }
+
+    public void StartBgm()
+    {
+        SoundManager.Instance.Play(bgmClip);
+        SoundManager.Instance.SetLoop(bgmClip, true);
+    }
+
+    public void StopBgm()
+    {
+        SoundManager.Instance.Stop(bgmClip);
     }
 
     public void SetActiveLight(bool set)

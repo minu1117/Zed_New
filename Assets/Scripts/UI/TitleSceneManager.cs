@@ -8,6 +8,7 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Button optionButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private AudioClip titleSceneBgm;
 
     private void Awake()
     {
@@ -16,6 +17,8 @@ public class TitleSceneManager : MonoBehaviour
         CustomSceneManager.Instance.SetOptionButton(optionButton);
         CustomSceneManager.Instance.GetOption().SetActiveTitleOptionButtons(false);
         exitButton.onClick.AddListener(() => Application.Quit());
+        SoundManager.Instance.Play(titleSceneBgm);
+        SoundManager.Instance.SetLoop(titleSceneBgm, true);
     }
 
     public void OnClickStartButton()
@@ -23,6 +26,7 @@ public class TitleSceneManager : MonoBehaviour
         if (startButton == null)
             return;
 
+        startButton.onClick.AddListener(() => SoundManager.Instance.Stop(titleSceneBgm));
         startButton.onClick.AddListener(CustomSceneManager.Instance.LoadGameScene);
     }
 

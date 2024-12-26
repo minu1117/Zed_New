@@ -1420,7 +1420,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be221a0b92f2f8469f5774111aa753e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSounds: []
+  bgmSounds:
+  - {fileID: 8300000, guid: 7e9563ab38e56ce45bf0c9e966957625, type: 3}
+  - {fileID: 8300000, guid: db74baa0966daa84cb0f84e7c7bc5b33, type: 3}
+  - {fileID: 8300000, guid: 2187d8851f135814ca9679dcaa66b79a, type: 3}
+  - {fileID: 8300000, guid: 3a926723e15273c40a52e5b5070797e6, type: 3}
+  - {fileID: 8300000, guid: 4f3fe76458bf67a48b22a6c613af802c, type: 3}
+  - {fileID: 8300000, guid: 9388ad335dfb8784388a969a0258a103, type: 3}
+  - {fileID: 8300000, guid: 846c812f2d0f455479d8ef24095211db, type: 3}
+  - {fileID: 8300000, guid: dd711edca2f3ae445adacceaaddcef21, type: 3}
+  - {fileID: 8300000, guid: dd0f4df5576b0a046aadaa46d51d0e48, type: 3}
+  - {fileID: 8300000, guid: 9be342e9e00567d4cb35eaabfbc028cb, type: 3}
   sfxSounds:
   - {fileID: 8300000, guid: a3fd9e9120c2b95418e559fa35be6457, type: 3}
   - {fileID: 8300000, guid: e0d21bb6cf429f04884c869602a4a173, type: 3}
@@ -4504,6 +4514,7 @@ MonoBehaviour:
   startButton: {fileID: 1980784710}
   optionButton: {fileID: 1477385084}
   exitButton: {fileID: 1116898888}
+  titleSceneBgm: {fileID: 8300000, guid: 9be342e9e00567d4cb35eaabfbc028cb, type: 3}
 --- !u!4 &1079940435
 Transform:
   m_ObjectHideFlags: 0

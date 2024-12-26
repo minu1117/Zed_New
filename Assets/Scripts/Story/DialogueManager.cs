@@ -418,8 +418,12 @@ public class DialogueManager : Singleton<DialogueManager>
         isTalking = false;
         dialogueTMP.text = string.Empty;
         dialoguePanel.SetActive(false);
-        character.StartMove();
-        Zed.Instance.SetAttackUse(true);
+
+        if (character != null)
+        {
+            character.StartMove();
+            Zed.Instance.SetAttackUse(true);
+        }
         currentTalkImages.Clear();
     }
 

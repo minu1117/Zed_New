@@ -56,6 +56,7 @@ public class StageManager : MonoBehaviour
         {
             startStage.SetActiveLight(false);
             startStage.gameObject.SetActive(false);
+            startStage.StopBgm();
             currentStage = stageDict[GetLowestStage()];
         }
 
@@ -79,6 +80,7 @@ public class StageManager : MonoBehaviour
         SetActiveAllStages(false);
         startStage.SetActiveLight(false);
         startStage.gameObject.SetActive(false);
+        startStage.StopBgm();
 
         SetActiveStage(currentStage, true);
         currentStage.MoveCurrentMap();

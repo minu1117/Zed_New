@@ -8,6 +8,8 @@ public class Stage : MonoBehaviour
     public int stageNumber;
     [SerializeField] private List<Map> maps;
     [SerializeField] private Dictionary<int, Map> mapDict;
+    [SerializeField] private AudioClip normalBGM;
+    [SerializeField] private AudioClip bossBGM;
     public bool lastStage;
     public bool stageClear { get; set; } = false;
     public Map currentMap { get; set; }
@@ -32,6 +34,8 @@ public class Stage : MonoBehaviour
         if (currentMap == null)
         {
             currentMap = mapDict[GetLowestMap()];
+            SoundManager.Instance.Play(normalBGM);
+            SoundManager.Instance.SetLoop(normalBGM, true);
         }
         else
         {
@@ -39,6 +43,13 @@ public class Stage : MonoBehaviour
 
             int stageNumber = currentMap.floor + 1;
             currentMap = mapDict[stageNumber];
+
+            if (currentMap != null && currentMap.lastFloor)
+            {
+                SoundManager.Instance.Stop(normalBGM);
+                SoundManager.Instance.Play(bossBGM);
+                SoundManager.Instance.SetLoop(bossBGM, true);
+            }
         }
 
         ResetCurrentMap();
@@ -49,6 +60,17 @@ public class Stage : MonoBehaviour
     {
         if (currentMap == null)
             return;
+
+        if (!currentMap.lastFloor)
+        {
+            SoundManager.Instance.Play(normalBGM);
+            SoundManager.Instance.SetLoop(normalBGM, true);
+        }
+        else
+        {
+            SoundManager.Instance.Play(bossBGM);
+            SoundManager.Instance.SetLoop(bossBGM, true);
+        }
 
         SetActiveAllMaps(false);
         ResetCurrentMap();
@@ -74,6 +96,7 @@ public class Stage : MonoBehaviour
 
     public void StageClear()
     {
+        SoundManager.Instance.Stop(bossBGM);
         stageClear = true;
         currentMap = null;
         SetActiveAllMaps(false);
