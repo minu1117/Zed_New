@@ -63,7 +63,9 @@ public class Map : MonoBehaviour
 
         enemyGeneratorController.ResetEnemyCount();
         isClear = true;
-        portal.Open();
+
+        if (portal != null)
+            portal.Open();
     }
 
     private bool GetIsClear()
@@ -116,6 +118,9 @@ public class Map : MonoBehaviour
 
     public void ResetPortal()
     {
+        if (portal == null)
+            return;
+
         portal.ResetDoor();
     }
 

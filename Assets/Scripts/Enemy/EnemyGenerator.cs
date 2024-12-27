@@ -52,6 +52,11 @@ public class EnemyGenerator : MonoBehaviour
             skillParentObj.transform.SetParent(poolObj.transform);
             enemySkillDict.Add(name, skillParentObj);
         }
+
+        if (enemyGeneratorController == null)
+        {
+            enemyGeneratorController = GetComponentInParent<EnemyGeneratorController>();
+        }
     }
 
     public void SpawnAllEnemy()

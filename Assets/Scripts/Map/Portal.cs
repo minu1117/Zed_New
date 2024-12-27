@@ -5,6 +5,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     [SerializeField] protected StageManager stageManager;
+    [SerializeField] protected GameObject blockObj;
     [SerializeField] protected GameObject leftDoor;
     [SerializeField] protected GameObject rightDoor;
     [SerializeField] protected float doorMoveDuration;
@@ -68,12 +69,22 @@ public class Portal : MonoBehaviour
 
     public void Open()
     {
+        if (blockObj != null)
+        {
+            blockObj.SetActive(false);
+        }
+
         Move(true);
         coll.enabled = true;
     }
 
     public void Close()
     {
+        if (blockObj != null)
+        {
+            blockObj.SetActive(true);
+        }
+
         Move(false);
         coll.enabled = false;
     }

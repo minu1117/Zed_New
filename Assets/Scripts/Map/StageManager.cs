@@ -47,6 +47,7 @@ public class StageManager : MonoBehaviour
             SetStageClear(currentStage);
         }
 
+        // ending
         if (currentStage != null && currentStage.lastStage && currentStage.stageClear)
         {
             startStage.gameObject.SetActive(true);
@@ -55,7 +56,7 @@ public class StageManager : MonoBehaviour
 
             startStage.Warp();
             endingCredit.Ending();
-            // ending
+            GameSceneManager.Instance.SetEnding(true);
             return;
         }
 
@@ -131,7 +132,9 @@ public class StageManager : MonoBehaviour
     {
         skyboxChanger.ChangeSunSource(light);
     }
-
+    public void SetActiveStartStage(bool set) { startStage.gameObject.SetActive(set); }
+    public void StopStartStageBGM() { startStage.StopBgm(); }
+    public void SetActiveStartStageLight(bool set) { startStage.SetActiveLight(set); }
     public void SetCurrentStage(Stage stage) { currentStage = stage; }
     public void SetCurrentMap(Map map)
     {

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class EnemyGeneratorController : MonoBehaviour
 {
-    [SerializeField] private List<EnemyGenerator> generators;
-    private Map map;
-    private int enemyCount = 0;
-    private bool isCreated = false;
-    private BoxCollider coll;
+    [SerializeField] protected List<EnemyGenerator> generators;
+    protected Map map;
+    protected int enemyCount = 0;
+    protected bool isCreated = false;
+    protected BoxCollider coll;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class EnemyGeneratorController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (GetIsCreated())
             return;
@@ -42,7 +42,7 @@ public class EnemyGeneratorController : MonoBehaviour
         }
     }
 
-    private void SpawnAllEnemy()
+    protected void SpawnAllEnemy()
     {
         foreach (var generator in generators)
         {

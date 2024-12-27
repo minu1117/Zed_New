@@ -3,11 +3,18 @@ using UnityEngine;
 
 public class ShieldBuffSkill : BuffSkill, ITargetable
 {
+    public bool isGround;
     private ChampBase target;
 
     public override void Use(GameObject character)
     {
-        base.Use(character);
+        if (isGround)
+            UseEffect(gameObject, target.groundTransform);          // 이펙트 사용
+        else
+            UseEffect(gameObject);
+
+        StartSound(data.useClips);      // 스킬 시전 사운드 재생
+        StartSound(data.voiceClips);    // 시전 보이스 재생
         StartCoroutine(CoShield());  // 근접 스킬 사용 코루틴 시작
     }
 
@@ -49,5 +56,13 @@ public class ShieldBuffSkill : BuffSkill, ITargetable
     public void SetTarget(GameObject target)
     {
         this.target = target.GetComponent<ChampBase>();
+    }
+
+    private void UseEffect(GameObject obj, Transform tr)
+    {
+        if (data.effect == null)
+            return;
+
+        effect = UseEffect(obj, tr, data.effect);
     }
 }

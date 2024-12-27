@@ -11,6 +11,9 @@ public class ContentUnlock : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bossRaidUnlockText;
     [SerializeField] private TextMeshProUGUI chellengeUnlockText;
 
+    [SerializeField] private Portal bossRaidPortal;
+    [SerializeField] private Portal chellengePortal;
+
     [SerializeField] private float waitTime;
     [SerializeField] private float fadeTime;
     private WaitForSeconds waitForDeltaTime;
@@ -30,6 +33,8 @@ public class ContentUnlock : MonoBehaviour
 
     public void FadeOut(float startAlpha)
     {
+        bossRaidPortal.Open();
+        chellengePortal.Open();
         StartCoroutine(CoFadeOut(bossRaidUnlockPanel, bossRaidUnlockText, startAlpha));
         StartCoroutine(CoFadeOut(chellengeUnlockPanel, chellengeUnlockText, startAlpha));
     }

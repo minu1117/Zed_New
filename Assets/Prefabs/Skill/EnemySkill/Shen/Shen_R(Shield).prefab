@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: b4212a5c0d1462e489efcc7f103e8a28, type: 2}
   isTargeting: 1
+  isPiercing: 0
+  isGround: 1

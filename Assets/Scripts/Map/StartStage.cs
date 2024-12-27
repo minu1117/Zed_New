@@ -23,6 +23,12 @@ public class StartStage : MonoBehaviour
         StartBgm();
         map.StartCheakMapClear();
         storyPortal.Open();
+
+        if (GameSceneManager.Instance.data.ending)
+        {
+            bossRaidPortal.Open();
+            challengePortal.Open();
+        }
     }
 
     public void Warp()
