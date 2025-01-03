@@ -59,4 +59,5 @@ public class EnemyGeneratorController : MonoBehaviour
     public int GetEnemyCount() { return enemyCount; }
     public void ResetEnemyCount() { enemyCount = 0; }
     public void SetColliderEnable(bool set) { coll.enabled = set; }
+    public List<EnemyGenerator> GetGenerators() { return generators; }
 }

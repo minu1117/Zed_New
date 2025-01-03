@@ -83,7 +83,7 @@ public class Skill : MonoBehaviour, IDamageable
 
     protected Effect UseEffect(GameObject obj, Transform tr, Effect eft, bool autoRelease = false)
     {
-        return EffectManager.Instance.UseEffect(eft, tr, data.isSelf, autoRelease, obj);
+        return EffectManager.Instance.UseEffect(eft, tr, autoRelease, obj);
     }
 
     protected void StartSound(List<AudioClip> clipList)

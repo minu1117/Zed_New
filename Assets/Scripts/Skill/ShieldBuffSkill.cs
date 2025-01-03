@@ -9,9 +9,9 @@ public class ShieldBuffSkill : BuffSkill, ITargetable
     public override void Use(GameObject character)
     {
         if (isGround)
-            UseEffect(gameObject, target.groundTransform);          // 이펙트 사용
+            UseEffect(target.gameObject, target.groundTransform);          // 이펙트 사용
         else
-            UseEffect(gameObject);
+            UseEffect(target.gameObject);
 
         StartSound(data.useClips);      // 스킬 시전 사운드 재생
         StartSound(data.voiceClips);    // 시전 보이스 재생

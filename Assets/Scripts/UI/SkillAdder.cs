@@ -56,7 +56,7 @@ public class SkillAdder : InteractiveObject
                 dialogueStarter.StartDialogue(player.gameObject);
 
             StartSound(interactionSound);
-            EffectManager.Instance.UseEffect(effect, transform, true, true);
+            EffectManager.Instance.UseEffect(effect, transform, true);
             skillCreatorManager.AddDraggableSkill(skill);
             isAdded = true;
         }

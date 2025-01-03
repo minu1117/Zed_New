@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -14,6 +15,7 @@ public class EnemyGenerator : MonoBehaviour
     private int createIndex = 0;                        // 생성 시 설정될 풀의 Index
 
     private Dictionary<string, GameObject> enemySkillDict;
+    private List<EnemyBase> cratedEnemies;
 
     private Map map;
 
@@ -22,6 +24,7 @@ public class EnemyGenerator : MonoBehaviour
         enemyPools = new();
         poolObjects = new();
         enemySkillDict = new();
+        cratedEnemies = new();
 
         // 생성될 몬스터 List 순회
         for (int i = 0; i < enemies.Count; i++)
@@ -102,7 +105,7 @@ public class EnemyGenerator : MonoBehaviour
 
         hpController.SetMaxValue();             // 몬스터 최대 HP, MP로 설정
         enemy.SetPool(enemyPools[createIndex]); // 몬스터에 오브젝트 풀 설정 (Release용)
-
+        cratedEnemies.Add(enemy);
         return enemy;
     }
 
@@ -117,8 +120,8 @@ public class EnemyGenerator : MonoBehaviour
     // 오브젝트 풀의 Get 
     private void GetEnemy(EnemyBase enemy)
     {
-        enemy.ResetEnemy();
         enemy.transform.position = GetRandomPos(transform.position);
+        enemy.ResetEnemy();
         enemy.SetPatrolState();
         var hpController = enemy.GetStatusController(SliderMode.HP);     // HP Controller 가져오기
         hpController.SetMaxValue();                     // 최대 HP, MP로 설정
@@ -126,9 +129,24 @@ public class EnemyGenerator : MonoBehaviour
         enemy.UseSpawnEffect();
     }
 
-    // 오브젝트 풀의 Release 
-    private void ReleaseEnemy(EnemyBase enemy)
+    // 오브젝트 풀의 Release
+    public void ReleaseEnemy(EnemyBase enemy)
     {
+        if (!enemy.GetIsDead())
+        {
+            StartCoroutine(enemy.OnDead());
+        }
+
+        for (int i = 0; i < cratedEnemies.Count; i++)
+        {
+            var createdEnemy = cratedEnemies[i];
+            if (ReferenceEquals(createdEnemy, enemy))
+            {
+                cratedEnemies[i] = null;
+            }
+        }
+        cratedEnemies.RemoveAll(obj => obj == null);
+
         enemy.gameObject.SetActive(false);
     }
 
@@ -138,8 +156,25 @@ public class EnemyGenerator : MonoBehaviour
         Destroy(enemy.gameObject);
     }
 
+    public void ReleaseAll()
+    {
+        if (cratedEnemies == null || cratedEnemies.Count == 0)
+            return;
+
+        for (int i = cratedEnemies.Count-1; i >= 0; i--)
+        {
+            if (cratedEnemies[i] == null)
+                continue;
+
+            ReleaseEnemy(cratedEnemies[i]);
+        }
+
+        cratedEnemies.Clear();
+    }
+
     public void SetGeneratorController(EnemyGeneratorController controller) { enemyGeneratorController = controller; }
     public void SetMap(Map map) { this.map = map; }
     public Map GetMap() { return map; }
     public void SubEnemyCount() { enemyGeneratorController.SubEnemyCount(); }
+    public List<IObjectPool<EnemyBase>> GetEnemyPools() { return enemyPools; }
 }

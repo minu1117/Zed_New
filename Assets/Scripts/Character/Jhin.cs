@@ -77,7 +77,10 @@ public class Jhin : BossEnemy
 
         var cm = map.GetCurtainMoveController();
         if (cm == null)
+        {
+            isStart = true;
             yield break;
+        }
 
         var targetChampBase = player.GetComponent<ChampBase>();
         if (targetChampBase == null)

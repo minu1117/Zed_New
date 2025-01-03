@@ -124,6 +124,12 @@ public class Map : MonoBehaviour
         portal.ResetDoor();
     }
 
-    public void SetActiveVirtualCam(bool set) { virtualCamera.gameObject.SetActive(set); }
+    public void SetActiveVirtualCam(bool set)
+    {
+        if (virtualCamera == null)
+            return;
+
+        virtualCamera.gameObject.SetActive(set); 
+    }
     public CurtainMoveController GetCurtainMoveController() { return curtainMoveController; }
 }

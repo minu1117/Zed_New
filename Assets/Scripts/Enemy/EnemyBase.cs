@@ -159,15 +159,20 @@ public abstract class EnemyBase : ChampBase
             rb.velocity = Vector3.zero;
         }
 
+        if (deadEffect != null)
+        {
+            EffectManager.Instance.UseEffect(deadEffect, gameObject.transform, true);
+        }
+
+        if (deadSounds != null && deadSounds.Count > 0)
+        {
+            SoundManager.Instance.StartSound(deadSounds);
+        }
+
         if (animationController != null)
         {
             animationController.Dead();
             yield return new WaitForSeconds(deadAnimDuration);
-        }
-
-        if (deadEffect != null)
-        {
-            EffectManager.Instance.UseEffect(deadEffect, gameObject.transform, true, true);
         }
 
         // 오브젝트 풀이 설정된 경우
@@ -504,7 +509,7 @@ public abstract class EnemyBase : ChampBase
 
     public void UseSpawnEffect()
     {
-        EffectManager.Instance.UseEffect(spawnEffect, gameObject.transform, true, true);
+        EffectManager.Instance.UseEffect(spawnEffect, gameObject.transform, true);
     }
 
     // 에디터 전용 코드

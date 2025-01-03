@@ -2302,6 +2302,11 @@ MonoBehaviour:
   - {fileID: 8866015382528976874}
   slot: {fileID: 3783680755063730397}
   deadEffect: {fileID: 0}
+  deadSounds:
+  - {fileID: 8300000, guid: c5df6d93b88c9e44aa00bd133db71079, type: 3}
+  - {fileID: 8300000, guid: 445776cf8821ca84ebd23d91722224fe, type: 3}
+  - {fileID: 8300000, guid: 019b298b4c22f6247a537cb18e218ced, type: 3}
+  - {fileID: 8300000, guid: 464fe38d67683d44b888567ad6bc148c, type: 3}
   deadAnimDuration: 5
   recognitionRange: 9999
   attackRange: 2.5

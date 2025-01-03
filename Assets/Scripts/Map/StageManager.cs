@@ -53,8 +53,11 @@ public class StageManager : MonoBehaviour
             startStage.gameObject.SetActive(true);
             skyboxChanger.ChangeToDaySkybox(Skybox.Defalut);
             ChangeSunSource(startStage.GetDirectionalLight());
-
             startStage.Warp();
+
+            if (GameSceneManager.Instance.data.ending)
+                return;
+
             endingCredit.Ending();
             GameSceneManager.Instance.SetEnding(true);
             return;
@@ -136,6 +139,7 @@ public class StageManager : MonoBehaviour
     public void StopStartStageBGM() { startStage.StopBgm(); }
     public void SetActiveStartStageLight(bool set) { startStage.SetActiveLight(set); }
     public void SetCurrentStage(Stage stage) { currentStage = stage; }
+    public StartStage GetStartStage() { return startStage; }
     public void SetCurrentMap(Map map)
     {
         if (currentStage == null)

@@ -97,6 +97,6 @@ public class Weapon : MonoBehaviour, IDamageable
 
     protected void UseEffect(GameObject obj, Transform tr, Effect effect)
     {
-        EffectManager.Instance.UseEffect(effect, tr, false, true, obj);
+        EffectManager.Instance.UseEffect(effect, tr, true, obj);
     }
 }

@@ -12,6 +12,7 @@ public class ChampBase : MonoBehaviour
     public List<Weapon> weapons;                                    // 무기 List (인스펙터에서 담아둠)
     public SkillSlot slot;                                          // 스킬 슬롯
     public Effect deadEffect;                                       // 죽었을 때 나오는 이펙트
+    public List<AudioClip> deadSounds;                              // 죽었을 때 나오는 사운드들
     private Dictionary<string, Weapon> weaponDict;                  // 무기들을 이름과 같이 담아두는 Dictionary
     protected CharacterAnimationController animationController;     // 애니메이션 컨트롤러
     private StatusController hpController;                          // hp 컨트롤러
@@ -183,15 +184,20 @@ public class ChampBase : MonoBehaviour
             moveController.StopMove();
         }
 
+        if (deadEffect != null)
+        {
+            EffectManager.Instance.UseEffect(deadEffect, gameObject.transform, true);
+        }
+
+        if (deadSounds != null && deadSounds.Count > 0)
+        {
+            SoundManager.Instance.StartSound(deadSounds);
+        }
+
         if (animationController != null)
         {
             animationController.Dead();
             yield return new WaitForSeconds(deadAnimDuration);
-        }
-
-        if (deadEffect != null)
-        {
-            EffectManager.Instance.UseEffect(deadEffect, gameObject.transform, true, true);
         }
 
         Destroy(gameObject);
@@ -212,6 +218,7 @@ public class ChampBase : MonoBehaviour
         hpController.DestroyShield();
     }
 
+    public bool GetIsDead() { return isDead; }
     public CharacterAnimationController GetAnimationController() { return animationController; }
     public CharacterMoveController GetMoveController() { return moveController; }
     public SkillSlot GetSlot() { return slot; }

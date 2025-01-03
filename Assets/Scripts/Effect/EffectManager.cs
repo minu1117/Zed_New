@@ -59,7 +59,7 @@ public class EffectManager : Singleton<EffectManager>
         return effect;
     }
 
-    public Effect UseEffect(Effect eft, Transform tr, bool self, bool autoRelease, GameObject target = null)
+    public Effect UseEffect(Effect eft, Transform tr, bool autoRelease, GameObject target = null)
     {
         if (eft == null)    // 데이터에 이펙트가 없을 시 return
             return null;
@@ -71,16 +71,9 @@ public class EffectManager : Singleton<EffectManager>
 
         if (eft.TryGetComponent<TargetFollowEffect>(out var followEffect))   // 이펙트 오브젝트에서 TargetFollowEffect 컴포넌트 추출 성공 시
         {
-            if (self)
-            {
-                followEffect.SetTarget(target);
-            }
-            else
-            {
-                followEffect.SetTarget(target);    // 이펙트가 따라다닐 타겟 지정
-            }
-
-            eft = followEffect;          // 이펙트 할당
+            followEffect.SetTarget(target);
+            followEffect.Use();
+            return followEffect;
         }
 
         eft.Use();   // 이펙트 사용

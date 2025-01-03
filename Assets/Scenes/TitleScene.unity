@@ -1431,6 +1431,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: dd711edca2f3ae445adacceaaddcef21, type: 3}
   - {fileID: 8300000, guid: dd0f4df5576b0a046aadaa46d51d0e48, type: 3}
   - {fileID: 8300000, guid: 9be342e9e00567d4cb35eaabfbc028cb, type: 3}
+  - {fileID: 8300000, guid: 0e0405a1aa25866499c6293fa2630cf0, type: 3}
+  - {fileID: 8300000, guid: 71827c574d6de6d4fb9fb9cee0686f15, type: 3}
+  - {fileID: 8300000, guid: e39ab3e8cd67def469a221da99a38b17, type: 3}
   sfxSounds:
   - {fileID: 8300000, guid: a3fd9e9120c2b95418e559fa35be6457, type: 3}
   - {fileID: 8300000, guid: e0d21bb6cf429f04884c869602a4a173, type: 3}
