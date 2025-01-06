@@ -51,8 +51,9 @@ public class StageManager : MonoBehaviour
         if (currentStage != null && currentStage.lastStage && currentStage.stageClear)
         {
             startStage.gameObject.SetActive(true);
-            skyboxChanger.ChangeToDaySkybox(Skybox.Defalut);
+            startStage.SetActiveLight(true);
             ChangeSunSource(startStage.GetDirectionalLight());
+            skyboxChanger.ChangeToDaySkybox(Skybox.Defalut);
             startStage.Warp();
 
             if (GameSceneManager.Instance.data.ending)

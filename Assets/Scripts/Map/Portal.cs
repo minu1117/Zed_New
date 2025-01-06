@@ -9,7 +9,7 @@ public class Portal : MonoBehaviour
     [SerializeField] protected GameObject leftDoor;
     [SerializeField] protected GameObject rightDoor;
     [SerializeField] protected float doorMoveDuration;
-    protected float movePos = 0.5f;
+    protected float movePos = 1f;
     protected float defalutPos = 0.5f;
     protected BoxCollider coll;
 

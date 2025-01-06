@@ -7,8 +7,8 @@ public class StartStage : MonoBehaviour
     [SerializeField] private Transform startPos;
     [SerializeField] private Portal storyPortal;
     [SerializeField] private Portal bossRaidPortal;
-    [SerializeField] private Portal challengePortal;
     [SerializeField] private AudioClip bgmClip;
+    [SerializeField] private SkyboxChanger skyboxChanger;
 
     public void Awake()
     {
@@ -23,11 +23,12 @@ public class StartStage : MonoBehaviour
         StartBgm();
         map.StartCheakMapClear();
         storyPortal.Open();
+        skyboxChanger.ChangeSunSource(directionalLight);
+        skyboxChanger.ChangeToDaySkybox(Skybox.Defalut);
 
         if (GameSceneManager.Instance.data.ending)
         {
             bossRaidPortal.Open();
-            challengePortal.Open();
         }
     }
 

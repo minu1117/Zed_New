@@ -6,13 +6,8 @@ using UnityEngine.UI;
 public class ContentUnlock : MonoBehaviour
 {
     [SerializeField] private Image bossRaidUnlockPanel;
-    [SerializeField] private Image chellengeUnlockPanel;
-
     [SerializeField] private TextMeshProUGUI bossRaidUnlockText;
-    [SerializeField] private TextMeshProUGUI chellengeUnlockText;
-
     [SerializeField] private Portal bossRaidPortal;
-    [SerializeField] private Portal chellengePortal;
 
     [SerializeField] private float waitTime;
     [SerializeField] private float fadeTime;
@@ -24,19 +19,13 @@ public class ContentUnlock : MonoBehaviour
         color1.a = 0f;
         bossRaidUnlockPanel.color = color1;
 
-        Color color2 = chellengeUnlockPanel.color;
-        color2.a = 0f;
-        bossRaidUnlockPanel.color = color2;
-
         waitForDeltaTime = new WaitForSeconds(Time.deltaTime);
     }
 
     public void FadeOut(float startAlpha)
     {
         bossRaidPortal.Open();
-        chellengePortal.Open();
         StartCoroutine(CoFadeOut(bossRaidUnlockPanel, bossRaidUnlockText, startAlpha));
-        StartCoroutine(CoFadeOut(chellengeUnlockPanel, chellengeUnlockText, startAlpha));
     }
 
     private IEnumerator CoFadeOut(Image img, TextMeshProUGUI text, float startAlpha)

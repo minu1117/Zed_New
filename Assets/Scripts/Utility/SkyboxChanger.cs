@@ -25,7 +25,6 @@ public class SkyboxChanger : MonoBehaviour
         switch (skybox)
         {
             case Skybox.Defalut:
-                mat = defalutSkybox;
                 break;
             case Skybox.ShadowOrder:
                 mat = shadowOrderSkybox;
@@ -44,6 +43,7 @@ public class SkyboxChanger : MonoBehaviour
         }
 
         RenderSettings.skybox = mat;
+        DynamicGI.UpdateEnvironment();
     }
 
     public void ChangeSunSource(Light light)
