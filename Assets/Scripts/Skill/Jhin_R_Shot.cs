@@ -15,6 +15,11 @@ public class Jhin_R_Shot : ShotSkill
 
     public override void Use(GameObject character)
     {
+        if (!SubMP())
+        {
+            Release();
+            return;
+        }
         StartCoroutine(CoShot());
     }
 

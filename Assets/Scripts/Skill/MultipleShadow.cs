@@ -31,6 +31,12 @@ public class MultipleShadow : Skill
     // 스킬 사용
     public override void Use(GameObject character)
     {
+        if (!SubMP())
+        {
+            Release();
+            return;
+        }
+
         base.Use(character);
         StartCoroutine(CoSpawnMultipleShadow(character));   // 다중 그림자 생성 코루틴 실행
     }
@@ -70,7 +76,7 @@ public class MultipleShadow : Skill
             {
                 shadow.SetLookAtPoint(lookPos);
                 shadow.SetActive(true);     // 그림자 활성화
-                shadow.Use(character);      // 그림자 스킬 사용
+                shadow.FreeUse(character);      // 그림자 스킬 사용
 
                 yield return waitDelay;     // 생성 간격만큼 대기
             }

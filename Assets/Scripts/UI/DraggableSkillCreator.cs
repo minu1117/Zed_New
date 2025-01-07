@@ -58,6 +58,7 @@ public class DraggableSkillCreator : MonoBehaviour, IPointerEnterHandler
 
         var skill = createdDraggableSkill.skill.skill;
         var skillData = skill.data;
+        var cost = skillData.cost;
         var count = 1;
 
         if (skill.TryGetComponent<MultipleSkill>(out var multiple))
@@ -67,7 +68,13 @@ public class DraggableSkillCreator : MonoBehaviour, IPointerEnterHandler
         }
 
         string newDescription = skillData.skillDescription.Replace("\\n", "\n");
-        descriptionText.text = $"[{skillData.skillName}]\n\n총 데미지 : {(skillData.damage * skillData.hitRate) * count}\n타격 횟수 : {skillData.hitRate}\n쿨타임 : {skillData.coolDown}초\n설명 : {skillData.skillDescription}";descriptionText.text = $"[{skillData.skillName}]\n\n총 데미지 : {(skillData.damage * skillData.hitRate) * count}\n타격 횟수 : {skillData.hitRate}\n쿨타임 : {skillData.coolDown}초\n설명 : {newDescription}";
+
+        descriptionText.text = 
+            $"[{skillData.skillName}]\n\n" +
+            $"총 데미지 : {(skillData.damage * skillData.hitRate) * count}\n" +
+            $"타격 횟수 : {skillData.hitRate}\n쿨타임 : {skillData.coolDown}초\n" +
+            $"소모 기력 : {cost}\n" +
+            $"{newDescription}";
     }
 
     public void SetDraggableSkill(DraggableSkill skill)

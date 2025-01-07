@@ -5,7 +5,9 @@ public class Option : MonoBehaviour
 {
     [SerializeField] private Button exitButton;
     [SerializeField] private GameObject optionPanel;
+    [SerializeField] private GameObject guidePanel;
     [SerializeField] private SoundSetting soundSetting;
+    [SerializeField] private Button guideButton;
     [SerializeField] private Button titleExitButton;
     [SerializeField] private Button quitButton;
     private Button optionButton;
@@ -13,10 +15,16 @@ public class Option : MonoBehaviour
     private void Start()
     {
         soundSetting.Init();
-        SetActiveOptionPanel(false);
-        exitButton.onClick.AddListener(() => SetActiveOptionPanel(false));
+        soundSetting.AddSoundSettingButtonOnClick(() => guidePanel.SetActive(false));
 
+        guideButton.onClick.AddListener(() => soundSetting.SetActiveViewport(false));
+        guideButton.onClick.AddListener(() => guidePanel.SetActive(true));
+
+        SetActiveOptionPanel(false);
+
+        exitButton.onClick.AddListener(() => SetActiveOptionPanel(false));
         quitButton.onClick.AddListener(() => Application.Quit());
+
         titleExitButton.onClick.AddListener(() => SetActiveOptionPanel(false));
         titleExitButton.onClick.AddListener(() => SoundManager.Instance.StopAllBgm());
         titleExitButton.onClick.AddListener(() => DialogueManager.Instance.ResetDialogue());

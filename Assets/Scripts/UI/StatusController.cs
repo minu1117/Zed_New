@@ -32,7 +32,7 @@ public class StatusController : MonoBehaviour
     public TextMeshProUGUI tmp;
     public CanvasMode canvasMode;
     public SliderMode sliderMode;
-    public UsedSlider usedSlider;
+    public UsedSlider usedSlider; 
     private CharacterData data;
     private Camera cam;
 
@@ -42,6 +42,10 @@ public class StatusController : MonoBehaviour
     private float currentShieldValue;
     private float maxShieldValue;
     public float shieldAccumulateDamage { get; set; }
+    private float manaRegenDuration = 0.5f;
+    private float manaRegenValue = 10f;
+    private float currentTime;
+    private bool isRegen = false;
 
     private void Awake()
     {
@@ -100,11 +104,6 @@ public class StatusController : MonoBehaviour
     // 현재 체력 변경
     public void SetCurrentHp()
     {
-        //data.currentHp = Math.Clamp(data.currentHp, 0, data.maxHp);
-        //champ.data.currentHp = data.currentHp;
-        //slider.value = data.currentHp / data.maxHp;
-        //SetText($"{data.currentHp} / {data.maxHp}");
-
         currentValue = Math.Clamp(currentValue, 0, data.maxHp);
         slider.value = currentValue / data.maxHp;
         SetText($"{currentValue} / {data.maxHp}");
@@ -122,10 +121,6 @@ public class StatusController : MonoBehaviour
     // 현재 마나 변경
     public void SetCurrentMp()
     {
-        //data.currentMp = Math.Clamp(data.currentMp, 0, data.maxMp);
-        //champ.data.currentMp = data.currentMp;
-        //slider.value = data.currentMp / data.maxMp;
-        //SetText($"{data.currentMp} / {data.maxMp}");
         currentValue = Math.Clamp(currentValue, 0, data.maxMp);
         slider.value = currentValue / data.maxMp;
         SetText($"{currentValue} / {data.maxMp}");
@@ -134,9 +129,6 @@ public class StatusController : MonoBehaviour
     // 최대 마나로 설정
     public void SetMaxMp()
     {
-        //data.currentMp = data.maxMp;
-        //SetCurrentMp();
-        //SetText($"{data.currentMp} / {data.maxMp}");
         currentValue = data.maxMp;
         SetCurrentMp();
         SetText($"{currentValue} / {data.maxMp}");
@@ -153,7 +145,7 @@ public class StatusController : MonoBehaviour
         maxShieldValue = 0;
         currentShieldValue = 0;
         shieldAccumulateDamage = 0f;
-        //SetText($"{data.currentHp} / {data.maxHp}");
+
         SetText($"{currentValue} / {data.maxHp}");
     }
 
@@ -171,7 +163,6 @@ public class StatusController : MonoBehaviour
         maxShieldValue += shieldValue;
         shieldSlider.value = currentShieldValue / maxShieldValue;
 
-        //SetText($"{data.currentHp} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
         SetText($"{currentValue} / {data.maxHp} ({shieldSlider.value * maxShieldValue})");
     }
 
@@ -198,7 +189,6 @@ public class StatusController : MonoBehaviour
         {
             shieldAccumulateDamage += damage;
             shieldSlider.value = currentShieldValue / maxShieldValue;
-            //SetText($"{data.currentHp} / {data.maxHp} ({currentShieldValue})");
             SetText($"{currentValue} / {data.maxHp} ({currentShieldValue})");
             return 0;
         }
@@ -222,6 +212,40 @@ public class StatusController : MonoBehaviour
     public void Update()
     {
         LookCamera();
+
+        if (sliderMode == SliderMode.MP && currentValue < data.maxMp)
+        {
+            if (!isRegen)
+            {
+                currentTime = 0f;
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
+
+            isRegen = true;
+            RegenMana();
+        }
+    }
+
+    private void RegenMana()
+    {
+        if (!isRegen)
+            return;
+
+        if (currentTime >= manaRegenDuration)
+        {
+            currentValue += manaRegenValue;
+            SetCurrentMp();
+            currentTime = 0f;
+        }
+
+        if (currentValue >= data.maxMp)
+        {
+            SetMaxMp();
+            isRegen = false;
+        }
     }
 
     // UI가 카메라를 바라보게 해줌

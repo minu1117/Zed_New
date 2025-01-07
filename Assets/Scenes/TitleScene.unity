@@ -2281,10 +2281,10 @@ RectTransform:
   - {fileID: 1730645293}
   m_Father: {fileID: 1730906664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -988.6428, y: 0}
-  m_SizeDelta: {x: 1968, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000036671492, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &599585139
 GameObject:
@@ -5414,7 +5414,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exitButton: {fileID: 1449414362}
   optionPanel: {fileID: 936873717}
+  guidePanel: {fileID: 1569589702}
   soundSetting: {fileID: 2129635506}
+  guideButton: {fileID: 100093208}
   titleExitButton: {fileID: 1504293229}
   quitButton: {fileID: 2111515331}
 --- !u!1 &1361992724
@@ -7768,10 +7770,10 @@ RectTransform:
   - {fileID: 1729863813}
   m_Father: {fileID: 1937081210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 656.4286, y: -440}
+  m_SizeDelta: {x: 1312.8572, y: 880}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1569589704
 MonoBehaviour:
@@ -8527,7 +8529,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1674895766}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8605,7 +8607,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -60, y: -60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730645294
 MonoBehaviour:
@@ -8627,8 +8629,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC00\uC774\uB4DC\uC778\uB370 \uC801\uC744\uAC8C \uC5C6\uB124\n\uC54C\uC544\uC11C\uB4E4
-    \uD558\uC1FC \uD654\uC774\uD305 ~ !"
+  m_text: "[ \uC870\uC791 ]\n\uC774\uB3D9    :  W, A, S, D\n\uB2EC\uB9AC\uAE30 : 
+    SHIFT\n\uACF5\uACA9    :  \uB9C8\uC6B0\uC2A4 \uC88C\uD074\uB9AD\n\n\n[ \uC2A4\uD14C\uC774\uC9C0
+    ]\n1. \uBAA8\uB4E0 \uBAAC\uC2A4\uD130 \uCC98\uCE58 \uC2DC \uB2E4\uC74C \uB9F5\uC73C\uB85C
+    \uAC00\uB294 \uD3EC\uD0C8\uC774 \uC5F4\uB9BD\uB2C8\uB2E4.\n2. \uC2A4\uD0AC \uC0C1\uC790\uC640
+    \uC0C1\uD638\uC791\uC6A9\uD558\uBA74 \uC2A4\uD0AC\uC744 \uC5BB\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\n\n[
+    \uC774\uC678 ]\n1. \uC2A4\uD0AC \uBCC0\uACBD \uC791\uC5C5\uB300\uC640 \uC0C1\uD638\uC791\uC6A9
+    \uC2DC \uC2A4\uD0AC\uC744 \uBCC0\uACBD\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n2.
+    \uB300\uD654 \uC2DC <Enter> \uD0A4\uB97C \uC785\uB825\uD558\uC5EC \uB300\uD654\uB97C
+    \uC9C4\uD589\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ae5b38f84536b0498e689fbebbd4b76, type: 2}
   m_sharedMaterial: {fileID: -6681515515913712038, guid: 5ae5b38f84536b0498e689fbebbd4b76, type: 2}
@@ -8637,8 +8646,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8655,23 +8664,23 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 45.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 1
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

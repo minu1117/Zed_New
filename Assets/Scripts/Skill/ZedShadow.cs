@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
+using UnityEngine.TextCore.Text;
 
 public struct UseSkillData
 {
@@ -47,6 +48,25 @@ public class ZedShadow : ShotSkill
 
     // 그림자 스킬 실행
     public override void Use(GameObject character)
+    {
+        if (!character.TryGetComponent(out Zed zed))    // character 오브젝트에서 플레이어 컴포넌트 추출 실패 시 (플레이어 전용 스킬)
+            return;
+
+        if (!SubMP())
+        {
+            Release();
+            return;
+        }
+
+        UseEffect(particleFollowObj);           // 이펙트 실행
+        StartSound(data.useClips);              // 스킬 사용 사운드 재생
+        meshRenderer.enabled = false;           // 이동 중 오브젝트가 보이지 않기 위해 비활성화
+        SetActiveTrailRenderer(true);           // TrailRenderer 활성화
+        SetActiveWeaponTrailRenderers(false);   // 무기 전용 TrailRenderer 활성화
+        StartCoroutine(CoSpawnShadow(zed));     // 이동 목표 지점까지 이동하는 코루틴 실행
+    }
+
+    public void FreeUse(GameObject character)
     {
         if (!character.TryGetComponent(out Zed zed))    // character 오브젝트에서 플레이어 컴포넌트 추출 실패 시 (플레이어 전용 스킬)
             return;

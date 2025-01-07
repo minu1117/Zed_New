@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SoundSetting : MonoBehaviour
@@ -44,6 +45,11 @@ public class SoundSetting : MonoBehaviour
         BGMSlider.value = loadData.bgmVolumeValue / 100f;
         SFXSlider.value = loadData.sfxVolumeValue / 100f;
         VoiceSlider.value = loadData.voiceVolumeValue / 100f;
+
+        SetValueText(masterTmp, loadData.masterVolumeValue / 100f);
+        SetValueText(bgmTmp, loadData.bgmVolumeValue / 100f);
+        SetValueText(sfxTmp, loadData.sfxVolumeValue / 100f);
+        SetValueText(voiceTmp, loadData.voiceVolumeValue / 100f);
     }
     
     private void SetValueText(TextMeshProUGUI tmp, float value)
@@ -54,4 +60,8 @@ public class SoundSetting : MonoBehaviour
     }
 
     public void SetActiveViewport(bool set) { soundSettingViewport.SetActive(set); }
+    public void AddSoundSettingButtonOnClick(UnityAction method)
+    {
+        soundSettingButton.onClick.AddListener(method);
+    }
 }

@@ -171,6 +171,27 @@ public class ChampBase : MonoBehaviour
         }
     }
 
+    public bool SubMP(float value)
+    {
+        if (mpController == null)
+            return false;
+
+        float currentValue = mpController.GetCurrentValue();
+        if (currentValue <= 0)            // 마나가 0 이하일 경우
+            return false;
+
+        if (currentValue - value < 0)     // 현재 마나보다 소모량이 많을 경우
+            return false;
+
+        mpController.SetCurrentValue(currentValue - value);
+
+        if (mpController == null)
+            return false;
+
+        mpController.SetCurrentValue();
+        return true;
+    }
+
     public virtual IEnumerator OnDead()
     {
         isDead = true;

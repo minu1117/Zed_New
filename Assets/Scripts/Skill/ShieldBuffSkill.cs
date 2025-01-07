@@ -8,6 +8,12 @@ public class ShieldBuffSkill : BuffSkill, ITargetable
 
     public override void Use(GameObject character)
     {
+        if (!SubMP())
+        {
+            Release();
+            return;
+        }
+
         if (isGround)
             UseEffect(target.gameObject, target.groundTransform);          // 이펙트 사용
         else

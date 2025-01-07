@@ -22,6 +22,9 @@ public class SkillData : ScriptableObject
     [Header("데미지 (보호막일 경우 보호막 값)")]
     public float damage;
 
+    [Header("소모 MP(기력)")]
+    public float cost;
+
     [Header("타격 횟수")]
     public int hitRate = 1;
 

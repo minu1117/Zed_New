@@ -21,6 +21,12 @@ public class Talon_Q : Skill
 
     public override void Use(GameObject character)
     {
+        if (!SubMP())
+        {
+            Release();
+            return;
+        }
+
         talon = character.GetComponent<ChampBase>();
         UseEffect(gameObject);          // 이펙트 사용
         StartSound(data.voiceClips);    // 시전 보이스 재생
