@@ -8,7 +8,9 @@ public class DashSkill : Skill
 
     public override void Use(GameObject character)
     {
-        base.Use(character);
+        //base.Use(character);
+        StartSound(data.useClips);      // 스킬 시전 사운드 재생
+        StartSound(data.voiceClips);    // 시전 보이스 재생
 
         if (coll == null)
             coll = GetComponent<BoxCollider>();
@@ -97,6 +99,13 @@ public class DashSkill : Skill
 
         if (rb != null)                                 // 시전자의 rigidBody가 있을 시 (중간에 죽어서 사라질 수도 있기 때문에 계속 체크)
             rb.velocity = dashDirection * data.speed;   // rigidBody의 속도 값 변경 -> 대쉬 방향 * 대쉬 속도
+
+        var champ = obj.GetComponent<ChampBase>();
+
+        if (champ != null)
+            UseEffect(obj, champ.shotStartTransform);
+        else
+            UseEffect(obj);
 
         yield return waitduration;                      // 지속 시간만큼 대기
 

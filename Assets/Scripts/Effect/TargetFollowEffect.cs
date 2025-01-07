@@ -29,7 +29,9 @@ public class TargetFollowEffect : Effect
         if (target == null || particle == null || particle.isStopped)       // 타겟이 없거나, 파티클이 없거나, 파티클이 멈춰있는 경우 return
             return;
 
-        particle.gameObject.transform.position = target.transform.position; // 따라다니기
+        newPos = target.transform.position;
+        newPos.y += newYPos;
+        particle.gameObject.transform.position = newPos; // 따라다니기
     }
 
     private void Update()

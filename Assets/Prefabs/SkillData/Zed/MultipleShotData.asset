@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   skillName: "\uB2E4\uC911 \uC608\uB9AC\uD55C \uD45C\uCC3D"
-  skillDescription: "\uC5EC\uB7EC \uAC1C \uC3D8\uB294 \uAC81\uB2C8\uB2E4"
+  skillDescription: "\uC5D0\uB9AC\uD55C \uD45C\uCC3D\uC744 3\uAC08\uB798 \uBC29\uD5A5\uC73C\uB85C
+    \uB358\uC9D1\uB2C8\uB2E4."
   skillLevel: 1
   levelRestriction: 0
   damage: 0
@@ -41,3 +42,4 @@ MonoBehaviour:
   complateVoiceClips: []
   isSelf: 0
   isStiffen: 0
+  isCameraShake: 0

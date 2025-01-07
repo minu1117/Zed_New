@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class DraggableSkillCreator : MonoBehaviour, IPointerEnterHandler
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Canvas parentCanvas;   // 생성기의 부모 캔버스
     [SerializeField] private Image img;
+    [SerializeField] private TextMeshProUGUI descriptionText;
     private DraggableSkill createdDraggableSkill;   // 생성된 드래그 스킬 오브젝트 저장용
 
     private void Start()
@@ -53,6 +55,19 @@ public class DraggableSkillCreator : MonoBehaviour, IPointerEnterHandler
 
         MoveCurrentPos();   // 생성기 위치로 드래그 될 스킬 오브젝트 이동 (위치 다시 맞추기)
         createdDraggableSkill.gameObject.SetActive(true); // 드래그 될 스킬 활성화
+
+        var skill = createdDraggableSkill.skill.skill;
+        var skillData = skill.data;
+        var count = 1;
+
+        if (skill.TryGetComponent<MultipleSkill>(out var multiple))
+        {
+            skillData = multiple.skillPrefab.data;
+            count = multiple.count;
+        }
+
+        string newDescription = skillData.skillDescription.Replace("\\n", "\n");
+        descriptionText.text = $"[{skillData.skillName}]\n\n총 데미지 : {(skillData.damage * skillData.hitRate) * count}\n타격 횟수 : {skillData.hitRate}\n쿨타임 : {skillData.coolDown}초\n설명 : {skillData.skillDescription}";descriptionText.text = $"[{skillData.skillName}]\n\n총 데미지 : {(skillData.damage * skillData.hitRate) * count}\n타격 횟수 : {skillData.hitRate}\n쿨타임 : {skillData.coolDown}초\n설명 : {newDescription}";
     }
 
     public void SetDraggableSkill(DraggableSkill skill)

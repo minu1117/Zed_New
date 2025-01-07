@@ -57,12 +57,4 @@ public class ShieldBuffSkill : BuffSkill, ITargetable
     {
         this.target = target.GetComponent<ChampBase>();
     }
-
-    private void UseEffect(GameObject obj, Transform tr)
-    {
-        if (data.effect == null)
-            return;
-
-        effect = UseEffect(obj, tr, data.effect);
-    }
 }

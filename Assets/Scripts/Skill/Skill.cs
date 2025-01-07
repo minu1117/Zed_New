@@ -65,12 +65,20 @@ public class Skill : MonoBehaviour, IDamageable
     }
 
     // 이펙트 사용
-    protected virtual void UseEffect(GameObject obj)
+    protected void UseEffect(GameObject obj)
     {
         if (data.effect == null)    // 데이터에 이펙트가 없을 시 return
             return;
 
         effect = UseEffect(obj, obj.transform, data.effect);
+    }
+
+    protected void UseEffect(GameObject obj, Transform tr)
+    {
+        if (data.effect == null)
+            return;
+
+        effect = UseEffect(obj, tr, data.effect);
     }
 
     protected void UseHitEffect(ChampBase target)
