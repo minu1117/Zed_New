@@ -8,8 +8,12 @@ public class ShotSkill : Skill
 
     public override void Use(GameObject character)
     {
-        StartSound(data.voiceClips);    // 시전 보이스 재생
-        StartSound(data.useClips);      // 스킬 시전 사운드 재생
+        if (isUseSound)
+        {
+            StartSound(data.voiceClips);    // 시전 보이스 재생
+            StartSound(data.useClips);      // 스킬 시전 사운드 재생
+        }
+
         SetActiveTrailRenderer(true);   // TrailRenderer 활성화
         StartCoroutine(CoShot(usePoint));    // 날리기 코루틴 실행
     }

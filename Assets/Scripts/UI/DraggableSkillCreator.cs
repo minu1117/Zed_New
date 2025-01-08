@@ -63,7 +63,7 @@ public class DraggableSkillCreator : MonoBehaviour, IPointerEnterHandler
 
         if (skill.TryGetComponent<MultipleSkill>(out var multiple))
         {
-            skillData = multiple.skillPrefab.data;
+            skillData = multiple.data;
             count = multiple.count;
         }
 

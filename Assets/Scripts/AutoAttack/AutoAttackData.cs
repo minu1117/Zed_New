@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Auto Attack Data", menuName = "Scriptable Objects/Auto Attack Data")]

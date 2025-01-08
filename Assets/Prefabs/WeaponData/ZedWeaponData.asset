@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
   m_Name: ZedWeaponData
   m_EditorClassIdentifier: 
-  damage: 1000
+  damage: 50
   useClips:
   - {fileID: 8300000, guid: a3fd9e9120c2b95418e559fa35be6457, type: 3}
   - {fileID: 8300000, guid: e0d21bb6cf429f04884c869602a4a173, type: 3}
@@ -26,5 +26,9 @@ MonoBehaviour:
   attackClips:
   - {fileID: 8300000, guid: 7a0a342e816ee994698e164ee6d0d1ad, type: 3}
   - {fileID: 8300000, guid: 95d083fa1772b1146bb4d6180c8ffc9f, type: 3}
-  voiceClips: []
+  voiceClips:
+  - {fileID: 8300000, guid: c3b2ac276fdb1ad40aa4f17adf16b8ae, type: 3}
+  - {fileID: 8300000, guid: 96541c886c2114b49aacef838bdac19e, type: 3}
+  - {fileID: 8300000, guid: ed16247d8506846419825a95414b6858, type: 3}
+  - {fileID: 8300000, guid: e25cdb39cc138304da545ff2fc17f04e, type: 3}
   hitEffect: {fileID: 7074227076283317439, guid: cf404cb3eeccd6d4a903ce64c42b6d80, type: 3}

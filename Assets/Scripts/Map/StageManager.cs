@@ -136,6 +136,11 @@ public class StageManager : MonoBehaviour
     {
         skyboxChanger.ChangeSunSource(light);
     }
+    public void ChangeSkybox(Skybox skyboxEnum)
+    {
+        skyboxChanger.ChangeToDaySkybox(skyboxEnum);
+    }
+
     public void SetActiveStartStage(bool set) { startStage.gameObject.SetActive(set); }
     public void StopStartStageBGM() { startStage.StopBgm(); }
     public void SetActiveStartStageLight(bool set) { startStage.SetActiveLight(set); }

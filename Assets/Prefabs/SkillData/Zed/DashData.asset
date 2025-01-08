@@ -18,8 +18,8 @@ MonoBehaviour:
     \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
   skillLevel: 1
   levelRestriction: 0
-  damage: 10
-  cost: 30
+  damage: 175
+  cost: 50
   hitRate: 1
   hitInterval: 0
   coolDown: 1

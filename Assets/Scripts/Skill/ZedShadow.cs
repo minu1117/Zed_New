@@ -260,6 +260,7 @@ public class ZedShadow : ShotSkill
             skillObject.SetPoint(point);
         }
 
+        skillObject.SetUseSound(false);
         skillObject.Use(gameObject);                            // 스킬 사용
     }
 

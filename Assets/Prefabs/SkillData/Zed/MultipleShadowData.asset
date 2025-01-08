@@ -21,7 +21,7 @@ MonoBehaviour:
   skillLevel: 1
   levelRestriction: 0
   damage: 0
-  cost: 50
+  cost: 150
   hitRate: 1
   hitInterval: 0
   coolDown: 5

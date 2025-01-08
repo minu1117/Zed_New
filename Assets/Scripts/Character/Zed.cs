@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -54,8 +55,7 @@ public class Zed : SingletonChampion<Zed>
             return null;
 
         var skillData = skillDict[keycode].GetExcutor().GetData().skill.data;
-        //if (!SubMP(skillData.cost))
-        //    return null;
+
         if (!CheckMP(skillData.cost))
             return null;
 
@@ -196,6 +196,38 @@ public class Zed : SingletonChampion<Zed>
             return;
 
         shadow.Teleport(gameObject);    // 위치 이동
+    }
+
+    public override IEnumerator OnDead()
+    {
+        isDead = true;
+        if (coll != null)
+        {
+            coll.enabled = false;
+        }
+
+        if (moveController != null)
+        {
+            moveController.StopMove();
+        }
+
+        if (deadEffect != null)
+        {
+            EffectManager.Instance.UseEffect(deadEffect, gameObject.transform, true);
+        }
+
+        if (deadSounds != null && deadSounds.Count > 0)
+        {
+            SoundManager.Instance.StartSound(deadSounds);
+        }
+
+        if (animationController != null)
+        {
+            animationController.Dead();
+            yield return new WaitForSeconds(deadAnimDuration);
+        }
+
+        GameSceneManager.Instance.Defeat();
     }
 
     public void SetAttackUse(bool set) { attackUsing = set; }

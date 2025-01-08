@@ -18,7 +18,7 @@ public class ChampBase : MonoBehaviour
     private StatusController hpController;                          // hp 컨트롤러
     private StatusController mpController;                          // mp 컨트롤러
     protected NavMeshAgent agent;
-    private CharacterMoveController moveController;
+    protected CharacterMoveController moveController;
     public float deadAnimDuration;                                  // 죽는 애니메이션 출력 시간
     protected BoxCollider coll;
     protected bool isDead = false;
@@ -227,6 +227,21 @@ public class ChampBase : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void Restart()
+    {
+        isDead = false;
+        if (coll != null)
+        {
+            coll.enabled = true;
+        }
+
+        hpController.SetMaxHp();
+        mpController.SetMaxMp();
+
+        moveController.StartMove();
+        animationController.Restart();
     }
 
     public void OnShield(float shieldValue)

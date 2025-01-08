@@ -48,7 +48,7 @@ MonoBehaviour:
   isTargeting: 0
   isPiercing: 0
   count: 3
-  skillPrefab: {fileID: 3740155931234028814, guid: d11bd22d3bebcba4583a10fd343fa589, type: 3}
+  skillPrefab: {fileID: 3740155931234028814, guid: fcc0a09e75fc28644ba665439d029893, type: 3}
   individualWaitDelay: 0
   angle: 120
   isGround: 0

@@ -25,6 +25,7 @@ public class Skill : MonoBehaviour, IDamageable
     protected List<ChildCollider> colliders;
     public bool isCollide { get; set; } = false;
     protected Vector3 usePoint;
+    protected bool isUseSound = true;
 
     public virtual void Awake()
     {
@@ -46,10 +47,15 @@ public class Skill : MonoBehaviour, IDamageable
     public virtual void Use(GameObject character)
     {
         UseEffect(gameObject);          // 이펙트 사용
+
+        if (!isUseSound)
+            return;
+
         StartSound(data.useClips);      // 스킬 시전 사운드 재생
         StartSound(data.voiceClips);    // 시전 보이스 재생
     }
 
+    public void SetUseSound(bool set) { isUseSound = set; }
     public Vector3 GetUsePoint() { return usePoint; }
     public GameObject GetCaster() { return caster; }
 
@@ -201,6 +207,7 @@ public class Skill : MonoBehaviour, IDamageable
             return;
         }
 
+        SetUseSound(true);
         isCollide = false;
         ReleaseEffect();        // 이펙트 반납
         StartDisappearSound();  // 시전 해제 사운드 재생

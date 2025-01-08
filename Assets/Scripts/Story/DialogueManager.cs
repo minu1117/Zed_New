@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -471,7 +472,10 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         if (isTalking)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) || 
+                Input.GetKeyDown(KeyCode.Space) || 
+                Input.GetKeyDown(KeyCode.KeypadEnter) ||
+                Input.GetMouseButtonDown((int)MouseButton.Left))
             {
                 GetMessage(currentTypingType);
             }
