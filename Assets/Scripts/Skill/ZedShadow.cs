@@ -52,12 +52,6 @@ public class ZedShadow : ShotSkill
         if (!character.TryGetComponent(out Zed zed))    // character 오브젝트에서 플레이어 컴포넌트 추출 실패 시 (플레이어 전용 스킬)
             return;
 
-        if (!SubMP())
-        {
-            Release();
-            return;
-        }
-
         UseEffect(particleFollowObj);           // 이펙트 실행
         StartSound(data.useClips);              // 스킬 사용 사운드 재생
         meshRenderer.enabled = false;           // 이동 중 오브젝트가 보이지 않기 위해 비활성화

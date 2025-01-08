@@ -50,18 +50,6 @@ public class Skill : MonoBehaviour, IDamageable
         StartSound(data.voiceClips);    // 시전 보이스 재생
     }
 
-    protected bool SubMP()
-    {
-        if (caster == null)
-            return true;
-
-        var champBase = caster.GetComponent<ChampBase>();
-        if (champBase == null)
-            return true;
-
-        return champBase.SubMP(data.cost);
-    }
-
     public Vector3 GetUsePoint() { return usePoint; }
     public GameObject GetCaster() { return caster; }
 

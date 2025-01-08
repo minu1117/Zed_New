@@ -73,7 +73,7 @@ public class DraggableSkillCreator : MonoBehaviour, IPointerEnterHandler
             $"[{skillData.skillName}]\n\n" +
             $"총 데미지 : {(skillData.damage * skillData.hitRate) * count}\n" +
             $"타격 횟수 : {skillData.hitRate}\n쿨타임 : {skillData.coolDown}초\n" +
-            $"소모 기력 : {cost}\n" +
+            $"소모 기력 : {cost}\n\n" +
             $"{newDescription}";
     }
 

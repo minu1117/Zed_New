@@ -45,7 +45,6 @@ public class StatusController : MonoBehaviour
     private float manaRegenDuration = 0.5f;
     private float manaRegenValue = 10f;
     private float currentTime;
-    private bool isRegen = false;
 
     private void Awake()
     {
@@ -213,38 +212,30 @@ public class StatusController : MonoBehaviour
     {
         LookCamera();
 
-        if (sliderMode == SliderMode.MP && currentValue < data.maxMp)
+        if (sliderMode != SliderMode.MP || currentValue >= data.maxMp)
         {
-            if (!isRegen)
-            {
-                currentTime = 0f;
-            }
-            else
-            {
-                currentTime += Time.deltaTime;
-            }
-
-            isRegen = true;
-            RegenMana();
+            currentTime = 0f;
+            return;
         }
+
+        currentTime += Time.deltaTime;
+        RegenMana();
     }
 
     private void RegenMana()
     {
-        if (!isRegen)
-            return;
+        currentTime += Time.deltaTime;
 
         if (currentTime >= manaRegenDuration)
         {
             currentValue += manaRegenValue;
+            if (currentValue >= data.maxMp)
+            {
+                currentValue = data.maxMp;
+            }
+
             SetCurrentMp();
             currentTime = 0f;
-        }
-
-        if (currentValue >= data.maxMp)
-        {
-            SetMaxMp();
-            isRegen = false;
         }
     }
 

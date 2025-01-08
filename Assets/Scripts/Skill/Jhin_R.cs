@@ -45,11 +45,6 @@ public class Jhin_R : Skill
 
     public override void Use(GameObject character)
     {
-        if (!SubMP())
-        {
-            Release();
-            return;
-        }
         StartCoroutine(CoCurtainCall(character));
     }
 

@@ -8,12 +8,6 @@ public class ShotSkill : Skill
 
     public override void Use(GameObject character)
     {
-        if (!SubMP())
-        {
-            Release();
-            return;
-        }
-
         StartSound(data.voiceClips);    // 시전 보이스 재생
         StartSound(data.useClips);      // 스킬 시전 사운드 재생
         SetActiveTrailRenderer(true);   // TrailRenderer 활성화

@@ -8,12 +8,6 @@ public class DashSkill : Skill
 
     public override void Use(GameObject character)
     {
-        //base.Use(character);
-        if (!SubMP())
-        {
-            Release();
-            return;
-        }
         StartSound(data.useClips);      // 스킬 시전 사운드 재생
         StartSound(data.voiceClips);    // 시전 보이스 재생
 

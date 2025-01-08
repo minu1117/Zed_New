@@ -34,12 +34,6 @@ public class MultipleSkill : Skill
     // 스킬 사용
     public override void Use(GameObject character)
     {
-        if (!SubMP())
-        {
-            Release();
-            return;
-        }
-
         base.Use(character);
         StartCoroutine(CoUseMultipleSkill(character));
     }

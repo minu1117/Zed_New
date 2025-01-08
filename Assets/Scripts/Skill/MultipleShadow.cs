@@ -31,12 +31,6 @@ public class MultipleShadow : Skill
     // 스킬 사용
     public override void Use(GameObject character)
     {
-        if (!SubMP())
-        {
-            Release();
-            return;
-        }
-
         base.Use(character);
         StartCoroutine(CoSpawnMultipleShadow(character));   // 다중 그림자 생성 코루틴 실행
     }

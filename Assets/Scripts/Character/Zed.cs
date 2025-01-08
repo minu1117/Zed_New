@@ -53,7 +53,19 @@ public class Zed : SingletonChampion<Zed>
         if (!skillDict.ContainsKey(keycode))        // 입력한 키가 없을 경우 null return
             return null;
 
+        var skillData = skillDict[keycode].GetExcutor().GetData().skill.data;
+        //if (!SubMP(skillData.cost))
+        //    return null;
+        if (!CheckMP(skillData.cost))
+            return null;
+
         Skill skill = skillDict[keycode].GetExcutor().StartSkill(gameObject, enumIndex, layerMask);    // 사용할 스킬 가져오기
+
+        if (skill != null)
+        {
+            SubMP(skillData.cost);
+        }
+
         return skill;   // 사용한 스킬 return
     }
 

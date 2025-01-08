@@ -5,12 +5,6 @@ public class MeleeSkill : Skill
 {
     public override void Use(GameObject character)
     {
-        if (!SubMP())
-        {
-            Release();
-            return;
-        }
-
         gameObject.transform.forward = usePoint;
         StartCoroutine(CoMelee(character));  // 근접 스킬 사용 코루틴 시작
     }
