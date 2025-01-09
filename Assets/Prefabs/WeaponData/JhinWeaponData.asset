@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
   m_Name: JhinWeaponData
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 150
   useClips:
   - {fileID: 8300000, guid: 35b22c905d18415418ec5c7421165904, type: 3}
   - {fileID: 8300000, guid: d1495d82d04f95a458c54a97fc2b96f5, type: 3}

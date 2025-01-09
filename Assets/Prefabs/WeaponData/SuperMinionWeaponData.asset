@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
   m_Name: SuperMinionWeaponData
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 70
   useClips:
   - {fileID: 8300000, guid: 7ab82af3a5e858b45a23ac290fe426ea, type: 3}
   attackClips: []

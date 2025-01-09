@@ -24,7 +24,7 @@ MonoBehaviour:
   cost: 80
   hitRate: 1
   hitInterval: 0
-  coolDown: 3
+  coolDown: 2
   duration: 5
   useDelay: 0
   afterUseStiffenTime: 0

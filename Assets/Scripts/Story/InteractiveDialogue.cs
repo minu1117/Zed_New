@@ -6,7 +6,7 @@ public class InteractiveDialogue : InteractiveObject
 
     private void Update()
     {
-        if (!CheackDistance())
+        if (!CheckDistance())
             return;
 
         Interaction();

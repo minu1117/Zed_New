@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
   m_Name: ZedWeaponData
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 120
   useClips:
   - {fileID: 8300000, guid: a3fd9e9120c2b95418e559fa35be6457, type: 3}
   - {fileID: 8300000, guid: e0d21bb6cf429f04884c869602a4a173, type: 3}

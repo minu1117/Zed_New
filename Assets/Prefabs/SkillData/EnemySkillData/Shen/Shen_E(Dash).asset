@@ -17,12 +17,13 @@ MonoBehaviour:
   skillDescription: "\uC2A4\uD0AC\uC785\uB2C8\uB2E4\uB871"
   skillLevel: 1
   levelRestriction: 0
-  damage: 100
+  damage: 150
+  cost: 0
   hitRate: 1
   hitInterval: 0
   coolDown: 1
   duration: 0.2
-  useDelay: 2
+  useDelay: 1
   afterUseStiffenTime: 0
   speed: 50
   immobilityTime: 0
@@ -30,7 +31,8 @@ MonoBehaviour:
   isDashPass: 1
   distance: 15
   indicator: {fileID: 4388867058225924817, guid: bf55cd90c50238446ac34790ad1286e2, type: 3}
-  effect: {fileID: 0}
+  effect: {fileID: 3942795597146725399, guid: fa399c8eb591b5b40bcf40723fa55ffd, type: 3}
+  hitEffect: {fileID: 0}
   useClips: []
   attackClips:
   - {fileID: 8300000, guid: 94781fb0e9e5c254abfe4333b9a4a01b, type: 3}
@@ -43,5 +45,7 @@ MonoBehaviour:
   voiceClips:
   - {fileID: 8300000, guid: 360035a9e7e98144980cbca1704d90c0, type: 3}
   - {fileID: 8300000, guid: 36aac6adf5b8e5949826e9cc98717571, type: 3}
+  complateVoiceClips: []
   isSelf: 0
   isStiffen: 1
+  isCameraShake: 0

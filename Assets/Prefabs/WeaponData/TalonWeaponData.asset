@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
   m_Name: TalonWeaponData
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 120
   useClips: []
   attackClips:
   - {fileID: 8300000, guid: 488f4d62e6bc25748ad540990dc9b5ec, type: 3}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603d0f2566da7dc4ca2a870a73589ce5, type: 3}
   m_Name: Zed Auto Attack Data
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 125
   attackSpeed: 2

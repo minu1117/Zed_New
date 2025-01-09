@@ -16,8 +16,6 @@ MonoBehaviour:
   currentHp: 10000
   maxMp: 1000
   currentMp: 1000
-  level: 1
-  charactorName: BossEnemy
+  charactorName: Talon
   moveSpeed: 2
   jumpSpeed: 1
-  gravity: 0

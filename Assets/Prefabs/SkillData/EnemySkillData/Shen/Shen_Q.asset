@@ -17,13 +17,14 @@ MonoBehaviour:
   skillDescription: "\uC2A4\uD0AC\uC785\uB2C8\uB2E4\uB871"
   skillLevel: 1
   levelRestriction: 0
-  damage: 100
+  damage: 300
+  cost: 0
   hitRate: 1
   hitInterval: 0
   coolDown: 1
   duration: 3
-  useDelay: 2
-  afterUseStiffenTime: 3
+  useDelay: 1
+  afterUseStiffenTime: 1
   speed: 50
   immobilityTime: 0
   isShadow: 0
@@ -31,11 +32,14 @@ MonoBehaviour:
   distance: 3
   indicator: {fileID: 4388867058225924817, guid: b44f9e24cee2a8c40a2a05f6e443ec79, type: 3}
   effect: {fileID: 0}
+  hitEffect: {fileID: 0}
   useClips: []
   attackClips: []
   disappearClips: []
   recastClips: []
   complateClips: []
   voiceClips: []
+  complateVoiceClips: []
   isSelf: 0
   isStiffen: 1
+  isCameraShake: 0

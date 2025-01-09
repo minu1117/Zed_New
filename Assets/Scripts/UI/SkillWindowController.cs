@@ -62,7 +62,7 @@ public class SkillWindowController : InteractiveObject
         if (!isInteractable)
             return;
 
-        if (!CheackDistance())
+        if (!CheckDistance())
             return;
 
         if (Input.GetKeyDown(interactionKey))

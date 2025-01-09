@@ -2935,6 +2935,7 @@ MonoBehaviour:
   - {fileID: 363585104383062060}
   slot: {fileID: 8096975348612580112}
   deadEffect: {fileID: 0}
+  deadSounds: []
   deadAnimDuration: 7
   recognitionRange: 9999
   attackRange: 30
@@ -2952,8 +2953,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 593f75679517c7c4dabc612b9751f6f4, type: 2}
   - {fileID: 11400000, guid: 42f1dda5dd598f3438dcb71be4b6a87c, type: 2}
   - {fileID: 11400000, guid: ba1aa70947b5da949859abc6271f03cf, type: 2}
-  waitPatternDelay: 15
-  resetDelay: 3
+  waitPatternDelay: 3
+  resetDelay: 2
   R_Shot_Tr: {fileID: 4898567031250830769}
   spine: {fileID: 5756474297505595080}
   isLastAAParamName: IsLastAA

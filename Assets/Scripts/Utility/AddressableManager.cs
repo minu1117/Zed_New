@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -111,6 +112,53 @@ public static class AddressableManager
         }
 
         return address; // 자르지 않아도 되는 문자이기 때문에 그대로 return
+    }
+
+    public static async Task<Dictionary<string, Material>> LoadAllMaterials(List<Material> materials)
+    {
+        var dict = new Dictionary<string, Material>();
+
+        foreach (var material in materials)
+        {
+            var key = material.name;
+            if (dict.ContainsKey(key))
+                continue;
+
+            Material mat = await GetMaterialAsync(key);
+            dict.Add(key, mat);
+        }
+
+        return dict;
+    }
+
+    private static async Task<Material> GetMaterialAsync(string key)
+    {
+        if (key == string.Empty)
+            return null;
+
+        try
+        {
+            var loadAsync = Addressables.LoadAssetAsync<Material>(key);
+            await loadAsync.Task;
+
+            // 로딩 완료 시 결과 return
+            if (loadAsync.Status == AsyncOperationStatus.Succeeded)
+            {
+                return loadAsync.Result;
+            }
+
+            // 로딩 실패 시 null return
+            else
+            {
+                Debug.LogError($"Failed to load material at address {key}");
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Exception : {ex.Message}");
+            return null;
+        }
     }
 
     /**************************************** 미완성 ****************************************/

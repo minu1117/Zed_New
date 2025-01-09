@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
   m_Name: SiegeMinionWeaponData
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 50
   useClips:
   - {fileID: 8300000, guid: 8becc5727ce09a44787f1aeb0338cb41, type: 3}
   attackClips: []

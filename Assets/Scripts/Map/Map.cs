@@ -18,6 +18,7 @@ public class Map : MonoBehaviour
     public DialogueStarter dialogueStarter;
     public SkillAdder skillAdder;
     public SkillWindowController skillWindowController;
+    public HealingSpot healingSpot;
 
     private void Awake()
     {
@@ -32,6 +33,9 @@ public class Map : MonoBehaviour
 
         if (skillWindowController != null)
             skillWindowController.SetIsInteract(false);
+
+        if (healingSpot != null)
+            healingSpot.SetIsInteract(false);
     }
 
     public void SetActiveLight(bool set)
@@ -60,6 +64,9 @@ public class Map : MonoBehaviour
 
         if (skillWindowController != null)
             skillWindowController.SetIsInteract(true);
+
+        if (healingSpot != null)
+            healingSpot.SetIsInteract(true);
 
         enemyGeneratorController.ResetEnemyCount();
         isClear = true;
@@ -104,6 +111,9 @@ public class Map : MonoBehaviour
 
             if (skillWindowController != null)
                 skillWindowController.SetIsInteract(true);
+
+            if (healingSpot != null)
+                healingSpot.SetIsInteract(true);
 
             isClear = true;
 

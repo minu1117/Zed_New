@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffee8199543ff747a5450e708a5fabf, type: 3}
   m_Name: Gangplank
   m_EditorClassIdentifier: 
-  maxHp: 10000
-  currentHp: 10000
+  maxHp: 5000
+  currentHp: 5000
   maxMp: 1000
   currentMp: 1000
-  level: 1
-  charactorName: BossEnemy
+  charactorName: Gangplank
   moveSpeed: 2
   jumpSpeed: 1
-  gravity: 0

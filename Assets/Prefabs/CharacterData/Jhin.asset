@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffee8199543ff747a5450e708a5fabf, type: 3}
   m_Name: Jhin
   m_EditorClassIdentifier: 
-  maxHp: 10000
-  currentHp: 10000
+  maxHp: 20000
+  currentHp: 20000
   maxMp: 1000
   currentMp: 1000
-  level: 1
   charactorName: Jhin
   moveSpeed: 3
   jumpSpeed: 1
-  gravity: 0

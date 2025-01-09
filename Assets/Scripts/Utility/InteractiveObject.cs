@@ -14,7 +14,7 @@ public abstract class InteractiveObject : MonoBehaviour
         player = Zed.Instance;
     }
 
-    protected virtual bool CheackDistance()
+    protected virtual bool CheckDistance()
     {
         if (player == null)
             return false;

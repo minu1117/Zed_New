@@ -17,7 +17,8 @@ MonoBehaviour:
   skillDescription: 1
   skillLevel: 1
   levelRestriction: 0
-  damage: 10
+  damage: 150
+  cost: 0
   hitRate: 1
   hitInterval: 0
   coolDown: 0
@@ -44,3 +45,4 @@ MonoBehaviour:
   complateVoiceClips: []
   isSelf: 0
   isStiffen: 0
+  isCameraShake: 0

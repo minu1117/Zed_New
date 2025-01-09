@@ -27,6 +27,8 @@ public class Heal : BuffSkill, ITargetable
         }
 
         StartSound(data.complateClips);
+
+        yield return waitduration;  // 지속 시간만큼 대기
         Release();                  // 오브젝트 풀에 반납
     }
 

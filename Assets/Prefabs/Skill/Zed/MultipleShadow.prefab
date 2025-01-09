@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6aed246f546af0349a0d74a51bdc28e1, type: 2}
   isTargeting: 0
+  isPiercing: 0
   shadowCount: 15
   shadowSkill: {fileID: 6859965597726614844, guid: b250de097ea699541bed799f1b268e4a, type: 3}
-  interval: 5
+  interval: 8
   individualWaitDelay: 0.05

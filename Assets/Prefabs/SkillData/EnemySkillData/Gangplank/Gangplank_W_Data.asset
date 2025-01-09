@@ -18,10 +18,11 @@ MonoBehaviour:
   skillLevel: 1
   levelRestriction: 0
   damage: 500
+  cost: 0
   hitRate: 1
   hitInterval: 0
   coolDown: 1
-  duration: 0
+  duration: 1
   useDelay: 1
   afterUseStiffenTime: 0.2
   speed: 0
@@ -30,7 +31,7 @@ MonoBehaviour:
   isDashPass: 0
   distance: 10
   indicator: {fileID: 0}
-  effect: {fileID: 0}
+  effect: {fileID: 3430412861628361164, guid: ab8964e97aebd0345a54701f33f119bb, type: 3}
   hitEffect: {fileID: 0}
   useClips:
   - {fileID: 8300000, guid: 39731e9c05a496b4c815abc3e206c0eb, type: 3}
@@ -43,3 +44,4 @@ MonoBehaviour:
   complateVoiceClips: []
   isSelf: 1
   isStiffen: 0
+  isCameraShake: 0

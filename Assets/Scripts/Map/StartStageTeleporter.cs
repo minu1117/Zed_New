@@ -17,7 +17,7 @@ public class StartStageTeleporter : InteractiveObject
         if (!Input.GetKeyDown(interactionKey))
             return;
 
-        if (!CheackDistance())
+        if (!CheckDistance())
             return;
 
         Interaction();
@@ -57,6 +57,12 @@ public class StartStageTeleporter : InteractiveObject
             map.SetActiveLight(false);
             map.SetActiveVirtualCam(false);
             map.gameObject.SetActive(false);
+        }
+
+        var hpController = Zed.Instance.GetStatusController(SliderMode.HP);
+        if (hpController != null)
+        {
+            hpController.SetMaxHp();
         }
     }
 

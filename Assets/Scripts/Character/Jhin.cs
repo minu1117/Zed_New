@@ -129,4 +129,6 @@ public class Jhin : BossEnemy
 
         cm.Open();
     }
+
+    public void SetIsStart(bool set) { isStart = set; }
 }

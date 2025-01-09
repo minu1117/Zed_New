@@ -96,7 +96,7 @@ public class StatusController : MonoBehaviour
 
     public void Heal(float value)
     {
-        data.currentHp = Math.Clamp(data.currentHp + value, 0, data.maxHp);
+        currentValue = Math.Clamp(currentValue + value, 0, data.maxHp);
         SetCurrentHp();
     }
 
@@ -111,8 +111,7 @@ public class StatusController : MonoBehaviour
     // 최대 체력으로 설정
     public void SetMaxHp()
     {
-        data.currentHp = data.maxHp;
-        currentValue = data.currentHp;
+        currentValue = data.maxHp;
         SetCurrentHp();
         SetText($"{currentValue} / {data.maxHp}");
     }

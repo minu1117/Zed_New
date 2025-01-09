@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1994847c41f4442b580941560a4d7f, type: 3}
   m_Name: ShenWeaponData
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 150
   useClips:
   - {fileID: 8300000, guid: 898a80c0688241840a1e59a8153871af, type: 3}
   - {fileID: 8300000, guid: 244a00c56d6295a42ab09bdcb5fb92f0, type: 3}

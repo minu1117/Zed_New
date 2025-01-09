@@ -17,9 +17,10 @@ MonoBehaviour:
   skillDescription: "\uBD80\uCC44\uAF34\uB85C \uB2E8\uAC80 \uD22C\uCC99"
   skillLevel: 0
   levelRestriction: 0
-  damage: 20
+  damage: 70
+  cost: 0
   hitRate: 5
-  hitInterval: 0.2
+  hitInterval: 0.15
   coolDown: 0
   duration: 0.5
   useDelay: 1
@@ -45,3 +46,4 @@ MonoBehaviour:
   complateVoiceClips: []
   isSelf: 0
   isStiffen: 1
+  isCameraShake: 0

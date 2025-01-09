@@ -25,7 +25,8 @@ public class PingPong_Shot : Skill
         base.Awake();
         rotateObject = GetComponent<RotateObject>();
         meshRenderer = GetComponent<MeshRenderer>();
-        defaultMaterial = meshRenderer.material;
+        //defaultMaterial = meshRenderer.material;
+        defaultMaterial = MaterialLoader.Instance.GetMatarial(meshRenderer.material.name);
     }
 
     public override void Use(GameObject character)
@@ -143,6 +144,7 @@ public class PingPong_Shot : Skill
         if (meshRenderer == null)
             return;
 
-        meshRenderer.material = mat;
+        meshRenderer.material = MaterialLoader.Instance.GetMatarial(mat.name);
+        //meshRenderer.material = mat;
     }
 }

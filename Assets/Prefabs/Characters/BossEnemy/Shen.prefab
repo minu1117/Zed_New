@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f536e8921dd8d8d4ab79787da5e34e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5c3bd012f4ae828429d94fffc29a5269, type: 2}
+  data: {fileID: 11400000, guid: f5697c61db41ebd4eaf36e87f5e338d1, type: 2}
   trailRenderer: {fileID: 1175696481862450854}
 --- !u!65 &3573751146486068086
 BoxCollider:

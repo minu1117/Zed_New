@@ -2323,7 +2323,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 98e42eaf90d0a53488295cc60e21c2ec, type: 2}
   - {fileID: 11400000, guid: 35b2e14e7a9493947974fd8cf0791e1f, type: 2}
   - {fileID: 11400000, guid: 0643c77a784bebd4995fdd125423807e, type: 2}
-  waitPatternDelay: 5
+  waitPatternDelay: 3
   resetDelay: 1
 --- !u!1 &7831642995740647218
 GameObject:

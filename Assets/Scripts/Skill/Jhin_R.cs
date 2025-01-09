@@ -70,6 +70,7 @@ public class Jhin_R : Skill
             agent.SetDestination(movedTr.transform.position);
         }
 
+        jhin.SetIsStart(false);
         yield return new WaitForSeconds(data.useDelay);     // 시전 대기 시간만큼 대기
 
         // 사운드
@@ -161,6 +162,7 @@ public class Jhin_R : Skill
             EffectManager.Instance.ReleaseEffect(tpEffect_2);
         }
 
+        jhin.SetIsStart(true);
         Release();
     }
 

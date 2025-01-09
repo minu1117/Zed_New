@@ -31,9 +31,9 @@ public class SkillAdder : InteractiveObject
         Interaction();
     }
 
-    protected override bool CheackDistance()
+    protected override bool CheckDistance()
     {
-        var check = base.CheackDistance();
+        var check = base.CheckDistance();
         if (isAdded)
         {
             check = false;
@@ -47,7 +47,7 @@ public class SkillAdder : InteractiveObject
         if (!isInteractable)
             return;
 
-        if (!CheackDistance())
+        if (!CheckDistance())
             return;
 
         if (Input.GetKeyDown(interactionKey))
