@@ -13,6 +13,7 @@ public class EndingCredit : MonoBehaviour
     private float waitEndingTime = 10f;
 
     private Coroutine coroutine;
+    private Zed player;
 
     private void Awake()
     {
@@ -23,10 +24,19 @@ public class EndingCredit : MonoBehaviour
         waitForDeltaTime = new WaitForSeconds(Time.deltaTime);
         background.gameObject.SetActive(false);
         endingText.gameObject.SetActive(false);
+
+        player = Zed.Instance;
     }
 
     public void Ending()
     {
+        if (player != null)
+        {
+            player.SetAttackUse(false);
+            var moveController = player.GetMoveController();
+            moveController.StopMove();
+        }
+
         background.gameObject.SetActive(true);
         endingText.gameObject.SetActive(true);
         CustomSceneManager.Instance.FadeIn();
@@ -79,6 +89,13 @@ public class EndingCredit : MonoBehaviour
         endingText.gameObject.SetActive(false);
         CustomSceneManager.Instance.FadeOut();
         contentUnlockUI.FadeOut(1f);
+
+        if (player != null)
+        {
+            player.SetAttackUse(true);
+            var moveController = player.GetMoveController();
+            moveController.StartMove();
+        }
     }
 
     private void Skip()
@@ -92,6 +109,13 @@ public class EndingCredit : MonoBehaviour
         CustomSceneManager.Instance.FadeOut();
 
         contentUnlockUI.FadeOut(1f);
+
+        if (player != null)
+        {
+            player.SetAttackUse(true);
+            var moveController = player.GetMoveController();
+            moveController.StartMove();
+        }
     }
 
     private void Update()

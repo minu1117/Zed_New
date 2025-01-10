@@ -27,6 +27,9 @@ public class SoundManager : Singleton<SoundManager>
         // 오디오 클립 List 순회
         foreach (var clip in clips)
         {
+            if (clip == null)
+                continue;
+
             GameObject audioObject = new GameObject(clip.name);             // 사운드 오브젝트 생성 (사운드 클립의 이름으로)
             AudioSource source = audioObject.AddComponent<AudioSource>();   // 오디오 소스 컴포넌트 붙이기
             source.clip = clip;                                             // 사운드 클립 할당

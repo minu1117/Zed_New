@@ -34,6 +34,7 @@ public class Jhin_Q : TargetingSkill
         transform.DORotate(new Vector3(360, 0, 360), data.duration * 2, RotateMode.FastBeyond360)
                 .SetEase(Ease.Linear);
 
+        float duration = currentCount == 1 ? data.duration + addStartDuration : data.duration;
         if (createdIndicator != null)
         {
             if (indicatorParent != null)
@@ -41,10 +42,9 @@ public class Jhin_Q : TargetingSkill
                 indicatorParent.SetActive(true);
             }
 
-            UseIndicator();
+            UseIndicator(duration);
         }
 
-        float duration = currentCount == 1 ? data.duration + addStartDuration : data.duration;
         transform.DOJump(target.transform.position, jumpPower, 1, duration)
                 .SetEase(Ease.Linear)
                 .OnComplete(() =>
@@ -63,14 +63,14 @@ public class Jhin_Q : TargetingSkill
                 });
     }
 
-    protected void UseIndicator()
+    protected void UseIndicator(float duration)
     {
         // 위치 가져오기
         var pos = target.transform.position;
         pos.y += 0.1f;
 
         createdIndicator.SetPosition(pos);
-        createdIndicator.duration = data.duration;
+        createdIndicator.duration = duration;
         createdIndicator.Use();
     }
 

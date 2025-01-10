@@ -23,7 +23,7 @@ MonoBehaviour:
   hitInterval: 0.15
   coolDown: 0
   duration: 0.5
-  useDelay: 1
+  useDelay: 0.5
   afterUseStiffenTime: 1
   speed: 0
   immobilityTime: 0

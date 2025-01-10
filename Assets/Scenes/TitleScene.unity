@@ -123,6 +123,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &3172909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3172911}
+  - component: {fileID: 3172910}
+  m_Layer: 0
+  m_Name: Button Sound Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &3172910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3172909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cb323ced478894996d26de3014e211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 1477385084}
+  clickSound: {fileID: 8300000, guid: 120b0cc39af71cc4ab520db735cd19b7, type: 3}
+  pointEnterSound: {fileID: 8300000, guid: 6ec58321ef664ba4685d8ebc2036bf93, type: 3}
+--- !u!4 &3172911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3172909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &10445665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1589,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e3a281bfc78b2bf40af25003d71e20e9, type: 3}
   - {fileID: 8300000, guid: 34efceb99e368a544a1bded3c05aa7b5, type: 3}
   - {fileID: 8300000, guid: 9cf7679c853a9d74ca9c85d55c5ddb44, type: 3}
+  - {fileID: 8300000, guid: 120b0cc39af71cc4ab520db735cd19b7, type: 3}
+  - {fileID: 8300000, guid: 37f7aaa02584da442b223426988eb962, type: 3}
+  - {fileID: 8300000, guid: 0aa17d5ba328fc64086be0688345d74c, type: 3}
+  - {fileID: 8300000, guid: 6ec58321ef664ba4685d8ebc2036bf93, type: 3}
   voiceSounds:
   - {fileID: 8300000, guid: 682aed651dad39f4f9d504c28a30f7f5, type: 3}
   - {fileID: 8300000, guid: 4928928556f2d684092c27e63ed49401, type: 3}
@@ -2928,7 +2980,7 @@ GameObject:
   - component: {fileID: 732127125}
   - component: {fileID: 732127124}
   m_Layer: 0
-  m_Name: MaterialLoader
+  m_Name: Material Loader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3349,10 +3401,59 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &764841813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 764841814}
+  - component: {fileID: 764841815}
+  m_Layer: 0
+  m_Name: Button Sound Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &764841814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764841813}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &764841815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764841813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cb323ced478894996d26de3014e211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 1980784710}
+  - {fileID: 1116898888}
+  clickSound: {fileID: 8300000, guid: 0aa17d5ba328fc64086be0688345d74c, type: 3}
+  pointEnterSound: {fileID: 8300000, guid: 6ec58321ef664ba4685d8ebc2036bf93, type: 3}
 --- !u!1 &822672077
 GameObject:
   m_ObjectHideFlags: 0
@@ -7778,7 +7879,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8044,6 +8145,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577274172}
   m_CullTransparentMesh: 1
+--- !u!1 &1588640119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588640120}
+  - component: {fileID: 1588640121}
+  m_Layer: 0
+  m_Name: Button Sound Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1588640120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588640119}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2011488741}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1588640121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588640119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cb323ced478894996d26de3014e211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 912199271}
+  - {fileID: 100093208}
+  - {fileID: 1504293229}
+  - {fileID: 2111515331}
+  - {fileID: 1449414362}
+  clickSound: {fileID: 8300000, guid: 120b0cc39af71cc4ab520db735cd19b7, type: 3}
+  pointEnterSound: {fileID: 8300000, guid: 6ec58321ef664ba4685d8ebc2036bf93, type: 3}
 --- !u!1 &1596801413
 GameObject:
   m_ObjectHideFlags: 0
@@ -9259,7 +9412,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10262,7 +10415,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10620,6 +10773,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1588640120}
   - {fileID: 1955315703}
   - {fileID: 1396749441}
   - {fileID: 1815264152}
@@ -11066,3 +11220,5 @@ SceneRoots:
   - {fileID: 1537811692}
   - {fileID: 2011488741}
   - {fileID: 732127125}
+  - {fileID: 764841814}
+  - {fileID: 3172911}

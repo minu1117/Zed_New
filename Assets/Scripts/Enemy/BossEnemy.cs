@@ -343,7 +343,8 @@ public class BossEnemy : EliteEnemy
         }
 
         isResetPattern = false;
-        yield return null;
         StartCoroutine(base.OnDead());
+
+        yield return null;
     }
 }

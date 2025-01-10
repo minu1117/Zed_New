@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class Zed : SingletonChampion<Zed>
 {
@@ -43,6 +44,25 @@ public class Zed : SingletonChampion<Zed>
         CheckAutoAttack(MouseButton.Left);
     }
 
+    private bool CheckSkillAlive(Dictionary<string, SkillButton> skillDict, string keycode)
+    {
+        var excutor = skillDict[keycode].GetExcutor();
+        if (excutor == null)
+            return false;
+
+        var data = excutor.GetData();
+        if (data == null)
+            return false;
+
+        if (data.skill == null)
+            return false;
+
+        if (data.skill.data == null)
+            return false;
+
+        return true;
+    }
+
     // 스킬 사용 
     // null return == 스킬 사용 X
     public override Skill UseSkill(string keycode, int enumIndex, string layerMask = "")
@@ -54,8 +74,10 @@ public class Zed : SingletonChampion<Zed>
         if (!skillDict.ContainsKey(keycode))        // 입력한 키가 없을 경우 null return
             return null;
 
-        var skillData = skillDict[keycode].GetExcutor().GetData().skill.data;
+        if (!CheckSkillAlive(skillDict, keycode))
+            return null;
 
+        var skillData = skillDict[keycode].GetExcutor().GetData().skill.data;
         if (!CheckMP(skillData.cost))
             return null;
 

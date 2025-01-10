@@ -18,6 +18,7 @@ public struct SoundSettingData
     public float bgmVolumeValue;
     public float sfxVolumeValue;
     public float voiceVolumeValue;
+    public bool isSave;
 }
 
 public class AudioMixerController : Singleton<AudioMixerController>
@@ -66,7 +67,7 @@ public class AudioMixerController : Singleton<AudioMixerController>
             mixer.SetFloat(MasterGroupName, Mathf.Log10(volume) * 20);
         }
 
-        data.masterVolumeValue = volume * 100f;
+        data.masterVolumeValue = volume;
     }
 
     // BGM 볼륨 조절
@@ -81,7 +82,7 @@ public class AudioMixerController : Singleton<AudioMixerController>
             mixer.SetFloat(BGMParamName, Mathf.Log10(volume) * 20);
         }
 
-        data.bgmVolumeValue = volume * 100f;
+        data.bgmVolumeValue = volume;
     }
 
     // SFX 볼륨 조절
@@ -96,7 +97,7 @@ public class AudioMixerController : Singleton<AudioMixerController>
             mixer.SetFloat(SFXParamName, Mathf.Log10(volume) * 20);
         }
 
-        data.sfxVolumeValue = volume * 100f;
+        data.sfxVolumeValue = volume;
     }
 
     // Voice 볼륨 조절
@@ -111,17 +112,26 @@ public class AudioMixerController : Singleton<AudioMixerController>
             mixer.SetFloat(VoiceParamName, Mathf.Log10(volume) * 20);
         }
 
-        data.voiceVolumeValue = volume * 100f;
+        data.voiceVolumeValue = volume;
     }
 
     public void Save()
     {
+        data.isSave = true;
         SaveLoadManager.Save(data, SaveLoadMode.SoundSetting);
     }
 
     public SoundSettingData Load()
     {
         var loadData = SaveLoadManager.Load<SoundSettingData>(SaveLoadMode.SoundSetting);
+        if (!loadData.isSave)
+        {
+            loadData.masterVolumeValue = 1f;
+            loadData.bgmVolumeValue = 1f;
+            loadData.sfxVolumeValue = 1f;
+            loadData.voiceVolumeValue = 1f;
+        }
+
         SetMasterVolume(loadData.masterVolumeValue);
         SetMusicVolume(loadData.bgmVolumeValue);
         SetSFXVolume(loadData.sfxVolumeValue);
