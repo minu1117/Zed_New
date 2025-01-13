@@ -82,6 +82,16 @@ public abstract class EnemyBase : ChampBase
         }
     }
 
+    public void InitStatusController()
+    {
+        hpController.SetChamp(this);
+
+        if (mpController != null)
+        {
+            mpController.SetChamp(this);
+        }
+    }
+
     // 초기 설정
     public virtual void Init()
     {

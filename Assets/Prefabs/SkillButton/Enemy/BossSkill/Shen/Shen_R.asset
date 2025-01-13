@@ -16,6 +16,6 @@ MonoBehaviour:
   skill: {fileID: 5529552521355609698, guid: 0f37cb8d058308e4f9e5d2d7d8ce357f, type: 3}
   maxPoolSize: 5
   sp: {fileID: 0}
-  type: 2
   isUpper: 1
-  healthPercentage: 100
+  type: 2
+  healthPercentage: 50

@@ -14,9 +14,9 @@ public class SkillAdder : InteractiveObject
     [SerializeField] private DialogueStarter dialogueStarter;
     private bool isAdded = false;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         keyTmp.text = EnumConverter.GetString(interactionKey);
 
         if (skill != null)

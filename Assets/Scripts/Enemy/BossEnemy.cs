@@ -35,15 +35,16 @@ public class BossEnemy : EliteEnemy
         SortPattern();
 
         if (sortedPattern != null &&  sortedPattern.Count > 0)
+        {
             SetCurrentPattern(sortedPattern[0].Value, sortedPattern[0].Key);
-
-        nextPatternHP = data.maxHp;
+            FindNextPattern();
+        }
     }
 
     public override void ResetEnemy()
     {
         base.ResetEnemy();
-        nextPatternHP = data.maxHp;
+        FindNextPattern();
         isPatternUsing = false;
     }
 
@@ -198,6 +199,8 @@ public class BossEnemy : EliteEnemy
 
         var enemySkillButtonData = data as EnemySkillButtonData;
         excutor.StartSkill(gameObject, (int)enemySkillButtonData.type, playerTag);
+
+        isResetPattern = false;
     }
 
     protected SkillExcutor GetRandomPatternSkillExcutor()
@@ -287,10 +290,26 @@ public class BossEnemy : EliteEnemy
         currentPatternHP = patternHP;
     }
 
+    private void FindNextPattern()
+    {
+        float currentHP = hpController.GetCurrentValue();
+        if (currentHP == data.maxHp)
+        {
+            var findNextPattern = sortedPattern.Find(pair => pair.Key < currentHP);
+            if (findNextPattern.Key == 0 || findNextPattern.Value == null || findNextPattern.Value.Count == 0)
+            {
+                nextPatternHP = data.maxHp;
+                return;
+            }
+
+            nextPatternHP = findNextPattern.Key;
+        }
+    }
+
     private void DecidePattern()
     {
-        float currentHP = data.currentHp;
-        if (nextPatternHP < currentHP || currentHP <= 0)
+        float currentHP = hpController.GetCurrentValue();
+        if (nextPatternHP == data.maxHp || nextPatternHP < currentHP || currentHP <= 0)
             return;
 
         for (int i = 0; i < sortedPattern.Count; i++)
@@ -299,7 +318,6 @@ public class BossEnemy : EliteEnemy
             if (key >= currentHP && key < currentPatternHP)
             {
                 var value = sortedPattern[i].Value;
-                //SetCurrentPattern(value, key);
                 AddCurrentPattern(value, key);
 
                 if (i + 1 < sortedPattern.Count)
@@ -320,11 +338,13 @@ public class BossEnemy : EliteEnemy
     protected void ResetUsePattern()
     {
         if (usePatternWaitCoroutine != null)
+        {
             StopCoroutine(usePatternWaitCoroutine);
+            usePatternWaitCoroutine = null;
+        }
 
         isResetPattern = true;
-        usePatternWaitCoroutine = null;
-        waitNextAttackCoroutine = null;
+        //waitNextAttackCoroutine = null;
         WaitNextAttack(resetDelay);
     }
 

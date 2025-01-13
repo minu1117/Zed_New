@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 70
   duration: 1
+  effect: {fileID: 2285019166014349913, guid: a6c052c985889c040be03d0ae7a04ca6, type: 3}
 --- !u!1001 &7574339755876165149
 PrefabInstance:
   m_ObjectHideFlags: 0

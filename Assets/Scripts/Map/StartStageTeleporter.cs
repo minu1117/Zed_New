@@ -7,9 +7,9 @@ public class StartStageTeleporter : InteractiveObject
     [SerializeField] private EnemyGeneratorController enemyGeneratorController;
     [SerializeField] private GameSceneManager gameSceneManager;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
     }
 
     public void Update()

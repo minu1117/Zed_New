@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed175eaf0cd4ce4e9ed1ed5a3f0c262, type: 3}
   m_Name: Gangplank_R
   m_EditorClassIdentifier: 
-  keycode: 
+  keycode: 321521603
   skill: {fileID: 6464024842145155692, guid: adb9d557b05aa8646bfaa2610d03629d, type: 3}
   maxPoolSize: 5
   sp: {fileID: 0}
   isUpper: 0
   type: 3
-  healthPercentage: 100
+  healthPercentage: 50

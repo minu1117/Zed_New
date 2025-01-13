@@ -30,6 +30,7 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
     public void LoadScene(string sceneName)
     {
         isLoaded = true;
+        AudioMixerController.Instance.Save();
         StartCoroutine(CoLoadSceneAsync(sceneName));
     }
     public IEnumerator CoLoadSceneAsync(string sceneName)
@@ -58,7 +59,6 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
 
         if (sceneName == gameSceneName)
         {
-            //var gameSceneMgr = FindFirstObjectByType<GameSceneManager>();
             var gameSceneMgr = GameSceneManager.Instance;
             if (gameSceneMgr != null)
             {

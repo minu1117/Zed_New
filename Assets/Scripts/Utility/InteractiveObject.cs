@@ -9,7 +9,7 @@ public abstract class InteractiveObject : MonoBehaviour
     protected Zed player;
     protected bool isInteractable;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         player = Zed.Instance;
     }

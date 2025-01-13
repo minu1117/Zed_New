@@ -15,8 +15,8 @@ public class ChampBase : MonoBehaviour
     public List<AudioClip> deadSounds;                              // 죽었을 때 나오는 사운드들
     private Dictionary<string, Weapon> weaponDict;                  // 무기들을 이름과 같이 담아두는 Dictionary
     protected CharacterAnimationController animationController;     // 애니메이션 컨트롤러
-    private StatusController hpController;                          // hp 컨트롤러
-    private StatusController mpController;                          // mp 컨트롤러
+    protected StatusController hpController;                          // hp 컨트롤러
+    protected StatusController mpController;                          // mp 컨트롤러
     protected NavMeshAgent agent;
     protected CharacterMoveController moveController;
     public float deadAnimDuration;                                  // 죽는 애니메이션 출력 시간

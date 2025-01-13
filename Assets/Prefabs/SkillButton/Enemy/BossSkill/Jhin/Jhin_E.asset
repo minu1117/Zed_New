@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed175eaf0cd4ce4e9ed1ed5a3f0c262, type: 3}
   m_Name: Jhin_E
   m_EditorClassIdentifier: 
-  keycode: 
+  keycode: 140379574
   skill: {fileID: 1659435368814680895, guid: a683baa826c2f4242b3fa21bc19521ee, type: 3}
   maxPoolSize: 5
   sp: {fileID: 0}
   isUpper: 0
   type: 2
-  healthPercentage: 100
+  healthPercentage: 80

@@ -15,6 +15,8 @@ public class AnimationTrap : Trap
     [SerializeField] private float burstDelay;
     [SerializeField] private AudioClip sensingAudio;
 
+    private Effect usedIdleEffect;
+
     private bool isSensing = false;
     
     public override void Use(GameObject character)
@@ -59,7 +61,7 @@ public class AnimationTrap : Trap
         }
 
         animator.SetTrigger(fireComplateTriggerName);
-        var idleEffect = UseTrapEffect(idleParticle, transform);
+        usedIdleEffect = UseTrapEffect(idleParticle, transform);
 
         // 착지 애니메이션 대기 후 센서 활성화
         yield return new WaitForSeconds(waitSensorAnimationDelay);
@@ -72,10 +74,11 @@ public class AnimationTrap : Trap
             SoundManager.Instance.PlayOneShot(sensingAudio);
         }
 
-        if (idleEffect != null)
+        if (usedIdleEffect != null)
         {
-            idleEffect.Stop();
-            EffectManager.Instance.ReleaseEffect(idleEffect);
+            usedIdleEffect.Stop();
+            EffectManager.Instance.ReleaseEffect(usedIdleEffect);
+            usedIdleEffect = null;
         }
         
         UseTrapEffect(sensingParticle, transform);
@@ -104,4 +107,14 @@ public class AnimationTrap : Trap
     }
 
     public void Sensing() { isSensing = true; }
+
+    private void OnDestroy()
+    {
+        if (usedIdleEffect != null)
+        {
+            usedIdleEffect.Stop();
+            EffectManager.Instance.ReleaseEffect(usedIdleEffect);
+            usedIdleEffect = null;
+        }
+    }
 }

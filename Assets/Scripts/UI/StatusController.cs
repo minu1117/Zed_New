@@ -46,7 +46,7 @@ public class StatusController : MonoBehaviour
     private float manaRegenValue = 10f;
     private float currentTime;
 
-    private void Awake()
+    private void Start()
     {
         switch (usedSlider)
         {
@@ -61,9 +61,19 @@ public class StatusController : MonoBehaviour
         }
 
         ChangeCanvasMode(canvasMode);               // 캔버스 모드 변경
-        data = champ.data;                          // 조정할 데이터 할당
+
+        if (data == null)
+        {
+            data = champ.data;                          // 조정할 데이터 할당
+        }
 
         SetMaxValue();      // 현재 체력 or 현재 마나를 최대 값으로 변경
+    }
+
+    public void SetChamp(ChampBase champ)
+    {
+        this.champ = champ;
+        data = champ.data;
     }
 
     // 모드에 따라 현재 체력 or 마나 설정

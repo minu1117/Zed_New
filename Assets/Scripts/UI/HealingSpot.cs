@@ -6,6 +6,9 @@ public class HealingSpot : InteractiveObject
 
     private void Update()
     {
+        if (!isInteractable)
+            return;
+
         if (!CheckDistance())
             return;
 

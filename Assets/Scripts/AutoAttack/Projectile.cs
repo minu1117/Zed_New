@@ -3,8 +3,9 @@ using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float duration;
+    [SerializeField] private float speed;
+    [SerializeField] private float duration;
+    [SerializeField] private Effect effect;
 
     private RangedWeapon rangedWeapon;
     private BoxCollider coll;
@@ -13,6 +14,8 @@ public class Projectile : MonoBehaviour
     private bool isMoved = false;
     private float currentTime = 0f;
     private float damage = 0f;
+
+    private Effect usedEffect;
 
     private void Awake()
     {
@@ -39,6 +42,11 @@ public class Projectile : MonoBehaviour
         coll.enabled = true;
         currentTime = 0f;
         isMoved = true;
+
+        if (effect != null)
+        {
+            usedEffect = EffectManager.Instance.UseEffect(effect, gameObject.transform, true, gameObject);
+        }
     }
 
     public void Update()
@@ -60,6 +68,13 @@ public class Projectile : MonoBehaviour
     private void Release()
     {
         coll.enabled = false;
+
+        if (usedEffect != null)
+        {
+            usedEffect.Stop();
+            usedEffect = null;
+        }
+
         if (releasePool != null)
         {
             releasePool.Release(this);

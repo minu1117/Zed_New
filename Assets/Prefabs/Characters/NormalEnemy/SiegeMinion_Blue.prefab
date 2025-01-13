@@ -1837,9 +1837,10 @@ MonoBehaviour:
   - {fileID: 4924006550438776568}
   slot: {fileID: 0}
   deadEffect: {fileID: 0}
+  deadSounds: []
   deadAnimDuration: 2
-  recognitionRange: 20
-  attackRange: 10
+  recognitionRange: 50
+  attackRange: 20
   skillRange: 0
   loseTargetTime: 1
   patrolRange: 10

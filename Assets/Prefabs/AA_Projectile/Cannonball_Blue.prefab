@@ -103,3 +103,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 40
   duration: 3
+  effect: {fileID: 5712969097235432472, guid: c4776668064ba3a46998f78e5b6fc801, type: 3}

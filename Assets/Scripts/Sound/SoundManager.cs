@@ -11,6 +11,10 @@ public class SoundManager : Singleton<SoundManager>
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    protected void Start()
+    {
         CreateSound(sfxSounds, AudioType.SFX);      // SFX 사운드 오브젝트 생성
         CreateSound(bgmSounds, AudioType.BGM);      // BGM 사운드 오브젝트 생성
         CreateSound(voiceSounds, AudioType.Voice);  // Voice 사운드 오브젝트 생성

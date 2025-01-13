@@ -18,4 +18,4 @@ MonoBehaviour:
   sp: {fileID: 0}
   isUpper: 0
   type: 3
-  healthPercentage: 100
+  healthPercentage: 50

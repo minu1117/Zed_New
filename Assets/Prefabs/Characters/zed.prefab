@@ -936,11 +936,20 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: eb883fbd557de9d47b60260619518020, type: 2}
   autoAttack: {fileID: 8946404786609123661}
   shotStartTransform: {fileID: 8822124168629930503}
+  groundTransform: {fileID: 0}
   weapons:
   - {fileID: 2422746513429961512}
   - {fileID: 1981062769573722123}
+  slot: {fileID: 0}
+  deadEffect: {fileID: 0}
+  deadSounds:
+  - {fileID: 8300000, guid: ff1c417186496a449b3ae2c889c6d951, type: 3}
+  - {fileID: 8300000, guid: 170d5c79841085f48a0f23dd3adba8c3, type: 3}
+  - {fileID: 8300000, guid: 527f6a970cbd3ad4aa604b94bd5dece2, type: 3}
+  deadAnimDuration: 0
   L_Hand_Blade: {fileID: 8727625155686893211}
   R_Hand_Blade: {fileID: 8334939799168551849}
+  skillSlotMgr: {fileID: 0}
 --- !u!195 &404673645307437552
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1044,9 +1053,15 @@ MonoBehaviour:
   attackTypeParamName: AttackType
   nextMotionTriggerParamName: NextMotion
   upperLayerParamName: IsUpper
+  JumpTriggerName: 
+  JumpTypeParamName: 
+  spell_Anim_Quarter_ParamName: 
   maxAutoAttackEnum: 2
   upperLayerIndex: 1
   wholeBodyLayerIndex: 2
+  shortJumpThreshold: 0
+  jumpSoundClips: []
+  landingSoundClips: []
 --- !u!114 &8946404786609123661
 MonoBehaviour:
   m_ObjectHideFlags: 0

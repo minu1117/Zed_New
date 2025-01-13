@@ -23,7 +23,7 @@ public struct SoundSettingData
 
 public class AudioMixerController : Singleton<AudioMixerController>
 {
-    [SerializeField] private AudioMixer mixer;              // 오디오 믹서
+    [SerializeField] private AudioMixer mixer;               // 오디오 믹서
     private string MasterGroupName;                          // 마스터 볼륨 그룹 이름
     private string BGMParamName;                             // BGM 볼륨 파라미터 이름
     private string SFXParamName;                             // SFX 볼륨 파라미터 이름
@@ -34,6 +34,10 @@ public class AudioMixerController : Singleton<AudioMixerController>
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    protected void Start()
+    {
         data = new();
         MasterGroupName = EnumConverter.GetString(AudioType.Master);
         BGMParamName = EnumConverter.GetString(AudioType.BGM);
@@ -139,11 +143,6 @@ public class AudioMixerController : Singleton<AudioMixerController>
 
         data = loadData;
         return data;
-    }
-
-    public void OnDestroy()
-    {
-        Save();
     }
 
     public void OnApplicationQuit()

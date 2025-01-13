@@ -724,6 +724,9 @@ MonoBehaviour:
   - {fileID: 2638650167282466082}
   slot: {fileID: 3656944444900938530}
   deadEffect: {fileID: 0}
+  deadSounds:
+  - {fileID: 8300000, guid: a1af8a1ed8cb5eb478fb7ebbc87407d0, type: 3}
+  - {fileID: 8300000, guid: 25c4ada1e22d16f4594c36b6f33fded7, type: 3}
   deadAnimDuration: 5
   recognitionRange: 9999
   attackRange: 4
@@ -3161,6 +3164,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5281473855976597995, guid: 67a35189f3cdcb547b304954f3d60155, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6477622340864459660, guid: 67a35189f3cdcb547b304954f3d60155, type: 3}
+      propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6534804822029099134, guid: 67a35189f3cdcb547b304954f3d60155, type: 3}

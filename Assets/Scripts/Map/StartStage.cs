@@ -10,13 +10,10 @@ public class StartStage : MonoBehaviour
     [SerializeField] private AudioClip bgmClip;
     [SerializeField] private SkyboxChanger skyboxChanger;
 
-    public void Awake()
-    {
-        Warp();
-    }
-
     private void Start()
     {
+        Warp();
+
         if (storyPortal == null)
             return;
 

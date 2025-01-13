@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillWindowController : InteractiveObject
 {
     public GameObject skillWindow;
     public GameObject opacityPanel;
+
+    protected override void Start()
+    {
+        base.Start();
+    }
 
     public void ClickContorllButton()
     {
@@ -17,17 +23,14 @@ public class SkillWindowController : InteractiveObject
 
         if (player != null && player.GetMoveController() != null)
         {
-            var moveController = player.GetMoveController();
             if (skillWindow.activeSelf == false)
             {
-                player.SetAttackUse(false);
-                moveController.StopMove();
+                SetPlayerInput(false);
                 StartSound(interactionSound);
             }
             else
             {
-                player.SetAttackUse(true);
-                moveController.StartMove();
+                SetPlayerInput(true);
                 StartSound(escapeSound);
             }
         }
@@ -49,8 +52,7 @@ public class SkillWindowController : InteractiveObject
 
             if (player != null && player.GetMoveController() != null)
             {
-                player.SetAttackUse(true);
-                player.GetMoveController().StartMove();
+                SetPlayerInput(true);
             }
         }
 
@@ -68,6 +70,21 @@ public class SkillWindowController : InteractiveObject
         if (Input.GetKeyDown(interactionKey))
         {
             ClickContorllButton();
+        }
+    }
+
+    private void SetPlayerInput(bool set)
+    {
+        player.SetAttackUse(set);
+
+        var moveController = player.GetMoveController();
+        if (set)
+        {
+            moveController.StartMove();
+        }
+        else
+        {
+            moveController.StopMove();
         }
     }
 }

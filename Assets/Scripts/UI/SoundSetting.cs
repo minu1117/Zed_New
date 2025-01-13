@@ -51,31 +51,6 @@ public class SoundSetting : MonoBehaviour
         SetValueText(bgmTmp, loadData.bgmVolumeValue);
         SetValueText(sfxTmp, loadData.sfxVolumeValue);
         SetValueText(voiceTmp, loadData.voiceVolumeValue);
-
-        //if (loadData.isSave)
-        //{
-        //    MasterSlider.value = loadData.masterVolumeValue / 100f;
-        //    BGMSlider.value = loadData.bgmVolumeValue / 100f;
-        //    SFXSlider.value = loadData.sfxVolumeValue / 100f;
-        //    VoiceSlider.value = loadData.voiceVolumeValue / 100f;
-
-        //    SetValueText(masterTmp, loadData.masterVolumeValue);
-        //    SetValueText(bgmTmp, loadData.bgmVolumeValue);
-        //    SetValueText(sfxTmp, loadData.sfxVolumeValue);
-        //    SetValueText(voiceTmp, loadData.voiceVolumeValue);
-        //}
-        //else
-        //{
-        //    MasterSlider.value = loadData.masterVolumeValue;
-        //    BGMSlider.value = loadData.bgmVolumeValue;
-        //    SFXSlider.value = loadData.sfxVolumeValue;
-        //    VoiceSlider.value = loadData.voiceVolumeValue;
-
-        //    SetValueText(masterTmp, loadData.masterVolumeValue);
-        //    SetValueText(bgmTmp, loadData.bgmVolumeValue);
-        //    SetValueText(sfxTmp, loadData.sfxVolumeValue);
-        //    SetValueText(voiceTmp, loadData.voiceVolumeValue);
-        //}
     }
     
     private void SetValueText(TextMeshProUGUI tmp, float value)

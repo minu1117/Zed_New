@@ -19,7 +19,7 @@ public class EnemyGenerator : MonoBehaviour
 
     private Map map;
 
-    public void Awake()
+    public void Start()
     {
         enemyPools = new();
         poolObjects = new();
@@ -89,6 +89,9 @@ public class EnemyGenerator : MonoBehaviour
         var enemy = enemyobj.GetComponent<EnemyBase>();                      // 생성한 몬스터에서 EnemyBase 컴포넌트 가져오기
         var hpController = enemy.GetStatusController(SliderMode.HP);         // 몬스터의 HP Controller 가져오기
 
+        enemy.InitStatusController();
+        hpController.SetMaxValue();             // 몬스터 최대 HP, MP로 설정
+
         enemy.SetEnemyGenerator(this);
         enemy.Init();                           // 몬스터 초기 설정 실행
 
@@ -103,7 +106,6 @@ public class EnemyGenerator : MonoBehaviour
             }
         }
 
-        hpController.SetMaxValue();             // 몬스터 최대 HP, MP로 설정
         enemy.SetPool(enemyPools[createIndex]); // 몬스터에 오브젝트 풀 설정 (Release용)
         cratedEnemies.Add(enemy);
         return enemy;

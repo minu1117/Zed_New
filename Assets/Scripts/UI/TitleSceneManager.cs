@@ -10,7 +10,7 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private AudioClip titleSceneBgm;
 
-    private void Awake()
+    private void Start()
     {
         StartVideo();
         OnClickStartButton();
