@@ -67,11 +67,18 @@ public class Jhin_R : Skill
             var movedTr = teleportTr.GetMovedTransform();
 
             teleportTr.Teleport(agent);
+
+            if (!agent.enabled)
+                yield break;
+
             agent.SetDestination(movedTr.transform.position);
         }
 
         jhin.SetIsStart(false);
         yield return new WaitForSeconds(data.useDelay);     // 시전 대기 시간만큼 대기
+
+        if (!agent.enabled)
+            yield break;
 
         // 사운드
         StartSound(data.useClips);      // 스킬 시전 사운드 재생

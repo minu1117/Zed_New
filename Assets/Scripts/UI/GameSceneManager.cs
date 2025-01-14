@@ -32,7 +32,7 @@ public class GameSceneManager : MonoBehaviour
         CustomSceneManager.Instance.SetOptionButton(optionButton);
         CustomSceneManager.Instance.GetOption().SetActiveTitleOptionButtons(true);
 
-        Load();
+        LoadPlayerData();
     }
 
     public void SetEnding(bool set) { data.ending = set; }
@@ -42,7 +42,6 @@ public class GameSceneManager : MonoBehaviour
 
     protected void OnDestroy()
     {
-        Save();
         if (Instance != null)
         {
             Instance = null;
@@ -56,10 +55,24 @@ public class GameSceneManager : MonoBehaviour
 
     public void Save()
     {
+        if (stageManager != null)
+        {
+            stageManager.SaveSequnce();
+        }
+
+        SavePlayerData();
+    }
+
+    private void SavePlayerData()
+    {
+        var loadData = SaveLoadManager.Load<PlayerData>(SaveLoadMode.PlayerData);
+        if (loadData.ending == true)
+            return;
+
         SaveLoadManager.Save(data, SaveLoadMode.PlayerData);
     }
 
-    public void Load()
+    public void LoadPlayerData()
     {
         data = SaveLoadManager.Load<PlayerData>(SaveLoadMode.PlayerData);
     }

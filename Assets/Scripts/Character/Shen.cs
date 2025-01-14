@@ -57,8 +57,8 @@ public class Shen : BossEnemy
         duskSword.gameObject.SetActive(false);
         createdDuskswordDummy.gameObject.SetActive(false);
 
-        yield return null;
         StartCoroutine(base.OnDead());
+        yield return null;
     }
 
     /********************************************** Animation Event **********************************************/

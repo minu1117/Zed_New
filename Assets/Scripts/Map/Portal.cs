@@ -106,6 +106,8 @@ public class Portal : MonoBehaviour
 
     public void ResetDoor()
     {
+        Close();
+
         if (leftDoor == null || rightDoor == null)
             return;
 

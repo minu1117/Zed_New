@@ -20,4 +20,9 @@ public class DialogueTrigger : MonoBehaviour
 
         isEnter = dialogueStarter.StartDialogue(other.gameObject);
     }
+
+    public void SetIsEnter(bool set)
+    {
+        isEnter = set;
+    }
 }

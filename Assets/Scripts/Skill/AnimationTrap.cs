@@ -68,7 +68,23 @@ public class AnimationTrap : Trap
         SetSensorsColliderEnable(true);
 
         // 센서 감지 대기
-        yield return new WaitUntil(() => isSensing);
+        yield return new WaitUntil(() => isSensing || !caster.gameObject.activeSelf);
+
+        if (!caster.gameObject.activeSelf)
+        {
+            if (usedIdleEffect != null)
+            {
+                usedIdleEffect.Stop();
+                EffectManager.Instance.ReleaseEffect(usedIdleEffect);
+                usedIdleEffect = null;
+            }
+
+            SetSensorsColliderEnable(false);
+            isSensing = false;
+            Release();
+            yield break;
+        }
+
         if (sensingAudio != null)
         {
             SoundManager.Instance.PlayOneShot(sensingAudio);

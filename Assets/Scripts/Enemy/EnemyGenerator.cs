@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -123,11 +122,11 @@ public class EnemyGenerator : MonoBehaviour
     private void GetEnemy(EnemyBase enemy)
     {
         enemy.transform.position = GetRandomPos(transform.position);
+        enemy.gameObject.SetActive(true);               // 몬스터 오브젝트 활성화
         enemy.ResetEnemy();
         enemy.SetPatrolState();
         var hpController = enemy.GetStatusController(SliderMode.HP);     // HP Controller 가져오기
         hpController.SetMaxValue();                     // 최대 HP, MP로 설정
-        enemy.gameObject.SetActive(true);               // 몬스터 오브젝트 활성화
         enemy.UseSpawnEffect();
     }
 

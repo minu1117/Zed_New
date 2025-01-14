@@ -6,16 +6,16 @@ public class MapSelectPortal : Portal
     [SerializeField] private ModeSelectUI modeSelectUI;
     [SerializeField] private MapSelectUI mapSelectUI;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     protected void Start()
     {
-        var loadData = stageManager.Load();
+        var loadData = Load();
         InitModeSelectUI(loadData);
         InitMapSelectUI(loadData);
+    }
+
+    private StageData Load()
+    {
+        return stageManager.Load();
     }
 
     private void InitModeSelectUI(StageData loadData)
@@ -113,6 +113,9 @@ public class MapSelectPortal : Portal
     {
         if (other.tag != EnumConverter.GetString(CharacterEnum.Player))
             return;
+
+        var loadData = Load();
+        SetupMapSelectButtons(loadData);
 
         var moveController = Zed.Instance.GetMoveController();
         moveController.StopMove();

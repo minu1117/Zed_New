@@ -37,6 +37,20 @@ public class StageManager : MonoBehaviour
         SetActiveAllStages(false);
     }
 
+    public void ResetAllMaps()
+    {
+        foreach (var stage in stages)
+        {
+            stage.stageClear = false;
+
+            var mapList = stage.GetAllMaps();
+            foreach (var map in mapList)
+            {
+                map.ResetMap();
+            }
+        }
+    }
+
     public void NextStage()
     {
         SetActiveAllStages(false);
@@ -44,6 +58,7 @@ public class StageManager : MonoBehaviour
         bool stageClear = CheckStageClear(currentStage);
         if (stageClear)
         {
+            SaveSequnce();
             SetStageClear(currentStage);
         }
 
@@ -55,6 +70,10 @@ public class StageManager : MonoBehaviour
             ChangeSunSource(startStage.GetDirectionalLight());
             skyboxChanger.ChangeToDaySkybox(Skybox.Defalut);
             startStage.Warp();
+            startStage.OpenPortals();
+
+            ResetAllMaps();
+            SetActiveAllStages(false);
 
             if (GameSceneManager.Instance.data.ending)
                 return;
@@ -199,7 +218,7 @@ public class StageManager : MonoBehaviour
 
     }
 
-    private void SaveSequnce()
+    public void SaveSequnce()
     {
         if (currentStage == null)
             return;
@@ -222,11 +241,6 @@ public class StageManager : MonoBehaviour
     }
 
     public void OnApplicationQuit()
-    {
-        SaveSequnce();
-    }
-
-    public void OnDestroy()
     {
         SaveSequnce();
     }

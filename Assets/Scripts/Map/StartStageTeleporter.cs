@@ -51,6 +51,7 @@ public class StartStageTeleporter : InteractiveObject
 
         startStage.StartBgm();
         startStage.Warp();
+        startStage.OpenPortals();
 
         if (map != null)
         {
@@ -59,6 +60,7 @@ public class StartStageTeleporter : InteractiveObject
             map.gameObject.SetActive(false);
         }
 
+        stageManager.ResetAllMaps();
         var hpController = Zed.Instance.GetStatusController(SliderMode.HP);
         if (hpController != null)
         {
@@ -79,11 +81,6 @@ public class StartStageTeleporter : InteractiveObject
         if (startStage == null)
             yield break;
 
-        //var enemyGenerators = enemyGeneratorController.GetGenerators();
-        //foreach (var generator in enemyGenerators)
-        //{
-        //    generator.ReleaseAll();
-        //}
         ReleaseCurrentMapEnemies();
 
         var customSceneMgr = CustomSceneManager.Instance;
@@ -91,20 +88,7 @@ public class StartStageTeleporter : InteractiveObject
 
         yield return new WaitUntil(() => !customSceneMgr.isFade);
         Teleport(stageManager, startStage);
-        //SoundManager.Instance.StopAllBgm();
-
-        //stageManager.SetActiveStartStage(true);
-        //stageManager.SetActiveStartStageLight(true);
-        //stageManager.ChangeSunSource(startStage.GetDirectionalLight());
-        //startStage.StartBgm();
-        //startStage.Warp();
-
-        //if (map != null)
-        //{
-        //    map.SetActiveLight(false);
-        //    map.SetActiveVirtualCam(false);
-        //    map.gameObject.SetActive(false);
-        //}
+        stageManager.ResetAllMaps();
 
         customSceneMgr.FadeOut();
     }

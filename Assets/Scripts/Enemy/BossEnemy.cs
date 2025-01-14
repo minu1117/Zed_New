@@ -344,7 +344,6 @@ public class BossEnemy : EliteEnemy
         }
 
         isResetPattern = true;
-        //waitNextAttackCoroutine = null;
         WaitNextAttack(resetDelay);
     }
 

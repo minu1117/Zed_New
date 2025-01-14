@@ -15,7 +15,7 @@ public class EndingCredit : MonoBehaviour
     private Coroutine coroutine;
     private Zed player;
 
-    private void Awake()
+    private void Start()
     {
         Color color1 = endingText.color;
         color1.a = 0f;

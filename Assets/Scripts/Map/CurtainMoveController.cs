@@ -96,15 +96,15 @@ public class CurtainMoveController : MonoBehaviour
         switch (rotateType)
         {
             case RotateType.X:
-                leftCurtain.gameObject.transform.localPosition = new Vector3(-defalutLeftPos, leftDoorPos.y, leftDoorPos.z);
+                leftCurtain.gameObject.transform.localPosition = new Vector3(defalutLeftPos, leftDoorPos.y, leftDoorPos.z);
                 rightCurtain.gameObject.transform.localPosition = new Vector3(defalutRightPos, rightDoorPos.y, rightDoorPos.z);
                 break;
             case RotateType.Y:
-                leftCurtain.gameObject.transform.localPosition = new Vector3(leftDoorPos.x, -defalutLeftPos, leftDoorPos.z);
+                leftCurtain.gameObject.transform.localPosition = new Vector3(leftDoorPos.x, defalutLeftPos, leftDoorPos.z);
                 rightCurtain.gameObject.transform.localPosition = new Vector3(rightDoorPos.x, defalutRightPos, rightDoorPos.z);
                 break;
             case RotateType.Z:
-                leftCurtain.gameObject.transform.localPosition = new Vector3(leftDoorPos.x, leftDoorPos.y, -defalutLeftPos);
+                leftCurtain.gameObject.transform.localPosition = new Vector3(leftDoorPos.x, leftDoorPos.y, defalutLeftPos);
                 rightCurtain.gameObject.transform.localPosition = new Vector3(rightDoorPos.x, rightDoorPos.y, defalutRightPos);
                 break;
         }

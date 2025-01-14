@@ -19,9 +19,16 @@ public class StartStage : MonoBehaviour
 
         StartBgm();
         map.StartCheakMapClear();
-        storyPortal.Open();
         skyboxChanger.ChangeSunSource(directionalLight);
         skyboxChanger.ChangeToDaySkybox(Skybox.Defalut);
+
+        OpenPortals();
+    }
+
+    public void OpenPortals()
+    {
+        map.StartCheakMapClear();
+        storyPortal.Open();
 
         if (GameSceneManager.Instance.data.ending)
         {

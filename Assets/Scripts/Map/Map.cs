@@ -19,6 +19,7 @@ public class Map : MonoBehaviour
     public SkillAdder skillAdder;
     public SkillWindowController skillWindowController;
     public HealingSpot healingSpot;
+    public DialogueTrigger dialogueTrigger;
 
     private void Awake()
     {
@@ -132,6 +133,21 @@ public class Map : MonoBehaviour
             return;
 
         portal.ResetDoor();
+    }
+
+    public void ResetMap()
+    {
+        if (curtainMoveController != null)
+        {
+            curtainMoveController.ResetDoor();
+        }
+
+        if (dialogueTrigger != null)
+        {
+            dialogueTrigger.SetIsEnter(false);
+        }
+
+        ResetPortal();
     }
 
     public void SetActiveVirtualCam(bool set)

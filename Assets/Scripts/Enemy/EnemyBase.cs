@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.AI;
+using TMPro;
 
 public enum EnemySkill
 {
@@ -110,7 +112,14 @@ public abstract class EnemyBase : ChampBase
 
         isDead = false;
         animationController.Restart();
-        agent.isStopped = false;
+
+        agent.enabled = true;
+
+        if (agent.isOnNavMesh)
+        {
+            agent.isStopped = false;
+        }
+        
         agent.speed = data.moveSpeed;
         runSpeed = data.moveSpeed + addRunSpeed;
     }
@@ -160,8 +169,13 @@ public abstract class EnemyBase : ChampBase
 
         if (agent != null)
         {
-            agent.isStopped = true;
+            if (agent.enabled && agent.isOnNavMesh)
+            {
+                agent.isStopped = true;
+            }
+
             agent.velocity = Vector3.zero;
+            agent.enabled = false;
         }
 
         if (rb != null)

@@ -10,6 +10,7 @@ public class Jhin : BossEnemy
 
     private Jhin_Weapon jhin_Weapon;
     private bool isStart = false;
+    private Coroutine startActionCoroutine;
     
     protected override void Awake()
     {
@@ -21,7 +22,15 @@ public class Jhin : BossEnemy
     {
         base.Init();
         ResetEnemy();
-        StartCoroutine(CoStartAction());
+    }
+
+    public override void ResetEnemy()
+    {
+        base.ResetEnemy();
+
+        isStart = false;
+        if (startActionCoroutine == null)
+            startActionCoroutine = StartCoroutine(CoStartAction());
     }
 
     public override void Update()
@@ -108,13 +117,14 @@ public class Jhin : BossEnemy
         targetMoveController.StartMove();
         Zed.Instance.SetAttackUse(true);
         isStart = true;
+        startActionCoroutine = null;
     }
 
     public override IEnumerator OnDead()
     {
         OpenCurtain();
-        yield return null;
         StartCoroutine(base.OnDead());
+        yield return null;
     }
 
     private void OpenCurtain()

@@ -24,6 +24,12 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
 
     public void LoadTitleScene()
     {
+        var gameSceneMgr = GameSceneManager.Instance;
+        if (gameSceneMgr != null)
+        {
+            gameSceneMgr.Save();
+        }
+
         LoadScene(titleSceneName);
     }
 
@@ -33,6 +39,7 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
         AudioMixerController.Instance.Save();
         StartCoroutine(CoLoadSceneAsync(sceneName));
     }
+
     public IEnumerator CoLoadSceneAsync(string sceneName)
     {
         FadeIn();
