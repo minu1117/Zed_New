@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,14 +11,14 @@ public static class AddressableManager
     // 이미지 적용
     public static async Task ApplyImage(string address, Image applyImage)
     {
-        if (applyImage == null || address == null || address == string.Empty || address == "-")   // 이미지가 없거나, 이미지 주소가 비었을 경우 return
+        if (applyImage == null || address == null || address == string.Empty || address == "-") // 이미지가 없거나, 이미지 주소가 비었을 경우 return
             return;
 
-        if (applyImage.sprite != null && applyImage.sprite.name == GetAddressName(address))                  // 같은 이미지일 경우 return
+        if (applyImage.sprite != null && applyImage.sprite.name == GetAddressName(address))     // 같은 이미지일 경우 return
             return;
 
-        var loadAsync = Addressables.LoadAssetAsync<Sprite>(address);           // 어드레서블에 저장된 이미지 로딩
-        loadAsync.Completed += handle => OnImageLoaded(handle, applyImage);     // 로딩 완료 시 이미지 적용 작업 추가
+        var loadAsync = Addressables.LoadAssetAsync<Sprite>(address);                           // 어드레서블에 저장된 이미지 로딩
+        loadAsync.Completed += handle => OnImageLoaded(handle, applyImage);                     // 로딩 완료 시 이미지 적용 작업 추가
 
         await loadAsync.Task;
     }
@@ -29,7 +28,7 @@ public static class AddressableManager
     {
         try
         {
-            var sprite = await GetSpriteAsync(address); // 이미지 찾기 실행
+            var sprite = await FindAsync<Sprite>(address); // 이미지 찾기 실행
             return sprite;
         }
         catch (Exception ex)
@@ -39,16 +38,16 @@ public static class AddressableManager
         }
     }
 
-    // 이미지 찾기
-    private static async Task<Sprite> GetSpriteAsync(string address)
+    // 찾기
+    private static async Task<T> FindAsync<T>(string address) where T : UnityEngine.Object
     {
         if (address == string.Empty)
             return null;
 
         try
         {
-            var loadAsync = Addressables.LoadAssetAsync<Sprite>(address);  // 어드레서블에 저장된 이미지 로딩
-            await loadAsync.Task;                                          // 로딩 대기
+            var loadAsync = Addressables.LoadAssetAsync<T>(address);    // 어드레서블에 저장된 요소 로딩
+            await loadAsync.Task;                                       // 로딩 대기
 
             // 로딩 완료 시 결과 return
             if (loadAsync.Status == AsyncOperationStatus.Succeeded)
@@ -70,22 +69,39 @@ public static class AddressableManager
         }
     }
 
-    // Dictionary에 이미지를 이름과 같이 저장해 가져오기
-    public static async Task<Dictionary<string, Sprite>> LoadSpritesToDictionary(List<string> addresses)
+    // Dictionary에 주소와 같이 저장해 가져오기
+    public static async Task<Dictionary<string, T>> LoadToDictionary<T>(List<string> addresses) where T : UnityEngine.Object
     {
-        var dict = new Dictionary<string, Sprite>();
+        var dict = new Dictionary<string, T>();
 
-        // 이미지 주소 List 순회
+        // 주소 List 순회
         foreach (string address in addresses)
         {
-            if (dict.ContainsKey(address))                  // 같은 이름이 있을 경우 넘기기 (같은 이미지가 있다는 뜻)
+            if (dict.ContainsKey(address))                      // 같은 이름이 있을 경우 넘기기
                 continue;
 
-            Sprite sprite = await GetSpriteAsync(address);  // 이미지 가져오기 (대기)
-            dict.Add(address, sprite);                      // 가져온 이미지를 이미지 주소와 함께 Dictionary에 추가
+            T result = await FindAsync<T>(address);             // 가져오기 (대기)
+            dict.Add(address, result);                          // 가져온 정보를 주소와 함께 Dictionary에 추가
         }
 
         return dict;    // 완료 후 return
+    }
+
+    public static async Task<Dictionary<string, T>> LoadAll<T>(List<T> loadList) where T : UnityEngine.Object
+    {
+        var dict = new Dictionary<string, T>();
+
+        foreach (var element in loadList)
+        {
+            var key = element.name;
+            if (dict.ContainsKey(key))
+                continue;
+
+            T value = await FindAsync<T>(key);
+            dict.Add(key, value);
+        }
+
+        return dict;
     }
 
     // 로딩된 이미지 적용
@@ -113,74 +129,4 @@ public static class AddressableManager
 
         return address; // 자르지 않아도 되는 문자이기 때문에 그대로 return
     }
-
-    public static async Task<Dictionary<string, Material>> LoadAllMaterials(List<Material> materials)
-    {
-        var dict = new Dictionary<string, Material>();
-
-        foreach (var material in materials)
-        {
-            var key = material.name;
-            if (dict.ContainsKey(key))
-                continue;
-
-            Material mat = await GetMaterialAsync(key);
-            dict.Add(key, mat);
-        }
-
-        return dict;
-    }
-
-    private static async Task<Material> GetMaterialAsync(string key)
-    {
-        if (key == string.Empty)
-            return null;
-
-        try
-        {
-            var loadAsync = Addressables.LoadAssetAsync<Material>(key);
-            await loadAsync.Task;
-
-            // 로딩 완료 시 결과 return
-            if (loadAsync.Status == AsyncOperationStatus.Succeeded)
-            {
-                return loadAsync.Result;
-            }
-
-            // 로딩 실패 시 null return
-            else
-            {
-                Debug.LogError($"Failed to load material at address {key}");
-                return null;
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Exception : {ex.Message}");
-            return null;
-        }
-    }
-
-    /**************************************** 미완성 ****************************************/
-    public static async Task<IList<AudioClip>> LoadSounds(AssetLabelReference label)
-    {
-        var loadAsync = Addressables.LoadAssetsAsync<AudioClip>(label.labelString, null);
-        await loadAsync.Task;
-
-        return loadAsync.Result;
-    }
-
-    public static async Task<IList<AudioClip>> LoadSoundss(AssetLabelReference label)
-    {
-        var loadAsync = Addressables.LoadAssetsAsync<AudioClip>(label.labelString, null);
-        await loadAsync.Task;
-
-        if (loadAsync.Status == AsyncOperationStatus.Succeeded)
-        {
-            return loadAsync.Result;
-        }
-
-        return null;
-    }
-    /****************************************************************************************/
 }

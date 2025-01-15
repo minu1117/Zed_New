@@ -13,12 +13,6 @@ public class SkillData : ScriptableObject
     [Header("스킬 설명")]
     public string skillDescription;
 
-    [Header("스킬 레벨 (처음엔 0 고정)")]
-    public int skillLevel;
-
-    [Header("레벨 제한")]
-    public int levelRestriction;
-
     [Header("데미지 (보호막일 경우 보호막 값)")]
     public float damage;
 

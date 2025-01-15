@@ -14,7 +14,8 @@ public class MaterialLoader : Singleton<MaterialLoader>
 
     private async void LoadMaterials()
     {
-        loadedMatDict = await AddressableManager.LoadAllMaterials(loadMatList);
+        //loadedMatDict = await AddressableManager.LoadAllMaterials(loadMatList);
+        loadedMatDict = await AddressableManager.LoadAll(loadMatList);
     }
 
     public Material GetMatarial(string name)

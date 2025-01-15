@@ -6,20 +6,20 @@ public class InteractiveDialogue : InteractiveObject
 
     private void Update()
     {
-        if (!CheckDistance())
+        if (dialogueStarter == null)
             return;
 
-        Interaction();
-    }
-
-    protected override void Interaction()
-    {
-        if (dialogueStarter == null)
+        if (!CheckDistance())
             return;
 
         if (Input.GetKeyDown(interactionKey))
         {
-            dialogueStarter.StartDialogue(player.gameObject);
+            Interaction();
         }
+    }
+
+    protected override void Interaction()
+    {
+        dialogueStarter.StartDialogue(player.gameObject);
     }
 }

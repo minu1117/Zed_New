@@ -23,13 +23,13 @@ public enum TypingType
 // CSV에 작성한 데이터를 가져올 때 사용
 public struct TalkData
 {
-    public string name;
-    public string talk;
-    public string address;
-    public bool isEnabled;
-    public bool shake;
-    public bool bounce;
-    public bool isCameraShake;
+    public string name;         // 캐릭터 이름
+    public string talk;         // 대사
+    public string address;      // 캐릭터 이미지 주소
+    public bool isEnabled;      // 이미지 활성화 여부
+    public bool shake;          // 이미지 흔들림 여부
+    public bool bounce;         // 이미지 점프 여부
+    public bool isCameraShake;  // 카메라 흔들림 여부
 }
 
 public class DialogueManager : Singleton<DialogueManager>
@@ -64,7 +64,6 @@ public class DialogueManager : Singleton<DialogueManager>
     private string lineSplitStr;                            // CSV에서 쓴 들여쓰기 텍스트 (텍스트 불러올 때 들여쓰기 확인)
     private string emptySellStr;                            // CSV에서 쓴 빈 공간에 적을 텍스트 (텍스트 불러올 때 스킵용)
     private string addressWhiteSpaceStr;                    // CSV에서 쓴 캐릭터 이미지 주소의 띄어쓰기 대신 사용한 문자 (띄어쓰기 시 오동작 할 위험이 있어 해당 문자로 사용)
-    //private string addressNormalImageStr;                   // CSV에서 쓴 캐릭터 이미지 주소의 평상시 버전 이미지를 가져오기 위한 것
     private Dictionary<string, Sprite> currentTalkImages;   // 현재 대화에서 사용될 이미지들
 
     public bool isTalking = false;                          // 대화 여부 확인용
@@ -89,7 +88,6 @@ public class DialogueManager : Singleton<DialogueManager>
         lineSplitStr = "\\n";                               // CSV에서 쓴 들여쓰기 텍스트
         emptySellStr = "-";                                 // CSV에서 쓴 빈 공간에 적을 텍스트
         addressWhiteSpaceStr = "_";                         // CSV에서 쓴 캐릭터 이미지 주소의 띄어쓰기 대신 사용한 문자
-        //addressNormalImageStr = "normal";                   // CSV에서 쓴 캐릭터 이미지 주소의 평상시 버전 이미지를 가져오기 위한 것
         enabledColumnStr = "IsEnabled";                     // CSV의 이미지를 출력 여부 열 텍스트
         shakeColumnStr = "Shake";                           // CSV의 이미지 흔들림 여부 열 텍스트
         bounceColumnStr = "Bounce";                         // CSV의 이미지 점프 여부 열 텍스트
@@ -263,7 +261,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
         // Dictionary에 로딩된 Sprite들의 Address를 Key로 하고, Sprite를 같이 저장
         // Address로 저장된 Image를 찾아 사용하려는 목적
-        currentTalkImages = await AddressableManager.LoadSpritesToDictionary(addresses);
+        //currentTalkImages = await AddressableManager.LoadSpritesToDictionary(addresses);
+        currentTalkImages = await AddressableManager.LoadToDictionary<Sprite>(addresses);
     }
 
     // 대화 진행
