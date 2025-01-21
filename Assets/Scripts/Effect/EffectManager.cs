@@ -9,7 +9,12 @@ public class EffectManager : Singleton<EffectManager>
     protected override void Awake()
     {
         base.Awake();
+        CreateEffectPools();
+    }
 
+    // 이펙트 풀 생성
+    private void CreateEffectPools()
+    {
         effectPoolDict = new();
         foreach (var pool in effectPools)   // 이펙트 풀 List 순회
         {
@@ -46,19 +51,21 @@ public class EffectManager : Singleton<EffectManager>
         pool.Release(eft);                                  // 이펙트 Release
     }
 
+    // 이펙트 사용
     public Effect UseEffect(Effect effectPrefab, Transform transform)
     {
         if (effectPrefab == null)
             return null;
 
-        var effect = GetEffect(effectPrefab.name);
-        effect.SetStartPos(transform.position);
-        effect.SetForward(transform.forward);
-        effect.Use();
+        var effect = GetEffect(effectPrefab.name);  // 이펙트 가져오기
+        effect.SetStartPos(transform.position);     // 이펙트 위치 설정
+        effect.SetForward(transform.forward);       // 이펙트의 Forward 설정
+        effect.Use();                               // 이펙트 사용
 
         return effect;
     }
 
+    // 이펙트 사용
     public Effect UseEffect(Effect eft, Transform tr, bool autoRelease, GameObject target = null)
     {
         if (eft == null)    // 데이터에 이펙트가 없을 시 return

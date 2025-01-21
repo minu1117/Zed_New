@@ -80,11 +80,6 @@ public class SkillSlotManager : MonoBehaviour
         buttonDict[keycode].SetSprite(sp);
     }
 
-    public void CoolDown(float time)
-    {
-
-    }
-
     public ZedSkillType GetType(string key)
     {
         if (!buttonDict.ContainsKey(key))

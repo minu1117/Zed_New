@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class Zed : SingletonChampion<Zed>
 {
@@ -148,7 +147,6 @@ public class Zed : SingletonChampion<Zed>
 
         Vector3 point = Raycast.GetMousePointVec();
         CopySkill(keycode, useSkill, type, skillSlotMgr.GetSlotDict()[keycode].GetExcutor(), point, target.Item1);   // 그림자 스킬에 사용한 스킬 전달
-        skillSlotMgr.CoolDown(useSkill.data.coolDown);  // 쿨다운 시작
     }
 
     // 그림자 스킬 사용
@@ -161,11 +159,6 @@ public class Zed : SingletonChampion<Zed>
         {
             FinishedAttack();       // 무기 상태 초기화
             Skill useSkill = UseSkill(key, (int)type, EnumConverter.GetString(CharacterEnum.Enemy));   // 그림자 스킬 사용
-
-            if (useSkill == null)
-                return;
-
-            skillSlotMgr.CoolDown(useSkill.data.coolDown);      // 쿨다운 시작
         }
         else  // 마우스 위치에 그림자 스킬이 있을 시
         {

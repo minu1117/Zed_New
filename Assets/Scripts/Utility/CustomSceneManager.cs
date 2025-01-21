@@ -118,16 +118,4 @@ public class CustomSceneManager : Singleton<CustomSceneManager>
     {
         return option;
     }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            LoadGameScene();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            LoadTitleScene();
-        }
-    }
 }
