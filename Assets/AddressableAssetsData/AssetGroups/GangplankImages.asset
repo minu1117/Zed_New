@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: GangplankImages
+  m_EditorClassIdentifier: 
+  m_GroupName: GangplankImages
+  m_Data:
+    m_SerializedData: []
+  m_GUID: c3dd098f51394fa4b900212e9f0e5806
+  m_SerializeEntries:
+  - m_GUID: ff182e5378332a449bde686fdc240d01
+    m_Address: Gangplank_Normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 75a4d2a29dbe23e4a9dd9fcc81cb2d56, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0db30d86b2a80dc4eaba7e9bdd879224, type: 2}
+    - {fileID: 11400000, guid: 624db71af21fd4741917307b696efcc2, type: 2}

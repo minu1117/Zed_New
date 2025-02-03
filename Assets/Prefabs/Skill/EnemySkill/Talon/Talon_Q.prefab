@@ -48,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: ebc7d24365d817542b30a73f543fbff9, type: 2}
   isTargeting: 0
-  meleeAttackRange: 3
+  isPiercing: 0
+  meleeAttackRange: 4
   meleeUseClip: {fileID: 8300000, guid: a8342382ff6cf6a41be80e9512a35e72, type: 3}
   leapUseClip: {fileID: 8300000, guid: b5a367a0b82053c4ca9e83c32db74ae7, type: 3}
   leapAttackClip: {fileID: 8300000, guid: 2b62dd830aa996f42bd609f3b95e8765, type: 3}

@@ -17,23 +17,23 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b2fd18d7b6aad51469fe4dccc41dbf77
   m_SerializeEntries:
-  - m_GUID: ad63a12202cbaa449ab3805b2832554b
-    m_Address: Talon_happy
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 81dd59811b86e0b45ba98142154b5f75
-    m_Address: Talon_normal
+  - m_GUID: b788abab4bcc78b4fa93da2eade7839b
+    m_Address: Talon_Hide
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b20575729a69ca5468999614e2f7614a
-    m_Address: Talon_panic
+    m_Address: Talon_Panic
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b788abab4bcc78b4fa93da2eade7839b
-    m_Address: Talon_hide
+  - m_GUID: 0195f86bc5dada748a32c0557ab0a13b
+    m_Address: Talon_Happy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81dd59811b86e0b45ba98142154b5f75
+    m_Address: Talon_Normal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

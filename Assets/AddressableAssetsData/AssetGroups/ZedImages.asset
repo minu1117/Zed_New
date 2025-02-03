@@ -17,53 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 2e402686328095e44b9d5f903c3733c8
   m_SerializeEntries:
-  - m_GUID: 692af55c7ea14c347b85adc263e1473d
-    m_Address: TempZed_normal
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 508526b2fe63f0c47b884d34e04c9464
-    m_Address: Govos_happy
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9c5ee23077e38714e89f3cbbba7be1d9
-    m_Address: Govos_surprised
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c7da56530b465f94a8eac45fc6cf85d0
-    m_Address: Usan_surprised
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0c457b96231bb594fb1013624c86df4e
-    m_Address: Temp_Usan_normal
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ce799d82c04f2fe4eae4e25ee6f0f21c
-    m_Address: Usan_happy
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 32edcc951456f0341b92dbb0d7b1e32d
-    m_Address: Usan_angry
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 00ffc1870d7d8284fac26b66f79b9ebc
-    m_Address: Govos_normal
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ac146d0dbe0dced49829d7ddc014cc49
-    m_Address: Usan_normal
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7bf5a6ac886bdfe4f8986a5ee5ff8dcb
-    m_Address: Zed_normal
+    m_Address: Zed_Normal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -17,13 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c085539f87ca50f46829d91a656d52e4
   m_SerializeEntries:
-  - m_GUID: f9f7c4baf0bca3144a329e1608d5bca5
-    m_Address: TempShen_normal
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 766b7756e8de2d74bb833e1987a80686
-    m_Address: Shen_normal
+    m_Address: Shen_Normal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

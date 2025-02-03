@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 15a318a73c8db884f86663d09fb1e18d
   m_SerializeEntries:
   - m_GUID: 22ee7315afdf57e48aa3fa7d64a6feae
-    m_Address: Jhin_normal
+    m_Address: Jhin_Normal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

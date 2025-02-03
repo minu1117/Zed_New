@@ -96,6 +96,14 @@ public class EndingCredit : MonoBehaviour
             var moveController = player.GetMoveController();
             moveController.StartMove();
         }
+
+        var startStage = GameSceneManager.Instance.GetStageManager().GetStartStage();
+        if (startStage != null)
+        {
+            startStage.StartBgm();
+        }
+
+        coroutine = null;
     }
 
     private void Skip()
@@ -115,6 +123,12 @@ public class EndingCredit : MonoBehaviour
             player.SetAttackUse(true);
             var moveController = player.GetMoveController();
             moveController.StartMove();
+        }
+
+        var startStage = GameSceneManager.Instance.GetStageManager().GetStartStage();
+        if (startStage != null)
+        {
+            startStage.StartBgm();
         }
     }
 
